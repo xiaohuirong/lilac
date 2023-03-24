@@ -1,6 +1,12 @@
 maintainers:
-- github: xiaohuirong
+  - github: Hoream
+    email: 2175223953@qq.com
+
+build_prefix: extra-x86_64
+pre_build: aur_pre_build
+post_build: aur_post_build
 
 update_on:
-- source: manual
-  manual: 1
+  - github: go-musicfox/go-musicfox
+    use_max_tag: true
+  - aur: go-musicfox-git
