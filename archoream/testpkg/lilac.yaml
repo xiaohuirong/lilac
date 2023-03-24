@@ -1,5 +1,6 @@
-maintainers: [Hoream <2175223953@qq.com>]
-- github: lilydjwg
+maintainers:
+- github: Hoream
+- email: 2175223953@qq.com
 
 update_on:
 - source: manual
