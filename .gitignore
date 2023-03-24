@@ -1,1 +1,4 @@
-myrepo/*/.git
+*.log
+*.zst
+*.gz
+src
