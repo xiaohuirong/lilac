@@ -1,6 +1,6 @@
 # Maintainer: Hoream <2175223953@qq.com>
 pkgname=test-package-for-lilac
-pkgver=0.0.1
+pkgver=0.0.2
 pkgrel=2
 pkgdesc="A test package for liac."
 arch=(x86_64)
