@@ -8,12 +8,4 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: bottles
-
-repo_depends:
-  - fvs
-  - vkbasalt-cli
-  - python-steamgriddb
-  - python-pathvalidate
-  - patool
-  - icoextract
+    aur: python-pathvalidate
