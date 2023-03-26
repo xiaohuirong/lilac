@@ -18,4 +18,3 @@ repo_depends:
   - patool
   - icoextract
   - lib32-gnutls
-    repo: multilib
