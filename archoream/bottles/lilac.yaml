@@ -17,3 +17,5 @@ repo_depends:
   - python-pathvalidate
   - patool
   - icoextract
+  - lib32-gnutls
+    repo: multilib
