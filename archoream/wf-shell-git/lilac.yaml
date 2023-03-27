@@ -13,3 +13,5 @@ update_on:
 repo_depends:
   - wf-config
   - wayfire
+
+managed: false
