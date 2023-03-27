@@ -3,7 +3,7 @@
 pkgname=aliyundrive-webdav-bin
 _pkgname=${pkgname%-bin}
 pkgver=1.10.6
-pkgrel=3
+pkgrel=4
 pkgdesc="阿里云盘 WebDAV 服务"
 arch=("x86_64" "aarch64")
 url="https://github.com/messense/aliyundrive-webdav"
