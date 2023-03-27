@@ -18,7 +18,8 @@ license=(GPL)
 depends=(vte3 gsettings-desktop-schemas)
 makedepends=(docbook-xsl libnautilus-extension gnome-shell yelp-tools meson)
 provides=("$_pkgname=$pkgver")
-conflicts=("$_pkgname")
+conflicts=("$_pkgname" "gnome-extra")
+groups=("gnome-extra")
 changelog=package.changelog
 source=(https://gitlab.gnome.org/GNOME/$_pkgname/-/archive/$pkgver/$_pkgname-$pkgver.tar.gz
         transparency.patch)
