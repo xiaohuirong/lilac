@@ -4,7 +4,7 @@
 
 pkgname=waterfox-classic-bin
 pkgver=2022.11
-pkgrel=1
+pkgrel=2
 pkgdesc="Customizable privacy-conscious web browser with primary support for legacy extensions"
 arch=('x86_64')
 url="https://classic.waterfox.net"
