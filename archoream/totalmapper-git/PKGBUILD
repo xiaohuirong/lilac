@@ -2,7 +2,7 @@
 _pkgname="totalmapper"
 pkgname="${_pkgname}-git"
 pkgver=1.4.3.r2.g947a8f6
-pkgrel=3
+pkgrel=4
 pkgdesc="A simple utility for remapping keys using the Linux event handling system."
 arch=(x86_64)
 url="https://github.com/ellbur/totalmapper"
@@ -10,7 +10,7 @@ license=('GPL3')
 depends=()
 provides=("${_pkgname}")
 conflicts=("${_pkgname}" "${_pkgname}-bin")
-makedepends=('cargo' 'git' 'gcc-libs' 'glibc')
+makedepends=('cargo' 'git' 'glibc' 'gcc-libs')
 source=("${_pkgname}::git+https://github.com/ellbur/${_pkgname}")
 sha512sums=('SKIP')
 
