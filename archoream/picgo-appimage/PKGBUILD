@@ -8,7 +8,7 @@ _beta=beta.0
 pkgver=${_ver}${_beta}
 _release=${_ver}-${_beta}
 #_release=${_ver}
-pkgrel=2
+pkgrel=3
 epoch=1
 
 pkgdesc="A simple & beautiful tool for pictures uploading built by electron-vue"
