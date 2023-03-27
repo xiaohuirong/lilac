@@ -3,7 +3,7 @@
 pkgname=activate-linux-wayland-git
 _pkgname=activate-linux
 pkgver=r16.8521a85
-pkgrel=1
+pkgrel=2
 pkgdesc="The \"Activate Windows\" watermark for Wayland"
 arch=("x86_64")
 
