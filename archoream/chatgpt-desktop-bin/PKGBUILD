@@ -1,7 +1,7 @@
 # Maintainer: asas1asas200 <asas1asas200@gmail.com>
 pkgname="chatgpt-desktop-bin"
 pkgver="0.12.0"
-pkgrel=3
+pkgrel=4
 pkgdesc="ChatGPT Desktop Application (Mac, Windows and Linux)"
 arch=("x86_64")
 url="https://github.com/lencx/ChatGPT"
