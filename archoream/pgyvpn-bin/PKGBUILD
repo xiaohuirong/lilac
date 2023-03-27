@@ -16,7 +16,7 @@ source=('LICENSE::https://service.oray.com/question/1820.html'
         "${_pkgname}_Ubuntu_${pkgver}_X86_64.deb::https://pgy.oray.com/dl/42/download?os=Ubuntu%20Linux(X86_64)")
 sha256sums=('SKIP'
             '25995cc8f865139147ced000fea52a8f4dda072addbf9e4a3b18b5c599a8be7f'
-            'SKIP')
+            '9420a8f73e2e8289c947adecb3ffa2c4673eb2eb7f4a46aa16b0ae8da45ce8fa')
 
 package() {
   tar -xf data.tar.*z -C ${pkgdir}
