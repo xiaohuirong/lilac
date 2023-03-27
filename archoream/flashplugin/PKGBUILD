@@ -4,7 +4,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 pkgname=(flashplugin pepper-flash)
 pkgver=32.0.0.465
-pkgrel=2
+pkgrel=3
 pkgdesc="Adobe Flash Player"
 arch=('x86_64')
 url="https://get.adobe.com/flashplayer/"
