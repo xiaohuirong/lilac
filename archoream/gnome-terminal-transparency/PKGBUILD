@@ -17,7 +17,6 @@ arch=(x86_64)
 license=(GPL)
 depends=(vte3 gsettings-desktop-schemas)
 makedepends=(docbook-xsl libnautilus-extension gnome-shell yelp-tools meson)
-provides=("$_pkgname=$pkgver")
 conflicts=("$_pkgname" "gnome-extra")
 groups=("gnome-extra")
 changelog=package.changelog
