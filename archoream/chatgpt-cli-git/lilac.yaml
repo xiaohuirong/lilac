@@ -13,4 +13,4 @@ update_on:
 repo_depends:
   - python-openai
 
-managed: false
+managed: true
