@@ -10,4 +10,4 @@ update_on:
   - source: aur
     aur: nautilus-admin-gtk4
 
-managed: false
+managed: true
