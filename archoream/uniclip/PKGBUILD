@@ -1,0 +1,30 @@
+# Maintainer: Hoream <2175223953@qq.com>
+_pkgname="uniclip"
+pkgname="${_pkgname}-git"
+pkgver=0.0.1
+pkgrel=1
+pkgdesc='Unify the clipboard operations for X11 and Wayland'
+url='https://github.com/lilydjwg/uniclip'
+license=('BSD')
+arch=('x86_64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=()
+makedepends=("cargo")
+source=(${_pkgname}::git+https://github.com/lilydjwg/uniclip)
+sha256sums=('SKIP')
+
+# pkgver() {
+#     cd "${srcdir}/${_pkgname}"
+#     git describe --tags | sed -E 's/([^-]*-g)/r\1/;s/-/./g;s/^v//'
+# }
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    cargo build --release
+}
+
+package() {
+	install -d "${pkgdir}/usr/bin"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/uniclip" "${pkgdir}/usr/bin/uniclip"
+}
