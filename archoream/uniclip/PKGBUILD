@@ -10,7 +10,7 @@ arch=('x86_64')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
 depends=()
-makedepends=("cargo", "git")
+makedepends=("cargo" "git")
 source=(${_pkgname}::git+https://github.com/lilydjwg/uniclip)
 sha256sums=('SKIP')
 
