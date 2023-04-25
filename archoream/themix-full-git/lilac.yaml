@@ -9,3 +9,17 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: themix-full-git 
+
+repo_depends:
+  - themix-gui-git
+  - themix-import-images-git
+  - themix-export-spotify-git
+  - themix-plugin-base16-git
+  - themix-theme-oomox-git
+  - themix-icons-archdroid-git
+  - themix-icons-gnome-colors-git
+  - themix-icons-numix-git
+  - themix-icons-papirus-git
+  - themix-icons-suru-plus-git
+  - themix-icons-suru-plus-aspromauros-git
+
