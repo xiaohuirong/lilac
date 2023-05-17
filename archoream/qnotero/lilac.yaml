@@ -10,4 +10,4 @@ build_prefix: extra-x86_64
   #- source: aur
   #  aur: qnotero
 
-managed: true
+managed: false
