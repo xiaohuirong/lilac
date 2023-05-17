@@ -2,12 +2,11 @@
 #Contributor: Thomas Jost  <schnouki at schnouki _ net>
 pkgname=qnotero
 pkgver=2.3.1
-pkgrel=5
+pkgrel=6
 pkgdesc="A Qt application which provides access to your Zotero references"
 arch=(any)
 url="https://github.com/ealbiter/qnotero"
 license=('GPL')
-makedepends=('python-setuptools')
 depends=('python-pyqt5')
 optdepends=(
   'gnote: for integration with gnote'
@@ -26,3 +25,4 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
   python setup.py install --root=$pkgdir
 }
+makedepends=("python-setuptools")
