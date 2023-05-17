@@ -4,7 +4,7 @@
 _pkgname=chatgpt-cli
 pkgname="${_pkgname}-git"
 pkgver=push+4.r52.20230311.9b38674
-pkgrel=3
+pkgrel=4
 pkgdesc="A very minimal cli prompt for ChatGPT."
 arch=(
   'any'

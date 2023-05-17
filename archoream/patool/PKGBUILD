@@ -4,7 +4,7 @@
 pkgbase=patool
 pkgname='patool'
 pkgver=1.12
-pkgrel=6
+pkgrel=7
 pkgdesc="portable command line archive file manager"
 arch=('any')
 url="https://wummel.github.io/patool/"
