@@ -1,0 +1,23 @@
+# Maintainer: Hoream <2175223953@qq.com>
+pkgname="firefox-waterfall-theme"
+pkgver=0.0.1
+pkgrel=1
+pkgdesc='Firefox waterfall theme'
+url='https://github.com/crambaud/waterfall'
+license=('MIT')
+arch=('x86_64')
+provides=()
+conflicts=()
+depends=('firefox')
+makedepends=()
+source=("source.tar.gz")
+sha256sums=(be59a7001a3d8d7a82698d7ebe06e73bb9c314498a7987ad5571f748e42c5c06)
+install="${pkgname}.install"
+
+
+package() {
+    install -d "${pkgdir}/usr/lib/${pkgname}"
+    cp -rfa $srcdir/source/* "${pkgdir}/usr/lib/${pkgname}"
+
+    install -Dm644 ../INSTALL.md "${pkgdir}/usr/share/doc/${pkgname}/INSTALL.md"
+}

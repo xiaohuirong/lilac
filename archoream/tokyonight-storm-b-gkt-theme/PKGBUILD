@@ -1,0 +1,19 @@
+# Maintainer: Hoream <2175223953@qq.com>
+pkgname="tokyonight-storm-b-gtk-theme"
+pkgver=0.0.1
+pkgrel=1
+pkgdesc='Tokyonight-Storm-B gtk theme'
+url='https://github.com/Fausto-Korpsvart/Tokyo-Night-GTK-Theme'
+license=('GPL3')
+arch=('x86_64')
+provides=()
+conflicts=()
+depends=()
+makedepends=()
+source=("Tokyonight-Storm-B.tar.gz")
+sha256sums=("8a549097557dbeaa29e79163bd104ca8d86d23ebcaeff1f0fcab88a2f3c0ff7c")
+
+package() {
+	install -d ${pkgdir}/usr/share/theme/Tokyonight-Storm-B
+	cp $srcdir/Tokyonight-Storm-B/* ${pkgdir}/usr/share/theme/Tokyonight-Storm-B -ra
+}

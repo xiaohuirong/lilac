@@ -1,6 +1,5 @@
 *.log
 *.zst
-*.gz
 src
 pkg
 *.sig
