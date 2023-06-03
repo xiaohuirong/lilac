@@ -1,19 +1,18 @@
 ## Manual installation from a system installed package
 
-1. Go to `about:support` in Firefox.
+1. Go to `about:profile` in Firefox.
 
-2. Application Basics > Profile Directory > Open Directory.
+2. Click `open directory` on default-release config file's root directory.
 
-3. Open directory in a terminal.
+3. Open terminal on directory.
 
 4. create a symlink to the actual theme location:
 
   ```
   ln -sf /usr/lib/firefox-waterfall-theme chrome
   ```
+5. Go to `about:config` in Firefox. Set `toolkit.legacyUserProfileCustomizations.stylesheets` to true.
 
-9. Restart Firefox.
+6. Restart Firefox.
 
-10. Open Firefox customization panel and move the new tab button to headerbar.
-
-Done. See README.md for more details.
+7. Open Firefox customization panel and move the new tab button to headerbar.
