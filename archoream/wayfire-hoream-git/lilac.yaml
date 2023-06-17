@@ -1,0 +1,10 @@
+maintainers:
+- github: Hoream
+  email: 2175223953@qq.com
+
+update_on:
+- source: manual
+  manual: 1
+
+repo_depends:
+  - wlroots-hoream-git

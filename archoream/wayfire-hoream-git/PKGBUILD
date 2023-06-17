@@ -1,0 +1,52 @@
+# Maintainer: Hoream <hoream@qq.com>
+# Contributor: Solomon Choina <shlomochoina@gmail.com0
+pkgname=wayfire-hoream-git
+pkgver=0.8.0.20230615.115420.g98ea2a59
+pkgrel=1
+pkgdesc="3D wayland compositor (lilydjwg's version)"
+arch=('x86_64')
+url="https://github.com/lilydjwg/wayfire"
+license=('MIT')
+depends=('wlroots-hoream-git' 'cairo' 'pango' 'glm' 'libjpeg' 'wf-config-git' 'seatd')
+makedepends=('git' 'meson' 'ninja' 'wayland-protocols' 'doctest')
+optdepends=('wf-shell-git: GTK3-based panel for the Wayfire compositor'
+            'wf-sound-control-git: Small utility for the Wayfire compositor to control sound volume')
+provides=(wayfire wayfire-git)
+conflicts=(wayfire wayfire-git)
+replaces=()
+options=(debug)
+source=(wayfire::git+$url.git
+        0001-patch.patch)
+sha256sums=(SKIP
+            SKIP)
+
+pkgver () {
+    cd "$srcdir/wayfire"
+    (
+        set -o pipefail
+        version=$(grep -zoP "project\([^)]*\)" meson.build | xargs --null echo | grep -oP "^\sversion:\s'\K[^']*")
+        printf "${version}.%s.g%s" "$(TZ=UTC git log -1 --pretty='%cd' --date=format-local:%Y%m%d.%H%M%S)" "$(git log -1 --format='%h')"
+    )
+}
+
+build() {
+    cd "$srcdir/wayfire"
+    # debug_ipc doesn't compile with wlroots 0.16.0
+    arch-meson \
+        --buildtype=debug \
+        -Duse_system_wlroots=enabled \
+        -Duse_system_wfconfig=enabled \
+        -Dtests=disabled \
+        -Ddebug_ipc=false \
+        . \
+        build
+    patch -b -d ${srcdir}/wayfire/subprojects/wf-utils -Np1 -i ${srcdir}/0001-patch.patch
+    ninja -C build
+}
+
+package() {
+    cd "$srcdir/wayfire"
+    DESTDIR="${pkgdir}/" ninja -C build install
+    install -m644 wayfire.ini "${pkgdir}/usr/share"
+}
+
