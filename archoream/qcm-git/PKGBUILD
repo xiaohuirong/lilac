@@ -1,7 +1,7 @@
 # Maintainer: Kimiblock Zhou <pn3535 at icloud dot com>
 pkgname=qcm-git
-pkgver=r55.f39f015
-pkgrel=8
+pkgver=r60.78ae22c
+pkgrel=1
 pkgdesc="Qt client for netease cloud music "
 arch=('x86_64')
 url="https://github.com/hypengw/Qcm"
