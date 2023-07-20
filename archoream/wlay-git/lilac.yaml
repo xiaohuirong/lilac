@@ -1,6 +1,6 @@
 maintainers:
   - github: Hoream
-    email: hoream@qq.com
+    email: hoream.top@qq.com
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
@@ -8,4 +8,4 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: fvs
+    aur: wlay-git

@@ -1,0 +1,7 @@
+maintainers:
+- github: Hoream
+  email: hoream@qq.com
+
+update_on:
+- source: manual
+  manual: 1
