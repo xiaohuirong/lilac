@@ -2,7 +2,7 @@
 _pkgname="monitor-control"
 pkgname="${_pkgname}-git"
 pkgver=0.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple tool suitable for adjusting external monitor's brightness."
 url='https://github.com/lilydjwg/monitor-control'
 license=('GPL3')
