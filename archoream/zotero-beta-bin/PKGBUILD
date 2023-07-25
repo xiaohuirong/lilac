@@ -1,8 +1,8 @@
 # Maintainer: Hoream <horeawm@qq.com>
 
 pkgname=zotero-beta-bin
-pkgver=7.0.0.r20.2b65fe50d11
-pkgrel=1
+pkgver=7.0.0.r23.fb5934563
+pkgrel=2
 pkgdesc="Zotero is a free, easy-to-use tool to help you collect, organize, annotate, cite, and share research."
 arch=('x86_64')
 url="https://www.zotero.org/download"
@@ -16,9 +16,18 @@ replaces=('zotero')
 install='zotero.install'
 
 source=("zotero.desktop"
-        "Zotero-7.0.0-beta.20%2B65fe50d11_linux-$CARCH.tar.bz::https://download.zotero.org/client/beta/7.0.0-beta.20%2B65fe50d11/Zotero-7.0.0-beta.20%2B65fe50d11_linux-$CARCH.tar.bz2")
+        "zotero-beta01.tar.bz2::https://www.zotero.org/download/client/dl?platform=linux-x86_64&channel=beta")
 sha256sums=('eab76db7a56a4d9aaa17baaf240b82fcf57944a4ddf8ef1b58cc64182426cedc'
-            '8bfa514a39e113a21050b824a4de08406a74c1140783d95a003b3e578800f5a8')
+            'SKIP')
+
+pkgver(){
+    cd "$srcdir"/Zotero_linux-$CARCH/app
+    full_ver=$(grep -oP '^Version=\K[^ ]+' application.ini)
+    version=$(echo "$full_ver" | grep -oP '^\d+\.\d+\.\d+')
+    build=$(echo "$full_ver" | grep -oP '(?<=beta\.)\d+')
+    hash=$(echo "$full_ver" | grep -oP '(?<=\+)\w+$')
+    printf "$version.r$build.$hash"
+}
 
 package() {
   install -dDm755 "$pkgdir"/usr/{bin,lib/zotero}
