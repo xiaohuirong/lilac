@@ -1,0 +1,34 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=ns3
+pkgver=3.39
+pkgrel=1
+pkgdesc='Discrete-event network simulator for Internet systems'
+arch=('any')
+url='http://www.nsnam.org/'
+license=('GPL2')
+depends=('python')
+makedepends=('cmake' 'ninja')
+provides=('ns3')
+conflicts=('ns3-hg')
+source=("ns-allinone-$pkgver.tar.bz2::https://www.nsnam.org/releases/ns-allinone-$pkgver.tar.bz2")
+sha256sums=('bbddebac2b035a8bd7c2ff934b3c4d9735ef9cf6763e362b79a62e0da8915eb0')
+
+build() {
+	cd "$srcdir/ns-allinone-$pkgver/ns-$pkgver"
+	./ns3 configure \
+		--prefix=/usr \
+		--enable-examples \
+		--enable-tests
+	./ns3 build
+}
+
+package() {
+	cd "$srcdir/ns-allinone-$pkgver/ns-$pkgver"
+	DESTDIR="$pkgdir" ./ns3 install
+}
+
+#check() {
+#	cd "$srcdir/ns-allinone-$pkgver/ns-$pkgver"
+#	./test.py
+#}
