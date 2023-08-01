@@ -1,8 +1,8 @@
 # Maintainer: Hoream <horeawm@qq.com>
 
 pkgname=zotero-beta-bin
-pkgver=7.0.0.r23.fb5934563
-pkgrel=2
+pkgver=7.0.0.r26.6dcc70f53
+pkgrel=1
 pkgdesc="Zotero is a free, easy-to-use tool to help you collect, organize, annotate, cite, and share research."
 arch=('x86_64')
 url="https://www.zotero.org/download"
@@ -16,7 +16,7 @@ replaces=('zotero')
 install='zotero.install'
 
 source=("zotero.desktop"
-        "zotero-beta01.tar.bz2::https://www.zotero.org/download/client/dl?platform=linux-x86_64&channel=beta")
+        "zotero-beta02.tar.bz2::https://www.zotero.org/download/client/dl?platform=linux-x86_64&channel=beta")
 sha256sums=('eab76db7a56a4d9aaa17baaf240b82fcf57944a4ddf8ef1b58cc64182426cedc'
             'SKIP')
 
