@@ -10,4 +10,4 @@ update_on:
   - source: aur
     aur: re3-git
 
-managed: false
+managed: true
