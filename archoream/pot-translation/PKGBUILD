@@ -10,7 +10,7 @@ url="https://github.com/pot-app/pot-desktop"
 license=('GPL3')
 provides=("$pkgname")
 conflicts=("$pkgname-bin" "$pkgname-git")
-depends=('webkit2gtk' 'gtk3' 'libayatana-appindicator' 'xdotool' 'libxcb' 'libxrandr' 'tesseract' 'tessdata' 'dbus')
+depends=('webkit2gtk' 'gtk3' 'libayatana-appindicator' 'xdotool' 'libxcb' 'libxrandr' 'tesseract' 'tessdata' 'libsoup' 'gdk-pixbuf2' 'cairo' 'pango' 'glibc' 'gcc-libs' 'hicolor-icon-theme' 'glib2')
 makedepends=('nodejs' 'pnpm' 'rust' 'git' 'dbus')
 
 source=("${reponame}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
