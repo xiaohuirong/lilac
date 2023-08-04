@@ -10,4 +10,4 @@ update_on:
   - source: aur
     aur: xcowsay
 
-managed: false
+managed: true
