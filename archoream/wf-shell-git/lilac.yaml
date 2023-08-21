@@ -14,4 +14,4 @@ repo_depends:
   - wf-config
   - wayfire
 
-managed: false
+managed: true
