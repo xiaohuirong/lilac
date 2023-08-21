@@ -12,6 +12,6 @@ update_on:
 
 repo_depends:
   - wf-config
-  - wayfire
+  - wayfire-git
 
 managed: true
