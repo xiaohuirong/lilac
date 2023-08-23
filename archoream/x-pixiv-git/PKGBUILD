@@ -1,0 +1,34 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="x-pixiv"
+pkgname="${_pkgname}-git"
+pkgver=r181.a66561d
+pkgrel=1
+pkgdesc='A simple pixiv downloader'
+url='https://github.com/xiaoxigua-1/XPixiv'
+license=('MIT')
+arch=('any')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}" "${_pkgname}-bin")
+depends=()
+makedepends=("cargo" "git")
+source=(${_pkgname}::git+https://github.com/xiaoxigua-1/XPixiv)
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    cargo build --release
+}
+
+package() {
+	install -d "${pkgdir}/usr/bin"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/x-pixiv" "${pkgdir}/usr/bin/x-pixiv"
+}
