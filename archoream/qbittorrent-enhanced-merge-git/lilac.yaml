@@ -1,10 +1,7 @@
-pre_build_script: |
-  aur_pre_build(maintainers=['Hoream'])
-  add_makedepends(['qt5-tools'])
-  add_depends(['qt5-base', 'qt5-svg'])
-
-post_build: aur_post_build
+maintainers:
+- github: Hoream
+  email: hoream@qq.com
 
 update_on:
-  - source: manual
-    manual: 1.0.0
+- source: manual
+  manual: 1

@@ -1,16 +1,7 @@
-pre_build_script: |
-  aur_pre_build(maintainers=['Hoream'])
-  add_makedepends(['qconf', 'qt5-tools'])
-  add_depends(['gcc-libs', 'glibc', 'openssl', 'qt5-base', 'qt5-svg', 'zlib'])
-
-post_build: aur_post_build
+maintainers:
+- github: Hoream
+  email: hoream@qq.com
 
 update_on:
-  - source: github
-    github: qbittorrent/qBittorrent
-  - source: alpm
-    alpm: openssl
-    strip_release: true
-    provided: libcrypto.so
-  - source: manual
-    manual: 1.0.0
+- source: manual
+  manual: 1
