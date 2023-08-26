@@ -18,6 +18,7 @@ EOF
 
     echo "Add following path to ${target_file}:"
     echo "${insert_content}"
+    echo "Remember to run cvx_setup in matlab console."
 
     awk -v insert="$insert_content" '/%%% BEGIN ENTRIES %%%/ {print; print insert; next} 1' "$target_file" > "$temp_file"
     mv $temp_file $target_file
