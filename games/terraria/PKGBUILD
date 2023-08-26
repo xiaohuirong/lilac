@@ -1,0 +1,20 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=terraria
+pkgver=1.4.4.9.v4.60321
+pkgrel=1
+pkgdesc="an action-adventure sandbox game."
+arch=('x86_64')
+url="https://freelinuxpcgames.com/terraria/"
+license=('custom')
+source=("terraria_v1_4_4_9_v4_60321.sh::http://app.hoream.top:8000/games/terraria_v1_4_4_9_v4_60321.sh" "gog_com-Terraria.desktop")
+sha256sums=('9ef66aa58acbdce161221539d91845b68a11bcd75560a019dc09206918aae876'
+    '662d915d3fa21718c605d6e296ebcdcca8087ef7b09579858826f40ed8abed7e')
+#options=('staticlibs')
+options=(!strip)
+
+package() {
+	install -d "${pkgdir}/opt/gog/${pkgname}"
+	install -Dm644 "$srcdir"/gog_com-Terraria.desktop "$pkgdir"/usr/share/applications/gog_com-Terraria.desktop
+	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${pkgname}"
+	sed -i '/chmod +x */d' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+}

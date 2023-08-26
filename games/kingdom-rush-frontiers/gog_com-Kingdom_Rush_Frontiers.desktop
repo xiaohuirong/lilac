@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Kingdom Rush: Frontiers
+GenericName=Kingdom Rush: Frontiers
+Comment=Kingdom Rush: Frontiers
+Icon=/opt/gog/kingdom-rush-frontiers/support/icon.png
+Exec="/opt/gog/kingdom-rush-frontiers/start.sh" ""
+Categories=Game;
+Path=/opt/gog/kingdom-rush-frontiers/
+

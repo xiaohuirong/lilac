@@ -1,0 +1,37 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=slay-the-spire
+pkgver=2.3.2
+pkgrel=1
+pkgdesc="a game"
+arch=('x86_64')
+url="https://freelinuxpcgames.com/kingdom-rush-frontiers/"
+license=('custom')
+source=("slay_the_spire_v2.3.2-10.04.2022.run::http://app.hoream.top:8000/games/slay_the_spire_v2.3.2-10.04.2022.run" "Slay the Spire.desktop" "install.sh")
+sha256sums=('dfdd9c47a372487178dbe5c4e69b5400c9ce95092182590b36e18da1652ba73f'
+    'ebf37a522eae83e2cb44204c8c6fe95a3545e1bd1e8ed63b511e4f39e751fd81'
+    '75aa83d1ab8b920998b6b3acd84e9b15e8c92b1612017be998b95d79eb836da9')
+#options=('staticlibs')
+options=(!strip)
+makedepends=('expect')
+install="${pkgname}.install"
+
+prepare() {
+	cd $srcdir
+	./install.sh .
+}
+
+package() {
+	install -Dm644 "$srcdir"/"Slay the Spire.desktop" "$pkgdir"/usr/share/applications/"Slay the Spire.desktop"
+	install -d "${pkgdir}/opt/gog/${pkgname}"
+    mv $srcdir/"Slay the Spire"/* ${pkgdir}/opt/gog/${pkgname}
+    rm ${pkgdir}/opt/gog/${pkgname}/uninstall.sh
+    find ${pkgdir}/opt/gog/${pkgname} -type d -exec chmod 755 {} \;
+    find ${pkgdir}/opt/gog/${pkgname} -type f -exec chmod 644 {} \;
+    chmod +x ${pkgdir}/opt/gog/${pkgname}/{run.sh,SlayTheSpire}
+    chmod +x ${pkgdir}/opt/gog/${pkgname}/jre -R
+
+    mkdir ${pkgdir}/opt/gog/${pkgname}/{preferences,sendToDevs}
+    chmod 777 ${pkgdir}/opt/gog/${pkgname}/{preferences,sendToDevs}
+    touch ${pkgdir}/opt/gog/${pkgname}/{info.displayconfig,twitchconfig.txt}
+    chmod 777 ${pkgdir}/opt/gog/${pkgname}/{info.displayconfig,twitchconfig.txt}
+}

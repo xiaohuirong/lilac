@@ -1,0 +1,19 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=stardew-valley
+pkgver=1.5.6.53040
+pkgrel=1
+pkgdesc="an open-ended country-life RPG"
+arch=('x86_64')
+url="https://freelinuxpcgames.com/stardew-valley/"
+license=('custom')
+source=("stardew_valley_1_5_6_1988831614_53040.sh::http://app.hoream.top:8000/games/stardew_valley_1_5_6_1988831614_53040.sh" "gog_com-Stardew_Valley.desktop")
+sha256sums=('692722cb77acbccf7392abfbaec54cae34fd6edb8e62cfb2843f70494cb5ea91'
+    'e1b837e523d6f1a3f57c791536c9348591a4c2bc943a9fda7290a45e45089533')
+options=(!strip staticlibs)
+
+package() {
+	install -d "${pkgdir}/opt/gog/${pkgname}"
+	install -Dm644 "$srcdir"/gog_com-Stardew_Valley.desktop "$pkgdir"/usr/share/applications/gog_com-Stardew_Valley.desktop
+	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${pkgname}"
+	sed -i '/chmod +x */d' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+}

@@ -1,0 +1,19 @@
+# Maintainer: Hoream <hoream@qq.com>
+_game=dont-starve
+pkgname="${_game}-shipwrecked-dlc"
+pkgver=4294041.41439
+pkgrel=1
+pkgdesc="shipwrecked dlc of don't starve."
+arch=('x86_64')
+url="https://freelinuxpcgames.com/dont-starve/"
+license=('custom')
+source=("don_t_starve_shipwrecked_dlc_4294041_41439.sh::http://app.hoream.top:8000/games/don_t_starve_shipwrecked_dlc_4294041_41439.sh")
+sha256sums=('0f22d41fbb58520b43efe52e1f75032d9fe33f3fd138c0a53e379a8116991b18')
+#options=('staticlibs')
+options=(!strip)
+depends=("dont-starve")
+
+package() {
+	install -d "${pkgdir}/opt/gog/${_game}"
+	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${_game}"
+}

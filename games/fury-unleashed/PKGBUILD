@@ -1,0 +1,31 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=fury-unleashed
+pkgver=1.8.4
+pkgrel=1
+pkgdesc="a combo-driven roguelite action platformer"
+arch=('x86_64')
+url="https://freelinuxpcgames.com/fury-unleashed/"
+license=('custom')
+source=("fury_unleashed_v1.8.4.run::http://app.hoream.top:8000/games/fury_unleashed_v1.8.4.run" "Fury Unleashed.desktop" "install.sh")
+sha256sums=('af2dc960a30e72ce1a1d2ae36e96423b0185187b3ee4f79949a48aa0ee0c31de'
+    'a2878d079b09190dacbffe1d36556838f0cd79ad2a8b2fbb5ab8619525255430'
+    'fc8b92e0635d536faae7c324ce2c08d196291e31c124a55a4c0e8e2d97562ff5')
+#options=('staticlibs')
+options=(!strip)
+makedepends=('expect')
+install="${pkgname}.install"
+
+prepare() {
+	cd $srcdir
+	./install.sh .
+}
+
+package() {
+	install -Dm644 "$srcdir"/"Fury Unleashed.desktop" "$pkgdir"/usr/share/applications/"Fury Unleashed.desktop"
+	install -d "${pkgdir}/opt/gog/${pkgname}"
+    mv $srcdir/"Fury Unleashed"/* ${pkgdir}/opt/gog/${pkgname}
+    rm ${pkgdir}/opt/gog/${pkgname}/uninstall.sh
+    find ${pkgdir}/opt/gog/${pkgname} -type d -exec chmod 755 {} \;
+    find ${pkgdir}/opt/gog/${pkgname} -type f -exec chmod 644 {} \;
+    chmod +x ${pkgdir}/opt/gog/${pkgname}/{run.sh,FuryUnleashed}
+}

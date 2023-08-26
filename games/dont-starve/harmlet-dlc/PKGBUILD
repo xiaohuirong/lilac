@@ -1,0 +1,19 @@
+# Maintainer: Hoream <hoream@qq.com>
+_game=dont-starve
+pkgname="${_game}-hamlet-dlc"
+pkgver=4294041.41439
+pkgrel=1
+pkgdesc="hamlet dlc of don't starve."
+arch=('x86_64')
+url="https://freelinuxpcgames.com/dont-starve/"
+license=('custom')
+source=("don_t_starve_hamlet_dlc_4294041_41439.sh::http://app.hoream.top:8000/games/don_t_starve_hamlet_dlc_4294041_41439.sh")
+sha256sums=('4231fcc673b9acc8420a1849ad5e25f2636cdcb9211eb43ae05addf82110a46a')
+#options=('staticlibs')
+options=(!strip)
+depends=("dont-starve")
+
+package() {
+	install -d "${pkgdir}/opt/gog/${_game}"
+	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${_game}"
+}

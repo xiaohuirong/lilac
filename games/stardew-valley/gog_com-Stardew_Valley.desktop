@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Stardew Valley
+GenericName=Stardew Valley
+Comment=Stardew Valley
+Icon=/opt/gog/stardew-valley/support/icon.png
+Exec="/opt/gog/stardew-valley/start.sh" ""
+Categories=Game;
+Path=/opt/gog/stardew-vallegy
+

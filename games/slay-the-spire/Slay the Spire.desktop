@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Slay the Spire
+Exec=/opt/gog/slay-the-spire/run.sh
+Icon=/opt/gog/slay-the-spire/icon.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Start Slay the Spire
+Comment[ru_RU]=Запустить Slay the Spire

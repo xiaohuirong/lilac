@@ -1,0 +1,22 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=dont-starve
+pkgver=4294041.41439
+pkgrel=1
+pkgdesc="an uncompromising survival game in a wild world filled with science and magic."
+arch=('x86_64')
+url="https://freelinuxpcgames.com/dont-starve/"
+license=('custom')
+source=("don_t_starve_4294041_41439.sh::http://app.hoream.top:8000/games/don_t_starve_4294041_41439.sh" "gog_com-Dont_Starve.desktop" "chinese_support_mod.tar.gz::http://app.hoream.top:8000/games/chinese_support_mod.tar.gz")
+sha256sums=('807b1b9d4c57f8fc1dce13beafa1d05542ecf113ef5f50d1185f1889cd76d15e'
+    '9bd880dcf91efb60a9e2882eb9b05752b5c38760c55d839d0e706ddaeb2d99bc'
+    '1584ac92a9716445e1d30277e800355a2f4d35f1b6ef089e7b668449e0e0f21c')
+#options=('staticlibs')
+options=(!strip)
+
+package() {
+	install -d "${pkgdir}/opt/gog/${pkgname}"
+	install -Dm644 "$srcdir"/gog_com-Dont_Starve.desktop "$pkgdir"/usr/share/applications/gog_com-Dont_Starve.desktop
+	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${pkgname}"
+    cp -r "$srcdir/Chinese Support" "${pkgdir}/opt/gog/${pkgname}/game/mods"
+	sed -i '/chmod +x */d' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+}

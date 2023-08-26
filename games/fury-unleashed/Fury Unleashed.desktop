@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Fury Unleashed
+Exec=/opt/gog/fury-unleashed/run.sh
+Icon=/opt/gog/fury-unleashed/FuryUnleashed_Data/Resources/UnityPlayer.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Fury Unleashed

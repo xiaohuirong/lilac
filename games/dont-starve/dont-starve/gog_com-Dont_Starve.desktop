@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Don't Starve
+GenericName=Don't Starve
+Comment=Don't Starve
+Icon=/opt/gog/dont-starve/support/icon.png
+Exec="/opt/gog/dont-starve/start.sh" ""
+Categories=Game;
+Path=/opt/gog/dont-starve
+

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Hollow Knight
+GenericName=Hollow Knight
+Comment=Hollow Knight
+Icon=/opt/gog/hollow-knight/support/icon.png
+Exec="/opt/gog/hollow-knight/start.sh" ""
+Categories=Game;
+Path=/opt/gog/hollow-knight
+

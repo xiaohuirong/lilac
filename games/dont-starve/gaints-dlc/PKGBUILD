@@ -1,0 +1,19 @@
+# Maintainer: Hoream <hoream@qq.com>
+_game=dont-starve
+pkgname="${_game}-reign-of-giants-dlc"
+pkgver=4294041.41439
+pkgrel=1
+pkgdesc="reign of giants dlc of don't starve."
+arch=('x86_64')
+url="https://freelinuxpcgames.com/dont-starve/"
+license=('custom')
+source=("don_t_starve_reign_of_giants_dlc_4294041_41439.sh::http://app.hoream.top:8000/games/don_t_starve_reign_of_giants_dlc_4294041_41439.sh")
+sha256sums=('b911e52b6323ce51ceb3a97015cf392b33ce21f9753b69abcdb540e83eb24125')
+#options=('staticlibs')
+options=(!strip)
+depends=("dont-starve")
+
+package() {
+	install -d "${pkgdir}/opt/gog/${_game}"
+	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${_game}"
+}

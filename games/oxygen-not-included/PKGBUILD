@@ -1,0 +1,33 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=oxygen-not-included
+pkgver=U43.531669
+pkgrel=1
+pkgdesc="a space-colony simulation game."
+arch=('x86_64')
+url="https://freelinuxpcgames.com/oxygen-not-included/"
+license=('custom')
+source=("oxygen_not_included_bundle_vU43-531669.run::http://app.hoream.top:8000/games/oxygen_not_included_bundle_vU43-531669.run" "Oxygen_Not_Included.desktop" "install.sh")
+sha256sums=('dce38da8e880cc391d1fea79c9257daf0e7c8670d39675cd3ba07e129f2efbfb'
+    'a8c4a7a9500dbf4b95598c3ded359af9a176ce37455d873b5dffb960938668fb'
+    '28d0512e545f4e3ff3897da4a51db1eabf81b9d9c436ce0c428ae96537ed1900')
+#options=('staticlibs')
+options=(!strip)
+makedepends=('expect')
+install="${pkgname}.install"
+
+prepare() {
+	cd $srcdir
+	./install.sh .
+}
+
+package() {
+	install -Dm644 "$srcdir"/"Oxygen_Not_Included.desktop" "$pkgdir"/usr/share/applications/"Oxygen_Not_Included.desktop"
+	install -d "${pkgdir}/opt/gog/${pkgname}"
+    mv $srcdir/"Oxygen Not Included Bundle"/* ${pkgdir}/opt/gog/${pkgname}
+    rm ${pkgdir}/opt/gog/${pkgname}/uninstall.sh
+    find ${pkgdir}/opt/gog/${pkgname} -type d -exec chmod 755 {} \;
+    find ${pkgdir}/opt/gog/${pkgname} -type f -exec chmod 644 {} \;
+    chmod +x ${pkgdir}/opt/gog/${pkgname}/{run.sh,OxygenNotIncluded}
+    touch ${pkgdir}/opt/gog/${pkgname}/unity.lock
+    chmod 777 ${pkgdir}/opt/gog/${pkgname}/unity.lock
+}

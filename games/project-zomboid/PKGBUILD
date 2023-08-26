@@ -1,0 +1,22 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=project-zomboid
+pkgver=41.78.7.60142
+pkgrel=1
+pkgdesc="an upcoming open-world, isometric video game"
+arch=('x86_64')
+url="https://freelinuxpcgames.com/project-zomboid/"
+license=('custom')
+source=("project_zomboid_41_78_7_60142.sh::http://app.hoream.top:8000/games/project_zomboid_41_78_7_60142.sh" "gog_com-Project_Zomboid.desktop")
+sha256sums=('fa3a2938097ce48edae934ff28ddccb790cade68b6c8a35e6b39dede5c9467be'
+    '2e19052c9d018693d1d9c7c764434e2ec1c60f6aa7b2f6d4023f89b5894cc0d3')
+options=(!strip)
+install="project-zomboid.install"
+depends=('bubblewrap')
+
+package() {
+	install -d "${pkgdir}/opt/gog/${pkgname}"
+	install -Dm644 "$srcdir"/gog_com-Project_Zomboid.desktop "$pkgdir"/usr/share/applications/gog_com-Project_Zomboid.desktop
+	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${pkgname}"
+	sed -i '/chmod +x */d' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+    sed -i 's|\./"projectzomboid\.sh"|bwrap --ro-bind / / \\\n\t --dev-bind /dev /dev \\\n\t --bind ${HOME}/.cache ${HOME} \\\n\t ./"projectzomboid.sh"|g' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+}
