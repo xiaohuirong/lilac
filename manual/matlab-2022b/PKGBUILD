@@ -1,0 +1,30 @@
+# Maintainer: Hoream <2175223953@qq.com>
+pkgname=matlab
+pkgver=2018a
+pkgrel=1
+pkgdesc="A high-level language for numerical computation and visualization"
+arch=(x86_64)
+url="https://www.mathworks.com"
+license=('custom')
+depends=('libxcrypt-compat')
+makedepends=()
+source=("matlab.png" "matlab.desktop")
+sha256sums=(SKIP
+            SKIP)
+provides=("matlab" "matlab-bin")
+
+build() {
+    echo "This is matlab2018a"
+}
+
+package() {
+  install -d "${pkgdir}/usr/share/applications"
+  install -d "${pkgdir}/usr/share/icons"
+  install -d "${pkgdir}/opt/matlab"
+
+  install -Dm644 "${srcdir}/matlab.png" "${pkgdir}/usr/share/icons/matlab.png"
+  install -Dm644 "${srcdir}/matlab.desktop" "${pkgdir}/usr/share/applications/matlab.desktop"
+
+  #cp -r ../matlab/ "${pkgdir}/opt/matlab/matlab2018a"
+  mv ../matlab/ "${pkgdir}/opt/matlab/matlab2018a"
+}

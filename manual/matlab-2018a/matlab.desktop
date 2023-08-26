@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=R2018a
+Type=Application
+Terminal=false
+MimeType=text/x-matlab
+#Exec=env LD_PRELOAD=/usr/lib/libfreetype.so.6 _JAVA_AWT_WM_NONREPARENTING=1 LD_PRELOAD=/usr/lib/libstdc++.so LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/ /opt/matlab/matlab2018a/bin/matlab
+Exec=env LD_PRELOAD=/lib64/libfreetype.so.6 TMPDIR=$HOME/.cache/matlab-tmp /opt/matlab/matlab2022b/bin/matlab -desktop
+Name=MATLAB
+Icon=/usr/share/icons/matlab.png
+Categories=Development;Math;Science
+Comment=Scientific computing environment
+StartupNotify=true
