@@ -1,0 +1,30 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname=matlab2tikz
+pkgname=matlab2tikz-git
+pkgver=1.0.0.r961.g806c97d
+pkgrel=1
+pkgdesc="A matlab script to convert native matlab figures to TikZ/Pgfplots figures."
+arch=(x86_64)
+url="https://github.com/matlab2tikz/matlab2tikz"
+license=('BSD')
+makedepends=()
+source=("${_pkgname}::git+https://github.com/matlab2tikz/${_pkgname}")
+install="matlab2tikz-git.install"
+depends=()
+
+sha256sums=('SKIP')
+provides=("matlab2tikz")
+
+pkgver() {
+    cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+
+}
+
+package() {
+  install -d "${pkgdir}/opt/${_pkgname}"
+  cp -r "${srcdir}/${_pkgname}/src" "${pkgdir}/opt/${_pkgname}"
+}

@@ -1,0 +1,7 @@
+post_install() {
+   echo -e "\033[34mYou should add '/opt/matlab2tikz/src' to your matlab path.\033[0m"
+}
+
+post_remove() {
+   echo -e "\033[34mYou can remove '/opt/matlab2tikz/src' from your matlab path.\033[0m" 
+}

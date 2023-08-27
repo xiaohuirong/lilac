@@ -16,9 +16,9 @@ EOF
 )
     temp_file="${matlab_path}/toolbox/local/pathdef.m.tmp"
 
-    echo "Add following path to ${target_file}:"
-    echo "${insert_content}"
-    echo "Remember to run cvx_setup in matlab console."
+    echo -e "\n\033[34mAdd following path to ${target_file}:\033[0m"
+    echo -e "\033[32m${insert_content}\033[0m"
+    echo -e "\033[34mRemember to run cvx_setup in matlab console.\033[0m\n"
 
     awk -v insert="$insert_content" '/%%% BEGIN ENTRIES %%%/ {print; print insert; next} 1' "$target_file" > "$temp_file"
     mv $temp_file $target_file
@@ -31,8 +31,8 @@ post_remove() {
     target_file="${matlab_path}/toolbox/local/pathdef.m"
     cvx_path="${matlab_path}/cvx"
 
-    echo "Remove following path from ${targer_file}:"
-    echo "${cvx_path}/*"
+    echo -e "\n\033[34mRemove following path from ${targer_file}:\033[0m"
+    echo -e "\033[32m${cvx_path}/*\033[0m\n"
 
     sed -i "\#${cvx_path}#d" "$target_file"
 
