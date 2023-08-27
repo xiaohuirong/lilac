@@ -1,19 +1,19 @@
 # Maintainer: Hoream <hoream@qq.com>
-pkgname=matlab-2023a-cvx
-pkgver=2.2
+pkgname=matlab-2023a-cvx-beta
+pkgver=3.0
 pkgrel=1
 pkgdesc="Matlab Software for Disciplined Convex Programming."
 arch=(x86_64)
-url="http://cvxr.com/cvx"
+url="http://cvxr.com/cvx/beta/"
 license=('GPL3')
 makedepends=()
-source=("cvx-a64.tar.gz::http://web.cvxr.com/cvx/cvx-a64.tar.gz")
-install="matlab-2023a-cvx.install"
+source=("cvx-a64.tar.gz::http://web.cvxr.com/cvx/beta/cvx-a64.tar.gz")
+install="matlab-2023a-cvx-beta.install"
 depends=(
   'matlab-2023a'
 )
 
-sha256sums=('16e4622c80f2bf63152aaee59db4fe42afa4d2282179e5d216358953c7f9ea4d')
+sha256sums=('ea2a2082d905d9e46831c345ebaa9cd14ddea9ba920d24d295f799d2f3ca76fc')
 provides=("matlab-2023a-cvx")
 
 package() {

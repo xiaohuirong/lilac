@@ -1,0 +1,39 @@
+post_install() {
+
+    matlab_path="/opt/matlab/matlab-2023a"
+    target_file="${matlab_path}/toolbox/local/pathdef.m"
+
+insert_content=$(
+cat <<EOF
+'${matlab_path}/cvx/builtins:', ...
+'${matlab_path}/cvx/commands:', ...
+'${matlab_path}/cvx/functions:', ...
+'${matlab_path}/cvx/lib:', ...
+'${matlab_path}/cvx/structures:', ...
+'${matlab_path}/cvx/functions/vec_:', ...
+'${matlab_path}/cvx:', ...
+EOF
+)
+    temp_file="${matlab_path}/toolbox/local/pathdef.m.tmp"
+
+    echo "Add following path to ${target_file}:"
+    echo "${insert_content}"
+    echo "Remember to run cvx_setup in matlab console."
+
+    awk -v insert="$insert_content" '/%%% BEGIN ENTRIES %%%/ {print; print insert; next} 1' "$target_file" > "$temp_file"
+    mv $temp_file $target_file
+
+}
+
+post_remove() {
+
+    matlab_path="/opt/matlab/matlab-2023a"
+    target_file="${matlab_path}/toolbox/local/pathdef.m"
+    cvx_path="${matlab_path}/cvx"
+
+    echo "Remove following path from ${targer_file}:"
+    echo "${cvx_path}/*"
+
+    sed -i "\#${cvx_path}#d" "$target_file"
+
+}
