@@ -3,7 +3,7 @@
 
 pkgbase=adwaita-qt-git
 pkgname=(adwaita-qt5-git adwaita-qt6-git)
-pkgver=1.4.1.r17.g417df19
+pkgver=1.4.1.r29.g0a77436
 pkgrel=1
 pkgdesc='A style to bend Qt applications to look like they belong into GNOME Shell, git package.'
 arch=(x86_64)
