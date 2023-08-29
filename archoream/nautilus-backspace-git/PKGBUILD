@@ -1,0 +1,28 @@
+# Maintainer: Hoream <2175223953@qq.com>
+_pkgname="nautilus-backspace"
+pkgname="${_pkgname}-git"
+pkgver=r5.0b7f2b1
+pkgrel=1
+pkgdesc='BackSpace in Nautilus on Gnome 43, 44'
+url='https://github.com/jesusferm/Nautilus-43-BackSpace'
+license=('MIT')
+arch=('any')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=("nautilus" "python" "gtk4" "gtk3")
+makedepends=("git")
+source=(${_pkgname}::git+https://github.com/jesusferm/Nautilus-43-BackSpace)
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+package() {
+	install -d "${pkgdir}/usr/share/nautilus-python/extensions/"
+    cp ${srcdir}/${_pkgname}/BackSpace.py ${pkgdir}/usr/share/nautilus-python/extensions
+}
