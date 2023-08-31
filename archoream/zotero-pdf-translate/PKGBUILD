@@ -1,0 +1,32 @@
+# Original maintainer: Hoream <hoream@qq.com>
+
+pkgname=zotero-pdf-translate
+pkgver=1.0.25
+pkgrel=1
+pkgdesc="Translate for Zotero"
+arch=(any)
+url="https://github.com/windingwind/zotero-pdf-translate"
+license=('AGPL3')
+depends=(
+    'zotero'
+)
+makedepends=(
+    'zip'
+)
+optdepends=()
+groups=("zotero-addons")
+source=(
+    "${pkgname}-${pkgver}.xpi::https://github.com/windingwind/zotero-pdf-translate/releases/download/v${pkgver}/${pkgname}.xpi"
+)
+sha256sums=('19b9105e3444ab8007b63393b9ed27d97c5189bb20eff941e471ed097e05fc52')
+
+package() {
+    folder=${pkgdir}/usr/lib/zotero/extensions/zoteropdftranslate@euclpts.com
+    mkdir "$folder" -p
+    cp ${srcdir}/* ${folder} -r
+    rm ${folder}/${pkgname}-${pkgver}.xpi
+    cd ${folder}
+    zip -r zoteropdftranslate@euclpts.com.xpi *
+    mv zoteropdftranslate@euclpts.com.xpi ..
+}
+
