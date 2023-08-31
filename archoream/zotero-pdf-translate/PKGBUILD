@@ -19,6 +19,7 @@ source=(
     "${pkgname}-${pkgver}.xpi::https://github.com/windingwind/zotero-pdf-translate/releases/download/v${pkgver}/${pkgname}.xpi"
 )
 sha256sums=('19b9105e3444ab8007b63393b9ed27d97c5189bb20eff941e471ed097e05fc52')
+install='zotero-pdf-translate.install'
 
 package() {
     folder=${pkgdir}/usr/lib/zotero/extensions/zoteropdftranslate@euclpts.com
