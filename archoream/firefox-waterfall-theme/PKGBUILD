@@ -1,6 +1,6 @@
 # Maintainer: Hoream <2175223953@qq.com>
 pkgname="firefox-waterfall-theme"
-pkgver=0.0.1
+pkgver=r27.8fd033a
 pkgrel=1
 pkgdesc='Firefox waterfall theme'
 url='https://github.com/crambaud/waterfall'
@@ -10,16 +10,25 @@ provides=()
 conflicts=()
 depends=('firefox')
 makedepends=()
-source=("source.tar.gz" 
+source=("${pkgname}::git+https://github.com/xiaohuirong/firefox-waterfall-theme.git" 
         "INSTALL.md")
-sha256sums=(be59a7001a3d8d7a82698d7ebe06e73bb9c314498a7987ad5571f748e42c5c06
+sha256sums=(SKIP
             SKIP)
 install="${pkgname}.install"
 
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
 
 package() {
     install -d "${pkgdir}/usr/lib/${pkgname}"
-    cp -rfa $srcdir/source/* "${pkgdir}/usr/lib/${pkgname}"
+    cp -rfa $srcdir/${pkgname}/background "${pkgdir}/usr/lib/${pkgname}"
+    cp -rfa $srcdir/${pkgname}/userChrome.css "${pkgdir}/usr/lib/${pkgname}"
+    cp -rfa $srcdir/${pkgname}/userContent.css "${pkgdir}/usr/lib/${pkgname}"
 
     install -Dm644 $srcdir/INSTALL.md "${pkgdir}/usr/share/doc/${pkgname}/INSTALL.md"
 }
