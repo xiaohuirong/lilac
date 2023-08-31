@@ -1,6 +1,6 @@
 # Maintainer: Hoream <2175223953@qq.com>
 pkgname="tokyonight-storm-b-gtk-theme"
-pkgver=0.0.1
+pkgver=r58.fb3e1cd1
 pkgrel=1
 pkgdesc='Tokyonight-Storm-B gtk theme'
 url='https://github.com/Fausto-Korpsvart/Tokyo-Night-GTK-Theme'
@@ -10,10 +10,19 @@ provides=()
 conflicts=()
 depends=()
 makedepends=()
-source=("Tokyonight-Storm-B.tar.gz")
-sha256sums=("8a549097557dbeaa29e79163bd104ca8d86d23ebcaeff1f0fcab88a2f3c0ff7c")
+source=("${pkgname}::git+https://github.com/xiaohuirong/Tokyo-Night-GTK-Theme.git")
+sha256sums=("SKIP")
+
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
 
 package() {
 	install -d ${pkgdir}/usr/share/theme/Tokyonight-Storm-B
-	cp $srcdir/Tokyonight-Storm-B/* ${pkgdir}/usr/share/theme/Tokyonight-Storm-B -ra
+	cp $srcdir/${pkgname}/themes/Tokyonight-Storm-B/* ${pkgdir}/usr/share/theme/Tokyonight-Storm-B -ra
 }
