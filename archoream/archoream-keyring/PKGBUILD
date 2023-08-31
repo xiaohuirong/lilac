@@ -1,5 +1,5 @@
 pkgname='archoream-keyring'
-pkgver='0.0.1'
+pkgver=r118.c663892
 pkgrel=1
 pkgdesc='Archoream PGP keyring'
 arch=('any')
@@ -7,11 +7,19 @@ license=('GPL')
 depends=('archlinux-keyring')
 optdepends=('pkgstats: install to submit package usage statistics')
 install="archoream-keyring.install"
-source=("source.tar.gz")
-sha512sums=('8a9e4e6fe9e80e775e6516fbf87cb0a4923f720853bb2b4cec75a5a16fd393ea41369094b58b7fb59e6ab131aefd74c122717b4ea7414f44c026a204f6dd116b')
+source=("${pkgname}::git+https://github.com/xiaohuirong/archoream-keyring.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
 
 package() {
-  cd "$srcdir/source"
+  cd "$srcdir/${pkgname}"
 
   make PREFIX=/usr "DESTDIR=$pkgdir" install
 }
