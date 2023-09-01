@@ -1,4 +1,5 @@
 # Maintainer: Hoream <2175223953@qq.com>
+
 pkgname="firefox-waterfall-theme"
 pkgver=r27.8fd033a
 pkgrel=1
@@ -9,7 +10,7 @@ arch=('x86_64')
 provides=()
 conflicts=()
 depends=('firefox')
-makedepends=()
+makedepends=('git')
 source=("${pkgname}::git+https://github.com/xiaohuirong/firefox-waterfall-theme.git" 
         "INSTALL.md")
 sha256sums=(SKIP

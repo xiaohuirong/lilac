@@ -5,6 +5,7 @@ pkgrel=2
 pkgdesc="A test package for liac."
 arch=(x86_64)
 license=('GPL3')
+url='https://blog.hoream.top'
 
 build() {
   echo "Hello, lilac."

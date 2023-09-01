@@ -1,7 +1,10 @@
+# Maintainer: Hoream <hoream@qq.com>
+
 pkgname='archoream-keyring'
 pkgver=r118.c663892
 pkgrel=1
 pkgdesc='Archoream PGP keyring'
+url='https://github.com/xiaohuirong/archoream-keyring'
 arch=('any')
 license=('GPL')
 depends=('archlinux-keyring')
@@ -9,6 +12,7 @@ optdepends=('pkgstats: install to submit package usage statistics')
 install="archoream-keyring.install"
 source=("${pkgname}::git+https://github.com/xiaohuirong/archoream-keyring.git")
 sha512sums=('SKIP')
+makedepends=('git')
 
 pkgver() {
   cd "${srcdir}/${pkgname}"
