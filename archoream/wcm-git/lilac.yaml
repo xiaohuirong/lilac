@@ -13,4 +13,4 @@ update_on:
 repo_depends:
   - wf-shell-git
 
-managed: false
+managed: true
