@@ -1,0 +1,35 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=lingo
+pkgver=20.0
+pkgrel=2
+pkgdesc="A optimization Modeling Software for Linear, Nonlinear, and Integer Programming."
+arch=(x86_64)
+url="https://www.lindo.com"
+license=('custom')
+depends=('bubblewrap')
+makedepends=()
+source=("lingo20.tar.gz::http://app.hoream.top:8000/manual/lingo20.tar.gz")
+
+sha256sums=(SKIP)
+provides=('lingo')
+install=lingo.install
+
+package() {
+  install -d "${pkgdir}/usr/share/applications"
+  install -d "${pkgdir}/opt/lingo"
+
+  install -Dm644 "${srcdir}/lingo20/Lingo 20.0.desktop" "${pkgdir}/usr/share/applications/lingo20.desktop"
+
+  cp -r lingo20/ "${pkgdir}/opt/lingo/lingo20"
+  rm ${pkgdir}/opt/lingo/lingo20/"Uninstall Lingo.desktop"
+  rm ${pkgdir}/opt/lingo/lingo20/uninstall
+  rm ${pkgdir}/opt/lingo/lingo20/uninstall.dat
+  rm ${pkgdir}/opt/lingo/lingo20/"Lingo 20.0.desktop"
+  rm ${pkgdir}/opt/lingo/lingo20/"Lingo-installLog.log"
+
+  sed -i '/^exec/ i\# Lingo does not support waland.\nexport QT_QPA_PLATFORM=xcb\nlicense_path="$HOME/.config/Lindo/license/linux64"\nif [ ! -e "$license_path" ]; then\n  mkdir -p "$license_path"\nfi\n' ${pkgdir}/opt/lingo/lingo20/lingo20
+  
+  sed -i '/^exec/ c\exec bwrap --ro-bind / / \\\n\t --dev-bind /dev /dev \\\n\t --bind ${HOME}/.config/Lindo ${HOME}/.config/Lindo \\\n\t--bind ${HOME}/.config/Lindo/license /opt/lingo/lingo20/license \\\n\t $LINGO_20_HOME/bin/linux64/lingo20.bin "$@"' ${pkgdir}/opt/lingo/lingo20/lingo20
+
+}
+
