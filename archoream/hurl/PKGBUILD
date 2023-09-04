@@ -1,7 +1,7 @@
 # Maintainer: Anders Damsgaard <anders@adamsgaard.dk>
 pkgname=hurl
 pkgver=0.8
-pkgrel=1
+pkgrel=2
 pkgdesc='HTTP/HTTPS/Gopher file grabber'
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url='https://codemadness.org/hurl.html'
