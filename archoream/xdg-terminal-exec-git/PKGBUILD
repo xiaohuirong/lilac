@@ -1,7 +1,7 @@
 # Maintainer: Max Gautier <mg@max.gautier.name>
 _pkgname=xdg-terminal-exec
 pkgname=${_pkgname}-git
-pkgver=r30.7ce994f
+pkgver=r65.6426085
 pkgrel=1
 pkgdesc="Proposed standard to launching desktop apps with Terminal=true"
 arch=(any)
