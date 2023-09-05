@@ -11,3 +11,5 @@ update_on:
     aur: go-musicfox-git
   - source: manual
     manual: 1
+  - source: github
+    github: go-musicfox/go-musicfox
