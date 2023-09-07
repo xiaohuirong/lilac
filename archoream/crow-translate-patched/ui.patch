@@ -1,0 +1,16 @@
+diff --git a/src/mainwindow.ui b/src/mainwindow.ui
+index f74ee92..1d428ee 100644
+--- a/src/mainwindow.ui
++++ b/src/mainwindow.ui
+@@ -18,6 +18,11 @@
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <widget class="QWidget" name="centralWidget">
++  <property name="minimumSize"> <!-- 设置最小高度 -->
++    <size>
++     <height>500</height> <!-- 设置最小高度值 -->
++    </size>
++   </property>
+    <layout class="QHBoxLayout" name="centralLayout">
+     <item>
+      <layout class="QGridLayout" name="sourceLayout">
