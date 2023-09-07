@@ -1,0 +1,39 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname=wayfire-firedecor
+pkgname=wayfire-firedecor-hoream-git
+pkgver=r89.3c6777d
+pkgrel=1
+pkgdesc="An advanced window decoration plugin for the wayfire window manager."
+arch=('any')
+url="https://github.com/AhoyISki/wayfire-firedecor.git"
+license=('MIT')
+depends=('wayfire-hoream-git' 'librsvg' 'boost')
+makedepends=('git' 'meson' 'ninja')
+provides=("${_pkgname}" "${_pkgname}-git")
+conflicts=("${_pkgname}" "${_pkgname}-git")
+source=("${_pkgname}::git+https://github.com/AhoyISki/${_pkgname}.git")
+sha256sums=("SKIP")
+
+prepare() {
+    cd "${srcdir}/${_pkgname}"
+    git checkout 3c6777dc64bc2e62ea495a8c99a712dee8c20edb
+}
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+build() {
+    cd "${srcdir}/${_pkgname}"
+	arch-meson build
+    ninja -C build
+}
+
+package() {
+    cd "${srcdir}/${_pkgname}"
+    DESTDIR="${pkgdir}/" ninja -C build install
+}
