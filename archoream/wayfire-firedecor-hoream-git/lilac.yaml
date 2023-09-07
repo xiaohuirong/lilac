@@ -4,3 +4,7 @@ maintainers:
 
 update_on:
 - source: manual
+
+repo_depends:
+  - wayfire-hoream-git
+
