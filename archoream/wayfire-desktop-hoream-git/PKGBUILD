@@ -1,0 +1,20 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=wayfire-desktop-hoream-git
+pkgver=1
+pkgrel=1
+pkgdesc='Wayfire desktop environment.(hoream git edition)'
+url=''
+arch=('any')
+license=('GPL')
+provides=('wayfire-desktop')
+conflicts=('wayfire-desktop-git' 'wayfire-desktop')
+depends=(
+  wayfire-hoream-git
+  wf-info-hoream-git
+  mpvpaper
+)
+# vim: ts=2 sw=2 et:
+
+
+
