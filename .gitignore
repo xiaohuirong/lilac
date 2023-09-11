@@ -4,3 +4,4 @@ src
 pkg
 *.sig
 archoream/wayfire-git/wayfire
+*.bz2
