@@ -1,7 +1,7 @@
 # Maintainer: desbma
 pkgname=ttf-icomoon-feather
 pkgver=1.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Icomoon feather font'
 arch=('any')
 url='https://github.com/adi1090x/polybar-themes/tree/master/fonts/panels'
