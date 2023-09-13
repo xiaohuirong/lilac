@@ -23,6 +23,6 @@ pkgver() {
 
 
 package() {
-	install -d ${pkgdir}/usr/share/theme/Tokyonight-Storm-B
-	cp $srcdir/${pkgname}/themes/Tokyonight-Storm-B/* ${pkgdir}/usr/share/theme/Tokyonight-Storm-B -ra
+	install -d ${pkgdir}/usr/share/themes/Tokyonight-Storm-B
+	cp $srcdir/${pkgname}/themes/Tokyonight-Storm-B/* ${pkgdir}/usr/share/themes/Tokyonight-Storm-B -ra
 }
