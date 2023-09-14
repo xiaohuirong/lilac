@@ -11,3 +11,5 @@ update_on:
     aur: jftui-git
   - source: github
     github: Aanok/jftui
+  - source: manual
+    manual: 1
