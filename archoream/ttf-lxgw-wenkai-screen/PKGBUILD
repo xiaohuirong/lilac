@@ -2,7 +2,7 @@
 
 pkgname=ttf-lxgw-wenkai-screen
 pkgver=1.300
-pkgrel=1
+pkgrel=2
 pkgdesc="本字体是霞鹜文楷的屏幕舒适阅读版本,增强了字重，包括LXGWWenKaiScreen（使用文楷完整版字库，不以其他任何字体打底）和LXGWWenKaiScreenR（在文楷完整版字库基础上，使用Roboto补全缺失字符，可能有文字形态不统一）。另外带 GB 的表示 GB 2312、通用规范汉字表范围内汉字为陆标字形，不带 GB 的为原版文楷的半陆标字形。"
 arch=('any')
 url='https://github.com/lxgw/LxgwWenKai-Screen/'
