@@ -37,19 +37,6 @@ sha256sums=(
     '99f9d17c4355b274ef0c08069cf6e756a98cd5c9d9d22d1b39f79538134277e1'
 )
 
-prepare() {
-#    if [ ! -d "${srcdir}/${_pkgname}" ]
-#    then
-#        cd ${srcdir}
-#        git clone https://github.com/Riteo/godot.git --branch wayland --single-branch --depth 1
-#    else
-#        cd "${srcdir}/${_pkgname}"
-#        git fetch --depth 1 origin wayland
-#        git reset --hard origin/wayland
-#    fi
-echo "hello"
-}
-
 pkgver() {
     cd "${srcdir}/${_pkgname}"
     _major=$(cat version.py|grep "major" | sed 's/major = //')
