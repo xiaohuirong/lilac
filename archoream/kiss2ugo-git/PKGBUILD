@@ -1,0 +1,39 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname=kiss2ugo
+pkgname="${_pkgname}-git"
+pkgver=r20.a960849
+pkgrel=1
+pkgdesc="Lilac build API"
+arch=('x86_64')
+url="https://github.com/a-wing/kiss2ugo"
+license=()
+depends=()
+makedepends=('git' 'go')
+source=(git+https://github.com/a-wing/kiss2ugo.git)
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+prepare(){
+  cd $_pkgname
+  go get -u github.com/shurcooL/vfsgen
+}
+
+build() {
+  cd "$_pkgname"
+
+  go generate
+  go build
+}
+
+package() {
+  cd "$_pkgname"
+  install -Dm 755 kiss2u $pkgdir/usr/bin/kiss2u
+  install -Dm 755 kiss2ugo.service $pkgdir/usr/lib/systemd/system/kiss2ugo.service
+}
