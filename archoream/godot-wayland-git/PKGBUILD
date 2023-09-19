@@ -27,11 +27,12 @@ else
 fi
 
 source=(
-    ${_pkgname}::https://github.com/Riteo/godot.git#branch=wayland
+    ${_pkgname}::https://github.com/Riteo/godot#branch=wayland
 	godot.desktop
 	icon.png
 )
 sha256sums=(
+    'SKIP'
     '2ae039a3879b23e157f2125e0b326fa1ef66d56bfd596c790e8943d27652e93a'
     '99f9d17c4355b274ef0c08069cf6e756a98cd5c9d9d22d1b39f79538134277e1'
 )
