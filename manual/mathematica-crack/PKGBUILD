@@ -1,0 +1,25 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=mathematica-crack
+pkgver=13.3.0
+pkgrel=1
+pkgdesc="Mathematica crack program."
+url="https://mp.weixin.qq.com/s/fYtFqrPzDRrgRAAgRUHSrQ"
+license=("unknown")
+arch=("x86_64")
+provides=()
+conflicts=()
+depends=()
+makedepends=()
+source=("Mathematica13KG_Linux_::http://app.hoream.top:8000/manual/Mathematica13KG_Linux_")
+install=mathematica-crack.install
+
+sha256sums=("77d9d57ff657a3a22dcf8a8f99b705e887bd0383d2b09570a002d3d961fbfb65")
+
+package() {
+    install -d "${pkgdir}/usr/bin"    
+    install -Dm755 "${srcdir}/Mathematica13KG_Linux_" "${pkgdir}/usr/bin/${pkgname}"
+}
+
+
+
