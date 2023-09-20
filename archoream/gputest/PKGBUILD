@@ -4,7 +4,7 @@ DLAGENTS=('http::/usr/bin/curl -e "http://www.geeks3d.com/20131028/gputest-0-6-0
 
 pkgname=gputest
 pkgver=0.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="cross-platform GPU stress test and OpenGL benchmark. Contains FurMark, TessMark"
 arch=('x86_64')
 url="http://www.geeks3d.com/gputest/"
