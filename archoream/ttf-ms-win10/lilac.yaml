@@ -9,3 +9,5 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: ttf-ms-win10-zh_cn
+
+managed: false
