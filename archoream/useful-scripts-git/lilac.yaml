@@ -1,0 +1,11 @@
+maintainers:
+- github: Hoream
+  email: hoream@qq.com
+
+build_prefix: archoream-x86_64
+
+update_on:
+  - source: manual
+    manual: 1
+  - source: github
+    github: xiaohuirong/useful-scripts
