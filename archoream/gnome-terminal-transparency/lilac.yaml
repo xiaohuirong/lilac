@@ -1,6 +1,6 @@
 maintainers:
   - github: Hoream
-    email: 2175223953@qq.com
+    email: hoream@qq.com
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
@@ -10,4 +10,4 @@ update_on:
   - source: aur
     aur: gnome-terminal-transparency
 
-managed: false
+managed: true
