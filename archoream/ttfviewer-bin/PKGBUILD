@@ -2,7 +2,7 @@
 pkgname=ttfviewer-bin
 _pkgname=TTFviewer
 pkgver=0.2.4
-pkgrel=2
+pkgrel=3
 pkgdesc="A small tool for developers to view and preview various ttf font/icon image formats. It is based on Qt and opencv frameworks and supports windows/linux/macos."
 arch=("x86_64")
 url="https://github.com/QQxiaoming/TTFviewer"
