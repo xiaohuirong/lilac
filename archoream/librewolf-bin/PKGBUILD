@@ -27,12 +27,12 @@ options=(!emptydirs)
 install='librewolf-bin.install'
 
 _project_id=44042130
-_base_url=https://gitlab.com/api/v4/projects/${_project_id}/packages/generic/${pkgname//-bin/""}/${pkgver}-${pkgrel}
-_uploadpath_aarch64=${_base_url}/${pkgname//-bin/""}-${pkgver}-${pkgrel}-linux-arm64-package.tar.bz2
-_uploadpath_x86_64=${_base_url}/${pkgname//-bin/""}-${pkgver}-${pkgrel}-linux-x86_64-package.tar.bz2
+_base_url=https://gitlab.com/api/v4/projects/${_project_id}/packages/generic/${pkgname//-bin/""}/${pkgver}-1
+_uploadpath_aarch64=${_base_url}/${pkgname//-bin/""}-${pkgver}-1-linux-arm64-package.tar.bz2
+_uploadpath_x86_64=${_base_url}/${pkgname//-bin/""}-${pkgver}-1-linux-x86_64-package.tar.bz2
 _uploadpath_sig_aarch64=${_uploadpath_aarch64}.sig
 _uploadpath_sig_x86_64=${_uploadpath_x86_64}.sig
-_source_tag="${pkgver}-${pkgrel}"
+_source_tag="${pkgver}-1"
 source=(
   "git+https://gitlab.com/${pkgname//-bin/""}-community/browser/source.git#tag=${_source_tag}"
   default192x192.png
