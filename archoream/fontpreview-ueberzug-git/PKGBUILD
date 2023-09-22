@@ -2,7 +2,7 @@
 pkgname=fontpreview-ueberzug-git
 _pkgname=${pkgname%-git}
 pkgver=r52.f10f40c
-pkgrel=1
+pkgrel=2
 pkgdesc="Preview system fonts in the terminal"
 arch=('any')
 url="https://github.com/OliverLew/fontpreview-ueberzug"
