@@ -16,3 +16,5 @@ update_on:
     github: Martchus/syncthingtray
     use_latest_release: true
     prefix: v
+
+managed: false
