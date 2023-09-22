@@ -12,5 +12,6 @@ update_on:
 
 repo_depends:
   - vte3-notification
+  - vte-notification-common
 
 managed: true
