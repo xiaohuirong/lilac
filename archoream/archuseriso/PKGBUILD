@@ -2,7 +2,7 @@
 
 pkgname=archuseriso
 pkgver=0.7.12
-pkgrel=1
+pkgrel=2
 pkgdesc="Create bootable disk images of Arch Linux, install to an external USB disk or thumb drive"
 arch=('any')
 url="https://github.com/laurent85v/archuseriso"
