@@ -1,19 +1,19 @@
 # Maintainer: hoream <hoream@qq.com>
 
-_pkgname=ttfviewer
+_pkgname=yuvviewer
 pkgname="${_pkgname}-git"
-pkgver=0.2.4.r13.g9ca4feb
+pkgver=0.5.3.r15.g4d26058
 pkgrel=1
-pkgdesc="A small tool for developers to view and preview various ttf font/icon image formats."
+pkgdesc="A small tool for developers to view and preview various original image formats."
 arch=("x86_64")
 url="https://github.com/QQxiaoming/TTFviewer"
 license=('GPL3')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}" "${_pkgname}-git")
-depends=("gcc-libs" "glibc" "xdg-utils" "freetype2" "qt5-base" "qt5-svg")
+depends=("opencv" "qt5-base" "qt5-svg" "xdg-utils" "glibc" "gcc-libs")
 makedepends=("git")
 options=()
-source=("${_pkgname}::git+https://github.com/QQxiaoming/TTFviewer.git")
+source=("${_pkgname}::git+https://github.com/QQxiaoming/YUVviewer.git")
 sha256sums=('SKIP')
 
 pkgver() {
@@ -27,28 +27,29 @@ pkgver() {
 build() {
     cd "${srcdir}/${_pkgname}"
     QT_DIR=/usr
-    TTFVIEWER_MAJARVERSION="0"
-    TTFVIEWER_SUBVERSION="2"
-    TTFVIEWER_REVISION="4"
+    YUVVIEWER_MAJARVERSION="0"
+    YUVVIEWER_SUBVERSION="5"
+    YUVVIEWER_REVISION="3"
     PATH=$QT_DIR/bin
     LD_LIBRARY_PATH=$QT_DIR/lib
-    QT_PLUGIN_PATH=/usr/lib/qt6/plugins
-    QML2_IMPORT_PATH=/usr/lib/qt6/qml
+    QT_PLUGIN_PATH=$QT_DIR/plugins
+    QML2_IMPORT_PATH=$QT_DIR/qml
     TTFVIEWER_VERSION=$TTFVIEWER_MAJARVERSION$TTFVIEWER_SUBVERSION$TTFVIEWER_REVISION
     CFLAGS+=" -fPIE"
     LDFLAGS+=" -pie"
 
-    sed -i 's/^FREETPE2_DIR=.*/FREETPE2_DIR=\/usr/' partform_unix.pri
-    lrelease ./TTFviewer.pro
-    qmake ./TTFviewer.pro -spec linux-g++ CONFIG+=qtquickcompiler
+    sed -i 's/^OPENCV_DIR=.*/OPENCV_DIR=\/usr/' partform_unix.pri
+    sed -i 's/rgbImglist.insert(rgbImglist.constEnd(), rgbImg)/rgbImglist.append(rgbImg)/g' src/YUVdecoder.cpp
+    lrelease ./YUVviewer.pro
+    qmake ./YUVviewer.pro -spec linux-g++ CONFIG+=qtquickcompiler
     make
 }
 
 package() {
     install -d "${pkgdir}/usr/bin"
     install -d "${pkgdir}/usr/share/applications"
-    install -Dm755 "${srcdir}/${_pkgname}/build_release/out/TTFviewer" "${pkgdir}/usr/bin/${_pkgname}"
-    install -Dm644 "${srcdir}/${_pkgname}/dpkg/TTFviewer/usr/share/applications/TTFviewer.desktop"  "${pkgdir}/usr/share/applications/${_pkgname}.desktop"
+    install -Dm755 "${srcdir}/${_pkgname}/build_release/out/YUVviewer" "${pkgdir}/usr/bin/${_pkgname}"
+    install -Dm644 "${srcdir}/${_pkgname}/dpkg/YUVviewer/usr/share/applications/YUVviewer.desktop"  "${pkgdir}/usr/share/applications/${_pkgname}.desktop"
     install -Dm644 "${srcdir}/${_pkgname}/img/ico.png" "${pkgdir}/usr/share/pixmaps/${_pkgname}.png"
 
     sed -i "s/^Exec=.*/Exec=\/usr\/bin\/${_pkgname}/" "${pkgdir}/usr/share/applications/${_pkgname}.desktop"
