@@ -8,10 +8,6 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: gnome-terminal-fedora 
-
-repo_depends:
-  - vte3-notification
-  - vte-notification-common: vte-notification-common
-
-managed: true
+    aur: lib2geom-git
+  - source: gitlab
+    gitlab: inkscape/lib2geom
