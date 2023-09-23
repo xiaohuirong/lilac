@@ -8,8 +8,5 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: calamares
-
-repo_depends: 
-  - mkinitcpio-openswap
-  - ckbcomp
+    aur: mkinitcpio-openswap
+  - source: manual
