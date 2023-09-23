@@ -3,7 +3,7 @@
 
 _name=gnome-browser-connector
 pkgname=$_name-git
-pkgver=42rc.r656.101c501
+pkgver=421.r665.1ed2008
 pkgrel=1
 pkgdesc='Native browser connector for integration with extensions.gnome.org'
 arch=(any)
