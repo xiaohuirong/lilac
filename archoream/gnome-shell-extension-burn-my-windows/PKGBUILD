@@ -3,7 +3,7 @@
 pkgname=gnome-shell-extension-burn-my-windows
 _pkgname=Burn-My-Windows
 pkgver=34
-pkgrel=1
+pkgrel=2
 pkgdesc="Disintegrate your apps the old-school way."
 arch=('any')
 url="https://github.com/Schneegans/Burn-My-Windows"
