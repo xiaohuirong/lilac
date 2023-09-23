@@ -13,3 +13,6 @@ update_on:
     aur: krita-git
   - source: github
     github: KDE/krita
+
+# too high build frequency.
+managed: false
