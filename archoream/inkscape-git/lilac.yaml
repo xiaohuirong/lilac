@@ -11,3 +11,7 @@ update_on:
     aur: inkscape-git
   - source: gitlab
     gitlab: inkscape/inkscape
+
+repo_depends: 
+  - libmagick6
+  - lib2geom-git
