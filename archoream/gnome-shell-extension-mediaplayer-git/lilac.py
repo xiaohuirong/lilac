@@ -4,7 +4,9 @@ import re
 def pre_build():
     aur_pre_build()
 
-    file = edit_file('PKGBUILD')
+    with open('PKGBUILD', "r") as file:
+        file_contents = file.read()
+
     pattern = r"pkgver\(\) \{\n.*?\}\n"
     matches = re.findall(pattern, file_contents, re.DOTALL)
     replacement = r'''pkgver() {
@@ -16,7 +18,8 @@ def pre_build():
 }
 '''
     for match in matches:
-        file = file.replace(match, replacement)
+        file_contents = file_contents.replace(match, replacement)
 
-    for line in file:
-        print(line)
+    with open('PKGBUILD', "w") as file:
+        file.write(file_contents)
+
