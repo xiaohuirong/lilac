@@ -8,12 +8,5 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: gradience-git
-  - source: github
-    github: GradienceTeam/Gradience
+    aur: python-libsass
   - source: manual
-
-repo_depends: 
-  - python-material-color-utilities
-  - python-cssutils
-  - python-libsass
