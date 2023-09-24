@@ -10,3 +10,7 @@ update_on:
   - source: aur
     aur: gradience
   - source: manual
+
+repo_depends: 
+  - python-cssutils
+  - python-material-color-utilities
