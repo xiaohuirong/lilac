@@ -8,9 +8,5 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: gnome-shell-extension-vitals
+    aur: gnome-icon-theme-symbolic
   - source: manual
-
-repo_depends: 
-  - gnome-icon-theme-symbolic
-  - gnome-icon-theme
