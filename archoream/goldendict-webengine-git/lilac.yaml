@@ -9,4 +9,4 @@ update_on:
   - source: github
     github: xiaoyifang/goldendict-ng
 
-managed: true
+managed: false
