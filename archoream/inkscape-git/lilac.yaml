@@ -13,5 +13,5 @@ update_on:
     gitlab: inkscape/inkscape
 
 repo_depends: 
-  - libmagick6
+  - imagemagick6: libmagick6
   - lib2geom-git
