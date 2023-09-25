@@ -14,8 +14,10 @@ source=("git+https://github.com/wxWidgets/wxWidgets.git"
         "git+https://github.com/wxWidgets/Catch.git"
         "git+https://github.com/wxWidgets/pcre.git"
         "git+https://github.com/wxWidgets/nanosvg.git"
-        "git+https://github.com/wxWidgets/scintilla.git")
+        "git+https://github.com/wxWidgets/scintilla.git"
+        "git+https://github.com/wxWidgets/lexilla.git")
 sha256sums=('SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -39,6 +41,9 @@ prepare() {
 
   git config submodule.src/stc/scintilla.url "${srcdir}/scintilla"
   git -c protocol.file.allow=always submodule update --init src/stc/scintilla
+
+  git config submodule.src/stc/lexilla.url "${srcdir}/lexilla"
+  git -c protocol.file.allow=always submodule update --init src/stc/lexilla
 
   ./autogen.sh
 }
