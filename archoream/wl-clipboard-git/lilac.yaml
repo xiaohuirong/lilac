@@ -9,3 +9,6 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: wl-clipboard-git
+  - source: github
+    github: bugaevc/wl-clipboard
+  - source: manual
