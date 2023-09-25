@@ -10,8 +10,8 @@ url="https://github.com/QQxiaoming/TTFviewer"
 license=('GPL3')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}" "${_pkgname}-git")
-depends=("gcc-libs" "glibc" "xdg-utils" "freetype2" "qt5-base" "qt5-svg")
-makedepends=("git")
+depends=("gcc-libs" "glibc" "xdg-utils" "freetype2" "qt6-base" "qt6-svg")
+makedepends=("git" "qt6-tools")
 options=()
 source=("${_pkgname}::git+https://github.com/QQxiaoming/TTFviewer.git")
 sha256sums=('SKIP')
@@ -40,7 +40,7 @@ build() {
 
     sed -i 's/^FREETPE2_DIR=.*/FREETPE2_DIR=\/usr/' partform_unix.pri
     lrelease ./TTFviewer.pro
-    qmake ./TTFviewer.pro -spec linux-g++ CONFIG+=qtquickcompiler
+    qmake6 ./TTFviewer.pro -spec linux-g++ CONFIG+=qtquickcompiler
     make
 }
 
