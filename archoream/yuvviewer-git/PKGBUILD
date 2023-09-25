@@ -10,8 +10,8 @@ url="https://github.com/QQxiaoming/TTFviewer"
 license=('GPL3')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}" "${_pkgname}-git")
-depends=("opencv" "qt5-base" "qt5-svg" "xdg-utils" "glibc" "gcc-libs")
-makedepends=("git")
+depends=("opencv" "qt6-base" "qt6-svg" "xdg-utils" "glibc" "gcc-libs")
+makedepends=("git" "qt6-tools" "qt5-tools")
 options=()
 source=("${_pkgname}::git+https://github.com/QQxiaoming/YUVviewer.git")
 sha256sums=('SKIP')
@@ -41,7 +41,7 @@ build() {
     sed -i 's/^OPENCV_DIR=.*/OPENCV_DIR=\/usr/' partform_unix.pri
     sed -i 's/rgbImglist.insert(rgbImglist.constEnd(), rgbImg)/rgbImglist.append(rgbImg)/g' src/YUVdecoder.cpp
     lrelease ./YUVviewer.pro
-    qmake ./YUVviewer.pro -spec linux-g++ CONFIG+=qtquickcompiler
+    qmake6 ./YUVviewer.pro -spec linux-g++ CONFIG+=qtquickcompiler
     make
 }
 

@@ -6,3 +6,4 @@ pkg
 archoream/wayfire-git/wayfire
 *.bz2
 *.gz
+archoream/*/*/*
