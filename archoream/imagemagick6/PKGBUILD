@@ -21,7 +21,6 @@ source=("https://legacy.imagemagick.org/archive/releases/ImageMagick-${_pkgver}.
 sha256sums=('71d86cb6c25a84c9fda996590e2fe37b48d2f9435278f7849218e754640bb4c5'
             'SKIP'
             'a85b744c61b1b563743ecb7c7adad999d7ed9a8af816650e3ab9321b2b102e73')
-validpgpkeys=('D8272EF51DA223E4D05B466989AB63D48277377A') # Lexie Parsimoniae (ImageMagick code signing key) <lexie.parsimoniae@imagemagick.org>
 
 shopt -s extglob
 
