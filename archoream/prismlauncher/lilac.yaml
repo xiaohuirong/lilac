@@ -5,14 +5,15 @@ maintainers:
 build_prefix: extra-x86_64
 
 post_build: aur_post_build
-pre_build_script: |
-  aur_pre_build()
-  update_pkgver_and_pkgrel(_G.newver)
+pre_build: aur_pre_build
+  #pre_build_script: |
+  #  aur_pre_build()
+  #  update_pkgver_and_pkgrel(_G.newver)
 
 update_on:
   - source: aur
     aur: prismlauncher
-  - source: github
-    github: PrismLauncher/PrismLauncher
-    use_latest_release: true
+      #  - source: github
+      #    github: PrismLauncher/PrismLauncher
+      #    use_latest_release: true
   - source: manual
