@@ -1,0 +1,17 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: multilib
+pre_build: aur_pre_build
+post_build: aur_post_build
+
+update_on:
+  - source: aur
+    aur: deepin-wine-wechat
+  - source: manual
+
+repo_depends:
+  - deepin-wine-helper
+  - lib32-udis86-git
+  - deepin-wine6-stable
