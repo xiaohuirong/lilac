@@ -14,9 +14,9 @@ depends=(lib32-glibc)
 makedepends=(git lib32-gcc-libs python)
 provides=(libudis86.so lib32-${_gitname} deepin-udis86)
 conflicts=(lib32-${_gitname})
-source=(git+https://github.com/canihavesomecoffee/${_gitname}.git?signed)
+source=(git+https://github.com/canihavesomecoffee/${_gitname}.git)
 sha512sums=('SKIP')
-validpgpkeys=('A5DD905196EF3973280DA13CB965BC5D279F42ED') ## canihavesomecoffee
+#validpgpkeys=('A5DD905196EF3973280DA13CB965BC5D279F42ED') ## canihavesomecoffee
 
 # To fetch the gpg key:
 # $ curl https://github.com/canihavesomecoffee.gpg | gpg --import
