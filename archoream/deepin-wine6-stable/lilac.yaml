@@ -10,3 +10,6 @@ update_on:
   - source: aur
     aur: deepin-wine6-stable
   - source: manual
+
+repo_depends: 
+  - lib32-udis86-git
