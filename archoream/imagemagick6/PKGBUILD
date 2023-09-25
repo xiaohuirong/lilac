@@ -16,10 +16,9 @@ depends=('libltdl' 'lcms2' 'fontconfig' 'libxext' 'liblqr' 'libraqm' 'libpng' 'l
 makedepends=('ghostscript' 'openexr' 'libwmf' 'librsvg' 'libxml2' 'openjpeg2' 'libraw' 'opencl-headers' 'libwebp' 'libzip' 'libjxl'
              'chrpath' 'ocl-icd' 'glu' 'ghostpcl' 'ghostxps' 'libheif' 'jbigkit' 'lcms2' 'libxext' 'liblqr' 'libraqm' 'libpng' 'djvulibre')
 checkdepends=('gsfonts' 'ttf-dejavu')
-source=("https://legacy.imagemagick.org/archive/releases/ImageMagick-${_pkgver}.tar.gz"{,.asc}
+source=("https://legacy.imagemagick.org/archive/releases/ImageMagick-${_pkgver}.tar.gz"
         'arch-fonts.diff')
 sha256sums=('71d86cb6c25a84c9fda996590e2fe37b48d2f9435278f7849218e754640bb4c5'
-            'SKIP'
             'a85b744c61b1b563743ecb7c7adad999d7ed9a8af816650e3ab9321b2b102e73')
 
 shopt -s extglob

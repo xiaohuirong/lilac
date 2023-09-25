@@ -9,3 +9,5 @@ update_on:
   - source: aur
     aur: gnome-shell-extension-mediaplayer-git
   - source: manual
+
+managed: false
