@@ -6,7 +6,7 @@
 pkgbase=wxwidgets-wayland-perf
 pkgname=(wxwidgets-gtk3-wayland-perf wxwidgets-qt5-wayland-perf wxwidgets-common-wayland-perf)
 pkgver=3.2.2.1
-pkgrel=1
+pkgrel=2
 arch=(x86_64)
 url='https://wxwidgets.org'
 license=(custom:wxWindows)
