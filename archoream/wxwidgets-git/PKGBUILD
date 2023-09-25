@@ -13,8 +13,8 @@ makedepends=(git cmake gst-plugins-base glu webkit2gtk libnotify qt5-base sdl2 l
 source=("git+https://github.com/wxWidgets/wxWidgets.git"
         "git+https://github.com/wxWidgets/Catch.git"
         "git+https://github.com/wxWidgets/pcre.git"
-        "git+https://github.com/wxWidgets/nanosvg.git")
-        "git+https://github.com/wxWidgets/scintilla.git"
+        "git+https://github.com/wxWidgets/nanosvg.git"
+        "git+https://github.com/wxWidgets/scintilla.git")
 sha256sums=('SKIP'
             'SKIP'
             'SKIP'
