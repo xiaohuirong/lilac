@@ -2,7 +2,7 @@
 
 pkgname='deepin-wine6-stable'
 pkgver=6.0.0.42
-pkgrel=1
+pkgrel=2
 _pkgrel=1
 pkgdesc="Deepin wine6 stable"
 arch=('x86_64')
