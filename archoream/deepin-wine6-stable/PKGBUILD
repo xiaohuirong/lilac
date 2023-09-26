@@ -3,16 +3,17 @@
 pkgname='deepin-wine6-stable'
 pkgver=6.0.0.42
 pkgrel=1
+_pkgrel=1
 pkgdesc="Deepin wine6 stable"
 arch=('x86_64')
 url="http://www.deepin.org"
 license=('Proprietary')
 makedepends=('tar')
 source=(
-    "https://com-store-packages.uniontech.com/appstore/pool/appstore/d/deepin-wine6-stable/deepin-wine6-stable_${pkgver}-${pkgrel}_amd64.deb"
+    "https://com-store-packages.uniontech.com/appstore/pool/appstore/d/deepin-wine6-stable/deepin-wine6-stable_${pkgver}-${_pkgrel}_amd64.deb"
 )
 noextract=(
-    "deepin-wine6-stable_${pkgver}-${pkgrel}_amd64.deb"
+    "deepin-wine6-stable_${pkgver}-${_pkgrel}_amd64.deb"
 )
 provides=("deepin-wine6-stable-i386=$pkgver" "deepin-wine6-stable-amd64=$pkgver")
 replaces=("deepin-wine6-stable-i386" "deepin-wine6-stable-amd64")
@@ -37,7 +38,7 @@ depends=(
 
 package_deepin-wine6-stable() {
 
-    mkdir -p "deepin-wine6-stable_${pkgver}-${pkgrel}"
-    ar -x "deepin-wine6-stable_${pkgver}-${pkgrel}_amd64.deb" data.tar.xz --output "deepin-wine6-stable_${pkgver}-${pkgrel}"
-    tar -xf "deepin-wine6-stable_${pkgver}-${pkgrel}/data.tar.xz" --directory="${pkgdir}"
+    mkdir -p "deepin-wine6-stable_${pkgver}-${_pkgrel}"
+    ar -x "deepin-wine6-stable_${pkgver}-${_pkgrel}_amd64.deb" data.tar.xz --output "deepin-wine6-stable_${pkgver}-${_pkgrel}"
+    tar -xf "deepin-wine6-stable_${pkgver}-${_pkgrel}/data.tar.xz" --directory="${pkgdir}"
 }
