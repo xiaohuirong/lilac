@@ -1,7 +1,7 @@
 # Maintainer: Asuka Minato <i at asukaminato dot eu dot org>
 pkgname=irreader1.5.9
 pkgver=1.5.9
-pkgrel=9
+pkgrel=10
 pkgdesc="万能订阅阅读器，订阅任何网站。this is the last free version"
 arch=(x86_64 aarch64)
 url="http://irreader.fatecore.com/"
