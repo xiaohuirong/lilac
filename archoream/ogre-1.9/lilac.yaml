@@ -9,4 +9,3 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: ogre-1.9
-repo_depends:
