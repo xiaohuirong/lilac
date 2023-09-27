@@ -10,7 +10,10 @@ update_on:
   - source: aur
     aur: ignition-transport-8
 repo_depends:
-  - ignition-cmake
-  - ignition-msgs
-  - ignition-tools
-  - libutil-linux
+  - ignition-cmake-2
+  - ignition-msgs-5
+  - ignition-tools-1
+  - ignition-math-6  
+  - ignition-utils-1 
+
+
