@@ -4,9 +4,16 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-simulators
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-rqt-common-plugins
+  - ros-noetic-robot
+  - ros-noetic-gazebo-ros-pkgs
+  - ros-noetic-rqt-robot-plugins
+  - ros-noetic-stage-ros

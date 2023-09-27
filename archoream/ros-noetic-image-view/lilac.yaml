@@ -4,9 +4,32 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-image-view
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-std-srvs
+  - ros-noetic-nodelet
+  - ros-noetic-dynamic-reconfigure
+  - ros-noetic-stereo-msgs
+  - ros-noetic-catkin
+  - ros-noetic-cv-bridge
+  - ros-noetic-camera-calibration-parsers
+  - ros-noetic-message-generation
+  - ros-noetic-rosconsole
+  - ros-noetic-roscpp
+  - ros-noetic-message-filters
+  - ros-noetic-sensor-msgs
+  - ros-noetic-image-transport
+  - ros-noetic-std-srvs
+  - ros-noetic-nodelet
+  - ros-noetic-dynamic-reconfigure
+  - ros-noetic-cv-bridge
+  - ros-noetic-camera-calibration-parsers
+  - ros-noetic-rosconsole
+  - ros-noetic-roscpp
+  - ros-noetic-message-filters
+  - ros-noetic-image-transport

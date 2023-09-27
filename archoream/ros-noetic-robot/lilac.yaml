@@ -4,9 +4,24 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-robot
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-filters
+  - ros-noetic-ros-base
+  - ros-noetic-joint-state-publisher
+  - ros-noetic-executive-smach
+  - ros-noetic-urdf-parser-plugin
+  - ros-noetic-xacro
+  - ros-noetic-diagnostics
+  - ros-noetic-robot-state-publisher
+  - ros-noetic-kdl-parser-py
+  - ros-noetic-geometry
+  - ros-noetic-urdf
+  - ros-noetic-control-msgs
+  - ros-noetic-kdl-parser

@@ -4,9 +4,18 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-rqt-logger-level
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-rqt-gui-py
+  - ros-noetic-rosservice
+  - ros-noetic-rosnode
+  - ros-noetic-python-qt-binding
+  - ros-noetic-rqt-gui
+  - ros-noetic-rospy
+  - python-rospkg

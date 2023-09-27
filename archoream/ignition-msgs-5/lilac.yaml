@@ -4,9 +4,14 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ignition-msgs-5
-  - source: manual
+repo_depends:
+  - ignition-cmake
+  - ruby-ronn
+  - ignition-math
+  - ignition-utils
+  - ignition-tools

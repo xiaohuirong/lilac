@@ -4,9 +4,30 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-rosbag
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-std-srvs
+  - ros-noetic-xmlrpcpp
+  - ros-noetic-rosbag-storage
+  - ros-noetic-catkin
+  - ros-noetic-cpp-common
+  - ros-noetic-rosconsole
+  - ros-noetic-roscpp
+  - ros-noetic-roscpp-serialization
+  - ros-noetic-topic-tools
+  - ros-noetic-std-srvs
+  - ros-noetic-xmlrpcpp
+  - ros-noetic-rosbag-storage
+  - ros-noetic-genpy
+  - ros-noetic-rosconsole
+  - ros-noetic-roscpp
+  - ros-noetic-topic-tools
+  - ros-noetic-rospy
+  - ros-noetic-genmsg
+  - ros-noetic-roslib
+  - python-rospkg

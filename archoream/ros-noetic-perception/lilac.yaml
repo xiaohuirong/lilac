@@ -4,9 +4,18 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-perception
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-vision-opencv
+  - ros-noetic-ros-base
+  - ros-noetic-perception-pcl
+  - ros-noetic-laser-pipeline
+  - ros-noetic-image-transport-plugins
+  - ros-noetic-image-pipeline
+  - ros-noetic-image-common

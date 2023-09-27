@@ -4,9 +4,22 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-ros
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-rosmake
+  - ros-noetic-rosboost-cfg
+  - ros-noetic-rosbuild
+  - ros-noetic-rosclean
+  - ros-noetic-rosbash
+  - ros-noetic-catkin
+  - ros-noetic-rosunit
+  - ros-noetic-mk
+  - ros-noetic-roscreate
+  - ros-noetic-roslang
+  - ros-noetic-roslib

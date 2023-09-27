@@ -4,9 +4,17 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-camera-calibration
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-std-srvs
+  - ros-noetic-image-geometry
+  - ros-noetic-cv-bridge
+  - ros-noetic-message-filters
+  - ros-noetic-sensor-msgs
+  - ros-noetic-rospy

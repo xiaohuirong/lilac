@@ -4,9 +4,25 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-diff-drive-controller
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-pluginlib
+  - ros-noetic-urdf
+  - ros-noetic-controller-interface
+  - ros-noetic-control-msgs
+  - ros-noetic-dynamic-reconfigure
+  - ros-noetic-geometry-msgs
+  - ros-noetic-hardware-interface
+  - ros-noetic-nav-msgs
+  - ros-noetic-realtime-tools
+  - ros-noetic-tf
+  - ros-noetic-pluginlib
+  - ros-noetic-urdf
+  - ros-noetic-controller-manager
+  - ros-noetic-controller-manager-msgs

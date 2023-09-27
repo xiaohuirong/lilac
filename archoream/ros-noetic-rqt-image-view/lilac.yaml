@@ -4,9 +4,23 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-rqt-image-view
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-rqt-gui-cpp
+  - ros-noetic-geometry-msgs
+  - ros-noetic-catkin
+  - ros-noetic-cv-bridge
+  - ros-noetic-rqt-gui
+  - ros-noetic-sensor-msgs
+  - ros-noetic-image-transport
+  - ros-noetic-rqt-gui-cpp
+  - ros-noetic-geometry-msgs
+  - ros-noetic-cv-bridge
+  - ros-noetic-rqt-gui
+  - ros-noetic-sensor-msgs
+  - ros-noetic-image-transport

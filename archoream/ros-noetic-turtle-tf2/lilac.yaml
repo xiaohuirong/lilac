@@ -4,9 +4,27 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-turtle-tf2
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-turtlesim
+  - ros-noetic-catkin
+  - ros-noetic-std-msgs
+  - ros-noetic-tf2-ros
+  - ros-noetic-roscpp
+  - ros-noetic-tf2
+  - ros-noetic-tf2-geometry-msgs
+  - ros-noetic-rospy
+  - ros-noetic-geometry-msgs
+  - ros-noetic-turtlesim
+  - ros-noetic-std-msgs
+  - ros-noetic-tf2-ros
+  - ros-noetic-roscpp
+  - ros-noetic-tf2
+  - ros-noetic-tf2-geometry-msgs
+  - ros-noetic-rospy
+  - ros-noetic-geometry-msgs

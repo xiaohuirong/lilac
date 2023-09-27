@@ -4,9 +4,24 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-urdf
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-urdf-parser-plugin
+  - ros-noetic-cmake-modules
+  - ros-noetic-catkin
+  - ros-noetic-rosconsole-bridge
+  - ros-noetic-roscpp
+  - ros-noetic-pluginlib
+  - ros-noetic-rostest
+  - urdfdom
+  - urdfdom-headers
+  - ros-noetic-rosconsole-bridge
+  - ros-noetic-pluginlib
+  - ros-noetic-roscpp
+  - urdfdom
+  - urdfdom-headers

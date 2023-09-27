@@ -4,9 +4,21 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-rqt-py-common
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-std-msgs
+  - ros-noetic-genmsg
+  - ros-noetic-catkin
+  - ros-noetic-genpy
+  - ros-noetic-rosbag
+  - ros-noetic-qt-gui
+  - ros-noetic-rostopic
+  - ros-noetic-actionlib
+  - ros-noetic-python-qt-binding
+  - ros-noetic-rospy
+  - ros-noetic-roslib

@@ -4,9 +4,20 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-rqt-robot-plugins
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-rqt-tf-tree
+  - ros-noetic-rqt-runtime-monitor
+  - ros-noetic-rqt-nav-view
+  - ros-noetic-rqt-pose-view
+  - ros-noetic-rqt-robot-steering
+  - ros-noetic-rqt-moveit
+  - ros-noetic-rqt-robot-dashboard
+  - ros-noetic-rqt-rviz
+  - ros-noetic-rqt-robot-monitor

@@ -4,9 +4,18 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-diagnostic-analysis
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-rostest
+  - ros-noetic-diagnostic-msgs
+  - ros-noetic-rosbag
+  - ros-noetic-catkin
+  - ros-noetic-roslib
+  - ros-noetic-roslib
+  - ros-noetic-rosbag
+  - ros-noetic-diagnostic-msgs

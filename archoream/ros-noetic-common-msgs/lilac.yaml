@@ -4,9 +4,20 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-common-msgs
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-diagnostic-msgs
+  - ros-noetic-trajectory-msgs
+  - ros-noetic-stereo-msgs
+  - ros-noetic-nav-msgs
+  - ros-noetic-actionlib-msgs
+  - ros-noetic-shape-msgs
+  - ros-noetic-visualization-msgs
+  - ros-noetic-sensor-msgs
+  - ros-noetic-geometry-msgs

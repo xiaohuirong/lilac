@@ -4,9 +4,17 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-nodelet-tutorial-math
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-nodelet
+  - ros-noetic-std-msgs
+  - ros-noetic-roscpp
+  - ros-noetic-catkin
+  - ros-noetic-nodelet
+  - ros-noetic-std-msgs
+  - ros-noetic-roscpp

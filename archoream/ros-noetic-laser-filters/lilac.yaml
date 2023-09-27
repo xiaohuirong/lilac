@@ -4,9 +4,31 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-laser-filters
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-dynamic-reconfigure
+  - ros-noetic-sensor-msgs
+  - ros-noetic-tf
+  - ros-noetic-filters
+  - ros-noetic-message-filters
+  - ros-noetic-laser-geometry
+  - ros-noetic-pluginlib
+  - ros-noetic-rostest
+  - ros-noetic-angles
+  - ros-noetic-nodelet
+  - ros-noetic-dynamic-reconfigure
+  - ros-noetic-sensor-msgs
+  - ros-noetic-roscpp
+  - ros-noetic-tf
+  - ros-noetic-filters
+  - ros-noetic-message-filters
+  - ros-noetic-laser-geometry
+  - ros-noetic-pluginlib
+  - ros-noetic-angles
+  - ros-noetic-nodelet

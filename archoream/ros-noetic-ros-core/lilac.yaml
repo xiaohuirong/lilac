@@ -4,9 +4,35 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-ros-core
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-geneus
+  - ros-noetic-roscpp-core
+  - ros-noetic-std-srvs
+  - ros-noetic-gencpp
+  - ros-noetic-rosconsole-bridge
+  - ros-noetic-genmsg
+  - ros-noetic-rosbag-migration-rule
+  - ros-noetic-genlisp
+  - ros-noetic-message-generation
+  - ros-noetic-std-msgs
+  - ros-noetic-ros
+  - ros-noetic-roslisp
+  - ros-noetic-class-loader
+  - ros-noetic-genpy
+  - ros-noetic-cmake-modules
+  - ros-noetic-rospack
+  - ros-noetic-catkin
+  - ros-noetic-common-msgs
+  - ros-noetic-rosconsole
+  - ros-noetic-gennodejs
+  - ros-noetic-rosgraph-msgs
+  - ros-noetic-ros-comm
+  - ros-noetic-message-runtime
+  - ros-noetic-pluginlib

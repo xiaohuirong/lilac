@@ -4,9 +4,17 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-message-filters
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-rostest
+  - ros-noetic-rosunit
+  - ros-noetic-catkin
+  - ros-noetic-rosconsole
+  - ros-noetic-roscpp
+  - ros-noetic-rosconsole
+  - ros-noetic-roscpp

@@ -4,9 +4,32 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-rqt-common-plugins
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-rqt-bag-plugins
+  - ros-noetic-rqt-launch
+  - ros-noetic-rqt-action
+  - ros-noetic-rqt-msg
+  - ros-noetic-rqt-logger-level
+  - ros-noetic-rqt-top
+  - ros-noetic-rqt-service-caller
+  - ros-noetic-rqt-shell
+  - ros-noetic-rqt-graph
+  - ros-noetic-rqt-topic
+  - ros-noetic-rqt-web
+  - ros-noetic-rqt-py-common
+  - ros-noetic-rqt-bag
+  - ros-noetic-rqt-plot
+  - ros-noetic-rqt-publisher
+  - ros-noetic-rqt-console
+  - ros-noetic-rqt-srv
+  - ros-noetic-rqt-dep
+  - ros-noetic-rqt-image-view
+  - ros-noetic-rqt-py-console
+  - ros-noetic-rqt-reconfigure

@@ -4,9 +4,22 @@ maintainers:
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: git_pkgbuild_commit
+post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: ros-noetic-urdf-sim-tutorial
-  - source: manual
+repo_depends:
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-position-controllers
+  - ros-noetic-controller-manager
+  - ros-noetic-joint-state-controller
+  - ros-noetic-diff-drive-controller
+  - ros-noetic-urdf-tutorial
+  - ros-noetic-gazebo-ros-control
+  - ros-noetic-rqt-robot-steering
+  - ros-noetic-gazebo-ros
+  - ros-noetic-xacro
+  - ros-noetic-rviz
+  - ros-noetic-robot-state-publisher
