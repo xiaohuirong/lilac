@@ -18,6 +18,5 @@ repo_depends:
   - pkg-config
   - ros-noetic-pluginlib
   - ros-noetic-qt-gui
-  - python-sip
   - sip4
-  - python-sip4
+  - sip4: python-sip4

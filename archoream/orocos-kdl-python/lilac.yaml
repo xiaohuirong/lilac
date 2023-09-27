@@ -12,4 +12,4 @@ update_on:
 repo_depends:
   - sip4
   - orocos-kdl
-  - python-sip4
+  - sip4: python-sip4

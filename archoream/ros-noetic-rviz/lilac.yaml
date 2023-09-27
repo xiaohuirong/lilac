@@ -41,4 +41,4 @@ repo_depends:
   - ros-noetic-media-export
   - ros-noetic-message-runtime
   - sip4
-  - python-sip4
+  - sip4: python-sip4
