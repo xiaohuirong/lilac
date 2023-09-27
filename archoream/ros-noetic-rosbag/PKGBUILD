@@ -6,7 +6,7 @@ url='https://wiki.ros.org/rosbag'
 pkgname='ros-noetic-rosbag'
 pkgver='1.16.0'
 arch=('i686' 'x86_64' 'aarch64' 'armv7h' 'armv6h')
-pkgrel=1
+pkgrel=2
 license=('BSD')
 
 ros_makedepends=(
@@ -55,6 +55,7 @@ source=("${pkgname}-${pkgver}.tar.gz"::"https://github.com/ros/ros_comm/archive/
 sha256sums=('0a51857a50cf646db4af85469cb0e4877b1484f7aa0c00ec65a8be7ff574a886')
 
 build() {
+sed -i '1i\#define BOOST_TIMER_ENABLE_DEPRECATED' ${srcdir}/ros_comm-${pkgver}/tools/rosbag/src/encrypt.cpp
 	# Use ROS environment variables.
 	source /usr/share/ros-build-tools/clear-ros-env.sh
 	[ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
