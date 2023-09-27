@@ -10,37 +10,13 @@ update_on:
   - source: aur
     aur: ros-noetic-qt-gui-cpp
 repo_depends:
-  - ros-build-tools                
-  - python-catkin_pkg              
-  - ros-noetic-catkin              
-  - ros-noetic-cmake-modules       
-  - console-bridge                 
-  - ros-noetic-class-loader        
-  - ros-noetic-cpp-common          
-  - ros-noetic-rostime             
-  - ros-noetic-ros-environment     
-  - python-rospkg                  
-  - python-rosdistro               
-  - python-rosdep                  
-  - ros-noetic-rospack             
-  - ros-noetic-roslib              
-  - ros-noetic-rosunit             
-  - ros-noetic-roscpp-traits       
-  - ros-noetic-genmsg              
-  - ros-noetic-genpy               
-  - ros-noetic-roscpp-serialization
-  - ros-noetic-message-runtime     
-  - ros-noetic-geneus              
-  - ros-noetic-gencpp              
-  - ros-noetic-gennodejs           
-  - ros-noetic-genlisp             
-  - ros-noetic-message-generation  
-  - ros-noetic-rosbuild            
-  - ros-noetic-rosconsole          
-  - ros-noetic-pluginlib           
-  - ros-noetic-python-qt-binding   
-  - tango-icon-theme               
-  - ros-noetic-qt-gui              
-  - sip4: python-sip4                    
-  - sip4                           
-
+  - ros-build-tools
+  - ros-noetic-catkin
+  - ros-noetic-cmake-modules
+  - ros-noetic-pluginlib
+  - ros-noetic-python-qt-binding
+  - pkg-config
+  - ros-noetic-pluginlib
+  - ros-noetic-qt-gui
+  - sip4
+  - sip4: python-sip4
