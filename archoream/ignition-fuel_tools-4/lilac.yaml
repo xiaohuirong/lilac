@@ -10,7 +10,9 @@ update_on:
   - source: aur
     aur: ignition-fuel_tools-4
 repo_depends:
-  - ignition-cmake
-  - ignition-common
-  - ignition-msgs
-  - ignition-tools
+  - ignition-cmake-2
+  - ignition-common-3
+  - ignition-msgs-5
+  - ignition-tools-1
+  - ignition-utils-1
+  - ignition-math-6
