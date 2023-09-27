@@ -12,6 +12,6 @@ update_on:
 repo_depends:
   - ignition-cmake-2
   - ruby-ronn
-  - ignition-math
+  - ignition-math-6
   - ignition-utils-1
   - ignition-tools-1
