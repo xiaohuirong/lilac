@@ -10,8 +10,8 @@ update_on:
   - source: aur
     aur: ignition-msgs-5
 repo_depends:
-  - ignition-cmake
+  - ignition-cmake-2
   - ruby-ronn
   - ignition-math
-  - ignition-utils
-  - ignition-tools
+  - ignition-utils-1
+  - ignition-tools-1
