@@ -10,6 +10,7 @@ update_on:
   - source: aur
     aur: ros-noetic-message-generation
 repo_depends:
+  - python-catkin_pkg
   - ros-build-tools
   - ros-noetic-catkin
   - ros-noetic-geneus
