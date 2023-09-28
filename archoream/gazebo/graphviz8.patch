@@ -1,0 +1,47 @@
+diff --git a/cmake/SearchForStuff.cmake b/cmake/SearchForStuff.cmake
+index b1cb3f3..d431c51 100644
+--- a/cmake/SearchForStuff.cmake
++++ b/cmake/SearchForStuff.cmake
+@@ -751,6 +751,9 @@ if (NOT GRAPHVIZ_FOUND)
+ else ()
+   message (STATUS "Looking for libgraphviz-dev - found")
+   set (HAVE_GRAPHVIZ ON CACHE BOOL "HAVE GRAPHVIZ" FORCE)
++  if (${GRAPHVIZ_CGRAPH_PKG_VERSION} VERSION_LESS 9.0)
++    set(GRAPHVIZ_VERSION_LT_9 TRUE)
++  endif ()
+ endif ()
+ 
+ ########################################
+diff --git a/gazebo/gui/CMakeLists.txt b/gazebo/gui/CMakeLists.txt
+index d9a3326..3135957 100644
+--- a/gazebo/gui/CMakeLists.txt
++++ b/gazebo/gui/CMakeLists.txt
+@@ -206,6 +206,11 @@ add_dependencies(gzclient gazebo_gui)
+ target_compile_definitions(gazebo_gui
+   PRIVATE BUILDING_DLL_GZ_GUI
+ )
++if (GRAPHVIZ_VERSION_LT_9)
++  target_compile_definitions(gazebo_gui
++    PRIVATE GRAPHVIZ_VERSION_LT_9
++  )
++endif()
+ 
+ target_link_libraries(gazebo_gui
+   libgazebo_client
+diff --git a/gazebo/gui/qgv/private/QGVCore.h b/gazebo/gui/qgv/private/QGVCore.h
+index 48ec1a1..e03b932 100644
+--- a/gazebo/gui/qgv/private/QGVCore.h
++++ b/gazebo/gui/qgv/private/QGVCore.h
+@@ -101,8 +101,12 @@ class QGVCore
+       rdr.data = cp;
+       rdr.len = strlen(cp);
+       rdr.cur = 0;
++      
+ 
++#ifdef GRAPHVIZ_VERSION_LT_9
++      // This variable only exists for versions before Graphviz 9.0
+       disc.mem = &AgMemDisc;
++#endif
+       disc.id = &AgIdDisc;
+       disc.io = &memIoDisc;
+       g = agread(&rdr, &disc);
