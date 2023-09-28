@@ -43,3 +43,4 @@ repo_depends:
   - sip4
   - sip4: python-sip4
   - ogre-1.9
+  - python-pyqt5-sip4
