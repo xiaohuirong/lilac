@@ -14,7 +14,7 @@ def pre_build():
             continue
 
         if line.startswith('source='):
-            print(r'''source=("${pkgname}-${pkgver}.tar.gz::https://github.com/gazebosim/gazebo-classic/archive/${pkgname}11_$pkgver.tar.gz" "graphviz8.patch"''')
+            print(r'''source=("${pkgname}-${pkgver}.tar.gz::https://github.com/gazebosim/gazebo-classic/archive/${pkgname}11_$pkgver.tar.gz" "graphviz8.patch")''')
             continue
 
         if line.startswith('sha256sums='):
