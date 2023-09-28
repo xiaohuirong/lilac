@@ -19,3 +19,4 @@ repo_depends:
   - ros-noetic-qt-gui
   - sip4
   - sip4: python-sip4
+  - python-pyqt5-sip4
