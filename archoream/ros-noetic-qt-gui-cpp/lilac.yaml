@@ -15,7 +15,6 @@ repo_depends:
   - ros-noetic-cmake-modules
   - ros-noetic-pluginlib
   - ros-noetic-python-qt-binding
-  - pkg-config
   - ros-noetic-pluginlib
   - ros-noetic-qt-gui
   - sip4
