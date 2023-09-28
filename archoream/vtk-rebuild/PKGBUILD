@@ -6,7 +6,7 @@
 # Contributor: Thomas Dziedzic <gostrc at gmail>
 
 _pkgname=vtk
-pkgname="${vtk}-rebuild"
+pkgname="${_pkgname}-rebuild"
 pkgver=9.2.6
 pkgrel=8
 pkgdesc="Software system for 3D computer graphics, image processing, and visualization"
