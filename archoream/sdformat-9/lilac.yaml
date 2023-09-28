@@ -10,7 +10,7 @@ update_on:
   - source: aur
     aur: sdformat-9
 repo_depends:
-  - ignition-cmake
-  - ignition-tools
-  - ignition-math
+  - ignition-cmake-2
+  - ignition-tools-1
+  - ignition-math-6
   - urdfdom
