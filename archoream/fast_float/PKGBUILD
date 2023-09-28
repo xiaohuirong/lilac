@@ -3,7 +3,7 @@
 
 pkgname=fast_float
 pkgver=5.2.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Fast and exact implementation of the C++ from_chars functions:4x faster than strtod'
 arch=(any)
 url="https://github.com/fastfloat/$pkgname"
