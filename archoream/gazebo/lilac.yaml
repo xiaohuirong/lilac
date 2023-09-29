@@ -24,4 +24,4 @@ repo_depends:
   - ignition-fuel_tools-4
   - ignition-msgs-5
 
-managed: false
+managed: true

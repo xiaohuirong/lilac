@@ -29,12 +29,17 @@ optdepends=('bullet: Bullet support'
             'urdfdom: Load URDF files')
 makedepends=('cmake' 'doxygen' 'ruby-ronn')
 install="${pkgname}.install"
-source=("${pkgname}-${pkgver}.tar.gz::https://github.com/gazebosim/gazebo-classic/archive/${pkgname}11_$pkgver.tar.gz")
-sha256sums=('a990f27dd08e4461107ef8e29eef18470789e7cd87cdb26e7f384769603537fd')
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/gazebosim/gazebo-classic/archive/${pkgname}11_$pkgver.tar.gz" "graphviz8.patch")
+sha256sums=('a990f27dd08e4461107ef8e29eef18470789e7cd87cdb26e7f384769603537fd' 'SKIP')
 
 _pkgname=gazebo-classic
 
 build() {
+  patch -Np1 -d ${srcdir}/gazebo-classic-gazebo11_${pkgver} -i ${srcdir}/graphviz8.patch
+  sed -i '0,/#include/s//#include <cstdint>\n&/' "${srcdir}/gazebo-classic-gazebo11_${pkgver}/gazebo/rendering/deferred_shading/MaterialGenerator.hh"
+  sed -i '0,/#include/s//#include <cstdint>\n&/' "${srcdir}/gazebo-classic-gazebo11_${pkgver}/gazebo/rendering/deferred_shading/SSAOLogic.hh"
+  sed -i '0,/#include/s//#include <cstdint>\n&/' "${srcdir}/gazebo-classic-gazebo11_${pkgver}/gazebo/rendering/skyx/src/MeshManager.cpp"
+  sed -i '0,/#include/s//#include <cstdint>\n&/' "${srcdir}/gazebo-classic-gazebo11_${pkgver}/gazebo/rendering/skyx/src/VClouds/GeometryBlock.cpp"
   cd "${srcdir}/${_pkgname}-${pkgname}11_$pkgver"
 
   mkdir -p build && cd build
