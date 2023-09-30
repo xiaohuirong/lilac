@@ -8,7 +8,7 @@
 
 _pkgname=godot
 pkgname="${_pkgname}-wayland-git"
-pkgver=4.2.r57906.376b4a6cf6
+pkgver=4.2.r57907.ad62a5808e
 pkgrel=1
 pkgdesc="Godot Game Engine: An advanced, feature packed, multi-platform 2D and 3D game engine."
 url="https://github.com/Riteo/godot.git"
