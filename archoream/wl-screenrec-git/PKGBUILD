@@ -1,5 +1,5 @@
 pkgname=wl-screenrec-git
-pkgver=r139.a36c592
+pkgver=r148.af46c4a
 pkgrel=1
 pkgdesc="High performance hardware accelerated wlroots screen recorder"
 arch=('i686' 'x86_64' 'aarch64')
