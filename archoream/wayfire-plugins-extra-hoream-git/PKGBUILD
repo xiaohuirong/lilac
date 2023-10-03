@@ -1,0 +1,44 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+_pkgname=wayfire-plugins-extra
+pkgname="${_pkgname}-hoream-git"
+pkgver=r185.0807f32
+pkgrel=1
+pkgdesc="3D wayland compositor extra plugins"
+arch=('any')
+url="https://github.com/lilydjwg/wayfire-plugins-extra"
+license=('MIT')
+depends=('wayfire-hoream-git' 'glibmm' 'iio-sensor-proxy')
+makedepends=('git' 'meson' 'ninja')
+optdepends=('wcm: GTK3-based configuration tool for the Wayfire compositor')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}" "${_pkgname}-git")
+replaces=()
+options=()
+source=('git+https://github.com/lilydjwg/wayfire-plugins-extra')
+sha256sums=('SKIP')
+install=wayfire-plugins-extra.install
+prepare() {
+  cd "$srcdir/$_pkgname"
+  git submodule update --init --recursive
+}
+pkgver() {
+        cd "$srcdir/$_pkgname"
+
+# Git, no tags available
+        printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+
+}
+
+build() {
+  cd "$srcdir/$_pkgname"
+  rm -rf build
+  arch-meson build
+  ninja -C build
+}
+
+
+package() {
+        cd "$srcdir/${_pkgname}"
+        DESTDIR="$pkgdir/" ninja -C build install
+}
