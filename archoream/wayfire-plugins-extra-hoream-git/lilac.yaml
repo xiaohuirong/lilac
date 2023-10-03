@@ -14,3 +14,5 @@ update_on:
 
 repo_depends:
   - wayfire-hoream-git
+
+managed: false
