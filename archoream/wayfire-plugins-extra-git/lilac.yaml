@@ -1,14 +1,17 @@
 maintainers:
   - github: Hoream
-    email: 2175223953@qq.com
+    email: hoream@qq.com
 
 build_prefix: extra-x86_64
 pre_build: aur_pre_build
-post_build: aur_post_build
+post_build: git_pkgbuild_commit
+
 
 update_on:
   - source: aur
     aur: wayfire-plugins-extra-git
+  - source: github
+    github: WayfireWM/wayfire-plugins-extra
 
 repo_depends:
   - wayfire-git
