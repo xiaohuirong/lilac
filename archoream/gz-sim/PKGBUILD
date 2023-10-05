@@ -1,0 +1,52 @@
+# Maintainer: oysstu <oysstu at gmail dot com>
+
+pkgname=gz-sim
+pkgver=7.6.0
+pkgrel=1
+pkgdesc="Open source robotics simulator"
+arch=('any')
+url="https://github.com/gazebosim/${pkgname}"
+license=('Apache')
+depends=(
+  'eigen'
+  'gz-common'
+  'gz-fuel-tools'
+  'gz-gui'
+  'gz-math'
+  'gz-msgs'
+  'gz-physics'
+  'gz-plugin'
+  'gz-rendering'
+  'gz-sensors'
+  'gz-transport'
+  'gz-utils'
+  'protobuf'
+  'qt5-base'
+  'qt5-quickcontrols2'
+  'sdformat'
+  )
+makedepends=(
+  'cmake'
+  'doxygen'
+  'gz-cmake'
+  'pybind11'
+  'python'
+  )
+
+provides=()
+source=("https://github.com/gazebosim/${_pkgbase}/archive/${pkgname}_${pkgver}.tar.gz")
+sha256sums=('872c08cb3cefe4b865daa3454256ba16ac993339bcad4a620930fbb51392c5e3')
+
+build() {
+  export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/lib/ffmpeg4.4/pkgconfig"
+  cmake -B build -S "${_pkgbase}-${pkgname}_${pkgver}" \
+           -DCMAKE_BUILD_TYPE='None' \
+           -DCMAKE_INSTALL_PREFIX='/usr' \
+           -DBUILD_TESTING=OFF \
+           -Wno-dev
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
