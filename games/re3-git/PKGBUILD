@@ -67,5 +67,5 @@ package() {
   chmod og=rX -R "$pkgdir/usr/share/games/re3"
 
   mkdir -p "$pkgdir/usr/share/games/re3/data"
-  cp $srcdir/RE3/* "$pkgdir/usr/share/games/re3/data"
+  cp $srcdir/RE3/* "$pkgdir/usr/share/games/re3/data" -r
 }
