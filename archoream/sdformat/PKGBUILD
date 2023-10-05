@@ -1,7 +1,7 @@
 #Maintainer: acxz <akashpatel2008 at yahoo dot com>
 pkgname=sdformat
 pkgver=13.3.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Simulation Description Format (SDFormat) parser and description files."
 arch=('i686' 'x86_64')
 url="http://sdformat.org/"
