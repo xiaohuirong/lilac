@@ -2,7 +2,7 @@
 
 pkgname=ignition-utils
 pkgver=2.0.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Classes and functions for robot applications"
 arch=('any')
 url="https://gazebosim.org/libs/utils"
