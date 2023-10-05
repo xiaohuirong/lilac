@@ -4,7 +4,7 @@
 # Contributor: calvertdw
 pkgname=ros2-arch-deps
 pkgver=0.15
-pkgrel=1
+pkgrel=2
 pkgdesc="Dependencies for building ROS2 on Arch"
 url="https://index.ros.org/doc/ros2/"
 arch=('any')
