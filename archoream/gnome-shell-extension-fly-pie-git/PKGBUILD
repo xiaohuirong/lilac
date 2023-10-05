@@ -1,8 +1,8 @@
 # Maintainer: Igor Dyatlov <dyatlov.igor@protonmail.com>
 
 pkgname=gnome-shell-extension-fly-pie-git
-pkgver=24.r3.gd222ad5
-pkgrel=2
+pkgver=24.r5.gac9d535
+pkgrel=1
 pkgdesc="Fly-Pie is an innovative marking menu written as a GNOME Shell extension"
 arch=('any')
 url="https://github.com/Schneegans/Fly-Pie"
