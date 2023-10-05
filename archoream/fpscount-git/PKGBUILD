@@ -1,0 +1,33 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="fpscount"
+pkgname="${_pkgname}-git"
+pkgver=r6.1703397
+pkgrel=1
+pkgdesc=""
+url="https://github.com/amarao/fpscount.git"
+license=("Apache")
+arch=('x86_64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=()
+makedepends=("cargo" "git")
+source=(${_pkgname}::git+${url})
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    cargo build --release
+}
+
+package() {
+	install -d "${pkgdir}/usr/bin"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}" "${pkgdir}/usr/bin/${pkg_name}"
+}
