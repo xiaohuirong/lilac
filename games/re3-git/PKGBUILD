@@ -19,6 +19,7 @@ source=(
     'no_link_with_unnecessary_sndfile.patch'
     're3-launcher'
     're3.desktop'
+    're3_data.tar.gz::http://app.hoream.top:8000/games/re3_data.tar.gz'
 )
 sha256sums=('035cb5f59811ae086510f02bd3817eaf43933c9723e52dba60807f48c4e9d9c3'
             'SKIP'
@@ -26,8 +27,9 @@ sha256sums=('035cb5f59811ae086510f02bd3817eaf43933c9723e52dba60807f48c4e9d9c3'
             'SKIP'
             'SKIP'
             '1d079928163893daa219a14cd3fa50de86b916ecbbeccb9587173d4b35d8e532'
-            '850d6e3ff7b92fcaadfcb52a3a8bd384122bcc1a2ee9e917f2b64991dd37ee3c'
-            '7d19322282de244decac39a1b3aa54196b5f9ba3e3762dbde931c75710bf9931')
+            'SKIP'
+            '7d19322282de244decac39a1b3aa54196b5f9ba3e3762dbde931c75710bf9931'
+            'SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgbase"
@@ -63,4 +65,7 @@ package() {
   mkdir -p "$pkgdir/usr/share/games/re3"
   cp -a gamefiles "$pkgdir/usr/share/games/re3/"
   chmod og=rX -R "$pkgdir/usr/share/games/re3"
+
+  mkdir -p "$pkgdir/usr/share/games/re3/data"
+  cp $srcdir/RE3/* "$pkgdir/usr/share/games/re3/data"
 }

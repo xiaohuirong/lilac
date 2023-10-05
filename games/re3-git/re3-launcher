@@ -35,6 +35,7 @@ run() {
 }
 
 for game_dir in \
+  "/usr/share/games/re3/data"
   "$HOME/.re3/Grand Theft Auto 3" \
   "$HOME/.local/share/Steam/steamapps/common/Grand Theft Auto 3" \
   "$PWD" \
