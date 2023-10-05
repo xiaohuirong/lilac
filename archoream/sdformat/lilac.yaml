@@ -1,0 +1,17 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+pre_build: aur_pre_build
+post_build: aur_post_build
+
+update_on:
+  - source: aur
+    aur: sdformat
+repo_depends:
+  - ignition-cmake
+  - ignition-utils
+  - ignition-tools
+  - ignition-math
+  - urdfdom
