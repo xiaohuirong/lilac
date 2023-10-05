@@ -1,0 +1,19 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+pre_build: aur_pre_build
+post_build: aur_post_build
+
+update_on:
+  - source: aur
+    aur: python-colcon-ros
+repo_depends:
+  - python-colcon-core
+  - python-colcon-library-path
+  - python-colcon-cmake
+  - python-colcon-pkg-config
+  - python-colcon-recursive-crawl
+  - python-colcon-python-setup-py
+  - python-catkin_pkg

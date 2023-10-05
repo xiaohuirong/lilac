@@ -1,0 +1,28 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+pre_build: aur_pre_build
+post_build: aur_post_build
+
+update_on:
+  - source: aur
+    aur: python-colcon-common-extensions
+repo_depends:
+  - python-colcon-core
+  - python-colcon-ros
+  - python-colcon-metadata
+  - python-colcon-argcomplete
+  - python-colcon-notification
+  - python-colcon-powershell
+  - python-colcon-test-result
+  - python-colcon-package-information
+  - python-colcon-parallel-executor
+  - python-colcon-cmake
+  - python-colcon-bash
+  - python-colcon-defaults
+  - python-colcon-devtools
+  - python-colcon-package-selection
+  - python-colcon-output
+  - python-colcon-zsh
