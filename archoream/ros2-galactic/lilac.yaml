@@ -12,4 +12,3 @@ update_on:
 repo_depends:
   - ros2-arch-deps
   - python-pyqt5-sip4
-  - gmock
