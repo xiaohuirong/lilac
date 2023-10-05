@@ -1,8 +1,8 @@
 # Maintainer: Librewish <librewish@gmail.com>
 
 pkgname=wayfire-plugins-extra-git
-pkgver=r185.0807f32
-pkgrel=5
+pkgver=r201.aa2c01a
+pkgrel=1
 pkgdesc="3D wayland compositor extra plugins"
 arch=('any')
 url="https://github.com/WayfireWM/wayfire-plugins-extra"
