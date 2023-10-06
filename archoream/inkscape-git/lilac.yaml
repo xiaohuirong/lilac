@@ -11,6 +11,7 @@ update_on:
     aur: inkscape-git
   - source: gitlab
     gitlab: inkscape/inkscape
+    lilac_throttle: 5d
 
 repo_depends: 
   - imagemagick6: libmagick6
