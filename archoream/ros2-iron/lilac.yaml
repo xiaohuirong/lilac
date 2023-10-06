@@ -16,4 +16,4 @@ update_on:
 repo_depends:
   - ros2-arch-deps 
 
-time_limit_hours: 3h
+time_limit_hours: 3
