@@ -9,7 +9,7 @@ license=("Apache")
 arch=('x86_64')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
-depends=()
+depends=("noto-fonts")
 makedepends=("cargo" "git")
 source=(${_pkgname}::git+${url})
 sha256sums=('SKIP')
@@ -24,6 +24,7 @@ pkgver() {
 
 build(){
  	cd "${srcdir}/${_pkgname}"
+    sed -i 's|/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf|/usr/share/fonts/noto/NotoSans-Regular.ttf|g' src/main.rs
     cargo build --release
 }
 
