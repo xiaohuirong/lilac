@@ -11,3 +11,4 @@ update_on:
     aur: ttf-google-fonts-git
   - source: github
     github: google/fonts
+    lilac_throttle: 5d
