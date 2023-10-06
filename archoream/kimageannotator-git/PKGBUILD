@@ -1,5 +1,5 @@
 pkgname=kimageannotator-git
-pkgver=r1096.c2919a5
+pkgver=r1156.23c2191
 pkgrel=1
 pkgdesc='Tool for annotating images'
 arch=('i686' 'x86_64')
