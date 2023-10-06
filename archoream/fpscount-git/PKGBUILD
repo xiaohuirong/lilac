@@ -2,7 +2,7 @@
 _pkgname="fpscount"
 pkgname="${_pkgname}-git"
 pkgver=r6.1703397
-pkgrel=1
+pkgrel=2
 pkgdesc=""
 url="https://github.com/amarao/fpscount.git"
 license=("Apache")
