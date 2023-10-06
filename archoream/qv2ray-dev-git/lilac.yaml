@@ -9,3 +9,6 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: qv2ray-dev-git
+  - source: github
+    github: Qv2ray/Qv2ray
+    branch: dev
