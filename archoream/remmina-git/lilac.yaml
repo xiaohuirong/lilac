@@ -11,3 +11,4 @@ update_on:
     aur: remmina-git
   - source: gitlab
     gitlab: Remmina/Remmina
+    lilac_throttle: 5d
