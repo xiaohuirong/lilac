@@ -12,7 +12,7 @@
 
 pkgname=ros2-iron
 pkgver=2023.07.17
-pkgrel=1
+pkgrel=2
 pkgdesc="A set of software libraries and tools for building robot applications"
 url="https://docs.ros.org/en/iron/"
 arch=('any')
@@ -69,3 +69,4 @@ package() {
     mkdir -p "$pkgdir"/opt/ros/iron
     cp -r "$srcdir"/install/* "$pkgdir"/opt/ros/iron/
 }
+makedepends=("git")
