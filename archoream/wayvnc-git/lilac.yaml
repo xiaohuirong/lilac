@@ -9,6 +9,8 @@ post_build: git_pkgbuild_commit
 update_on:
   - source: aur
     aur: wayvnc-git
+  - source: github
+    github: any1/wayvnc
 
 repo_depends:
   - neatvnc-git
