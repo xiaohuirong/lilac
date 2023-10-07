@@ -2,7 +2,7 @@
 _pkgname="todo"
 pkgname="${_pkgname}-git"
 pkgver=r77.a630428
-pkgrel=1
+pkgrel=2
 pkgdesc="A lightweight and super fast cli todo program written in rust under 200 sloc"
 url="https://github.com/sioodmy/todo"
 license=("GPL3")
