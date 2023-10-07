@@ -1,0 +1,33 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="todo"
+pkgname="${_pkgname}-git"
+pkgver=r77.a630428
+pkgrel=1
+pkgdesc="A lightweight and super fast cli todo program written in rust under 200 sloc"
+url="https://github.com/sioodmy/todo"
+license=("GPL3")
+arch=('x86_64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}" "${_pkgname}-bin")
+depends=()
+makedepends=("cargo" "git")
+source=(${_pkgname}::git+${url})
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    cargo build --release
+}
+
+package() {
+	install -d "${pkgdir}/usr/bin"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}" "${pkgdir}/usr/bin/${pkg_name}"
+}
