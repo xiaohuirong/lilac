@@ -1,6 +1,6 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=wcm-hoream-git
-pkgver=0.7.0.r58.g6b28ffc
+pkgver=0.8.0.r2.gaade422
 pkgrel=1
 pkgdesc='Wayfire Config Manager'
 url=https://wayfire.org
