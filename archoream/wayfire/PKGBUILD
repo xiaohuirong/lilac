@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=wayfire
 pkgver=0.7.5
-pkgrel=3
+pkgrel=4
 pkgdesc="3D wayland compositor"
 arch=(x86_64)
 url=https://wayfire.org
