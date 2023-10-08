@@ -5,11 +5,12 @@ maintainers:
 build_prefix: extra-x86_64
 post_build: git_pkgbuild_commit
 
-
 update_on:
+  - source: github
+    github: WayfireWM/wcm
   - source: manual
 
 repo_depends:
   - wf-shell-hoream-git
 
-managed: false
+managed: true
