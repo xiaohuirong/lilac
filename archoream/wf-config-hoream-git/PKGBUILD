@@ -12,12 +12,11 @@ makedepends=('git' 'wlroots-hoream-git' 'meson' 'ninja' 'wayland-protocols'
 provides=()
 conflicts=("wf-config" "wf-config-git")
 replaces=()
-source=("${pkgname}::git+https://github.com/WayfireWM/wf-config")
+source=("${pkgname}::git+https://github.com/WayfireWM/wf-config#commit=e42a3870fb194842a505ad5a9671be1aebda0b0b")
 sha256sums=('SKIP')
 
 pkgver () {
   cd "${srcdir}/${pkgname}"
-  git checkout e42a3870fb194842a505ad5a9671be1aebda0b0b
   ( set -o pipefail
     git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
     printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
