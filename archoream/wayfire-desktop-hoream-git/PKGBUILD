@@ -22,6 +22,7 @@ optdepends=("wf-info-hoream-git: for get window information."
             "mako: for notification daemon"
             "waybar-lily: for bar panel"
             "eww-wayland: for some wacky widgets"
+            "wayfire-plugins-extra-hoream-git: for some extra plugins."
             )
 # vim: ts=2 sw=2 et:
 
