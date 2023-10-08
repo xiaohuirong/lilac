@@ -18,7 +18,11 @@ optdepends=("wf-info-hoream-git: for get window information."
             "mpvpaper: for dynamic papper."
             "wayfire-firedecor-hoream-git: for firedecor'window decoration."
             "windecor-hoream-git: for windecor'window decoration."
-            "wcm-hoream-git: for gui config file genarator.")
+            "wcm-hoream-git: for gui config file genarator."
+            "mako: for notification daemon"
+            "waybar-lily: for bar panel"
+            "eww-wayland: for some wacky widgets"
+            )
 # vim: ts=2 sw=2 et:
 
 
