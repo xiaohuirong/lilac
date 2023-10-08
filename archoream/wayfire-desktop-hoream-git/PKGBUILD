@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname=wayfire-desktop-hoream-git
-pkgver=1
+pkgver=1.0.0
 pkgrel=1
 pkgdesc='Wayfire desktop environment.(hoream git edition)'
 url=''
@@ -10,10 +10,15 @@ license=('GPL')
 provides=('wayfire-desktop')
 conflicts=('wayfire-desktop-git' 'wayfire-desktop')
 depends=(
+  wf-config-hoream-git
+  wlroots-hoream-git
   wayfire-hoream-git
-  wf-info-hoream-git
-  mpvpaper
 )
+optdepends=("wf-info-hoream-git: for get window information."
+            "mpvpaper: for dynamic papper."
+            "wayfire-firedecor-hoream-git: for firedecor'window decoration."
+            "windecor-hoream-git: for windecor'window decoration."
+            "wcm-hoream-git: for gui config file genarator.")
 # vim: ts=2 sw=2 et:
 
 
