@@ -2,7 +2,7 @@
 
 _pkgname="memos"
 pkgname="${_pkgname}-git"
-pkgver=0.16.0.r6.g6ffc09d8
+pkgver=0.16.0.r12.gdfaf2ee2
 pkgrel=1
 pkgdesc="A lightweight, self-hosted memo hub. Open Source and Free forever."
 url="https://github.com/usememos/${_pkgname}"
