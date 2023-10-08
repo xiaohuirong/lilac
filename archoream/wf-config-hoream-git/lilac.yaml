@@ -11,4 +11,4 @@ update_on:
 repo_depends: 
   - wlroots-hoream-git
 
-managed: false
+managed: true
