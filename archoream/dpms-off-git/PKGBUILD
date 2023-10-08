@@ -1,4 +1,4 @@
-# Maintainer: Hoream <2175223953@qq.com>
+# Maintainer: Hoream <hoream@qq.com>
 _pkgname="dpms-off"
 pkgname="${_pkgname}-git"
 pkgver=r8.fb1e761

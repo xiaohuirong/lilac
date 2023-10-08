@@ -1,4 +1,4 @@
-# Maintainer: Hoream <2175223953@qq.com>
+# Maintainer: Hoream <hoream@qq.com>
 _pkgname="totalmapper"
 pkgname="${_pkgname}-git"
 pkgver=1.4.3

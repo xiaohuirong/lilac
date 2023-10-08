@@ -1,4 +1,4 @@
-# Maintainer: Hoream <2175223953@qq.com>
+# Maintainer: Hoream <hoream@qq.com>
 _pkgname="go-musicfox"
 pkgname="${_pkgname}-git"
 pkgver=4.2.0.r5.gf3b7f29

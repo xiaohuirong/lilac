@@ -1,4 +1,4 @@
-# Maintainer: Hoream <2175223953@qq.com>
+# Maintainer: Hoream <hoream@qq.com>
 _pkgname="nautilus-backspace"
 pkgname="${_pkgname}-git"
 pkgver=r5.0b7f2b1

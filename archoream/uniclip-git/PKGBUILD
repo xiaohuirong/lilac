@@ -1,4 +1,4 @@
-# Maintainer: Hoream <2175223953@qq.com>
+# Maintainer: Hoream <hoream@qq.com>
 _pkgname="uniclip"
 pkgname="${_pkgname}-git"
 pkgver=r10.a294a22

@@ -1,4 +1,4 @@
-# Maintainer: Hoream <2175223953@qq.com>
+# Maintainer: Hoream <hoream@qq.com>
 _pkgname="monitor-control"
 pkgname="${_pkgname}-git"
 pkgver=0.0.1
