@@ -2,7 +2,7 @@
 
 pkgname=wayfire-desktop-hoream-git
 pkgver=1.0.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Wayfire desktop environment.(hoream git edition)'
 url=''
 arch=('any')
