@@ -7,7 +7,7 @@ pkgdesc="3D wayland compositor (lilydjwg's version)"
 arch=('x86_64')
 url="https://github.com/xiaohuirong/wayfire"
 license=('MIT')
-depends=('wlroots-hoream-git' 'cairo' 'pango' 'glm' 'libjpeg' 'wf-config-git' 'seatd')
+depends=('wlroots-hoream-git' 'cairo' 'pango' 'glm' 'libjpeg' 'wf-config-hoream-git' 'seatd')
 makedepends=('git' 'meson' 'ninja' 'wayland-protocols' 'doctest' 'cmake')
 optdepends=('wf-shell-git: GTK3-based panel for the Wayfire compositor'
             'wf-sound-control-git: Small utility for the Wayfire compositor to control sound volume')

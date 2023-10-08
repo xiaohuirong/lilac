@@ -7,10 +7,8 @@ post_build: git_pkgbuild_commit
 
 update_on:
   - source: manual
-    manual: 5
-  - source: github
-    github: xiaohuirong/wayfire
 
-repo_depends:
+repo_depends: 
   - wlroots-hoream-git
-  - wf-config-hoream-git
+
+managed: false
