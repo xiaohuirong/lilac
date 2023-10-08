@@ -16,13 +16,26 @@ conflicts=("${_pkgname}" "${_pkgname}-git")
 replaces=()
 options=()
 source=("${_pkgname}::git+https://github.com/lilydjwg/wayfire-plugins-extra#commit=0cdbc738f4756156c102a1d86c72743d7d241ce7"
+        "dbus::git+https://github.com/damianatorrpm/wayfire-plugin_dbus_interface"
+        "wayfire-shadows::git+https://github.com/timgott/wayfire-shadows"
+        "windecor::git+https://gitlab.com/wayfireplugins/windecor"
         "rename.patch")
 sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP')
 install=wayfire-plugins-extra.install
 prepare() {
   cd "$srcdir/$_pkgname"
-  git submodule update --init --recursive
+  git config submodule.subprojects/dbus.url "${srcdir}/dbus"
+  git -c protocol.file.allow=always submodule update --init subprojects/dbus
+  
+  git config submodule.subprojects/wayfire-shadows.url "${srcdir}/wayfire-shadows"
+  git -c protocol.file.allow=always submodule update --init subprojects/wayfire-shadows
+
+  git config submodule.subprojects/windecor.url "${srcdir}/windecor"
+  git -c protocol.file.allow=always submodule update --init subprojects/windecor
 }
 pkgver() {
         cd "$srcdir/$_pkgname"
