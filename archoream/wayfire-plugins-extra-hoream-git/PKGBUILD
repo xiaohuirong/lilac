@@ -2,7 +2,7 @@
 
 _pkgname=wayfire-plugins-extra
 pkgname="${_pkgname}-hoream-git"
-pkgver=r185.0807f32
+pkgver=r154.0cdbc73
 pkgrel=1
 pkgdesc="3D wayland compositor extra plugins"
 arch=('any')
@@ -15,8 +15,10 @@ provides=("${_pkgname}")
 conflicts=("${_pkgname}" "${_pkgname}-git")
 replaces=()
 options=()
-source=('git+https://github.com/lilydjwg/wayfire-plugins-extra')
-sha256sums=('SKIP')
+source=("${_pkgname}::git+https://github.com/lilydjwg/wayfire-plugins-extra#commit=0cdbc738f4756156c102a1d86c72743d7d241ce7"
+        "rename.patch")
+sha256sums=('SKIP'
+            'SKIP')
 install=wayfire-plugins-extra.install
 prepare() {
   cd "$srcdir/$_pkgname"
@@ -31,6 +33,7 @@ pkgver() {
 }
 
 build() {
+  patch -b -d ${srcdir}/${_pkgname} -Np1 -i ${srcdir}/rename.patch
   cd "$srcdir/$_pkgname"
   rm -rf build
   arch-meson build
