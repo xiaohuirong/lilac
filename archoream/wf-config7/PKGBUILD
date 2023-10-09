@@ -2,7 +2,7 @@
 _pkgname=wf-config
 pkgname=wf-config7
 pkgver=0.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A library for managing configuration files, written for wayfire"
 arch=(x86_64)
 url=https://wayfire.org
