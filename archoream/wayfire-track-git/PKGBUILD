@@ -2,7 +2,7 @@
 # Co-Maintainer: Frank Tao <frank.tao@uwaterloo.ca>
 _pkgname=wayfire-git
 pkgname=wayfire-track-git
-pkgver=0.8.0.r8.gd54bc1a8
+pkgver=0.8.0.r8.g88982ff6
 pkgrel=1
 pkgdesc="3D wayland compositor"
 arch=('x86_64')
@@ -12,7 +12,8 @@ depends=('cairo' 'pango' 'doctest' 'freetype2' 'glm' 'nlohmann-json'
          'libdrm' 'libevdev' 'libglvnd' 'libinput' 'libjpeg'
          'libpng' 'libxkbcommon' 'libxml2' 'pixman' 'polkit'
          'pkgconf' 'seatd' 'xcb-util-errors' 'xcb-util-renderutil'
-         'xcb-util-wm' 'xorg-xwayland' 'wayland' 'wayland-protocols')
+         'xcb-util-wm' 'xorg-xwayland' 'wayland' 'wayland-protocols'
+         'libdisplay-info')
 makedepends=('git' 'glslang' 'meson' 'ninja' 'cmake' 'vulkan-headers')
 optdepends=('xorg-xeyes')
 provides=("${_pkgname%-git}" 'wlroots' 'wf-config' 'wlroots-git' 'wf-config-git' 'libwlroots.so')
