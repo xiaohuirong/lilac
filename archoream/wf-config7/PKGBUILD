@@ -1,0 +1,31 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname=wf-config
+pkgname=wf-config7
+pkgver=0.7.1
+pkgrel=1
+pkgdesc="A library for managing configuration files, written for wayfire"
+arch=(x86_64)
+url=https://wayfire.org
+license=(custom:MIT)
+depends=(libevdev libxml2)
+makedepends=(meson ninja pkg-config wayland-protocols glm doctest cmake)
+conflicts=("${_pkgname}-git")
+source=("https://github.com/WayfireWM/${_pkgname}/releases/download/v${pkgver}/${_pkgname}-${pkgver}.tar.xz")
+sha256sums=(7d2285adeaca0ff6e36e6ef450564ab02c8e26ba5da3b169257c5bf061f7e5f0)
+provides=("wf-config=0.7.1")
+
+build() {
+	rm -rf build
+	arch-meson "${_pkgname}-${pkgver}" build
+	ninja -C build
+}
+
+check () {
+	meson test -C build
+}
+
+package() {
+	DESTDIR="${pkgdir}" ninja -C build install
+	install -Dm644 "${_pkgname}-${pkgver}/LICENSE" \
+		"${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE"
+}

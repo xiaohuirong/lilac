@@ -7,7 +7,7 @@ pkgdesc="3D wayland compositor"
 arch=(x86_64)
 url=https://wayfire.org
 license=(custom:MIT)
-depends=(cairo pango 'wf-config>=0.5' libjpeg libinput 'wlroots>=0.16' 'wlroots<0.17')
+depends=(cairo pango 'wf-config7' libjpeg libinput 'wlroots>=0.16' 'wlroots<0.17')
 makedepends=(meson ninja wayland-protocols glm cmake doctest)
 conflicts=("${_pkgname}-git")
 provides=("wayfire=0.7.5")
