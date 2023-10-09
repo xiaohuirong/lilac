@@ -11,3 +11,5 @@ update_on:
     aur: memos-git
   - source: github
     github: usememos/memos
+    lilac_throttle: 7d
+
