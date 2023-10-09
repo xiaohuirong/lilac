@@ -26,9 +26,11 @@ source=('wayfire::git+https://github.com/WayfireWM/wayfire#branch=track-wlroots'
         'wf-touch::git+https://github.com/WayfireWM/wf-touch'
         'wf-utils::git+https://github.com/WayfireWM/wf-utils'
         'wlroots::git+https://gitlab.freedesktop.org/wlroots/wlroots'
-        'triple_buffer.patch')
+        'triple_buffer.patch'
+        'comment.patch')
 
 sha256sums=('SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -59,6 +61,7 @@ pkgver() {
 build() {
     cd "$srcdir/wayfire/"
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/triple_buffer.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/comment.patch
 
     arch-meson \
         --buildtype=release \
