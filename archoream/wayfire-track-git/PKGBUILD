@@ -2,8 +2,8 @@
 # Co-Maintainer: Frank Tao <frank.tao@uwaterloo.ca>
 _pkgname=wayfire-git
 pkgname=wayfire-track-git
-pkgver=0.8.0.r8.g88982ff6
-pkgrel=4
+pkgver=0.8.0.r8.g384bf816
+pkgrel=1
 pkgdesc="3D wayland compositor"
 arch=('x86_64')
 url="https://github.com/WayfireWM/wayfire"
