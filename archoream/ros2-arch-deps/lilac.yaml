@@ -37,3 +37,6 @@ repo_depends:
   - python-rospkg
   - python-rosdistro
   - python-rosdep
+  - python-pyqt5-sip4
+  - sip4: python-sip4
+  - sip4: sip4
