@@ -12,3 +12,4 @@ update_on:
 
 repo_depends: 
   - c++utilities
+  - qtutilities
