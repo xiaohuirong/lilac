@@ -8,7 +8,7 @@ post_build: git_pkgbuild_commit
 
 update_on:
   - source: aur
-    aur: qtutilities
+    aur: qtforkawesome
 
-repo_depends:
+repo_depends: 
   - c++utilities
