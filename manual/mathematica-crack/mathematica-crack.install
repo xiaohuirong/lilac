@@ -1,5 +1,5 @@
 post_install() {
-    echo -e "\nRun \033[32mmathematica-crack\033[0m, input the password \033[32msannet.st\033[0m, then input mathematic's serial number and copy output to mathematic.\n"
+    echo -e "\nRun \033[32mmathematica-crack\033[0m, input the password \033[32msanet.st\033[0m, then input mathematic's serial number and copy output to mathematic.\n"
 }
 
 post_upgrade() {

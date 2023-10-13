@@ -2,7 +2,7 @@
 
 pkgname=mathematica-crack
 pkgver=13.3.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Mathematica crack program."
 url="https://mp.weixin.qq.com/s/fYtFqrPzDRrgRAAgRUHSrQ"
 license=("unknown")
