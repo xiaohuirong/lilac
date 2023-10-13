@@ -14,4 +14,4 @@ update_on:
   - source: github
     github: jeessy2/ddns-go
     use_latest_release: true
-    prefix: v
+      #prefix: v
