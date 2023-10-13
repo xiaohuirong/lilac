@@ -17,4 +17,4 @@ update_on:
     use_latest_release: true
     prefix: v
 
-managed: false
+managed: true
