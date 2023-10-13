@@ -10,11 +10,11 @@ pre_build_script: |
   update_pkgver_and_pkgrel(_G.newver)
 
 update_on:
-  - source: aur
-    aur: syncthingtray-qt6
   - source: github
     github: Martchus/syncthingtray
     use_latest_release: true
     prefix: v
+  - source: aur
+    aur: syncthingtray-qt6
 
 managed: true
