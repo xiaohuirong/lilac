@@ -18,5 +18,6 @@ update_on:
 repo_depends:
   - qtutilities
   - c++utilities
+  - qtforkawesome
 
 managed: true
