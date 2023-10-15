@@ -1,0 +1,14 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: multilib
+pre_build: aur_pre_build
+post_build: git_pkgbuild_commit
+
+update_on:
+  - source: aur
+    aur: wine-git
+  - source: gitlab
+    gitlab: wine/wine
+    host: gitlab.winehq.org
