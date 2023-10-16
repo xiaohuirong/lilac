@@ -17,3 +17,4 @@ update_on:
     host: gitlab.gnome.org
     lilac_throttle: 7d
 
+managed: false
