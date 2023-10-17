@@ -1,0 +1,36 @@
+ # Maintainer Hoream <hoream@qq.com>
+
+_pkgname=lxqt-desktop-shell
+pkgname="${_pkgname}-git"
+pkgver=r22.27ac211
+pkgrel=1
+pkgdesc="A wayfire plugin that allows the LXQt desktop shell components to function as wayfire shell components."
+arch=(x86_64)
+url="https://gitlab.com/wayfireplugins/lxqt-desktop-shell"
+license=(MIT)
+depends=(wayfire-git)
+makedepends=(meson ninja pkg-config git qt6-base)
+conflicts=("${_pkgname}")
+provides=("${_pkgname}")
+source=("git+${url}")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd $_pkgname
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+	rm -rf build
+	arch-meson "${_pkgname}" build
+	ninja -C build
+}
+
+check () {
+	meson test -C build
+}
+
+package() {
+	DESTDIR="${pkgdir}" ninja -C build install
+}
+

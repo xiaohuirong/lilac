@@ -1,0 +1,13 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+post_build: git_pkgbuild_commit
+
+update_on:
+  - source: gitlab
+    gitlab: wayfireplugins/lxqt-desktop-shell
+
+repo_depends:
+  - wayfire-git
