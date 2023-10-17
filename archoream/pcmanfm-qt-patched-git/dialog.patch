@@ -1,0 +1,26 @@
+diff --git a/pcmanfm/desktopwindow.cpp b/pcmanfm/desktopwindow.cpp
+index 4ee1f1cf..337aec13 100644
+--- a/pcmanfm/desktopwindow.cpp
++++ b/pcmanfm/desktopwindow.cpp
+@@ -1122,7 +1122,7 @@ void DesktopWindow::selectAll() {
+ }
+ 
+ void DesktopWindow::onCreatingShortcut() {
+-    DesktopEntryDialog* dlg = new DesktopEntryDialog(this);
++    DesktopEntryDialog* dlg = new DesktopEntryDialog();
+     dlg->setAttribute(Qt::WA_DeleteOnClose);
+     connect(dlg, &DesktopEntryDialog::desktopEntryCreated, [this] (const Fm::FilePath&, const QString& name) {
+         filesToTrust_ << name;
+diff --git a/pcmanfm/tabpage.cpp b/pcmanfm/tabpage.cpp
+index 3b0a688f..6100c5e1 100644
+--- a/pcmanfm/tabpage.cpp
++++ b/pcmanfm/tabpage.cpp
+@@ -1089,7 +1089,7 @@ void TabPage::createShortcut() {
+     if(folder_ && folder_->isLoaded()) {
+         auto folderPath = folder_->path();
+         if(folderPath && folderPath.isNative()) {
+-            DesktopEntryDialog* dlg = new DesktopEntryDialog(this, folderPath);
++            DesktopEntryDialog* dlg = new DesktopEntryDialog(nullptr, folderPath);
+             dlg->setAttribute(Qt::WA_DeleteOnClose);
+             connect(dlg, &DesktopEntryDialog::desktopEntryCreated, [this] (const Fm::FilePath& parent, const QString& name) {
+                 // if the current directory does not have a file monitor or is changed,
