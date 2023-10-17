@@ -3,7 +3,7 @@
 
 _pkgname=pcmanfm-qt6
 pkgname=$_pkgname-git
-pkgver=1.3.0.3.ga905d907
+pkgver=1.3.0.34.gb6290df2
 pkgrel=1
 pkgdesc="The LXQt file manager, Qt port of PCManFM"
 arch=("x86_64")
