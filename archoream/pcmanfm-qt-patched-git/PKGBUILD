@@ -8,10 +8,10 @@ pkgdesc="The LXQt file manager, Qt port of PCManFM"
 arch=("i686" "x86_64")
 url="https://lxqt.org"
 license=("GPL2")
-depends=("libfm-qt-git" "qt5-x11extras")
+depends=("libfm-qt-patched-git" "qt5-x11extras")
 makedepends=("git" "cmake" "qt5-tools" "lxqt-build-tools-git")
-provides=("$_pkgname=$pkgver")
-conflicts=("$_pkgname")
+provides=("$_pkgname=$pkgver" "$_pkgname-git")
+conflicts=("$_pkgname" "$_pkgname-git")
 source=("git+https://github.com/lxqt/$_pkgname.git"
         "dialog.patch")
 sha256sums=('SKIP'

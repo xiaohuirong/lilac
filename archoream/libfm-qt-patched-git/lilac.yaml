@@ -7,7 +7,4 @@ post_build: git_pkgbuild_commit
 
 update_on:
   - source: github
-    github: lxqt/pcmanfm-qt
-
-repo_depends:
-  - libfm-qt-patched-git
+    aur: lxqt/libfm-qt

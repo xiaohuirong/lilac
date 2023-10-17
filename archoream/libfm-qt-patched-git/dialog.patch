@@ -1,0 +1,28 @@
+diff --git a/src/createnewmenu.cpp b/src/createnewmenu.cpp
+index 57d4040..6bb816a 100644
+--- a/src/createnewmenu.cpp
++++ b/src/createnewmenu.cpp
+@@ -82,20 +82,20 @@ CreateNewMenu::~CreateNewMenu() {
+ 
+ void CreateNewMenu::onCreateNewFile() {
+     if(dirPath_) {
+-        createFileOrFolder(CreateNewTextFile, dirPath_, nullptr, dialogParent_);
++        createFileOrFolder(CreateNewTextFile, dirPath_, nullptr, nullptr);
+     }
+ }
+ 
+ void CreateNewMenu::onCreateNewFolder() {
+     if(dirPath_) {
+-        createFileOrFolder(CreateNewFolder, dirPath_, nullptr, dialogParent_);
++        createFileOrFolder(CreateNewFolder, dirPath_, nullptr, nullptr);
+     }
+ }
+ 
+ void CreateNewMenu::onCreateNew() {
+     TemplateAction* action = static_cast<TemplateAction*>(sender());
+     if(dirPath_) {
+-        createFileOrFolder(CreateWithTemplate, dirPath_, action->templateItem().get(), dialogParent_);
++        createFileOrFolder(CreateWithTemplate, dirPath_, action->templateItem().get(), nullptr);
+     }
+ }
+ 
