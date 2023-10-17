@@ -3,7 +3,7 @@
 _pkgname=lxqt-desktop-shell
 pkgname="${_pkgname}-git"
 pkgver=r22.27ac211
-pkgrel=1
+pkgrel=2
 pkgdesc="A wayfire plugin that allows the LXQt desktop shell components to function as wayfire shell components."
 arch=(x86_64)
 url="https://gitlab.com/wayfireplugins/lxqt-desktop-shell"
