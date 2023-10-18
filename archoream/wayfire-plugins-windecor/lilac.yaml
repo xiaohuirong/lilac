@@ -8,7 +8,7 @@ post_build: git_pkgbuild_commit
 
 update_on:
   - source: aur
-    aur: wayfire-plugins-qtshell
+    aur: wayfire-plugins-windecor
 
 repo_depends:
   - wayfire
