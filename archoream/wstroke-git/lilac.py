@@ -5,6 +5,6 @@ def pre_build():
 
     for line in edit_file('PKGBUILD'):
         if line.startswith('depends=('):
-            print(r'''depends=('wayfire-git' 'nlohmann-json' 'glib2' 'gtk3' 'gtkmm3' 'boost-libs')''')
+            print(r'''depends=('wayfire-git' 'nlohmann-json' 'glib2' 'gtk3' 'gtkmm3' 'boost-libs' 'boost')''')
             continue
         print(line)
