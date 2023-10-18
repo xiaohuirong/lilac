@@ -3,7 +3,7 @@
 _pkgname=desq-shell
 pkgname=wayfire-plugins-desq-shell
 pkgver=0.8.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Provides interfaces to set backgrounds, panels, and drop-downs in DesQ. It also contains the implementation for Wayfire in the form of wayfire plugin"
 arch=('x86_64' 'aarch64')
 url="https://gitlab.com/wayfireplugins/${_pkgname}"
