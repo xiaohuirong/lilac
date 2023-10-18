@@ -7,4 +7,5 @@ archoream/wayfire-git/wayfire
 *.bz2
 *.gz
 *.xz
+*.zip
 archoream/*/*/*

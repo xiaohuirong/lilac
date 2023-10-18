@@ -11,3 +11,6 @@ update_on:
     aur: wstroke-git
   - source: github
     github: dkondor/wstroke
+
+repo_depends:
+  - wayfire-git
