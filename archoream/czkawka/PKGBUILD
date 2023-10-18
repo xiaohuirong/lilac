@@ -6,7 +6,7 @@ pkgname=(
   czkawka-gui
 )
 pkgver=6.1.0
-pkgrel=0.1
+pkgrel=1
 pkgdesc='Multi functional app to find duplicates, empty folders, similar images etc.'
 url='https://github.com/qarmin/czkawka'
 arch=(
