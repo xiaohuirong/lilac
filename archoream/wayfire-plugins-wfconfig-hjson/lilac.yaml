@@ -11,4 +11,4 @@ update_on:
     aur: wayfire-plugins-wfconfig-hjson 
 
 repo_depends:
-  - wayfire-plugins-wfconfig-hjson 
+  - wayfire 
