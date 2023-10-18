@@ -1,8 +1,8 @@
 # Maintainer: Chocobo1 <chocobo1 AT archlinux DOT net>
 
 pkgname=hyperfine-git
-pkgver=1.16.1.r4.g2763b41
-pkgrel=2
+pkgver=1.18.0.r0.g24a0d5d
+pkgrel=1
 pkgdesc="A command-line benchmarking tool"
 arch=('i686' 'x86_64')
 url="https://github.com/sharkdp/hyperfine"
