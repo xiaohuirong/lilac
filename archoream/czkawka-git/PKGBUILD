@@ -21,7 +21,7 @@
 _basename=czkawka
 pkgname=${_basename}-git
 pkgver=6.1.0.r2.g99277b9
-pkgrel=1
+pkgrel=2
 pkgdesc="Multi functional app to find duplicates, empty folders etc."
 arch=(any)
 url="https://github.com/qarmin/czkawka"
