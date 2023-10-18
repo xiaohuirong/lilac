@@ -18,3 +18,4 @@ repo_depends:
   - dfl-login1
   - dfl-settings
   - dfl-status-notifier
+  - wayfire
