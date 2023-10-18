@@ -1,0 +1,20 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+pre_build: aur_pre_build
+post_build: git_pkgbuild_commit
+
+update_on:
+  - source: aur
+    aur: paperde
+repo_depends:
+  - libcsys
+  - libcprime
+  - dfl-wayqt
+  - dfl-applications
+  - dfl-ipc
+  - dfl-login1
+  - dfl-settings
+  - dfl-status-notifier
