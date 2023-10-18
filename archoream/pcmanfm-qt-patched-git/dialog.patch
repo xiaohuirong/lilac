@@ -1,7 +1,16 @@
 diff --git a/pcmanfm/desktopwindow.cpp b/pcmanfm/desktopwindow.cpp
-index 4ee1f1cf..337aec13 100644
+index 4ee1f1cf..6901c1c5 100644
 --- a/pcmanfm/desktopwindow.cpp
 +++ b/pcmanfm/desktopwindow.cpp
+@@ -1036,7 +1036,7 @@ void DesktopWindow::onFileClicked(int type, const std::shared_ptr<const Fm::File
+                         connect(action, &QAction::triggered, this, [this, &settings] {
+                             Fm::FilePathList files;
+                             files.push_back(Fm::FilePath::fromUri("trash:///"));
+-                            Fm::FileOperation::deleteFiles(std::move(files), settings.confirmDelete(), this);
++                            Fm::FileOperation::deleteFiles(std::move(files), settings.confirmDelete(), nullptr);
+                         });
+                     }
+                     menu->exec(QCursor::pos());
 @@ -1122,7 +1122,7 @@ void DesktopWindow::selectAll() {
  }
  
@@ -11,6 +20,15 @@ index 4ee1f1cf..337aec13 100644
      dlg->setAttribute(Qt::WA_DeleteOnClose);
      connect(dlg, &DesktopEntryDialog::desktopEntryCreated, [this] (const Fm::FilePath&, const QString& name) {
          filesToTrust_ << name;
+@@ -1631,7 +1631,7 @@ void DesktopWindow::onDeleteActivated() {
+             Fm::FileOperation::trashFiles(paths, settings.confirmTrash(), this);
+         }
+         else {
+-            Fm::FileOperation::deleteFiles(paths, settings.confirmDelete(), this);
++            Fm::FileOperation::deleteFiles(paths, settings.confirmDelete(), nullptr);
+         }
+     }
+ }
 diff --git a/pcmanfm/tabpage.cpp b/pcmanfm/tabpage.cpp
 index 3b0a688f..6100c5e1 100644
 --- a/pcmanfm/tabpage.cpp
