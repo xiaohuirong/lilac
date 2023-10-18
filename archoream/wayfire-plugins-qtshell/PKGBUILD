@@ -3,7 +3,7 @@
 _pkgname=qt-shell
 pkgname=wayfire-plugins-qtshell
 pkgver=0.8.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Implementation of qt-shell protocol for Wayfire in the form of wayfire plugin"
 arch=('x86_64' 'aarch64')
 url="https://gitlab.com/wayfireplugins/${_pkgname}"
