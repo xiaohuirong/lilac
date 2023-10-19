@@ -3,6 +3,7 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
+_pkgname=breeze-icons
 pkgname=breeze-dark-icons
 pkgver=5.111.0
 pkgrel=1
@@ -11,16 +12,17 @@ arch=(any)
 url='https://community.kde.org/Frameworks'
 license=(LGPL)
 groups=(kf5)
-makedepends=(extra-cmake-modules qt5-base python-lxml)
-source=(https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgname-$pkgver.tar.xz)
+makedepends=(extra-cmake-modules-git qt5-base python-lxml)
+source=(https://download.kde.org/stable/frameworks/${pkgver%.*}/$_pkgname-$pkgver.tar.xz)
 sha256sums=('4c570e4c5f75a30f911db6fe5d907dfb58a02d2afbd160d81b51bfc8dc5b3aef')
 provides=('breeze-icons')
 conflicts=('breeze-icons')
 
 build() {
-  cmake -B build -S $pkgname-$pkgver \
+  cmake -B build -S $_pkgname-$pkgver \
     -DBINARY_ICONS_RESOURCE=ON \
-    -DBUILD_TESTING=OFF
+    -DBUILD_TESTING=OFF \
+    -DCMAKE_INSTALL_PREFIX=/usr
   cmake --build build
 }
 
