@@ -44,7 +44,7 @@ build() {
     # disable git_tag.inc to ignore missing target problem.
     sed -i '/^PRE_TARGETDEPS/d' ./TTFviewer.pro
     sed -i '/^QMAKE_EXTRA_TARGETS/d' ./TTFviewer.pro
-    sed -i "s/#include <git_tag.inc>/'${pkgver}'/" ./src/TTFviewer.cpp
+    sed -i "s/#include <git_tag.inc>/\"${pkgver}\"/" ./src/TTFviewer.cpp
     lrelease ./TTFviewer.pro
     qmake6 ./TTFviewer.pro -spec linux-g++ CONFIG+=qtquickcompiler
     make
