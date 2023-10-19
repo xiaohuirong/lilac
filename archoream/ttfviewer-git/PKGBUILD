@@ -35,6 +35,8 @@ build() {
     QT_PLUGIN_PATH=/usr/lib/qt6/plugins
     QML2_IMPORT_PATH=/usr/lib/qt6/qml
     TTFVIEWER_VERSION=$TTFVIEWER_MAJARVERSION$TTFVIEWER_SUBVERSION$TTFVIEWER_REVISION
+    QMAKE="/usr/bin/qmake6"
+
     CFLAGS+=" -fPIE"
     LDFLAGS+=" -pie"
 
