@@ -10,7 +10,7 @@ pkgrel=1
 arch=(any)
 url='https://community.kde.org/Frameworks'
 license=(LGPL)
-makedepends=(extra-cmake-modules-git qt5-base python-lxml rsync)
+makedepends=(extra-cmake-modules qt5-base python-lxml rsync)
 source=(https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgbase-$pkgver.tar.xz)
 sha256sums=('1a3ced17ac34f7b7cb165017e6ceee71a0184a645ff962ace39bc69dcf43bfd4')
 
