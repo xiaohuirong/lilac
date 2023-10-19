@@ -41,6 +41,7 @@ build() {
     LDFLAGS+=" -pie"
 
     sed -i 's/^FREETPE2_DIR=.*/FREETPE2_DIR=\/usr/' partform_unix.pri
+    # disable git_tag.inc to ignore missing target problem.
     sed -i '/^PRE_TARGETDEPS/d' ./TTFviewer.pro
     sed -i '/^QMAKE_EXTRA_TARGETS/d' ./TTFviewer.pro
     sed -i 's/#include <git_tag.inc>/"0.0.1"/' ./src/TTFviewer.cpp
