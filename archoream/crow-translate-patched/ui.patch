@@ -9,7 +9,7 @@ index f74ee92..1d428ee 100644
 +  <property name="minimumSize"> <!-- 设置最小高度和宽度 -->
 +    <size>
 +     <height>500</height> <!-- 设置最小高度值 -->
-+     <width>1000</height> <!-- 设置最小宽度值 -->
++     <width>1000</width> <!-- 设置最小宽度值 -->
 +    </size>
 +   </property>
     <layout class="QHBoxLayout" name="centralLayout">
