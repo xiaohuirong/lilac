@@ -7,7 +7,7 @@
 
 pkgname=chromium-wayland-vaapi
 pkgver=118.0.5993.88
-pkgrel=1
+pkgrel=2
 _launcher_ver=8
 _manual_clone=0
 pkgdesc="Chromium, patched to enable VA-API video decoding on the Ozone Wayland backend"
