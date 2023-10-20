@@ -4,7 +4,7 @@
 _gitname="qogir-theme"
 _pkgname="qogir-gtk-theme"
 pkgname="$_pkgname-git"
-pkgver=2023.05.24.r6.ga25bc47
+pkgver=2023.05.24.r19.g93142f7
 pkgrel=1
 pkgdesc='Qogir is a flat Design theme for GTK'
 arch=('any')
