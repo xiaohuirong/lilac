@@ -2,7 +2,7 @@
 
 pkgname=obs-rachni-theme-larger-font
 pkgver=29.1.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Obs Rachni theme with larger font size."
 url="https://github.com/obsproject/obs-studio"
 license=("GPL2")
