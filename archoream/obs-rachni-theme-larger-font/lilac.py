@@ -14,4 +14,5 @@ def try_remove_pkgrel(newver):
 
 def pre_build():
   if _G.newver is not None: 
-      update_pkgver_and_pkgrel(try_remove_pkgrel(_G.newver))
+      # update_pkgver_and_pkgrel(try_remove_pkgrel(_G.newver), updpkgsums=False)
+      update_pkgver_and_pkgrel(_G.newver, updpkgsums=False)

@@ -12,8 +12,8 @@ conflicts=()
 depends=(obs-studio)
 makedepends=()
 #install=patch.install
-source=("patch.install")
-sha256sums=('da74eb7b348db923f79d023fa39e3f7c9a317c37d1c7d968678507b36c1bd80f')
+#source=("patch.install")
+#sha256sums=('da74eb7b348db923f79d023fa39e3f7c9a317c37d1c7d968678507b36c1bd80f')
 
 package() {
     install -d "${pkgdir}/usr/share/obs/obs-studio/themes/Rachni-larger"
