@@ -11,3 +11,5 @@ update_on:
     aur: qogir-cursor-theme-git 
   - source: github
     github: vinceliuice/Qogir-icon-theme
+
+managed: false
