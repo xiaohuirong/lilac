@@ -1,0 +1,13 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+pre_build: aur_pre_build
+post_build: git_pkgbuild_commit
+
+update_on:
+  - source: aur
+    aur: simple-http-server-git
+  - source: github
+    github: TheWaWaR/simple-http-server
