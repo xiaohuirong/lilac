@@ -11,9 +11,20 @@ provides=()
 conflicts=()
 depends=(obs-studio)
 makedepends=()
-install=patch.install
-source=("patch.install")
-sha256sums=('da74eb7b348db923f79d023fa39e3f7c9a317c37d1c7d968678507b36c1bd80f')
+#install=patch.install
+#source=("patch.install")
+#sha256sums=('da74eb7b348db923f79d023fa39e3f7c9a317c37d1c7d968678507b36c1bd80f')
+source=()
+sha256sums=()
+
+package() {
+    install -d "${pkgdir}/usr/share/obs/obs-studio/themes/Rachni-larger"
+    ln -sf /usr/share/obs/obs-studio/themes/Rachni/* ${pkgdir}/usr/share/obs/obs-studio/themes/Rachni-larger/
+    cp /usr/share/obs/obs-studio/themes/Rachni.qss ${pkgdir}/usr/share/obs/obs-studio/themes/Rachni-larger.qss
+    sed -i '/QWidget {/,/}/ s/font-size: 10pt;/font-size: 14pt;/' ${pkgdir}/usr/share/obs/obs-studio/themes/Rachni-larger.qss
+}
+
+
 
 
 
