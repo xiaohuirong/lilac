@@ -13,7 +13,8 @@ def try_remove_pkgrel(newver):
     return result
 
 def pre_build():
-  update_pkgver_and_pkgrel(try_remove_pkgrel(_G.newver))
+  if _G.newver is not None:
+      update_pkgver_and_pkgrel(try_remove_pkgrel(_G.newver))
 
 def post_build():
   git_add_files('PKGBUILD')
