@@ -1,0 +1,18 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=obs-rachni-theme-larger-font
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Obs Rachni theme with larger font size."
+url="https://github.com/obsproject/obs-studio"
+license=("GPL2")
+arch=("x86_64")
+provides=()
+conflicts=()
+depends=(obs-studio)
+makedepends=()
+install=patch.install
+
+
+
+

@@ -1,0 +1,17 @@
+post_install() {
+    mkdir -p /usr/share/obs/obs-studio/themes/Rachni-larger
+    ln -sf /usr/share/obs/obs-studio/themes/Rachni/* /usr/share/obs/obs-studio/themes/Rachni-larger/
+    cp /usr/share/obs/obs-studio/themes/Rachni.qss /usr/share/obs/obs-studio/themes/Rachni-larger.qss
+    sed -i '/QWidget {/,/}/ s/font-size: 10pt;/font-size: 14pt;/' /usr/share/obs/obs-studio/themes/Rachni-larger.qss
+}
+
+post_upgrade() {
+    rm -r /usr/share/obs/obs-studio/themes/Rachni-larger
+    rm /usr/share/obs/obs-studio/themes/Rachni-larger.qss
+    post_install
+}
+
+post_remove() {
+    rm -r /usr/share/obs/obs-studio/themes/Rachni-larger
+    rm /usr/share/obs/obs-studio/themes/Rachni-larger.qss
+}
