@@ -10,3 +10,4 @@ update_on:
     github: crow-translate/crow-translate
     use_latest_release: true
   - source: manual
+    manual: 1
