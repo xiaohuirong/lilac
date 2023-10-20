@@ -12,6 +12,8 @@ conflicts=()
 depends=(obs-studio)
 makedepends=()
 install=patch.install
+source=("patch.install")
+sha256sums=("SKIP")
 
 
 
