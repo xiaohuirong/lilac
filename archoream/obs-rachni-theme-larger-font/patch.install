@@ -6,8 +6,7 @@ post_install() {
 }
 
 post_upgrade() {
-    rm -r /usr/share/obs/obs-studio/themes/Rachni-larger
-    rm /usr/share/obs/obs-studio/themes/Rachni-larger.qss
+    post_remove
     post_install
 }
 
