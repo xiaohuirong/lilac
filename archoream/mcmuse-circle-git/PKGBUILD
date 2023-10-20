@@ -1,6 +1,6 @@
 pkgname=mcmuse-circle-git
 _pkgname=McMuse-circle
-pkgver=r30.55596ca2
+pkgver=r88.b15ff32e
 pkgrel=1
 pkgdesc="A colorful design icon theme for linux desktops"
 arch=('any')
