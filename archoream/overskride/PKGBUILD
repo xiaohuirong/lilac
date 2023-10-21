@@ -10,7 +10,7 @@ license=('GPL3')
 depends=('bluez' 'libadwaita')
 makedepends=('blueprint-compiler' 'cargo' 'git' 'meson')
 checkdepends=('appstream-glib')
-source=("git+$url.git#tag=$pkgver")
+source=("git+$url.git#tag=main")
 sha256sums=('SKIP')
 
 prepare() {
