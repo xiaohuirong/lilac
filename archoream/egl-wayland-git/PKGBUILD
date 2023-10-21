@@ -3,7 +3,7 @@
 
 pkgname=egl-wayland-git
 pkgver=1.1.13.r0.g69ae9cf
-pkgrel=1
+pkgrel=2
 pkgdesc='EGLStream-based Wayland external platform (git version)'
 arch=('x86_64')
 url='https://github.com/NVIDIA/egl-wayland/'
