@@ -16,3 +16,5 @@ update_on:
 repo_depends: 
   - imagemagick6: libmagick6
   - lib2geom-git
+
+managed: false
