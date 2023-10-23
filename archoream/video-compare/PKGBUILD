@@ -3,7 +3,7 @@
 
 pkgname=video-compare
 pkgver=20230807
-pkgrel=1
+pkgrel=2
 pkgdesc="Split screen video comparison tool using FFmpeg and SDL2"
 arch=('x86_64')
 url="https://github.com/pixop/video-compare"
