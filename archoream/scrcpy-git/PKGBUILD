@@ -4,7 +4,7 @@
 
 pkgname=scrcpy-git
 pkgver=2.1.1_r2218.g1ee46970
-pkgrel=1
+pkgrel=2
 pkgdesc='Display and control your Android device'
 arch=($CARCH)
 url='https://github.com/Genymobile/scrcpy'
