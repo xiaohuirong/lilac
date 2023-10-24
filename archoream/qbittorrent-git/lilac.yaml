@@ -9,3 +9,5 @@ update_on:
     manual: 1
   - source: github
     github: qbittorrent/qBittorrent
+    lilac_throttle: 5d
+
