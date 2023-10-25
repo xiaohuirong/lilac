@@ -1,7 +1,7 @@
 # Maintainer: w1nst0n <w1nst0n at keemail dot me>
 pkgname=universal-android-debloater-bin
 pkgver=0.5.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Cross-platform GUI written in Rust using ADB to debloat non-rooted Android devices."
 arch=('x86_64')
 url="https://github.com/0x192/universal-android-debloater"
