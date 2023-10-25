@@ -9,3 +9,5 @@ post_build: git_pkgbuild_commit
 update_on:
   - source: aur
     aur: universal-android-debloater
+
+managed: false

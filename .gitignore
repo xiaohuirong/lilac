@@ -8,4 +8,5 @@ archoream/wayfire-git/wayfire
 *.gz
 *.xz
 *.zip
+*.tgz
 archoream/*/*/*

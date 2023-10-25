@@ -22,9 +22,9 @@ replaces=('surge-synthesizer')
 source=("${pkgname}-${pkgver}.tgz::https://github.com/surge-synthesizer/releases/releases/download/${pkgver}/SurgeSrc_${pkgver}.tgz"
         "${pkgname}-1.9.0-test.patch::https://github.com/surge-synthesizer/surge/pull/4397/commits/077fbdda1c70413b6ff1af26f5ee0a7b814aa934.patch")
 sha512sums=('f06caae297026e9bbccdb097a47341dc1abd17dc7988d8d46368bec202fe701b1b7c9614b441f8d00a5a3a4f386d870a2da86c422ddd7324db216de7baa00836'
-            '90d5760b64bcbd782c6318d92ac19a89f84eb63bfe96c5122830cbdd1a78806e8422d1969bc1a8888e20fa2fd0872c69c0d298b909b3006067993fb2177ab2d5')
+            'c39a9afc1aaefcb5f58e1e7fde9a02958648ab02a3f8dcb8b4f60fee4bc67c75ceaac7448fc32f8b8322e284fa85c8ed684b8298627b95169a63776f7acb2625')
 b2sums=('b6574a48feefe6173afb2185be64423bb70d51d7376e9b5c44c4882d8e3e078c6b0430cb33aa23f9858a21db0be7b0dddfeebb57625149d79f066bb23639882e'
-        '7ca2599f7340e63f0f5f5e4d097c28fbc4d68d06c4de33da63b55b50404ebf14007717aa803dea28c0d124b70887848d4479ff19a640f752e13839fbf6f0a7f3')
+        'c000bcde88e448bbe1b39eb3be80812c3fb953e0e528bb3d647bc03edb76b76fbb02173667ea3b5bad371a33d67ea30be41cee5ff4c1936963f5c4bd66a695a0')
 
 prepare() {
   mv -v "$pkgname" "$pkgname-$pkgver"
