@@ -22,8 +22,8 @@ depends=(
 	ffmpeg hicolor-icon-theme
 )
 makedepends=(
-	git extra-cmake-modules kdoctools5 boost eigen poppler-qt5
-	python-pyqt5 libheif qt5-tools sip kseexpr5 libmypaint libjxl
+	git extra-cmake-modules kdoctools boost eigen poppler-qt5
+	python-pyqt5 libheif qt5-tools sip kseexpr libmypaint libjxl
 	xsimd immer zug lager
 )
 optdepends=(
@@ -31,7 +31,7 @@ optdepends=(
 	'ffmpeg: to save animations'
 	'python-pyqt5: for the Python plugins'
 	'libheif: HEIF filter'
-	'kseexpr5: SeExpr generator layer'
+	'kseexpr: SeExpr generator layer'
 	'kimageformats5: PSD support'
 	'libmypaint: support for MyPaint brushes'
 	'krita-plugin-gmic: GMic plugin'
