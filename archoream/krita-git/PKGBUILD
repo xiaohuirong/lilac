@@ -22,7 +22,7 @@ depends=(
 	ffmpeg hicolor-icon-theme
 )
 makedepends=(
-	git extra-cmake-modules kdoctools boost eigen poppler-qt5
+	git extra-cmake-modules kdoctools5 boost eigen poppler-qt5
 	python-pyqt5 libheif qt5-tools sip kseexpr libmypaint libjxl
 	xsimd immer zug lager
 )
