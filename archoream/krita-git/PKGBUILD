@@ -16,14 +16,14 @@ url='https://krita.org'
 license=('GPL3')
 
 depends=(
-	kitemviews kitemmodels ki18n kcompletion kguiaddons kcrash
+	kitemviews5 kitemmodels5 ki18n5 kcompletion5 kguiaddons5 kcrash5
 	qt5-svg qt5-multimedia quazip gsl libraw exiv2 openexr fftw
 	openjpeg2 opencolorio libwebp mlt sdl2 libraqm libunibreak
 	ffmpeg hicolor-icon-theme
 )
 makedepends=(
-	git extra-cmake-modules kdoctools boost eigen poppler-qt5
-	python-pyqt5 libheif qt5-tools sip kseexpr libmypaint libjxl
+	git extra-cmake-modules kdoctools5 boost eigen poppler-qt5
+	python-pyqt5 libheif qt5-tools sip kseexpr5 libmypaint libjxl
 	xsimd immer zug lager
 )
 optdepends=(
@@ -31,8 +31,8 @@ optdepends=(
 	'ffmpeg: to save animations'
 	'python-pyqt5: for the Python plugins'
 	'libheif: HEIF filter'
-	'kseexpr: SeExpr generator layer'
-	'kimageformats: PSD support'
+	'kseexpr5: SeExpr generator layer'
+	'kimageformats5: PSD support'
 	'libmypaint: support for MyPaint brushes'
 	'krita-plugin-gmic: GMic plugin'
 	'libjxl: JPEG-XL filter'
