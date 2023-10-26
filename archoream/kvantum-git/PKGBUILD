@@ -26,6 +26,14 @@ prepare() {
   sed -e 's|Qt6 Qt5|Qt6|' -i ${_pkgname}/Kvantum/*/CMakeLists.txt
 }
 
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
 build() {
   cmake -B build5 -S ${_pkgname}/Kvantum \
     -DCMAKE_INSTALL_PREFIX=/usr
