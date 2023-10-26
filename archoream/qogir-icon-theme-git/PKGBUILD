@@ -3,8 +3,8 @@
 
 _pkgname="qogir-icon-theme"
 pkgname="$_pkgname-git"
-pkgver=2023.06.05.r25.gb7a28b70
-pkgrel=2
+pkgver=2023.06.05.r27.g9f6c9348
+pkgrel=1
 pkgdesc='A colorful design icon theme for linux desktops'
 arch=('any')
 url='https://github.com/vinceliuice/Qogir-icon-theme'
