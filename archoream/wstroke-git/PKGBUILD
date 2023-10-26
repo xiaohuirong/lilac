@@ -1,7 +1,7 @@
 # Maintainer: steve finkel <mrsteve0924 at verizon dot net>
 
 pkgname=wstroke-git
-pkgver=r96.ce96935
+pkgver=20231005.ce96935
 pkgrel=1
 pkgdesc="a mouse gesture plug-in for wayfire. port of easystroke"
 arch=('x86_64')
@@ -19,7 +19,7 @@ sha256sums=('SKIP')
 pkgver() {
 	cd "$srcdir/${pkgname%-git}"
 
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  printf "%s.%s" "$(git show -s --format=%cs | tr -d -)" "$(git rev-parse --short HEAD)"
 
 }
 
