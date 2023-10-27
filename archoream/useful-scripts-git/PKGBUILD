@@ -2,7 +2,7 @@
 
 _pkgname=useful-scripts
 pkgname="${_pkgname}-git"
-pkgver=r20.1a74270
+pkgver=r22.c512f28
 pkgrel=1
 pkgdesc="Some useful scripts."
 url="https://github.com/xiaohuirong/useful-scripts"
@@ -11,7 +11,12 @@ arch=("any")
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
 depends=('bat' 'bash' 'bash-completion' 'zsh' 'zsh-autosuggestions' 'fzf' 'ripgrep' 'pacman' 'pkgfile' 'wget')
-optdepends=('uniclip' 'wl-clipboard')
+optdepends=('uniclip: for clipboard'
+            'wl-clipboard: for wayland clipboard'
+            'gptfdisk: for mkarchqemu'
+            'qemu-img: for mkarchqemu'
+            'arch-install-scripts: for mkarchqemu'
+            )
 makedepends=('git')
 source=("${_pkgname}::git+https://github.com/xiaohuirong/useful-scripts.git")
 
