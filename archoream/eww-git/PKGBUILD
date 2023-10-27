@@ -1,0 +1,83 @@
+# Maintainer: Y7n05h <Y7n05h(aT)protonmail--d0t--com>
+
+_pkgbase=eww
+pkgbase=eww-git
+pkgname=(eww-x11-git eww-wayland-git)
+pkgver=r584.a9a35c1
+pkgrel=1
+arch=("x86_64")
+url="https://github.com/elkowar/eww"
+license=("MIT")
+makedepends=("cargo-nightly" "rust-nightly"
+	gtk-layer-shell
+	libgobject-2.0.so
+	libgtk-3.so=0-64
+	libgdk-3.so=0-64
+	libpango-1.0.so=0-64
+	cairo
+	libgdk_pixbuf-2.0.so=0-64
+	libgio-2.0.so=0-64
+	libglib-2.0.so=0-64
+	gcc-libs
+	glibc
+    git
+)
+provides=("eww")
+replaces=()
+source=("$_pkgbase::git+${url}")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$_pkgbase"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//'
+}
+
+package_eww-x11-git() {
+    _pkgname=eww-x11
+	pkgdesc="ElKowars wacky widgets(For x11 only)"
+	depends=(
+		libgobject-2.0.so
+		libgtk-3.so=0-64
+		libgdk-3.so=0-64
+		libpango-1.0.so=0-64
+		cairo
+		libgdk_pixbuf-2.0.so=0-64
+		libgio-2.0.so=0-64
+		libglib-2.0.so=0-64
+		gcc-libs
+		glibc
+	)
+	conflicts=("eww-wayland" "eww" "eww-x11" "eww-wayland-git")
+    provides=("eww-x11")
+
+	cd $_pkgbase
+	export CARGO_TARGET_DIR=target
+	cargo build --release
+	install -Dm755 target/release/$_pkgbase "$pkgdir/usr/bin/$_pkgbase"
+	install -D -m644 "LICENSE" "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+}
+package_eww-wayland-git() {
+    _pkgname=eww-wayland
+	pkgdesc="ElKowars wacky widgets(For wayland only)"
+	depends=(
+		gtk-layer-shell
+		libgobject-2.0.so
+		libgtk-3.so=0-64
+		libgdk-3.so=0-64
+		libpango-1.0.so=0-64
+		cairo
+		libgdk_pixbuf-2.0.so=0-64
+		libgio-2.0.so=0-64
+		libglib-2.0.so=0-64
+		gcc-libs
+		glibc
+	)
+	conflicts=("eww-x11" "eww" "eww-wayland" "eww-x11-git")
+    provides=("eww-wayland")
+
+	cd $_pkgbase
+	export CARGO_TARGET_DIR=target
+	cargo build --release --no-default-features --features=wayland
+	install -Dm755 target/release/$_pkgbase "$pkgdir/usr/bin/$_pkgbase"
+	install -D -m644 "LICENSE" "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+}
