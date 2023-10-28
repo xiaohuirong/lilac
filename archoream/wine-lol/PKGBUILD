@@ -8,7 +8,7 @@
 
 pkgname=wine-lol
 pkgver=p8_12
-pkgrel=1
+pkgrel=3
 epoch=2
 
 # Be sure to use commits from a "lol-pX-XX" branch here
@@ -126,7 +126,7 @@ build() {
     --enable-win64 \
     --with-xattr
 
-  make -j 8
+  make
 
   msg2 "Building Wine-32..."
 
@@ -141,7 +141,7 @@ build() {
     --libdir=/opt/wine-lol/lib32 \
     --with-wine64="$srcdir/$pkgname-64-build"
 
-  make -j 8
+  make
 }
 
 package() {
