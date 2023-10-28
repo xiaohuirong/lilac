@@ -3,7 +3,7 @@
 
 pkgname=mozregression-gui
 pkgver=6.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Regression range finder for Firefox'
 arch=('any')
 license=(MPL)
