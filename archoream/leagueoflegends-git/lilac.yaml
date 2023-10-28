@@ -1,0 +1,19 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: multilib
+pre_build_scripts: |
+  aur_pre_build()
+  add_makedepends(['git'])
+post_build: git_pkgbuild_commit
+
+update_on:
+  - source: aur
+    aur: leagueoflegends-git
+  - source: github
+    github: kyechou/leagueoflegends
+
+repo_depends:
+  - wine-lol
+  - lib32-unixodbc
