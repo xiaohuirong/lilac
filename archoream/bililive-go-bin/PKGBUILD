@@ -2,7 +2,7 @@
 pkgname=bililive-go-bin
 _pkgname=${pkgname%-bin}
 pkgver=0.7.18
-pkgrel=1
+pkgrel=2
 pkgdesc="pre build binary for bililive-go"
 arch=("x86_64")
 url="https://github.com/hr3lxphr6j/${_pkgname}"
