@@ -2,8 +2,8 @@
 
 pkgname=pypipe-git
 _gitpkgname=pypipe
-pkgver=r18.3bb2c8c
-pkgrel=3
+pkgver=r20.7a2d7f2
+pkgrel=1
 pkgdesc='Python command-line tool for pipeline processing'
 arch=('any')
 url='https://github.com/bugen/pypipe'
