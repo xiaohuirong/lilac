@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=dead-cells
 pkgver=2023.3.6
-pkgrel=2
+pkgrel=3
 pkgdesc="a rogue-lite, metroidvania inspired, action-platformer"
 arch=('x86_64')
 url="https://www.linuxgame.cn/dead-cells"
