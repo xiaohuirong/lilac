@@ -10,3 +10,5 @@ archoream/wayfire-git/wayfire
 *.zip
 *.tgz
 archoream/*/*/*
+games/re3-git/*/*
+*.bundle
