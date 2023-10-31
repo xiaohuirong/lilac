@@ -1,14 +1,14 @@
 # Maintainer: Mateen Ulhaq <mulhaq2005+aur at gmail dot com>
 
 pkgname=gping-git
-pkgver=1.2.3.r4.ga95a678
+pkgver=1.14.0.r78.g5dbf586
 pkgrel=1
 pkgdesc="Ping, but with a graph"
 arch=("x86_64")
 url="https://github.com/orf/gping"
 license=("MIT")
 depends=("iputils")
-makedepends=("cargo" "git")
+makedepends=("cargo" "git" "libgit2")
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
 source=("$pkgname::git+$url")
