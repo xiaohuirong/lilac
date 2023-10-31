@@ -7,7 +7,8 @@ arch=('x86_64')
 url="https://www.linuxgame.cn/dead-cells"
 license=('custom')
 depends=('bubblewrap' 'libxss' 'libbsd' 'hashlink')
-source=("Dead Cells.zip::https://49-89-187-6.d.cjjd15.com:30443/download-cdn.123pan.cn/123-824/6d3e6d2d/1813455289-0/6d3e6d2d7a121fb066fd4a1715ac5f38/c-m11?v=5&t=1690727843&s=1690727843aefd675b5374889d11fbab9b08b2850d&r=FFDFLO&filename=Dead+Cells.zip&x-mf-biz-cid=482379a7-d0ce-48d4-8c8e-c41bb91d80b1-a0d664&auto_redirect=0&xmfcid=8b9da108-e137-4f38-a55b-c930c2f9aad7-1-50111d3b1" "gog_com-Dead_Cells.desktop")
+source=("Dead Cells.zip::http://app.hoream.top:8000/games/Dead%20Cells.zip"
+        "gog_com-Dead_Cells.desktop")
 sha256sums=('97ec0b5a7243d2bac5e7319c8e3ab7298bca1a219249b31cf2462e3e99a1ae20'
     '05aa7f3c11f6f5e6ca67a902594ec2cf8c3c8e121fe07b1ab0f12ed7b60885d1')
 options=(!strip)
