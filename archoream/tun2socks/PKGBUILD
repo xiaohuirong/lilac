@@ -2,7 +2,7 @@
 
 pkgname=tun2socks
 pkgver=2.5.1
-pkgrel=1
+pkgrel=2
 pkgdesc="tun2socks - powered by gVisor TCP/IP stack"
 arch=('any')
 url="https://github.com/xjasonlyu/tun2socks"

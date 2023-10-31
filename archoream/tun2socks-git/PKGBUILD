@@ -3,7 +3,7 @@
 pkgname=tun2socks-git
 _pkgname=tun2socks
 pkgver=v2.5.1.r21.gf8bddb1
-pkgrel=1
+pkgrel=2
 pkgdesc='create a network interface which passes all traffic through proxy'
 arch=('x86_64')
 url='https://github.com/xjasonlyu/tun2socks'
