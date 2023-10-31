@@ -1,13 +1,13 @@
 # Maintainer: PwnWriter <hey@pwnwriter.xyz>
 
 pkgname=presenterm-git
-pkgver=0.2.1.r1.g0f901be
+pkgver=0.2.1.r41.g8215449
 pkgrel=1
 pkgdesc="A terminal slideshow tool"
 arch=('x86_64')
 url="https://github.com/mfontanini/presenterm"
 license=('BSD 2-Clause')
-makedepends=('cargo' 'git')
+makedepends=('cargo' 'git' 'oniguruma' 'glibc' 'gcc-libs')
 conflicts=("${pkgname%-git}")
 provides=("${pkgname%-git}")
 source=("git+${url}")
@@ -25,6 +25,7 @@ prepare() {
 
 build() {
   cd "${pkgname%-git}"
+  export RUSTONIG_DYNAMIC_LIBONIG=1
   cargo build --release --frozen
 }
 
