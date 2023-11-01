@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=kingdom-rush-frontiers
 pkgver=4.2.33.43930
-pkgrel=1
+pkgrel=2
 pkgdesc="a new chapter in a series of cute and laid-back tower defense games."
 arch=('x86_64')
 url="https://freelinuxpcgames.com/kingdom-rush-frontiers/"
@@ -11,10 +11,22 @@ sha256sums=('4e3a825e1d31ed4b5439372b4046f0bcf36de52d1f6582d5d0c4f7ec504abfa8'
     '66b12eb0c71fad15712cf8fcbea832c9cd5a8a69098e476e7248922ef5f48abe')
 #options=('staticlibs')
 options=(!strip)
+depends=("sdl2")
 
 package() {
 	install -d "${pkgdir}/opt/gog/${pkgname}"
 	install -Dm644 "$srcdir"/gog_com-Kingdom_Rush_Frontiers.desktop "$pkgdir"/usr/share/applications/gog_com-Kingdom_Rush_Frontiers.desktop
 	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${pkgname}"
 	sed -i '/chmod +x */d' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+
+    # enable wayland support
+    sed -i '2i\
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then\
+    export SDL_VIDEODRIVER=wayland\
+    export SDL_DYNAMIC_API="/usr/lib/libSDL2-2.0.so"\
+else \
+    export SDL_VIDEODRIVER=x11\
+fi
+' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+
 }
