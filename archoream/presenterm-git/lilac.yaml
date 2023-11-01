@@ -13,5 +13,6 @@ update_on:
   #  aur: presenterm-git
   - source: github
     github: mfontanini/presenterm
+  - source: manual
 
 managed: true
