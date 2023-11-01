@@ -1,7 +1,7 @@
 # Maintainer: Angelo Verlain SHEMA (https://vixalien.com)
 pkgname=decibels
 pkgver=0.1.4
-pkgrel=1
+pkgrel=2
 pkgdesc="Play audio files"
 arch=('any')
 url="https://github.com/vixalien/decibels"
