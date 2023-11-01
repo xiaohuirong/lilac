@@ -12,3 +12,5 @@ archoream/wayfire-git/wayfire
 archoream/*/*/*
 games/re3-git/*/*
 *.bundle
+*.ttf
+*.ttc

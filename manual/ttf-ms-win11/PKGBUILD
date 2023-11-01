@@ -174,18 +174,20 @@ gadugi.ttf     gadugib.ttf                                  # Gadugi
 mvboli.ttf                                                  # MV Boli
 )
 
-DLAGENTS=("file::/usr/bin/echo ${BOLD}${RED} Unable to find %u, please read the PKGBUILD ${ALL_OFF}" $DLAGENTS[@])
+#DLAGENTS=("file::/usr/bin/echo ${BOLD}${RED} Unable to find %u, please read the PKGBUILD ${ALL_OFF}" $DLAGENTS[@])
 
-source=(${_ttf_ms_win11[@]/#/file://}
-        ${_ttf_ms_win11_japanese[@]/#/file://}
-        ${_ttf_ms_win11_korean[@]/#/file://}
-        ${_ttf_ms_win11_sea[@]/#/file://}
-        ${_ttf_ms_win11_thai[@]/#/file://}
-        ${_ttf_ms_win11_zh_cn[@]/#/file://}
-        ${_ttf_ms_win11_zh_tw[@]/#/file://}
-        ${_ttf_ms_win11_other[@]/#/file://}
-        file://license.rtf)
+echo "${_ttf_ms_win11[@]/#/http://app.hoream.top:8000/fonts/win11/}"
+source=(${_ttf_ms_win11[@]/#/http://app.hoream.top:8000/fonts/win11/}
+        ${_ttf_ms_win11_japanese[@]/#/http://app.hoream.top:8000/fonts/win11/}
+        ${_ttf_ms_win11_korean[@]/#/http://app.hoream.top:8000/fonts/win11/}
+        ${_ttf_ms_win11_sea[@]/#/http://app.hoream.top:8000/fonts/win11/}
+        ${_ttf_ms_win11_thai[@]/#/http://app.hoream.top:8000/fonts/win11/}
+        ${_ttf_ms_win11_zh_cn[@]/#/http://app.hoream.top:8000/fonts/win11/}
+        ${_ttf_ms_win11_zh_tw[@]/#/http://app.hoream.top:8000/fonts/win11/}
+        ${_ttf_ms_win11_other[@]/#/http://app.hoream.top:8000/fonts/win11/}
+        )
 
+http://app.hoream.top:8000/fonts/win11/arial.ttf http://app.hoream.top:8000/fonts/win11/arialbd.ttf http://app.hoream.top:8000/fonts/win11/ariali.ttf http://app.hoream.top:8000/fonts/win11/arialbi.ttf http://app.hoream.top:8000/fonts/win11/ariblk.ttf http://app.hoream.top:8000/fonts/win11/bahnschrift.ttf http://app.hoream.top:8000/fonts/win11/calibri.ttf http://app.hoream.top:8000/fonts/win11/calibrib.ttf http://app.hoream.top:8000/fonts/win11/calibrii.ttf http://app.hoream.top:8000/fonts/win11/calibriz.ttf http://app.hoream.top:8000/fonts/win11/calibril.ttf http://app.hoream.top:8000/fonts/win11/calibrili.ttf http://app.hoream.top:8000/fonts/win11/cambria.ttc http://app.hoream.top:8000/fonts/win11/cambriab.ttf http://app.hoream.top:8000/fonts/win11/cambriai.ttf http://app.hoream.top:8000/fonts/win11/cambriaz.ttf http://app.hoream.top:8000/fonts/win11/Candara.ttf http://app.hoream.top:8000/fonts/win11/Candarab.ttf http://app.hoream.top:8000/fonts/win11/Candarai.ttf http://app.hoream.top:8000/fonts/win11/Candaraz.ttf http://app.hoream.top:8000/fonts/win11/Candaral.ttf http://app.hoream.top:8000/fonts/win11/Candarali.ttf http://app.hoream.top:8000/fonts/win11/comic.ttf http://app.hoream.top:8000/fonts/win11/comicbd.ttf http://app.hoream.top:8000/fonts/win11/comici.ttf http://app.hoream.top:8000/fonts/win11/comicz.ttf http://app.hoream.top:8000/fonts/win11/consola.ttf http://app.hoream.top:8000/fonts/win11/consolab.ttf http://app.hoream.top:8000/fonts/win11/consolai.ttf http://app.hoream.top:8000/fonts/win11/consolaz.ttf http://app.hoream.top:8000/fonts/win11/constan.ttf http://app.hoream.top:8000/fonts/win11/constanb.ttf http://app.hoream.top:8000/fonts/win11/constani.ttf http://app.hoream.top:8000/fonts/win11/constanz.ttf http://app.hoream.top:8000/fonts/win11/corbel.ttf http://app.hoream.top:8000/fonts/win11/corbelb.ttf http://app.hoream.top:8000/fonts/win11/corbeli.ttf http://app.hoream.top:8000/fonts/win11/corbelz.ttf http://app.hoream.top:8000/fonts/win11/corbell.ttf http://app.hoream.top:8000/fonts/win11/corbelli.ttf http://app.hoream.top:8000/fonts/win11/cour.ttf http://app.hoream.top:8000/fonts/win11/courbd.ttf http://app.hoream.top:8000/fonts/win11/couri.ttf http://app.hoream.top:8000/fonts/win11/courbi.ttf http://app.hoream.top:8000/fonts/win11/framd.ttf http://app.hoream.top:8000/fonts/win11/framdit.ttf http://app.hoream.top:8000/fonts/win11/Gabriola.ttf http://app.hoream.top:8000/fonts/win11/georgia.ttf http://app.hoream.top:8000/fonts/win11/georgiab.ttf http://app.hoream.top:8000/fonts/win11/georgiai.ttf http://app.hoream.top:8000/fonts/win11/georgiaz.ttf http://app.hoream.top:8000/fonts/win11/impact.ttf http://app.hoream.top:8000/fonts/win11/Inkfree.ttf http://app.hoream.top:8000/fonts/win11/l_10646.ttf http://app.hoream.top:8000/fonts/win11/lucon.ttf http://app.hoream.top:8000/fonts/win11/marlett.ttf http://app.hoream.top:8000/fonts/win11/micross.ttf http://app.hoream.top:8000/fonts/win11/pala.ttf http://app.hoream.top:8000/fonts/win11/palab.ttf http://app.hoream.top:8000/fonts/win11/palai.ttf http://app.hoream.top:8000/fonts/win11/palabi.ttf http://app.hoream.top:8000/fonts/win11/segmdl2.ttf http://app.hoream.top:8000/fonts/win11/SegoeIcons.ttf http://app.hoream.top:8000/fonts/win11/segoepr.ttf http://app.hoream.top:8000/fonts/win11/segoeprb.ttf http://app.hoream.top:8000/fonts/win11/segoesc.ttf http://app.hoream.top:8000/fonts/win11/segoescb.ttf http://app.hoream.top:8000/fonts/win11/segoeui.ttf http://app.hoream.top:8000/fonts/win11/segoeuib.ttf http://app.hoream.top:8000/fonts/win11/segoeuii.ttf http://app.hoream.top:8000/fonts/win11/segoeuiz.ttf http://app.hoream.top:8000/fonts/win11/segoeuil.ttf http://app.hoream.top:8000/fonts/win11/seguili.ttf http://app.hoream.top:8000/fonts/win11/segoeuisl.ttf http://app.hoream.top:8000/fonts/win11/seguisli.ttf http://app.hoream.top:8000/fonts/win11/seguibl.ttf http://app.hoream.top:8000/fonts/win11/seguibli.ttf http://app.hoream.top:8000/fonts/win11/seguiemj.ttf http://app.hoream.top:8000/fonts/win11/seguihis.ttf http://app.hoream.top:8000/fonts/win11/seguisb.ttf http://app.hoream.top:8000/fonts/win11/seguisbi.ttf http://app.hoream.top:8000/fonts/win11/seguisym.ttf http://app.hoream.top:8000/fonts/win11/SegUIVar.ttf http://app.hoream.top:8000/fonts/win11/SitkaVF.ttf http://app.hoream.top:8000/fonts/win11/SitkaVF-Italic.ttf http://app.hoream.top:8000/fonts/win11/sylfaen.ttf http://app.hoream.top:8000/fonts/win11/symbol.ttf http://app.hoream.top:8000/fonts/win11/tahoma.ttf http://app.hoream.top:8000/fonts/win11/tahomabd.ttf http://app.hoream.top:8000/fonts/win11/times.ttf http://app.hoream.top:8000/fonts/win11/timesbd.ttf http://app.hoream.top:8000/fonts/win11/timesi.ttf http://app.hoream.top:8000/fonts/win11/timesbi.ttf http://app.hoream.top:8000/fonts/win11/trebuc.ttf http://app.hoream.top:8000/fonts/win11/trebucbd.ttf http://app.hoream.top:8000/fonts/win11/trebucit.ttf http://app.hoream.top:8000/fonts/win11/trebucbi.ttf http://app.hoream.top:8000/fonts/win11/verdana.ttf http://app.hoream.top:8000/fonts/win11/verdanab.ttf http://app.hoream.top:8000/fonts/win11/verdanai.ttf http://app.hoream.top:8000/fonts/win11/verdanaz.ttf http://app.hoream.top:8000/fonts/win11/webdings.ttf http://app.hoream.top:8000/fonts/win11/wingding.ttf
 sha256sums=('baa251526d6862712a58e613ef451d8a2b60482142ec6aab1d47fb8e23e21a7c'
             '8df7a2c69fc4044835814899534e5fee6e72f78285b5a6dcb19531142b51d742'
             '090b89742910172c69e1fd3b1814ad4e482a1c712b87d24e96b377beaac3a6d1'
@@ -248,7 +250,7 @@ sha256sums=('baa251526d6862712a58e613ef451d8a2b60482142ec6aab1d47fb8e23e21a7c'
             '99f0af2d1941707fecda23da38bafbed5144a73a3720d773c05b9d4c445920ed'
             'd0e722b91ffd5391cc2e7d6e976f274d5aee9fe0b8d0fedfffe093763e695cde'
             'a2efc8b8e51fbd031a7142a1ade8866fa904c0c349511abc579ee53f8a926f31'
-            'f1f3111aeaa890587b0ddfd4d2574ec24a09a9a1c47d8d5ed72b795fc133937e'
+            '54a7c523a178cfff110935a58ba7682b9d6bfae4a85ce72b00a733c09462f44a'
             '91046862e08fbade0bdd648e81c4efbe6a963947f8b6e32b64a28fe39073c468'
             '3cced0162ddb9e5f1e63ee1b36fd6e581c090318dce1a0af01b77f5ea9952c80'
             'b24aa49a4bcb99a0ffc60cad77f00941e4b121153d8b0a519c03719d9be6004e'
@@ -263,7 +265,7 @@ sha256sums=('baa251526d6862712a58e613ef451d8a2b60482142ec6aab1d47fb8e23e21a7c'
             '254ad309e8f6b49cf0379a565adaf85a78994b4420b98a94119f45449d7b70ab'
             'e17738f092c8b02f4443867a7dfcdde66fb4cd6f6b10de8e40b2f3192f8a5835'
             '33212faa85fad61785cd6917172378b798bc9f5d4c47c121437354f47980aa6f'
-            '4e3cec7d1995b6d74102c0b4669e4507ac35cbf9a9830a93ac14c6e40dfe36a9'
+            '742dcdad8a12b0dad5869d3748a74a19b8ee19a659b23eb3fb20feaef9cf7f01'
             'fec0897934d26625b17bb3e4ffb3a7b0b6a138f6e61d5eff7535417cfbbc7884'
             'b381730d47408ced8f104b62c9042a6abbbd08501a37f14b76858760a6cf176c'
             '60cd474595d07bbdfa9d87de1a1e24c876e218d117c4a3098e0ac937157a1b9d'
@@ -328,14 +330,13 @@ sha256sums=('baa251526d6862712a58e613ef451d8a2b60482142ec6aab1d47fb8e23e21a7c'
             '9090931d496a272ab9f1382480332e6029e636a9191fe21d158adbf148acf0df'
             '0ec2bdbfc2ba99d9fb05b6f7c511e7ab8b7c055e2d644570ad777455d6e9796d'
             'c96226cba7f50e94b534a5f8ade6a54f48a03be7c73360524eda5cbce4de34b6'
-            '5dfd7a4c708caeefae42cdb9540946de042beeb8c069dfde0dbc14c2fa0705ae'
-            'SKIP')
+            '5dfd7a4c708caeefae42cdb9540946de042beeb8c069dfde0dbc14c2fa0705ae')
 
 _package() {
     conflicts+=(${pkgname/11/8} ${pkgname/11/10} ttf-win7-fonts${pkgname##*11})
 
     install -Dm644 $@ -t "$pkgdir/usr/share/fonts/TTF"
-    install -Dm644 license.rtf -t "$pkgdir/usr/share/licenses/$pkgname"
+    #install -Dm644 license.rtf -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_ttf-ms-win11() {
