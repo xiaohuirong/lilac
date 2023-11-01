@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=dead-cells
 pkgver=2023.3.6
-pkgrel=3
+pkgrel=4
 pkgdesc="a rogue-lite, metroidvania inspired, action-platformer"
 arch=('x86_64')
 url="https://www.linuxgame.cn/dead-cells"
@@ -32,5 +32,11 @@ package() {
     rm "${pkgdir}/opt/gog/${pkgname}/game/sdl.hdll"
     rm "${pkgdir}/opt/gog/${pkgname}/game/libSDL2-2.0.so.0"
     rm "${pkgdir}/opt/gog/${pkgname}/game/libhl.so"
-    sed -i '2i\export SDL_VIDEODRIVER=wayland' "$pkgdir"/opt/gog/"${pkgname}"/game/deadcells.sh
+    sed -i '2i\
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then\
+    export SDL_VIDEODRIVER=wayland\
+else \
+    export SDL_VIDEODRIVER=x11\
+fi
+' "$pkgdir"/opt/gog/"${pkgname}"/game/deadcells.sh
 }
