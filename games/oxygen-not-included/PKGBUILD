@@ -14,6 +14,7 @@ sha256sums=('dce38da8e880cc391d1fea79c9257daf0e7c8670d39675cd3ba07e129f2efbfb'
 options=(!strip)
 makedepends=('expect')
 install="${pkgname}.install"
+depends=('sdl2')
 
 prepare() {
 	cd $srcdir
@@ -30,4 +31,15 @@ package() {
     chmod +x ${pkgdir}/opt/gog/${pkgname}/{run.sh,OxygenNotIncluded}
     touch ${pkgdir}/opt/gog/${pkgname}/unity.lock
     chmod 777 ${pkgdir}/opt/gog/${pkgname}/unity.lock
+
+    # enable wayland support
+    sed -i '2i\
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then\
+    export SDL_VIDEODRIVER=wayland\
+    export SDL_DYNAMIC_API="/usr/lib/libSDL2-2.0.so"\
+else \
+    export SDL_VIDEODRIVER=x11\
+fi
+' "$pkgdir"/opt/gog/"${pkgname}"/run.sh
+
 }
