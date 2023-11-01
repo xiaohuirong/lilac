@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=dont-starve
 pkgver=4294041.41439
-pkgrel=1
+pkgrel=2
 pkgdesc="an uncompromising survival game in a wild world filled with science and magic."
 arch=('x86_64')
 url="https://freelinuxpcgames.com/dont-starve/"
@@ -19,4 +19,8 @@ package() {
 	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${pkgname}"
     cp -r "$srcdir/Chinese Support" "${pkgdir}/opt/gog/${pkgname}/game/mods"
 	sed -i '/chmod +x */d' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+
+    # only support x11
+    sed -i '2i\export SDL_VIDEODRIVER=x11' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+
 }
