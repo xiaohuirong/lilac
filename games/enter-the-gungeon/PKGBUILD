@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=enter-the-gungeon
 pkgver=2.1.9.33951
-pkgrel=1
+pkgrel=2
 pkgdesc="a gunfight dungeon crawler following a band of misfits seeking to shoot, loot, dodge roll, and table-flip their way to personal absolution by reaching the legendary Gungeon’s ultimate treasure: the gun that can kill the past."
 arch=('x86_64')
 url="https://freelinuxpcgames.com/enter-the-gungeon/"
@@ -12,10 +12,22 @@ sha256sums=('23eb414b55da3eecabb1ed0773499b30effabe563d08a0f6e74a1999db48067c'
     'b2ad3a630dbb5ab42b3c701b727a40231b2c59887637de242832ee10a64b377d')
 #options=('staticlibs')
 options=(!strip)
+depends=("sdl2")
 
 package() {
 	install -d "${pkgdir}/opt/gog/${pkgname}"
 	install -Dm644 "$srcdir"/gog_com-Enter_The_Gungeon.desktop "$pkgdir"/usr/share/applications/gog_com-Enter_The_Gungeon.desktop
 	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${pkgname}"
 	sed -i '/chmod +x */d' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+
+    # enable wayland support
+    sed -i '2i\
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then\
+    export SDL_VIDEODRIVER=wayland\
+    export SDL_DYNAMIC_API="/usr/lib/libSDL2-2.0.so"\
+else \
+    export SDL_VIDEODRIVER=x11\
+fi
+' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+
 }
