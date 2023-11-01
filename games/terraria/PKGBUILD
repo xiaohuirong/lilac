@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=terraria
 pkgver=1.4.4.9.v4.60321
-pkgrel=1
+pkgrel=2
 pkgdesc="an action-adventure sandbox game."
 arch=('x86_64')
 url="https://freelinuxpcgames.com/terraria/"
@@ -11,10 +11,21 @@ sha256sums=('9ef66aa58acbdce161221539d91845b68a11bcd75560a019dc09206918aae876'
     '662d915d3fa21718c605d6e296ebcdcca8087ef7b09579858826f40ed8abed7e')
 #options=('staticlibs')
 options=(!strip)
+depends=("sdl2")
 
 package() {
 	install -d "${pkgdir}/opt/gog/${pkgname}"
 	install -Dm644 "$srcdir"/gog_com-Terraria.desktop "$pkgdir"/usr/share/applications/gog_com-Terraria.desktop
 	cp -r "$srcdir/data/noarch"/* "${pkgdir}/opt/gog/${pkgname}"
 	sed -i '/chmod +x */d' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+
+    # enable wayland support
+    sed -i '2i\
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then\
+    export SDL_VIDEODRIVER=wayland\
+    export SDL_DYNAMIC_API="/usr/lib/libSDL2-2.0.so"\
+else \
+    export SDL_VIDEODRIVER=x11\
+fi
+' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
 }
