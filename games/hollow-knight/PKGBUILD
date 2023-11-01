@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=hollow-knight
 pkgver=1.4.3.2
-pkgrel=1
+pkgrel=2
 pkgdesc="a classically styled 2D action adventure across a vast interconnected world."
 arch=('x86_64')
 url="https://freelinuxpcgames.com/hollow-knight/"
@@ -12,6 +12,7 @@ sha256sums=('483414118634692276b2ac50ebc87c2d2b1e4ca445cc3a7c901b2af9ab59e0a5'
 #options=('staticlibs')
 options=(!strip)
 depends=('bubblewrap')
+depends=("sdl2")
 
 package() {
 	install -d "${pkgdir}/opt/gog/${pkgname}"
@@ -21,4 +22,15 @@ package() {
     touch ${pkgdir}/opt/gog/${pkgname}/game/hollow_knight_Data/Config.ini
     find ${pkgdir}/opt/gog/${pkgname} -type d -exec chmod 755 {} \;
     sed -i 's|\./"hollow_knight.x86_64"|mkdir -p "${HOME}/.config/unity3d/Team Cherry/Hollow Knight/hollow_knight_Data"\ntouch "${HOME}/.config/unity3d/Team Cherry/Hollow Knight/hollow_knight_Data/Config.ini"\nbwrap --ro-bind / / \\\n\t --dev-bind /dev /dev \\\n\t --bind "${HOME}/.config/unity3d/Team Cherry/Hollow Knight" "${HOME}/.config/unity3d/Team Cherry/Hollow Knight" \\\n\t --bind "${HOME}/.config/unity3d/Team Cherry/Hollow Knight/hollow_knight_Data/Config.ini" "/opt/gog/hollow-knight/game/hollow_knight_Data/Config.ini" \\\n\t ./"hollow_knight.x86_64"|g' ${pkgdir}/opt/gog/${pkgname}/start.sh
+
+    # enable wayland support
+    sed -i '2i\
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then\
+    export SDL_VIDEODRIVER=wayland\
+    export SDL_DYNAMIC_API="/usr/lib/libSDL2-2.0.so"\
+else \
+    export SDL_VIDEODRIVER=x11\
+fi
+' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+
 }
