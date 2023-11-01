@@ -2,7 +2,7 @@
 
 pkgname=presenterm-git
 pkgver=0.2.1.r41.g8215449
-pkgrel=1
+pkgrel=2
 pkgdesc="A terminal slideshow tool"
 arch=('x86_64')
 url="https://github.com/mfontanini/presenterm"
