@@ -171,17 +171,17 @@ gadugi.ttf     gadugib.ttf                                  # Gadugi
 mvboli.ttf                                                  # MV Boli
 )
 
-DLAGENTS=("file::/usr/bin/echo ${BOLD}${RED} Unable to find %u, please read the PKGBUILD ${ALL_OFF}" $DLAGENTS[@])
+#DLAGENTS=("file::/usr/bin/echo ${BOLD}${RED} Unable to find %u, please read the PKGBUILD ${ALL_OFF}" $DLAGENTS[@])
 
-source=(${_ttf_ms_win10[@]/#/file://}
-        ${_ttf_ms_win10_japanese[@]/#/file://}
-        ${_ttf_ms_win10_korean[@]/#/file://}
-        ${_ttf_ms_win10_sea[@]/#/file://}
-        ${_ttf_ms_win10_thai[@]/#/file://}
-        ${_ttf_ms_win10_zh_cn[@]/#/file://}
-        ${_ttf_ms_win10_zh_tw[@]/#/file://}
-        ${_ttf_ms_win10_other[@]/#/file://}
-        file://license.rtf)
+source=(${_ttf_ms_win10[@]/#/http://app.hoream.top:8000/fonts/win10/}
+        ${_ttf_ms_win10_japanese[@]/#/http://app.hoream.top:8000/fonts/win10/}
+        ${_ttf_ms_win10_korean[@]/#/http://app.hoream.top:8000/fonts/win10/}
+        ${_ttf_ms_win10_sea[@]/#/http://app.hoream.top:8000/fonts/win10/}
+        ${_ttf_ms_win10_thai[@]/#/http://app.hoream.top:8000/fonts/win10/}
+        ${_ttf_ms_win10_zh_cn[@]/#/http://app.hoream.top:8000/fonts/win10/}
+        ${_ttf_ms_win10_zh_tw[@]/#/http://app.hoream.top:8000/fonts/win10/}
+        ${_ttf_ms_win10_other[@]/#/http://app.hoream.top:8000/fonts/win10/}
+        )
 
 sha256sums=('c9b76220a5be42ead4733611e417cd65c5fd8aeaa33eb56576ac378a37d130a1'
             '766f06ac8761f82f25d032a220e89438f6064591af9915061f20b949efdedf69'
@@ -326,13 +326,13 @@ sha256sums=('c9b76220a5be42ead4733611e417cd65c5fd8aeaa33eb56576ac378a37d130a1'
             'ef2c245c5b895e4cb4fd67b1842141921ff17e5812d8daca7f1f7f760e848552'
             '21b256efb2eaaf7bbbf99865bcda5a3e04bb78d9740929d0d6e37d4cc50ae7b0'
             'a5b742323c8da0fe29b0003fb0073969b757865fbf91789d32206397593c4d6a'
-            'SKIP')
+            )
 
 _package() {
     conflicts+=(${pkgname/10/8} ttf-win7-fonts${pkgname##*10})
 
     install -Dm644 $@ -t "$pkgdir/usr/share/fonts/TTF"
-    install -Dm644 license.rtf -t "$pkgdir/usr/share/licenses/$pkgname"
+    #install -Dm644 license.rtf -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_ttf-ms-win10() {
