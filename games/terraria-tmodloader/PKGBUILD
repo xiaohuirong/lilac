@@ -11,7 +11,7 @@ pkgver="$tmlver"_"$terrariaver"
 url="https://www.tmodloader.net/"
 arch=("x86_64")
 license=("MIT")
-depends=('unzip>=6.0')
+depends=('unzip>=6.0' 'terraria' 'sdl2')
 provides=('tmodloader')
 conflicts=('tmodloader' 'tmodloader-bin')
 
@@ -30,4 +30,18 @@ package() {
     rm ${_install_dir}/tml-$tmlver.zip
     chmod a+x ${_install_dir}/*.sh
     chmod a+x ${_install_dir}/LaunchUtils/*.sh
+
+    # enable wayland support
+    sed -i '2i\
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then\
+    export SDL_VIDEODRIVER=wayland\
+    export SDL_DYNAMIC_API="/usr/lib/libSDL2-2.0.so"\
+else \
+    export SDL_VIDEODRIVER=x11\
+fi
+' "${_install_dir}/start-tModLoader.sh"
+
+    # copy Terraria.exe
+    ln -sf /opt/gog/terraria/game/Terraria.exe "${pkgdir}"/opt/gog/terraria/game/Terraria_v${terrariaver}.exe
+
 }
