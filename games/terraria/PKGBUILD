@@ -12,6 +12,7 @@ sha256sums=('9ef66aa58acbdce161221539d91845b68a11bcd75560a019dc09206918aae876'
 #options=('staticlibs')
 options=(!strip)
 depends=("sdl2")
+install=terraria.install
 
 package() {
 	install -d "${pkgdir}/opt/gog/${pkgname}"
