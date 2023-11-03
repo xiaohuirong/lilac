@@ -2,7 +2,7 @@
 
 tmlver="2023.09.3.0"
 terrariaver="1.4.4.9"
-pkgrel=1
+pkgrel=2
 epoch=0
 
 pkgname="terraria-tmodloader"
