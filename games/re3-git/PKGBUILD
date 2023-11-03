@@ -1,12 +1,13 @@
 _pkgbase=re3
 pkgname=re3-git
 pkgver=r3167.3233ffe1
-pkgrel=1
+pkgrel=2
 pkgdesc="An open-source project reverse-engineering Grand Theft Auto III"
 arch=('x86_64' 'aarch64')
 url="https://github.com/GTAmodding/re3"
 license=('custom:none')
-depends=('openal' 'glew' 'glfw' 'mpg123' 'zenity')
+# glfw-wayland will failed when runing.
+depends=('openal' 'glew' 'glfw-x11' 'mpg123' 'zenity')
 makedepends=('git' 'premake')
 provides=("$_pkgbase")
 conflicts=("$_pkgbase")
@@ -68,4 +69,8 @@ package() {
 
   mkdir -p "$pkgdir/usr/share/games/re3/data"
   cp $srcdir/RE3/* "$pkgdir/usr/share/games/re3/data" -r
+
+  # only support x11
+  sed -i '2i\export SDL_VIDEODRIVER=x11' "$pkgdir"/usr/bin/re3-launcher
+
 }
