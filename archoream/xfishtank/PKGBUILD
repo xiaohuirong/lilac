@@ -3,7 +3,7 @@
 
 pkgname=xfishtank
 pkgver=2.6
-pkgrel=1
+pkgrel=2
 pkgdesc="Fish swimming across your Root Window"
 arch=('i686' 'x86_64')
 url="http://jim.rees.org/computers/xfishtank.html"
