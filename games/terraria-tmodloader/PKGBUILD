@@ -23,12 +23,10 @@ source=(
   "tmodloader.desktop"
 )
 
-sha256sums=(
-  "1b3fb0318bdb0ab6aaf326a2fe018dd3599e64c770d9522030384a5643bc5cb9"
-  "SKIP"
-  "SKIP"
-  "SKIP"
-)
+sha256sums=('1b3fb0318bdb0ab6aaf326a2fe018dd3599e64c770d9522030384a5643bc5cb9'
+            '76d4683cf616aa6af49602f813ba757bc1e5d41ee64a99af5092ce2b4d311ec7'
+            '7509e7b26f5f86096d50bb0629993491e9b9a816e167d0afbcb4c7f1380d9cd6'
+            '565f290fbf5a1850cdae85d4f9701328fb3ee41dd945676d13a1905dc086936c')
 
 package() {
     _install_dir="${pkgdir}/opt/gog/terraria/game/tModLoader"
