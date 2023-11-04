@@ -17,7 +17,7 @@ license=('custom:ZLIB')
 depends=('wayland' 'libxkbcommon' 'libgl')
 conflicts=('glfw' 'glfw-wayland' 'glfw-wayland-minecraft')
 provides=("glfw=$pkgver")
-makedepends=('mesa' 'cmake' 'doxygen' 'vulkan-headers' 'vulkan-icd-loader'
+makedepends=('git' 'mesa' 'cmake' 'doxygen' 'vulkan-headers' 'vulkan-icd-loader'
              'extra-cmake-modules' 'wayland-protocols' 'libxi' 'libxrandr'
              'libxcursor' 'libxkbcommon' 'libxinerama')
 source=("${_pkgname}::git+https://github.com/glfw/glfw"
