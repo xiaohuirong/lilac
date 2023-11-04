@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=dead-cells
 pkgver=2023.3.6
-pkgrel=4
+pkgrel=5
 pkgdesc="a rogue-lite, metroidvania inspired, action-platformer"
 arch=('x86_64')
 url="https://www.linuxgame.cn/dead-cells"
@@ -26,7 +26,7 @@ package() {
 	sed -i '/chmod +x */d' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
     find ${pkgdir}/opt/gog/${pkgname} -type d -exec chmod 755 {} \;
 
-    sed -i 's|\./"deadcells\.sh"|mkdir -p ${HOME}/.config/dead-cells\n bwrap --ro-bind / / \\\n\t --dev-bind /dev /dev \\\n\t --bind ${HOME}/.config/dead-cells /opt/gog/dead-cells/game/save \\\n\t ./"deadcells.sh"|g' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+    sed -i 's|\./"deadcells\.sh"|mkdir -p ${HOME}/.config/dead-cells\n bwrap --ro-bind / / \\\n\t --bind /run /run \\\n\t --dev-bind /dev /dev \\\n\t --bind ${HOME}/.config/dead-cells /opt/gog/dead-cells/game/save \\\n\t ./"deadcells.sh"|g' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
 
     # enable wayland support
     rm "${pkgdir}/opt/gog/${pkgname}/game/sdl.hdll"
