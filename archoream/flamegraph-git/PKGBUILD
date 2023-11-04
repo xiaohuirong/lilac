@@ -2,8 +2,8 @@
 # Contributor: wicastC <wicastchen at hotmail.com>
 
 pkgname=flamegraph-git
-pkgver=r316.a258e78
-pkgrel=3
+pkgver=r371.30573bc
+pkgrel=1
 pkgdesc="Stack trace visualizer"
 arch=('any')
 url='http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html'
