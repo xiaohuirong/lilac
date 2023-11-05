@@ -2,7 +2,7 @@
 
 pkgname='tailspin'
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc='tailspin - A log file highlighter'
 url='https://github.com/bensadeh/tailspin'
 source=("$pkgname-$pkgver.tar.gz::${url}/archive/refs/tags/$pkgver.tar.gz")
