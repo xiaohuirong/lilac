@@ -1,5 +1,5 @@
 post_install() {
-  echo -e "\n\e[34mUse bwrap bind /opt/gog/dead-cells/game/save to \$HOME/.config/deads-cells, the game data will be in \$HOME/.config/dead-cells\n"
+  echo -e "\n\e[34mUse bwrap bind /opt/gog/dead-cells/game/save to \$HOME/.local/share/deads-cells, the game data will be in \$HOME/.config/dead-cells[00m\n"
 }
 
 post_upgrade() {
