@@ -1,9 +1,9 @@
 # Maintainer: Hoream <hoream@qq.com>
-pkgname="th18"
-pkgver=1.02
+pkgname="th17"
+pkgver=1.01
 pkgrel=1
-pkgdesc="东方虹龙洞(Unconnected Marketeers)."
-url="https://thwiki.cc/%E4%B8%9C%E6%96%B9%E8%99%B9%E9%BE%99%E6%B4%9E"
+pkgdesc="东方鬼形兽(Wily Beast and Weakest Creature)."
+url="https://thwiki.cc/%E4%B8%9C%E6%96%B9%E9%AC%BC%E5%BD%A2%E5%85%BD"
 license=("custom")
 arch=('x86_64')
 provides=("${pkgname}")
@@ -11,7 +11,7 @@ conflicts=("${pkgname}")
 depends=("wine")
 makedepends=("icoutils")
 source=(${pkgname}.tar.gz::http://app.hoream.top:8000/games/${pkgname}.tar.gz)
-sha256sums=('6fbbbfd774d2c1c9be63506b61ae155263aa056102fcf02f4198f900b9ff7983')
+sha256sums=('4ad61964ed4aa962713385e81a7b1659c84360f24b8e1e155b06c507db040e0a')
 install=game.install
 
 build(){
@@ -19,12 +19,12 @@ build(){
     cat <<EOL > ${pkgname}.desktop
 [Desktop Entry]
 Type=Application
-Name=东方虹龙洞
+Name=东方鬼形兽
 GenericName=${pkgname}
 Exec=/usr/bin/bash /opt/wine-game/${pkgname}/start.sh
 Icon=/usr/share/pixmaps/${pkgname}.ico
 Categories=Game;
-Comment=${pkgname};wine;touhou;东方虹龙洞
+Comment=${pkgname};wine;touhou;东方鬼形兽
 EOL
 
     cat <<EOL > start.sh
