@@ -1,0 +1,8 @@
+post_install() {
+  echo -e "\n\e\033[34mThe game's data is in \$HOME/.local/share/wine-game/\$pkgname\033[0m\n"
+}
+
+post_upgrade() {
+    post_install
+}
+

@@ -1,0 +1,66 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname="th18"
+pkgver=1.02
+pkgrel=1
+pkgdesc="东方虹龙洞(Unconnected Marketeers)."
+url="https://thwiki.cc/%E4%B8%9C%E6%96%B9%E8%99%B9%E9%BE%99%E6%B4%9E"
+license=("custom")
+arch=('x86_64')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+depends=("wine")
+makedepends=("icoutils")
+source=(${pkgname}.tar.gz::http://app.hoream.top:8000/games/${pkgname}.tar.gz)
+sha256sums=('6fbbbfd774d2c1c9be63506b61ae155263aa056102fcf02f4198f900b9ff7983')
+install=game.install
+
+build(){
+ 	cd "${srcdir}"
+    cat <<EOL > ${pkgname}.desktop
+[Desktop Entry]
+Type=Application
+Name=${pkgname}
+Exec=/usr/bin/bash /opt/wine-game/${pkgname}/start.sh
+Icon=/usr/share/pixmaps/${pkgname}.ico
+Categories=Game;
+Comment=${pkgname};wine;touhou;东方虹龙洞
+EOL
+
+    cat <<EOL > start.sh
+#!/bin/bash
+
+source_dir=\$HOME/.local/share/wine-game/${pkgname}
+target_dir=\$HOME/.wine/drive_c/users/xiao/AppData/Roaming/ShanghaiAlice/th18
+
+log_file=\$source_dir/log
+
+if [ ! -d "\$source_dir" ]; then
+	mkdir -p "\$source_dir"
+fi
+
+if [ ! -d "\$target_dir" ]; then
+	mkdir -p "\$target_dir"
+fi
+
+cd /opt/wine-game/${pkgname}
+
+bwrap --bind / / \\
+      --bind \$source_dir \$target_dir \\
+      wine ${pkgname}c.exe > \$log_file 2>&1
+EOL
+
+    cd "${srcdir}/${pkgname}"
+    wrestool -x --output=${srcdir}/${pkgname}.ico -t14 ${pkgname}.exe
+}
+
+package() {
+	install -d "${pkgdir}/usr/share/pixmaps"
+	install -d "${pkgdir}/usr/share/applications"
+	install -d "${pkgdir}/opt/wine-game/"
+
+	install -Dm644 "${srcdir}/${pkgname}.ico" "${pkgdir}/usr/share/pixmaps/${pkgname}.ico"
+	install -Dm644 "${srcdir}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+    install -Dm755 "${srcdir}/start.sh" "${pkgdir}/opt/wine-game/${pkgname}/start.sh"
+
+    cp -r "${srcdir}/${pkgname}" "${pkgdir}/opt/wine-game"
+}
