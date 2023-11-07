@@ -4,7 +4,7 @@
 # Contributor: dracorp aka Piotr Rogoza <piotr.r.public at gmail.com>
 
 pkgname=ksnip-git
-pkgver=1.11.0_r2759.g1f9616fe
+pkgver=1.11.0_r2760.g1ea1fb5c
 pkgrel=1
 pkgdesc='Qt-based screenshot tool that provides many annotation features'
 arch=($CARCH)
