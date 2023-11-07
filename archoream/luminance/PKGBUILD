@@ -3,7 +3,7 @@
 pkgname=luminance
 _pkgname=Luminance
 pkgver=1.0.2
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple GTK application to control brightness of displays including external displays supporting DDC/CI"
 arch=('x86_64')
 url="https://github.com/sidevesh/$_pkgname"
