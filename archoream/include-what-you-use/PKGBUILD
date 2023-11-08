@@ -3,7 +3,7 @@
 
 pkgname=include-what-you-use
 pkgver=0.20
-pkgrel=1
+pkgrel=2
 _clang_major=16
 _clang_minor=0
 _clang_ver="${_clang_major}.${_clang_minor}"
