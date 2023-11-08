@@ -2,7 +2,7 @@
 # Contributor: wicastC <wicastchen at hotmail.com>
 
 pkgname=flamegraph-git
-pkgver=r386.45b2761
+pkgver=r390.cd9ee4c
 pkgrel=1
 pkgdesc="Stack trace visualizer"
 arch=('any')
