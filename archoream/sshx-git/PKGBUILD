@@ -2,7 +2,7 @@
 _pkgname="sshx"
 pkgname="${_pkgname}-git"
 pkgver=r268.e01b75a
-pkgrel=1
+pkgrel=2
 pkgdesc="A secure web-based, collaborative terminal."
 url="https://github.com/ekzhang/sshx"
 license=("MIT")
