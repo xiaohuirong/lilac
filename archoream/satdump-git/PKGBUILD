@@ -1,6 +1,6 @@
 # Maintainer: Aang23 <aang23@altillimity.com>
 pkgname=satdump-git
-pkgver=r3731.7e7d28cb
+pkgver=r3737.d8018aa1
 pkgrel=1
 epoch=
 pkgdesc="A generic satellite processing software"
@@ -8,8 +8,8 @@ arch=('any')
 url="https://github.com/altillimity/SatDump"
 license=('GPL')
 groups=()
-depends=("libvolk" "glfw" "glew" "fftw" "airspy" "airspyhf" "rtl-sdr" "hackrf" "libusb" "libiio" "libad9361" "ocl-icd" "zstd" "nng")
-makedepends=("gcc" "make" "cmake" "git")
+depends=("airspy" "airspyhf" "fftw" "glew" "glfw" "glibc" "hackrf" "libad9361" "libiio" "libpng" "libusb" "libvolk" "nng" "ocl-icd" "rtl-sdr" "zstd")
+makedepends=("cmake" "gcc" "git" "make")
 checkdepends=()
 optdepends=("limesuite" "bladerf")
 provides=()
