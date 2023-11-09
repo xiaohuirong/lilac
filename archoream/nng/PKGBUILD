@@ -1,12 +1,12 @@
 # Maintainer: Vincent Bernardoff <vb AT luminar.eu.org>
 pkgname=nng
 pkgver=1.5.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Rewrite of the SP protocol library known as libnanomsg"
 arch=(arm armv6h armv7h aarch64 x86_64 i686)
 url="https://nanomsg.github.io/nng/"
 license=('MIT')
-depends=( 'mbedtls')
+depends=("gcc-libs" "glibc" "libnsl" "mbedtls")
 makedepends=('cmake' 'ninja' 'asciidoctor')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
