@@ -1,0 +1,21 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+pre_build_script: |
+  aur_pre_build()
+  add_makedepends(['git'])
+  add_depends(['libpng'])
+
+post_build: aur_post_build
+
+update_on:
+  - source: aur
+    aur: satdump-git
+  - source: github
+    github: altillimity/SatDump
+
+repo_depends:
+  - nng
+  - airspyhf-git
