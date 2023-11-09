@@ -1,4 +1,4 @@
-from lilaclib import aur_pre_build, edit_file
+from lilaclib import aur_pre_build, edit_file, add_depends
 
 def pre_build():
     aur_pre_build()
