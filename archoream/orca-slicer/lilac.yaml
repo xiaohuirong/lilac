@@ -13,4 +13,4 @@ update_on:
 repo_depends:
   - ttf-harmonyos-sans
 
-managed: true
+managed: false
