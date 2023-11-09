@@ -9,7 +9,7 @@ arch=("x86_64")
 url="https://gyroflow.xyz/"
 license=("GPL3")
 depends=("libc++" "qt6-base" "qt6-quick3d" "qt6-declarative" "qt6-3d" "pulseaudio" "libxkbcommon" "opencv" "opencl-driver" "ocl-icd" "vulkan-driver" "libva" "ffmpeg")
-makedepends=("cargo" "opencl-headers")
+makedepends=("cargo" "opencl-headers" "clang")
 source=("https://github.com/${pkgname}/${pkgname}/archive/refs/tags/v${_pkgver}.tar.gz"
         "gyroflow.desktop"
         "gyroflow-fix-opencv-4-8.patch")
