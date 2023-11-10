@@ -6,6 +6,6 @@ def pre_build():
 
     for line in edit_file('PKGBUILD'):
         if r"glfw-x11" in line:
-            line = line.replace(r"glfw-x11", r"glfw-wayland-minecraft-git")
+            line = line.replace(r"glfw-x11", r"glfw")
         print(line)
 

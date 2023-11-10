@@ -9,5 +9,5 @@ update_on:
   - source: aur
     aur: open3d
 
-repo_depends:
-  - glfw-wayland-minecraft-git
+      #repo_depends:
+      #  - glfw-wayland-minecraft-git
