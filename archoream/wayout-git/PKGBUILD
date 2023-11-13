@@ -2,12 +2,12 @@
 pkgname='wayout-git'
 _pkgname="wayout"
 pkgver=1.1.3.19.g324c792
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 url="https://git.sr.ht/~shinyzenith/wayout"
 pkgdesc="A simple output management tool for wlroots based compositors"
 license=('BSD')
-makedepends=('cargo' 'rustup' 'git')
+makedepends=('cargo' 'git')
 conflicts=('wayout-bin')
 source=("$_pkgname::git+https://git.sr.ht/~shinyzenith/$_pkgname")
 sha256sums=('SKIP')
