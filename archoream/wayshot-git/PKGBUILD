@@ -3,7 +3,7 @@
 _pkgname=wayshot
 pkgname="$_pkgname-git"
 pkgver=1.4.0.r19.7e517ccf
-pkgrel=1
+pkgrel=2
 pkgdesc="Screenshot tool for wlroots compositors"
 arch=(x86_64)
 url="https://git.sr.ht/~shinyzenith/$_pkgname"
