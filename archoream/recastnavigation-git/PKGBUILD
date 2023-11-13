@@ -1,7 +1,7 @@
 # Maintainer: acxz <akashpatel2008 at yahoo dot com>
 pkgname=recastnavigation-git
-pkgver=1.6.0.r12.gcd89890
-pkgrel=2
+pkgver=1.6.0.r13.gddaa361
+pkgrel=1
 pkgdesc="Navigation-msh Toolset for Games"
 url="https://github.com/recastnavigation/recastnavigation"
 arch=(x86_64)
