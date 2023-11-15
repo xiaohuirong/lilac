@@ -10,4 +10,4 @@ update_on:
   - source: aur
     aur: microsoft-edge-stable-bin
 
-managed: false
+managed: true
