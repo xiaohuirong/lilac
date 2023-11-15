@@ -1,0 +1,75 @@
+# Maintainer: GreyXor <greyxor@protonmail.com>
+# Contributor: Drew DeVault <sir@cmpwn.com>
+# Contributor: Antonin Décimo <antonin dot decimo at gmail dot com>
+
+pkgname=sway-git
+pkgver=r7188.8a8fb76e
+pkgrel=1
+arch=('x86_64')
+pkgdesc='Tiling Wayland compositor and replacement for the i3 window manager (git development version)'
+url='https://swaywm.org'
+license=('MIT')
+depends=(
+	"cairo"
+	"gdk-pixbuf2"
+	"glib2"
+	"glibc"
+	"json-c"
+	"libevdev"
+	"libinput"
+	"libxcb"
+	"libxkbcommon"
+	"pango"
+	"pcre2"
+	"pixman"
+	"systemd-libs"
+	"wayland"
+	"wlroots-hoream-git"
+	"xcb-util-wm"
+)
+makedepends=(
+	"git"
+	"libcap"
+	"meson"
+	"scdoc"
+	"wayland-protocols"
+    "mesa"
+)
+optdepends=(
+	'wmenu: Application launcher used in default configuration'
+	'foot: Terminal emulator used in default configuration'
+	'polkit: System privilege control. Required if not using seatd service'
+	'swaybg: Wallpaper tool for sway'
+	'swayidle: Idle management daemon'
+	'swaylock: Screen locker'
+	'xorg-xwayland: X11 support'
+)
+install=sway-git.install
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+backup=("etc/sway/config")
+# wlroots change: https://gitlab.freedesktop.org/wlroots/wlroots/-/commit/03e240a7f2f459863b8ea9bc47e03a503cf1f278
+# sway change: https://github.com/swaywm/sway/commit/4326a26ad6fb64b8f8de7d32c1e7b6423e1f84f3
+# so set commit to 8a8fb76e
+source=("${pkgname}::git+https://github.com/swaywm/sway.git#commit=8a8fb76ec1d0b9a269b86688cff419201d1e6f62"
+	"50-systemd-user.conf")
+b2sums=('SKIP'
+        '95e0862807c3b5bb490b88c46e6d2d4deaa8ba0d18be0c169f3d57606acbfa124cb712b48b22ab6f12f247ac5b8d5d3cf4db85f7b04420845c0e3ed742edf917')
+
+pkgver() {
+	# Calculate the version dynamically using git information
+	printf "r%s.%s" "$(git -C "$srcdir/${pkgname}" rev-list --count HEAD)" "$(git -C "$srcdir/${pkgname}" rev-parse --short HEAD)"
+}
+
+build() {
+	arch-meson "${pkgname}" build -D sd-bus-provider=libsystemd -D werror=false
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+
+	install -Dm644 50-systemd-user.conf -t "$pkgdir/etc/sway/config.d/"
+	install -Dm644 "${pkgname}/LICENSE" "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
+}
