@@ -4,7 +4,7 @@
 
 pkgname=sway-git
 pkgver=r7188.8a8fb76e
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 pkgdesc='Tiling Wayland compositor and replacement for the i3 window manager (git development version)'
 url='https://swaywm.org'
