@@ -15,7 +15,7 @@ depends=(
 	glslang
 	libinput
 	libxcb
-	opengl-driver
+    mesa
 	xcb-util-errors
 	xcb-util-renderutil
 	xcb-util-wm
