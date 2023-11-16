@@ -2,7 +2,7 @@
 pkgname="otf-monaspace-bin"
 _pkgbase=${pkgname%-bin}
 pkgver="v1.000"
-pkgrel=1
+pkgrel=2
 pkgdesc="An innovative superfamily of fonts for code"
 arch=("any")
 conflicts=("${pkgname%-bin}")
