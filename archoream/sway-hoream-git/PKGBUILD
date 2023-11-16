@@ -1,75 +1,79 @@
-# Maintainer: GreyXor <greyxor@protonmail.com>
-# Contributor: Drew DeVault <sir@cmpwn.com>
-# Contributor: Antonin Décimo <antonin dot decimo at gmail dot com>
+# Maintainer: q234 rty <q23456yuiop at gmail dot com>
+# Contributor: Brett Cornwall <ainola@archlinux.org>
+# Contributor: Maxim Baz <$pkgname at maximbaz dot com>
+# Contributor: Alexander F. Rødseth <xyproto@archlinux.org>
 
 pkgname=sway-hoream-git
-pkgver=r7188.8a8fb76e
+_pkgname=sway
+pkgver=r7188.8a8fb76ec1d0
 pkgrel=3
-arch=('x86_64')
-pkgdesc='Tiling Wayland compositor and replacement for the i3 window manager (git development version)'
-url='https://swaywm.org'
-license=('MIT')
+pkgdesc='Tiling Wayland compositor and replacement for the i3 window manager (git version with input method popups)'
+arch=(x86_64)
+url='https://swaywm.org/'
+license=(MIT)
 depends=(
-	"cairo"
-	"gdk-pixbuf2"
-	"glib2"
-	"glibc"
-	"json-c"
-	"libevdev"
-	"libinput"
-	"libxcb"
-	"libxkbcommon"
-	"pango"
-	"pcre2"
-	"pixman"
-	"systemd-libs"
-	"wayland"
-	"wlroots-hoream-git"
-	"xcb-util-wm"
+  'cairo'
+  'gdk-pixbuf2'
+  'json-c'
+  'pango'
+  'polkit'
+  'pcre'
+  'swaybg'
+  'ttf-font'
+  'wlroots-hoream-git'
 )
-makedepends=(
-	"git"
-	"libcap"
-	"meson"
-	"scdoc"
-	"wayland-protocols"
-    "mesa"
-)
+makedepends=(git meson ninja scdoc setconf wayland-protocols)
+backup=(etc/sway/config)
 optdepends=(
-	'wmenu: Application launcher used in default configuration'
-	'foot: Terminal emulator used in default configuration'
-	'polkit: System privilege control. Required if not using seatd service'
-	'swaybg: Wallpaper tool for sway'
-	'swayidle: Idle management daemon'
-	'swaylock: Screen locker'
-	'xorg-xwayland: X11 support'
+  'dmenu: Application launcher'
+  'grim: Screenshot utility'
+  'i3status: Status line'
+  'mako: Lightweight notification daemon'
+  'slurp: Select a region'
+  'swayidle: Idle management daemon'
+  'swaylock: Screen locker'
+  'wallutils: Timed wallpapers'
+  'waybar: Highly customizable bar'
+  'xorg-xwayland: X11 support'
+  'xdg-desktop-portal-gtk: Default xdg-desktop-portal for file picking'
+  'xdg-desktop-portal-wlr: xdg-desktop-portal backend'
 )
-install=sway-git.install
+source=("sway::git+https://github.com/swaywm/sway.git#commit=8a8fb76ec1d0b9a269b86688cff419201d1e6f62"
+        "50-systemd-user.conf"
+        "7226.patch"
+        "sway-portals.conf")
 provides=("sway")
-conflicts=("sway" "sway-git")
-backup=("etc/sway/config")
-# wlroots change: https://gitlab.freedesktop.org/wlroots/wlroots/-/commit/03e240a7f2f459863b8ea9bc47e03a503cf1f278
-# sway change: https://github.com/swaywm/sway/commit/4326a26ad6fb64b8f8de7d32c1e7b6423e1f84f3
-# so set commit to 8a8fb76e
-source=("${pkgname}::git+https://github.com/swaywm/sway.git#commit=8a8fb76ec1d0b9a269b86688cff419201d1e6f62"
-	"50-systemd-user.conf")
-b2sums=('SKIP'
-        '95e0862807c3b5bb490b88c46e6d2d4deaa8ba0d18be0c169f3d57606acbfa124cb712b48b22ab6f12f247ac5b8d5d3cf4db85f7b04420845c0e3ed742edf917')
-
+conflicts=("sway")
+options=(debug)
+install=sway.install
+sha512sums=('SKIP'
+            'd5f9aadbb4bbef067c31d4c8c14dad220eb6f3e559e9157e20e1e3d47faf2f77b9a15e52519c3ffc53dc8a5202cb28757b81a4b3b0cc5dd50a4ddc49e03fe06e'
+            'affc2bb0060ed060259114385f7f24d27c716eb8fc0d1f027fa96bbe1c468115683055931422b183e6fbba5f3ed77a13edb0efca8f95c4aff4cf1a9f2e265adb'
+            '091a205bca875b6a78150b5b14ffaca996b7c7c3d6f68910e5891e5409ca070d27b3307e8c4916c1562a998d5bcb94406e961bf376d86e64c8ddf5afe5b41f76')
 pkgver() {
-	# Calculate the version dynamically using git information
-	printf "r%s.%s" "$(git -C "$srcdir/${pkgname}" rev-list --count HEAD)" "$(git -C "$srcdir/${pkgname}" rev-parse --short HEAD)"
+  cd "$_pkgname"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=12 HEAD)"
+}
+prepare() {
+  cd "$_pkgname"
+
+  # Set the version information to 'Arch Linux' instead of 'makepkg'
+  sed -i "s/branch \\\'@1@\\\'/Arch Linux/g" meson.build
+
+  patch -Np1 -i ../7226.patch
 }
 
 build() {
-	arch-meson "${pkgname}" build -D sd-bus-provider=libsystemd -D werror=false
-
-	meson compile -C build
+  mkdir -p build
+  arch-meson build "$_pkgname" -D sd-bus-provider=libsystemd -D werror=false -D b_ndebug=true
+  ninja -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
-
-	install -Dm644 50-systemd-user.conf -t "$pkgdir/etc/sway/config.d/"
-	install -Dm644 "${pkgname}/LICENSE" "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
+  DESTDIR="$pkgdir" ninja -C build install
+  install -Dm644 "$_pkgname/LICENSE" "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+  install -Dm644 50-systemd-user.conf -t "$pkgdir/etc/sway/config.d/"
+  install -Dm644 sway-portals.conf "$pkgdir/usr/share/xdg-desktop-portal/sway-portals.conf"
 }
+
+# vim: ts=2 sw=2 et
