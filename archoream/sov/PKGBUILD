@@ -3,7 +3,7 @@
 
 pkgname=sov
 pkgver=0.93
-pkgrel=1
+pkgrel=2
 pkgdesc='Overview application for sway'
 arch=(i686 x86_64)
 url="https://github.com/milgra/$pkgname"
