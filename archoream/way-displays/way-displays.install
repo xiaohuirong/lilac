@@ -1,0 +1,48 @@
+all_off="$(tput sgr0)"
+bold="${all_off}$(tput bold)"
+red="${bold}$(tput setaf 1)"
+green="${bold}$(tput setaf 2)"
+yellow="${bold}$(tput setaf 3)"
+blue="${bold}$(tput setaf 4)"
+magenta="${bold}$(tput setaf 5)"
+
+# Colored makepkg-like functions
+note() {
+    printf "${blue}==>${yellow} NOTE:${all_off} ${1}\n"
+}
+
+plain() {
+    printf "${1}\n"
+}
+
+green() {
+    printf "${green}${1}${all_off}\n"
+}
+
+yello() {
+    printf "${yellow}${1}${all_off}\n"
+}
+
+blue() {
+    printf "${blue}${1}${all_off}\n"
+}
+
+magen() {
+    printf "${magenta}${1}${all_off}\n"
+}
+
+post_install() {
+    yello "1.9.0"
+    blue  "New Features:"
+	plain "  TRANSFORM"
+	plain "  Allow exact refresh HZ up to 3d.p."
+    blue  "Bug Fixes:"
+	plain "  Ignore multiple preferred modes"
+	plain "  Apply VRR_OFF via CLI and cfg.yaml"
+    plain ""
+}
+
+post_upgrade() {
+    post_install
+}
+
