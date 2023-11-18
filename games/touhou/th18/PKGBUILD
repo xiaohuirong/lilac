@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname="th18"
 pkgver=1.02
-pkgrel=1
+pkgrel=2
 pkgdesc="东方虹龙洞(Unconnected Marketeers)."
 url="https://thwiki.cc/%E4%B8%9C%E6%96%B9%E8%99%B9%E9%BE%99%E6%B4%9E"
 license=("custom")
@@ -46,6 +46,7 @@ fi
 cd /opt/wine-game/${pkgname}
 
 bwrap --bind / / \\
+      --dev-bind /dev /dev \\
       --bind \$source_dir \$target_dir \\
       wine ${pkgname}c.exe > \$log_file 2>&1
 EOL
