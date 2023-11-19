@@ -3,7 +3,7 @@
 _pkgname=tinycmmc
 pkgname=$_pkgname-git
 pkgver=r57.01fe277
-pkgrel=2
+pkgrel=3
 arch=('any')
 pkgdesc='Tiny CMake Module Collections'
 url=https://github.com/grumbel/$_pkgname
