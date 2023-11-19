@@ -1,5 +1,5 @@
 pkgname=wl-screenrec-git
-pkgver=r156.2614398
+pkgver=r163.36ea7cf
 pkgrel=1
 pkgdesc="High performance hardware accelerated wlroots screen recorder"
 arch=('i686' 'x86_64' 'aarch64')
@@ -9,11 +9,15 @@ provides=("wl-screenrec")
 makedepends=('cargo' 'git' 'clang')
 depends=('ffmpeg' 'libva-driver')
 conflicts=('wl-screenrec')
-source=("$pkgname::git+https://github.com/russelltg/wl-screenrec")
-sha1sums=('SKIP')
+source=("$pkgname::git+https://github.com/russelltg/wl-screenrec"
+    "0001.patch")
+sha1sums=('SKIP'
+"SKIP")
 
 build() {
   cd "$pkgname"
+  patch -Np1 -i ${srcdir}/0001.patch
+
   if command -v rustup > /dev/null 2>&1; then
     rustup run stable cargo build --release
   else
