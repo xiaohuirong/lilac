@@ -9,14 +9,11 @@ provides=("wl-screenrec")
 makedepends=('cargo' 'git' 'clang')
 depends=('ffmpeg' 'libva-driver')
 conflicts=('wl-screenrec')
-source=("$pkgname::git+https://github.com/russelltg/wl-screenrec"
-    "0001.patch")
-sha1sums=('SKIP'
-"SKIP")
+source=("$pkgname::git+https://github.com/russelltg/wl-screenrec")
+sha1sums=('SKIP')
 
 build() {
   cd "$pkgname"
-  patch -Np1 -i ${srcdir}/0001.patch
 
   if command -v rustup > /dev/null 2>&1; then
     rustup run stable cargo build --release
