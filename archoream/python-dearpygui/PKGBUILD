@@ -3,7 +3,7 @@
 _name=DearPyGui
 pkgname=python-dearpygui
 pkgver=1.10.0
-pkgrel=1
+pkgrel=2
 pkgdesc='A fast and powerful Graphical User Interface Toolkit for Python with minimal dependencies'
 arch=(x86_64)
 url='https://github.com/hoffstadt/DearPyGui'
