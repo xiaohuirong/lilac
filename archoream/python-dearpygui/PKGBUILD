@@ -8,8 +8,8 @@ pkgdesc='A fast and powerful Graphical User Interface Toolkit for Python with mi
 arch=(x86_64)
 url='https://github.com/hoffstadt/DearPyGui'
 license=('MIT')
-depends=(python)
-makedepends=(git python-build python-installer python-wheel python-setuptools cmake libx11 libxrandr libxinerama libxcursor libxi mesa)
+depends=(python libglvnd libx11)
+makedepends=(git python-build python-installer python-wheel python-setuptools cmake libxrandr libxinerama libxcursor libxi mesa)
 source=("git+$url#tag=v$pkgver"
 "git+https://github.com/ocornut/imgui"
 "git+https://github.com/python/cpython"
