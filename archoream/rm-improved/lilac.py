@@ -5,5 +5,6 @@ def pre_build():
 
     for line in edit_file('PKGBUILD'):
         if line.startswith('options'):
-           print(r"options=('!lto')"
+            print(r"options=('!lto')")
+            continue
         print(line)
