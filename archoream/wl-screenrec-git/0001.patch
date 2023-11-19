@@ -1,0 +1,14 @@
+diff --git a/src/main.rs b/src/main.rs
+index c9f11f7..b0ba2fb 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -1633,7 +1633,7 @@ fn video_filter(
+         .input("out", 0)
+         .unwrap()
+         .parse(&format!(
+-            "crop={roi_w}:{roi_h}:{roi_x}:{roi_y},scale_vaapi=format={output_real_pixfmt_name}:w={enc_w}:h={enc_h}{}",
++            "crop={roi_w}:{roi_h}:{roi_x}:{roi_y}:exact=1,scale_vaapi=format={output_real_pixfmt_name}:w={enc_w}:h={enc_h}{}",
+             if let EncodePixelFormat::Vaapi(_) = pix_fmt {
+                 ""
+             } else {
+``
