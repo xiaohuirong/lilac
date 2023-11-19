@@ -4,7 +4,7 @@
 pkgname=avizo-git
 _pkgname=avizo
 pkgver=r103.4b9f951
-pkgrel=1
+pkgrel=2
 pkgdesc="A neat notification daemon"
 arch=("x86_64")
 url="https://github.com/misterdanb/avizo"
