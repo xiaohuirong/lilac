@@ -1,7 +1,7 @@
 # Maintainer: musiclover <musiclover382@protonmail.com>
 
 pkgname=kooha-git
-pkgver=2.2.4.r24.gce1f77e
+pkgver=2.2.4.r29.g2993e91
 pkgrel=1
 pkgdesc="Elegantly record your screen"
 provides=(${pkgname%-git})
