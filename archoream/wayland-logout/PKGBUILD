@@ -1,7 +1,7 @@
 # Maintainer: karras <karras@0x539.ch>
 pkgname=wayland-logout
 pkgver=1.4
-pkgrel=1
+pkgrel=2
 pkgdesc="A utility designed to kill a single instance of a Wayland compositor"
 arch=('x86_64')
 url="https://github.com/soreau/wayland-logout"
