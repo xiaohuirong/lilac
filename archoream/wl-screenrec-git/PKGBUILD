@@ -1,5 +1,5 @@
 pkgname=wl-screenrec-git
-pkgver=r164.e0945eb
+pkgver=r165.161dec4
 pkgrel=1
 pkgdesc="High performance hardware accelerated wlroots screen recorder"
 arch=('i686' 'x86_64' 'aarch64')
@@ -14,7 +14,6 @@ sha1sums=('SKIP')
 
 build() {
   cd "$pkgname"
-
   if command -v rustup > /dev/null 2>&1; then
     rustup run stable cargo build --release
   else
