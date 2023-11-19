@@ -9,7 +9,7 @@ pkgver() {
 	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 #	echo r.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 }
-pkgrel=1
+pkgrel=2
 pkgdesc="Simple SDL joystick test application for the command line."
 url="https://github.com/Grumbel/sdl-jstest.git"
 arch=('x86_64' 'i686' 'aarch64')
