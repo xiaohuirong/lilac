@@ -1,6 +1,6 @@
 # Maintainer: <agustinballesteros04@gmail.com>
 pkgname=kew-git
-pkgver=v1.6.0.r0.g7c9d496
+pkgver=v.1.7.0.r1.gce98291
 pkgrel=1
 pkgdesc="A command-line music player"
 arch=('x86_64')
@@ -29,3 +29,4 @@ package() {
     install -Dm644 "$srcdir/kew/docs/kew-manpage.mdoc" "$pkgdir/usr/share/man/man1/kew.1"
 }
 
+makedepends=("opusfile")
