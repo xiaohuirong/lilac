@@ -2,7 +2,7 @@
 
 pkgname="bottom-git"
 _pkgname="bottom"
-pkgver=0.9.6.1933.g5df66006
+pkgver=0.9.6.1935.g10a37c26
 pkgrel=1
 pkgdesc="Yet another cross-platform graphical process/system monitor"
 arch=("i686" "x86_64")
