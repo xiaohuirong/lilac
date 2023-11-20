@@ -2,7 +2,7 @@
 # Maintainer: Harry Stanton <harry@harrystanton.com>
 pkgname=lyrebird
 pkgver=1.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Simple and powerful voice changer for Linux, written in Python and GTK"
 arch=('any')
 url="https://github.com/lyrebird-voice-changer/lyrebird"
