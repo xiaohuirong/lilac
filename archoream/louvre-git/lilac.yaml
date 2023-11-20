@@ -9,3 +9,6 @@ update_on:
   - source: github
     github: CuarzoSoftware/Louvre
   - source: manual
+
+repo_depends:
+  - srm-git
