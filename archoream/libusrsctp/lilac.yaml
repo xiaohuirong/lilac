@@ -8,9 +8,4 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: janus-gateway 
-
-repo_depends:
-  - sofia-sip
-  - paho-mqtt-c
-  - libusrsctp
+    aur: libusrsctp
