@@ -1,12 +1,13 @@
 # Maintainer: <agustinballesteros04@gmail.com>
 pkgname=kew-git
-pkgver=v.1.7.0.r1.gce98291
+pkgver=v1.7.1.r1.gb03b41c
 pkgrel=1
 pkgdesc="A command-line music player"
 arch=('x86_64')
 url="https://github.com/ravachol/kew"
 license=('GPL2')
-depends=('ffmpeg' 'fftw' 'git' 'chafa' 'freeimage')
+conflicts=('kew')
+depends=('ffmpeg' 'fftw' 'git' 'chafa' 'freeimage' 'gcc' 'make' 'glib2' 'opus' 'opusfile' 'libvorbis')
 replaces=('cue-git')
 sha256sums=('SKIP')
 
