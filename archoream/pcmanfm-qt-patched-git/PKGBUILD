@@ -9,7 +9,7 @@ arch=("i686" "x86_64")
 url="https://lxqt.org"
 license=("GPL2")
 depends=("desktop-file-utils" "libfm-qt-patched-git")
-makedepends=("git" "lxqt-build-tools-git")
+makedepends=("git" "lxqt-build-tools-git" "cmake")
 provides=("$_pkgname=$pkgver" "$_pkgname-git")
 conflicts=("$_pkgname" "$_pkgname-git")
 optdepends=(
@@ -30,7 +30,7 @@ pkgver() {
 }
 
 build() {
-  patch -b -d ${srcdir}/${_pkgname} -Np1 -i ${srcdir}/dialog.patch
+  patch -Np1 -i ${srcdir}/dialog.patch -d ${srcdir}/${_pkgname}
 
   mkdir -p build
   cd build
