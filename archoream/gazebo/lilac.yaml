@@ -10,6 +10,8 @@ post_build: git_pkgbuild_commit
 update_on:
   - source: aur
     aur: gazebo
+  - alias: protobuf
+  
 repo_depends:
   - ruby-ronn
   - tbb
