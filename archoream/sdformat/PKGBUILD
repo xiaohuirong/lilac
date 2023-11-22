@@ -11,6 +11,7 @@ makedepends=('cmake' 'doxygen' 'ignition-cmake>2' 'ignition-utils>1'
              'ignition-tools>1' 'ruby')
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/gazebosim/${pkgname}/archive/${pkgname}13_${pkgver}.tar.gz")
 sha256sums=('SKIP')
+provides=('sdformat=13')
 
 _dir="sdformat-${pkgname}13_${pkgver}"
 
