@@ -1,7 +1,7 @@
 # Maintainer: Jose Riha <jose1711 gmail com>
 pkgname=controllermap
 pkgver=2.0.14
-pkgrel=2
+pkgrel=3
 pkgdesc="Game controller mapping generator"
 arch=('i686' 'x86_64')
 url="http://www.libsdl.org"
