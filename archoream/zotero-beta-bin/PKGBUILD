@@ -16,7 +16,7 @@ replaces=('zotero')
 install='zotero.install'
 
 source=("zotero.desktop"
-        "Zotero-${pkgver}-${pkgrel}+1.tar.gz::https://www.zotero.org/download/client/dl?platform=linux-x86_64&channel=beta")
+        "https://download.zotero.org/client/beta/7.0.0-beta.51%2B7c5600913/Zotero-7.0.0-beta.51%2B7c5600913_linux-x86_64.tar.bz2")
 sha256sums=('eab76db7a56a4d9aaa17baaf240b82fcf57944a4ddf8ef1b58cc64182426cedc'
             'SKIP')
 
