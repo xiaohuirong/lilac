@@ -2,7 +2,7 @@
 
 pkgname=game-devices-udev
 pkgver=0.22
-pkgrel=0.2
+pkgrel=1
 pkgdesc="Udev rules for controllers"
 url='https://codeberg.org/fabiscafe/game-devices-udev'
 arch=('any')
