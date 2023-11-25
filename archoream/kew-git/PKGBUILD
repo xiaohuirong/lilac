@@ -1,7 +1,7 @@
 # Maintainer: <agustinballesteros04@gmail.com>
 pkgname=kew-git
-pkgver=1.7.2.r0.gdb19593
-pkgrel=2
+pkgver=1.7.2.r3.g60a7325
+pkgrel=1
 pkgdesc="A command-line music player"
 arch=('x86_64')
 url="https://github.com/ravachol/kew"
