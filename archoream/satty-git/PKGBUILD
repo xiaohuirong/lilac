@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="satty"
 pkgname="${_pkgname}-git"
-pkgver=0.0.1
+pkgver=0.7.0.r4.ge1ad952
 pkgrel=1
 pkgdesc="A screenshot annotation tool inspired by Swappy and Flameshot."
 url="https://github.com/gabm/satty"
@@ -9,12 +9,13 @@ license=("MPL2")
 arch=('x86_64')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
-depends=()
+depends=("hicolor-icon-theme" "gcc-libs" "libadwaita" "glib2" "gdk-pixbuf2" "gtk4" "pango" "glibc" "cairo")
 makedepends=("cargo" "git" "make")
 source=(${_pkgname}::git+${url})
 sha256sums=('SKIP')
 
 pkgver() {
+    cd "${srcdir}/${_pkgname}"
     git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//'
 }
 
@@ -25,8 +26,5 @@ build(){
 
 package() {
     cd "${srcdir}/${_pkgname}"
-	#install -d "${pkgdir}/usr/bin"
-	#install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}" "${pkgdir}/usr/bin/${pkg_name}"
-    #install -Dm644 "${srcdir}/${_pkgname}/LICENSE" -t "${pkgdir}/usr/share/licenses/${_pkgname}/"
-    PREFIX=/usr make install
+    PREFIX=${pkgdir}/usr make install
 }
