@@ -1,0 +1,68 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+#######################
+# todo
+# 1. add start.sh
+# 2. fix freezeing problem when change foucus to anther app then change back.
+#######################
+
+pkgname=monument-valley2
+pkgver=3.3.332
+pkgrel=1
+pkgdesc="Monument Valley 2"
+url="https://www.monumentvalleygame.com/mv2"
+license=("custom")
+arch=("x86_64")
+depends=("wine")
+makedepends=()
+source=("Monument_Valley_2_Panoramic_Edition-3.3.332-x86_64.AppImage")
+sha256sums=('SKIP')
+
+build() {
+    cd "${srcdir}"
+    chmod +x Monument_Valley_2_Panoramic_Edition-3.3.332-x86_64.AppImage
+    ./Monument_Valley_2_Panoramic_Edition-3.3.332-x86_64.AppImage --appimage-extract
+
+    ########### desktop entry ##################
+    cat <<EOL > ${pkgname}.desktop
+[Desktop Entry]
+Categories=Game;
+Type=Application
+Exec=/opt/wine-game/${pkgname}/start.sh
+Icon=/usr/share/pixmaps/${pkgname}.png
+Name=Monument Valley 2: Panoramic Edition
+Name[zh_CN]=纪念碑谷 2：全景版
+Name[zh_SG]=纪念碑谷 2：全景版
+Name[zh_HK]=紀念碑谷 2：全景版
+Name[zh_TW]=紀念碑谷 2：全景版
+Name[ja_JP]=モニュメントバレー 2
+GenericName=Indie puzzle game
+GenericName[zh_CN]=独立解谜游戏
+GenericName[zh_SG]=独立解谜游戏
+GenericName[zh_HK]=獨立解謎遊戲
+GenericName[zh_TW]=獨立解謎遊戲
+Comment=Indie puzzle game developed and published by Ustwo Games
+Comment[zh_CN]=由 Ustwo 独立游戏工作室开发和发行的解谜游戏
+Comment[zh_SG]=由 Ustwo 独立游戏工作室开发和发行的解谜游戏
+Comment[zh_HK]=由 Ustwo 獨立遊戲工作室開發和發行的解謎遊戲
+Comment[zh_TW]=由 Ustwo 獨立遊戲工作室開發和發行的解謎遊戲
+Comment[ja_JP]=インディーゲームの開発者である Ustwo Games によって開発・発売されたパズルゲームである
+Keywords=monument valley panoramic edition
+X-AppImage-Version=3.3.332
+EOL
+####################################################
+
+}
+
+package() {
+    install -d "${pkgdir}/usr/bin"    
+    install -d "${pkgdir}/usr/share/pixmaps"
+    install -d "${pkgdir}/usr/share/applications"
+    
+    install -d "${pkgdir}/opt/wine-game/${pkgname}"
+
+    install -Dm644 "${srcdir}/squashfs-root/MonumentValley2.png" "${pkgdir}/usr/share/pixmaps/${pkgname}.png"
+    install -Dm644 "${srcdir}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+
+    cp -r "${srcdir}/squashfs-root/usr/share/MonumentValley2/GameFiles"/* "${pkgdir}/opt/wine-game/${pkgname}"
+}
