@@ -4,7 +4,7 @@ pkgname=wine-wl-git
 pkgver=8.0.rc1.g622bd916a7f
 pkgrel=1
 
-source=(git+https://gitlab.collabora.com/alf/wine.git/#branch=wayland-part-10
+source=(git+https://gitlab.winehq.org/afrantzis/wine#branch=wayland-part-10
         30-win32-aliases.conf
         wine-binfmt.conf)
 sha512sums=('SKIP'
