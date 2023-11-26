@@ -16,3 +16,4 @@ games/re3-git/*/*
 *.ttc
 *.appimage
 *.AppImage
+*.iso
