@@ -1,0 +1,50 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=osmos
+pkgver=1.6.0
+pkgrel=1
+pkgdesc="Enter the ambient world of Osmos: elegant, physics-based gameplay, dreamlike visuals, and a minimalist, electronic soundtrack."
+url="https://www.osmos-game.com"
+license=("custom")
+arch=("x86_64")
+depends=("lib32-glu" "glibc" "libvorbis" "libx11" "gcc-libs" "fuse2" "bash" "lib32-openal" "lib32-libvorbis" "lib32-freetype2" "freetype2" "lib32-libglvnd" "libglvnd" "lib32-libx11" "glu" "openal" "lib32-gcc-libs" "lib32-glibc")
+makedepends=()
+source=("osmos_1.6.0.appimage::http://app.hoream.top:8000/games/osmos_1.6.0.appimage")
+sha256sums=('284f1c7ca6b6f3f9dfad06f0ab964a3a7c3fefd0ba16fdaa8a60bcbf047d57b4')
+
+build() {
+    cd "${srcdir}"
+    chmod +x osmos_1.6.0.appimage
+    ./osmos_1.6.0.appimage --appimage-extract
+
+    ########### desktop entry ##################
+    cat <<EOL > ${pkgname}.desktop
+[Desktop Entry]
+Type=Application
+Name=${pkgname}
+Exec=/usr/bin/${pkgname}
+Icon=/usr/share/pixmaps/${pkgname}.png
+Categories=Game;
+Comment=${pkgname};
+EOL
+####################################################
+
+}
+
+package() {
+    install -d "${pkgdir}/usr/bin"    
+    install -d "${pkgdir}/usr/share/pixmaps"
+    install -d "${pkgdir}/usr/share/applications"
+    
+    install -d "${pkgdir}/opt/game/${pkgname}"
+
+    install -Dm644 "${srcdir}/squashfs-root/game.png" "${pkgdir}/usr/share/pixmaps/${pkgname}.png"
+    install -Dm644 "${srcdir}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+
+    cp -r "${srcdir}/squashfs-root/usr/bin/game"/* "${pkgdir}/opt/game/${pkgname}"
+
+    ln -sf "/opt/game/${pkgname}/Osmos" "${pkgdir}/usr/bin/${pkgname}"
+}
+
+
+
