@@ -5,9 +5,9 @@ maintainers:
 post_build: git_pkgbuild_commit
 
 update_on:
-  - source: gitlab
-    gitlab: lilydjwg/wlroots
-    branch: lilydjwg
-    host: gitlab.freedesktop.org
+  #- source: gitlab
+  #  gitlab: lilydjwg/wlroots
+  #  branch: lilydjwg
+  #  host: gitlab.freedesktop.org
   - source: manual
     manual: 3
