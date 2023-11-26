@@ -1,0 +1,14 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: multilib
+post_build: git_pkgbuild_commit
+
+update_on:
+  - source: gitlab
+    gitlab: afrantzis/wine
+    host: gitlab.winehq.org
+    branch: wayland-part-10
+  - source: manual
+
