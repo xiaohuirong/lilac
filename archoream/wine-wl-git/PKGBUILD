@@ -133,7 +133,8 @@ build() {
       --with-x \
       --with-gstreamer \
       --enable-win64 \
-      --with-wayland
+      --with-wayland \
+      --with-vulkan
 
   make
 
@@ -150,6 +151,7 @@ build() {
       --with-x \
       --with-gstreamer \
       --with-wayland \
+      --with-vulkan \
       "${_wine32opts[@]}"
 
   make

@@ -11,4 +11,4 @@ update_on:
     host: gitlab.winehq.org
     branch: wayland-part-10
   - source: manual
-
+    manual: 1
