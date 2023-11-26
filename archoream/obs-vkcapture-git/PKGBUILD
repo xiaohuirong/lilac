@@ -1,8 +1,8 @@
 _pkgbase=obs-vkcapture
 pkgbase=${_pkgbase}-git
 pkgname=('obs-vkcapture-git' 'lib32-obs-vkcapture-git')
-pkgver=r242.ae42c60
-pkgrel=3
+pkgver=r290.50547aa
+pkgrel=1
 url='https://github.com/nowrep/obs-vkcapture'
 license=('GPL2')
 arch=('x86_64')
