@@ -1,5 +1,10 @@
 # Maintainer: Hoream <hoream@qq.com>
 
+##########################
+# todo
+# 1. find osmos data dir, add wrap to lanuch osmos
+##########################
+
 pkgname=osmos
 pkgver=1.6.0
 pkgrel=1
