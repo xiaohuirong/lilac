@@ -3,7 +3,7 @@
 _pkgname=vkd3d-proton
 pkgname=$_pkgname-bin
 pkgver=2.11
-pkgrel=1
+pkgrel=2
 pkgdesc="Direct3D 12 to Vulkan translation library (Windows DLL binary files)"
 url="https://github.com/HansKristian-Work/vkd3d-proton"
 license=('LGPL')
