@@ -1,0 +1,105 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+########### edit base information ##################
+pkgname="th17.5"
+pkgver=1.14
+pkgrel=1
+pkgdesc="东方刚欲异闻~被水淹没的沉愁地狱"
+url="https://thwiki.cc/%E4%B8%9C%E6%96%B9%E5%88%9A%E6%AC%B2%E5%BC%82%E9%97%BB"
+####################################################
+
+license=("custom")
+arch=('x86_64')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+depends=("wine")
+makedepends=()
+source=(${pkgname}.tar.gz::http://app.hoream.top:8000/games/${pkgname}.tar.gz
+        "th17.5.jpg")
+sha256sums=('SKIP'
+            'SKIP')
+install=game.install
+
+build(){
+ 	cd "${srcdir}"
+
+########### desktop entry ##################
+    cat <<EOL > ${pkgname}.desktop
+[Desktop Entry]
+Type=Application
+Name=${pkgname}
+Exec=/usr/bin/bash /opt/wine-game/${pkgname}/start.sh
+Icon=/usr/share/pixmaps/${pkgname}.jpg
+Categories=Game;
+Comment=${pkgname};wine;东方刚欲异闻
+EOL
+####################################################
+
+
+########### launch script ##################
+    cat <<EOL > start.sh
+#!/bin/bash
+
+source_dir=\$HOME/.local/share/wine-game/${pkgname}
+game_log=\$source_dir/game.exe.log
+game_chs_log=\$source_dir/game_chs.exe.log
+game_chs_core=\$source_dir/game_chs.exe.core
+save_dat=\$source_dir/save.dat
+system_dat=\$source_dir/system.dat
+
+target_dir=/opt/wine-game/$pkgname
+target_game_log=\$target_dir/game.exe.log
+target_game_chs_log=\$target_dir/game_chs.exe.log
+target_game_chs_core=\$target_dir/game_chs.exe.core
+target_save_dat=\$target_dir/save.dat
+target_system_dat=\$target_dir/system.dat
+
+mkdir -p "\$source_dir"
+touch \$game_log
+touch \$game_chs_log
+touch \$game_chs_core
+touch \$save_dat
+touch \$system_dat
+
+dll_source_dir=/opt/wine-game/$pkgname/syswow64
+dll_target_dir=\$HOME/.wine/drive_c/windows/syswow64
+mpkir -p \$dll_target_dir
+touch \$dll_target_dir/d3dcompiler_47.dll
+touch \$dll_target_dir/d3dx11_43.dll
+
+cd /opt/wine-game/${pkgname}
+
+bwrap --bind / / \\
+      --dev-bind /dev /dev \\
+      --bind \$game_log \$target_game_log \\
+      --bind \$game_chs_log \$target_game_chs_log \\
+      --bind \$game_chs_core \$target_game_chs_core \\
+      --bind \$save_dat \$target_save_dat \\
+      --bind \$system_dat \$target_system_dat \\
+      --bind \$dll_source_dir/d3dcompiler_47.dll \$dll_target_dir/d3dcompiler_47.dll \\
+      --bind \$dll_source_dir/d3dx11_43.dll \$dll_target_dir/d3dx11_43.dll \\
+      wine game_chs.exe > /dev/null 2>&1
+EOL
+####################################################
+
+    cd "${srcdir}/${pkgname}"
+############### copy exe and generate ico################
+####################################################
+    touch game.exe.log
+    touch game_chs.exe.log
+    touch game_chs.exe.core
+    touch save.dat
+    touch system.dat
+}
+
+package() {
+	install -d "${pkgdir}/usr/share/pixmaps"
+	install -d "${pkgdir}/usr/share/applications"
+	install -d "${pkgdir}/opt/wine-game/"
+
+	install -Dm644 "${srcdir}/${pkgname}.jpg" "${pkgdir}/usr/share/pixmaps/${pkgname}.jpg"
+	install -Dm644 "${srcdir}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+    install -Dm755 "${srcdir}/start.sh" "${pkgdir}/opt/wine-game/${pkgname}/start.sh"
+
+    cp -r "${srcdir}/${pkgname}" "${pkgdir}/opt/wine-game"
+}
