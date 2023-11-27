@@ -1,6 +1,6 @@
 # Maintainer: Aang23 <aang23@altillimity.com>
 pkgname=satdump-git
-pkgver=r3926.d9b299df
+pkgver=r3928.9de5c1a9
 pkgrel=1
 epoch=
 pkgdesc="A generic satellite processing software"
