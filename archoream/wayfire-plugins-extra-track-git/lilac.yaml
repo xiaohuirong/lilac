@@ -11,3 +11,5 @@ update_on:
 
 repo_depends:
   - wayfire-track-git
+
+managed: false
