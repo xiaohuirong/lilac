@@ -2,7 +2,7 @@
 
 _pkgname=wayfire-plugins-extra-git
 pkgname=wayfire-plugins-extra-track-git
-pkgver=r217.a86e02e
+pkgver=r224.0f817ac
 pkgrel=1
 pkgdesc="3D wayland compositor extra plugins"
 arch=('any')
