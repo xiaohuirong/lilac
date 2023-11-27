@@ -34,7 +34,7 @@ pkgver() {
 
 build() {
   cd "$srcdir/wayfire-plugins-extra/"
-  patch -b -d ${srcdir}/wayfire-plugins-extra -Np1 -i ${srcdir}/track_wlroots.patch
+  #patch -b -d ${srcdir}/wayfire-plugins-extra -Np1 -i ${srcdir}/track_wlroots.patch
   rm -rf build
   arch-meson build
   ninja -C build
