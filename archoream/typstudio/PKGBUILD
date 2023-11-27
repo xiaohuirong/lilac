@@ -3,7 +3,7 @@
 pkgname=typstudio
 pkgver=0.1.0dev.32
 _pkgver=${pkgver/dev/-dev}
-pkgrel=1
+pkgrel=2
 pkgdesc='desktop application for typst'
 url="https://github.com/Cubxity/$pkgname"
 arch=(x86_64)
