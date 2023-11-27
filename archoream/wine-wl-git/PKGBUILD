@@ -113,7 +113,7 @@ prepare() {
     if [ ! -f "$patch" ]; then
       break;
     else
-      patch -d wine -p1 -i "$patch"
+      patch -d "${srcdir}/wine" -Np1 -i "${srcdir}/$patch"
     fi
   done
 
