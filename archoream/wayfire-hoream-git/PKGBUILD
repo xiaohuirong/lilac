@@ -16,8 +16,10 @@ conflicts=(wayfire wayfire-git)
 replaces=()
 options=(debug)
 source=(wayfire::git+$url.git
-        0001-patch.patch)
+        0001-patch.patch
+        decoration.patch)
 sha256sums=(SKIP
+            SKIP
             SKIP)
 
 pkgver () {
@@ -41,6 +43,7 @@ build() {
         . \
         build
     patch -b -d ${srcdir}/wayfire/subprojects/wf-utils -Np1 -i ${srcdir}/0001-patch.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/decoration.patch
     ninja -C build
 }
 
