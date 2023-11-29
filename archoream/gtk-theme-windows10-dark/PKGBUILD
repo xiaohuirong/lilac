@@ -4,7 +4,7 @@
 pkgname=gtk-theme-windows10-dark
 pkgver=3.2
 _pkgver=3.0
-pkgrel=1
+pkgrel=2
 pkgdesc="GTK 3.x Theme made to emulate a Windows 10 environment on Linux machines"
 arch=('any')
 url="https://github.com/B00merang-Project/Windows-10-Dark"
