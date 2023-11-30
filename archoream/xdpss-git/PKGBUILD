@@ -1,8 +1,8 @@
 # Maintainer: Junxuan Liao <mikeljx at 126 dot com>
 _pkgname=xdpss
 pkgname=$_pkgname-git
-pkgver=r2.5c255e1
-pkgrel=2
+pkgver=r3.2754743
+pkgrel=1
 pkgdesc="Initiate screencast with the help of XDG Desktop portals"
 arch=('any')
 url="https://github.com/MikeWalrus/xdpss"
