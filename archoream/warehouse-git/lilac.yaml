@@ -10,3 +10,4 @@ post_build_script: |
 update_on:
   - source: github
     github: flattool/warehouse
+  - source: manual

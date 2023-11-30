@@ -13,6 +13,11 @@ makedepends=('git' 'meson' 'cmake')
 source=("${_pkgname}::git+${url}")
 sha1sums=('SKIP')
 
+prepare() {
+    cd $srcdir/${_pkgname}
+    sed -i 's/os_string = GLib.get_os_info("NAME") + " " + GLib.get_os_info("VERSION")/os_string = GLib.get_os_info("NAME")/g' src/main.py
+}
+
 pkgver() {
     cd $srcdir/${_pkgname}
     git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
