@@ -8,5 +8,5 @@ Comment=Stardew Valley
 Icon=/opt/gog/stardew-valley/support/icon.png
 Exec="/opt/gog/stardew-valley/start.sh" ""
 Categories=Game;
-Path=/opt/gog/stardew-vallegy
+Path=/opt/gog/stardew-valley
 
