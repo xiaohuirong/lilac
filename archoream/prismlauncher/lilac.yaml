@@ -17,3 +17,10 @@ update_on:
       #    github: PrismLauncher/PrismLauncher
       #    use_latest_release: true
   - source: manual
+    manual: 1
+
+repo_depends:
+  - qt6-trigger
+
+update_on_build:
+  - pkgbase: qt6-trigger
