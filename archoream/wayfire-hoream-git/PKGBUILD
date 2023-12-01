@@ -16,9 +16,11 @@ conflicts=(wayfire wayfire-git)
 replaces=()
 options=(debug)
 source=(wayfire::git+$url.git
+        sdl_decor.patch
         0001-patch.patch
         decoration.patch)
 sha256sums=(SKIP
+            SKIP
             SKIP
             SKIP)
 
@@ -44,6 +46,7 @@ build() {
         build
     patch -b -d ${srcdir}/wayfire/subprojects/wf-utils -Np1 -i ${srcdir}/0001-patch.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/decoration.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/sdl_decor.patch
     ninja -C build
 }
 
