@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=stardew-valley
 pkgver=1.5.6.53040
-pkgrel=3
+pkgrel=4
 pkgdesc="an open-ended country-life RPG"
 arch=('x86_64')
 url="https://freelinuxpcgames.com/stardew-valley/"
