@@ -14,7 +14,7 @@ optdepends=("opencl-driver: OpenCL driver for GPU accelerated stabilization"
             "intel-media-driver: VAAPI video acceleration for Intel GPU")
 provides=("${_pkgname}")
 conflicts=("${_pkgname}" "${_pkgname}-appimage" "${_pkgname}-git")
-source=("Gyroflow-linux64.tar.gz::https://github.com/gyroflow/gyroflow/releases/download/v${pkgver}/Gyroflow-linux64.tar.gz"
+source=("Gyroflow-linux64-${pkgver}.tar.gz::https://github.com/gyroflow/gyroflow/releases/download/v${pkgver}/Gyroflow-linux64.tar.gz"
 		"icon.svg::https://raw.githubusercontent.com/gyroflow/gyroflow/v${pkgver}/resources/icon.svg"
         "${_pkgname}.desktop")
 
