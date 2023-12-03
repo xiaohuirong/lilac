@@ -15,7 +15,7 @@ provides=("${_pkgname}")
 conflicts=("${_pkgname}" "${_pkgname}-git")
 replaces=()
 options=()
-source=("${_pkgname}::git+https://github.com/lilydjwg/wayfire-plugins-extra#commit=0cdbc738f4756156c102a1d86c72743d7d241ce7"
+source=("${_pkgname}::git+https://github.com/xiaohuirong/wayfire-plugins-extra#commit=0cdbc738f4756156c102a1d86c72743d7d241ce7"
         "dbus::git+https://github.com/damianatorrpm/wayfire-plugin_dbus_interface"
         "wayfire-shadows::git+https://github.com/timgott/wayfire-shadows"
         "windecor::git+https://gitlab.com/wayfireplugins/windecor"
