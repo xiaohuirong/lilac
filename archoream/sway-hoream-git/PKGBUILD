@@ -5,8 +5,8 @@
 
 pkgname=sway-hoream-git
 _pkgname=sway
-pkgver=r7188.8a8fb76ec1d0
-pkgrel=4
+pkgver=r7140.913a7679cbde
+pkgrel=1
 pkgdesc='Tiling Wayland compositor and replacement for the i3 window manager (git version with input method popups)'
 arch=(x86_64)
 url='https://swaywm.org/'
@@ -38,7 +38,7 @@ optdepends=(
   'xdg-desktop-portal-gtk: Default xdg-desktop-portal for file picking'
   'xdg-desktop-portal-wlr: xdg-desktop-portal backend'
 )
-source=("sway::git+https://github.com/swaywm/sway.git#commit=8a8fb76ec1d0b9a269b86688cff419201d1e6f62"
+source=("sway::git+https://github.com/swaywm/sway.git#commit=913a7679cbde98df0722b326d8c3cfc0f0576f6d"
         "50-systemd-user.conf"
         "7226.patch"
         "sway-portals.conf")
