@@ -1,9 +1,9 @@
 # Maintainer: Hoream <hoream@qq.com>
 # Contributor: Solomon Choina <shlomochoina@gmail.com0
 pkgname=wayfire-hoream-git
-pkgver=0.8.0.20230906.100948.g0f509228
+pkgver=0.8.0.20231203.142008.gca86c2bd
 pkgrel=6
-pkgdesc="3D wayland compositor (lilydjwg's version)"
+pkgdesc="3D wayland compositor (hoream's version)"
 arch=('x86_64')
 url="https://github.com/xiaohuirong/wayfire"
 license=('MIT')
@@ -15,7 +15,7 @@ provides=(wayfire wayfire-git)
 conflicts=(wayfire wayfire-git)
 replaces=()
 options=(debug)
-source=(wayfire::git+$url.git
+source=(wayfire::git+$url.git#branch=hoream
         sdl_decor.patch
         0001-patch.patch
         decoration.patch)

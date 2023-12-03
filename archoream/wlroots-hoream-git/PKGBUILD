@@ -2,7 +2,7 @@
 # Contributor: Adrian Perez de Castro <aperez@igalia.com>
 # Contributor: Antonin Décimo <antonin dot decimo at gmail dot com>
 pkgname=wlroots-hoream-git
-pkgver=0.17.0.20230830.063110
+pkgver=0.17.0.20231203.140450
 pkgrel=4
 license=(MIT)
 pkgdesc='Modular Wayland compositor library (git version, with patches)'
@@ -40,7 +40,7 @@ makedepends=(
 	vulkan-headers
 	wayland-protocols
 	xorgproto)
-source=("${pkgname}::git+https://gitlab.freedesktop.org/lilydjwg/wlroots.git#branch=lilydjwg")
+source=("${pkgname}::git+https://github.com/xiaohuirong/wlroots#branch=hoream")
 sha512sums=('SKIP')
 
 pkgver () {
