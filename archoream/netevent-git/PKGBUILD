@@ -1,12 +1,12 @@
 _pkgbase=netevent
 pkgname=netevent-git
 pkgver=2.2.2.r0.gbcadfcc
-pkgrel=1
+pkgrel=2
 pkgdesc="Event device viewing/cloning utility"
 url="https://github.com/Blub/netevent"
 arch=('i686' 'x86_64' 'aarch64')
 license=('GPL')
-depends=()
+depends=("gcc-libs" "glibc")
 makedepends=('python-docutils' 'git')
 source=("git+https://github.com/Blub/netevent.git")
 sha256sums=('SKIP')
