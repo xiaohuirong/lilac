@@ -8,5 +8,5 @@ def pre_build():
     for line in edit_file('PKGBUILD'):
         print(line)
         if "--with-gstreamer" in line:
-            print(r'''      --with-wayland \''')
-            print(r'''      --with-vulkan \''')
+            print("      --with-wayland \\")
+            print("      --with-vulkan \\")
