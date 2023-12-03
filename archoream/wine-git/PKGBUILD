@@ -3,13 +3,13 @@
 # Contributor: sxe <sxxe@gmx.de>
 
 pkgname=wine-git
-pkgver=8.21.r0.g13c43cf3d06
+pkgver=8.21.r200.g369b540abf3
 pkgrel=1
 pkgdesc='A compatibility layer for running Windows programs (git version)'
 arch=('x86_64')
 url='https://www.winehq.org/'
 license=('LGPL')
-depends=(
+depends=("wayland"
     'fontconfig'      'lib32-fontconfig'
     'libxcursor'      'lib32-libxcursor'
     'libxrandr'       'lib32-libxrandr'
@@ -20,7 +20,7 @@ depends=(
     'libpcap'         'lib32-libpcap'
     'desktop-file-utils'
 )
-makedepends=('git' 'perl' 'mingw-w64-gcc'
+makedepends=("git" "mingw-w64-gcc" "perl" "wayland-protocols"
     'giflib'                'lib32-giflib'
     'gnutls'                'lib32-gnutls'
     'libxinerama'           'lib32-libxinerama'
@@ -102,6 +102,8 @@ build() {
         --libdir='/usr/lib' \
         --with-x \
         --with-gstreamer \
+      --with-wayland \
+      --with-vulkan \
         --enable-win64
     make
     
@@ -114,6 +116,8 @@ build() {
         --libdir='/usr/lib32' \
         --with-x \
         --with-gstreamer \
+      --with-wayland \
+      --with-vulkan \
         --with-wine64="${srcdir}/build-64"
     make
 }
