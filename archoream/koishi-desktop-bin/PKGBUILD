@@ -3,7 +3,7 @@ _pkgname=koishi
 pkgname="${_pkgname}-desktop-bin"
 _appname="chat.${_pkgname}.desktop"
 pkgver=0.11.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Launch Koishi from your desktop"
 arch=('x86_64')
 url="https://koishi.chat/manual/starter/"
@@ -33,3 +33,4 @@ package() {
     install -Dm644 "${srcdir}/${pkgname%-bin}.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/${pkgname%-bin}.svg"
     install -Dm644 "${srcdir}/${pkgname%-bin}.desktop" "${pkgdir}/usr/share/applications/${pkgname%-bin}.desktop"
 }
+makedepends=("gendesk")
