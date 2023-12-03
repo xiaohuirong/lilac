@@ -7,15 +7,13 @@
 _pkgname=logseq-desktop
 pkgname="$_pkgname${_pkgtype:+-$_pkgtype}"
 pkgver=0.10.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Privacy-first, open-source platform for knowledge sharing and management"
 url="https://github.com/logseq/logseq"
 license=('AGPL3')
 arch=("x86_64")
 
-depends=('electron')
 makedepends=(
-  'asar'
   'gendesk'
 )
 
@@ -36,30 +34,51 @@ prepare() {
   cat <<'EOF' > "$_pkgname.sh"
 #!/usr/bin/env sh
 set -e
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-if [ -r "${XDG_CONFIG_HOME}/logseq-flags.conf" ]; then
-  LOGSEQ_USER_FLAGS="$(cat "$XDG_CONFIG_HOME/logseq-flags.conf")"
+
+APPDIR="/opt/logseq-desktop"
+_ELECTRON="${APPDIR}/Logseq"
+
+_FLAGS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/logseq-flags.conf"
+if [ -r "$_FLAGS_FILE" ]; then
+  _USER_FLAGS="$(cat "$_FLAGS_FILE")"
 fi
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-  LOGSEQ_USER_FLAGS="${LOGSEQ_USER_FLAGS:-} --enable-features=UseOzonePlatform --ozone-platform=wayland"
+
+if [[ $EUID -ne 0 ]] || [[ $ELECTRON_RUN_AS_NODE ]]; then
+    exec ${_ELECTRON} $_USER_FLAGS "$@"
+else
+    exec ${_ELECTRON} --no-sandbox $_USER_FLAGS "$@"
 fi
-exec electron /usr/lib/logseq-desktop/app.asar $LOGSEQ_USER_FLAGS "$@"
 EOF
 
-  gendesk -q -f -n --pkgname="$_pkgname" --pkgdesc="$pkgdesc" --name="Logseq" --exec="logseq %u" --icon="logseq" --terminal=false --categories="Office" --mimetypes="x-scheme-handler/logseq" --startupnotify=true --custom="StartupWMClass=Logseq"
+  local _gendesk_options=(
+    -q -f -n
+    --pkgname="$_pkgname"
+    --pkgdesc="$pkgdesc"
+    --name="Logseq"
+    --exec="logseq %u"
+    --icon="logseq"
+    --terminal=false
+    --categories="Office"
+    --mimetypes="x-scheme-handler/logseq"
+    --startupnotify=true
+    --custom="StartupWMClass=Logseq"
+  )
+
+  gendesk "${_gendesk_options[@]}"
 }
 
+
 package() {
+  # copy files
+  install -dm755 "$pkgdir/opt/$_pkgname"
+  cp -r "$srcdir/$_pkgsrc"/* "$pkgdir/opt/$_pkgname/"
+
   # desktop file
   install -Dm644 "$_pkgname.desktop" "$pkgdir/usr/share/applications/logseq-desktop.desktop"
 
   # icons
   install -Dm644 "$_pkgsrc/resources/app/icons/logseq.png" \
     -t "$pkgdir/usr/share/pixmaps/"
-
-  # asar
-  install -dm755 "$pkgdir/usr/lib/$_pkgname"
-  asar pack "$_pkgsrc/resources/app" "$pkgdir/usr/lib/$_pkgname/app.asar"
 
   # script
   install -Dm755 "logseq-desktop.sh" "$pkgdir/usr/bin/logseq"
