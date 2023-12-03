@@ -1,7 +1,7 @@
 # Maintainer: Luis Martinez <luis dot martinez at tuta dot io>
 
 pkgname=szyszka-git
-pkgver=3.0.0.r0.gb7c552c
+pkgver=3.0.0.r1.g1244a3e
 pkgrel=1
 pkgdesc="A simple but powerful batch file rename program"
 arch=('x86_64')
