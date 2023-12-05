@@ -1,0 +1,1924 @@
+diff --git a/examples/ext-workspace.c b/examples/ext-workspace.c
+new file mode 100644
+index 00000000..1e1544dd
+--- /dev/null
++++ b/examples/ext-workspace.c
+@@ -0,0 +1,364 @@
++#define _POSIX_C_SOURCE 200809L
++#include <getopt.h>
++#include <stdbool.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <wayland-client.h>
++#include "ext-workspace-unstable-v1-client-protocol.h"
++
++#define WLR_EXT_WORKSPACE_VERSION 1
++
++/**
++ * Usage:
++ * 1. ext-workspace
++ *    List all workspace groups and their workspaces
++ * 2. ext-workspace -w X
++ *    Focus workspace with name X
++ * 3. ext-workspace -m
++ *    Continuously monitor for changes and print new state.
++ * 4. ext-workspace -c X
++ *    Create a new workspace with name hint X in some workspace group
++ * 5. ext-workspace -r X
++ *    Request removal of workspace X
++ */
++
++enum workspace_state_field {
++	WORKSPACE_FOCUSED = (1 << 0),
++};
++
++struct workspace_state {
++	char *name;
++	struct wl_array coordinates;
++	uint32_t state;
++};
++
++static void copy_state(struct workspace_state *current,
++		struct workspace_state *pending) {
++
++	current->state = pending->state;
++	wl_array_copy(&current->coordinates, &pending->coordinates);
++
++	if (pending->name) {
++		free(current->name);
++		current->name = pending->name;
++		pending->name = NULL;
++	}
++}
++
++struct workspace_v1 {
++	struct wl_list link;
++	struct zext_workspace_handle_v1 *handle;
++	struct workspace_state current, pending;
++};
++
++static void print_workspace(struct workspace_v1 *workspace) {
++	printf("--> workspace name=%s, focused=%d, coordinates=(",
++			workspace->current.name ?: "(n/a)",
++			!!(workspace->current.state & WORKSPACE_FOCUSED));
++
++	bool is_first = true;
++	int32_t *pos;
++	wl_array_for_each(pos, &workspace->current.coordinates) {
++		if (!is_first) {
++			printf(",");
++		}
++		printf("%d", *pos);
++		is_first = false;
++	}
++
++	printf(")\n");
++}
++
++static uint32_t array_to_state(struct wl_array *array) {
++	uint32_t state = 0;
++	uint32_t *entry;
++	wl_array_for_each(entry, array) {
++		if (*entry == ZEXT_WORKSPACE_HANDLE_V1_STATE_ACTIVE)
++			state |= WORKSPACE_FOCUSED;
++	}
++
++	return state;
++}
++
++static void workspace_handle_name(void *data,
++		struct zext_workspace_handle_v1 *workspace_handle_v1,
++		const char *name) {
++	struct workspace_v1 *workspace = (struct workspace_v1*)
++		zext_workspace_handle_v1_get_user_data(workspace_handle_v1);
++
++	free(workspace->pending.name);
++	workspace->pending.name = strdup(name);
++}
++
++static void workspace_handle_coordinates(void *data,
++		struct zext_workspace_handle_v1 *workspace_handle,
++		struct wl_array *coordinates) {
++	struct workspace_v1 *workspace = (struct workspace_v1*)
++		zext_workspace_handle_v1_get_user_data(workspace_handle);
++	wl_array_copy(&workspace->pending.coordinates, coordinates);
++}
++
++static void workspace_handle_state(void *data,
++		struct zext_workspace_handle_v1 *workspace_handle,
++		struct wl_array *state) {
++	struct workspace_v1 *workspace = (struct workspace_v1*)
++		zext_workspace_handle_v1_get_user_data(workspace_handle);
++	workspace->pending.state = array_to_state(state);
++}
++
++static void workspace_handle_remove(void *data,
++		struct zext_workspace_handle_v1 *workspace_handle) {
++	struct workspace_v1 *workspace = (struct workspace_v1*)
++		zext_workspace_handle_v1_get_user_data(workspace_handle);
++	zext_workspace_handle_v1_destroy(workspace_handle);
++
++	wl_list_remove(&workspace->link);
++	free(workspace->current.name);
++	free(workspace->pending.name);
++	wl_array_release(&workspace->pending.coordinates);
++	wl_array_release(&workspace->current.coordinates);
++	free(workspace);
++}
++
++static const struct zext_workspace_handle_v1_listener workspace_listener = {
++	.name = workspace_handle_name,
++	.coordinates = workspace_handle_coordinates,
++	.state = workspace_handle_state,
++	.remove = workspace_handle_remove,
++};
++
++struct group_v1 {
++	struct wl_list link;
++
++	struct zext_workspace_group_handle_v1 *handle;
++	int32_t id;
++	struct wl_list workspaces;
++};
++
++static void group_handle_output_enter(void *data,
++		struct zext_workspace_group_handle_v1 *group_handle,
++		struct wl_output *output) {
++	struct group_v1 *group = (struct group_v1*)
++		zext_workspace_group_handle_v1_get_user_data(group_handle);
++	printf("Group %d output_enter %u\n", group->id,
++		(uint32_t)(size_t)wl_output_get_user_data(output));
++}
++
++static void group_handle_output_leave(void *data,
++		struct zext_workspace_group_handle_v1 *group_handle,
++		struct wl_output *output) {
++	struct group_v1 *group = (struct group_v1*)
++		zext_workspace_group_handle_v1_get_user_data(group_handle);
++	printf("Group %d output_leave %u\n", group->id,
++		(uint32_t)(size_t)wl_output_get_user_data(output));
++}
++
++static void group_handle_workspace(void *data,
++		struct zext_workspace_group_handle_v1 *group_handle,
++		struct zext_workspace_handle_v1 *workspace_handle) {
++	struct group_v1 *group = (struct group_v1*)
++		zext_workspace_group_handle_v1_get_user_data(group_handle);
++	struct workspace_v1 *workspace = (struct workspace_v1*)
++		calloc(1, sizeof(struct workspace_v1));
++
++	wl_list_insert(&group->workspaces, &workspace->link);
++	wl_array_init(&workspace->pending.coordinates);
++	wl_array_init(&workspace->current.coordinates);
++
++	workspace->handle = workspace_handle;
++	zext_workspace_handle_v1_add_listener(workspace_handle,
++			&workspace_listener, NULL);
++	zext_workspace_handle_v1_set_user_data(workspace_handle, workspace);
++}
++
++static void group_handle_remove(void *data,
++		struct zext_workspace_group_handle_v1 *group_handle) {
++	struct group_v1 *group = (struct group_v1*)
++		zext_workspace_group_handle_v1_get_user_data(group_handle);
++	wl_list_remove(&group->link);
++	if (!wl_list_empty(&group->workspaces)) {
++		printf("Compositor bug! Group destroyed before its workspaces.\n");
++	}
++
++	free(group);
++}
++
++static const struct zext_workspace_group_handle_v1_listener group_listener = {
++	.output_enter = group_handle_output_enter,
++	.output_leave = group_handle_output_leave,
++	.workspace = group_handle_workspace,
++	.remove = group_handle_remove,
++};
++
++static struct zext_workspace_manager_v1 *workspace_manager = NULL;
++static struct wl_list group_list;
++static int32_t last_group_id = 0;
++
++static void workspace_manager_handle_workspace_group(void *data,
++		struct zext_workspace_manager_v1 *zext_workspace_manager_v1,
++		struct zext_workspace_group_handle_v1 *workspace_group) {
++	struct group_v1 *group = (struct group_v1*)
++		calloc(1, sizeof(struct group_v1));
++	group->id = last_group_id++;
++	group->handle = workspace_group;
++	wl_list_init(&group->workspaces);
++	wl_list_insert(&group_list, &group->link);
++
++	zext_workspace_group_handle_v1_add_listener(workspace_group,
++			&group_listener, NULL);
++	zext_workspace_group_handle_v1_set_user_data(workspace_group, group);
++}
++
++static void workspace_manager_handle_done(void *data,
++		struct zext_workspace_manager_v1 *zext_workspace_manager_v1) {
++
++	printf("*** Workspace configuration ***\n");
++	struct group_v1 *group;
++	wl_list_for_each(group, &group_list, link) {
++		printf("> Group id=%d\n", group->id);
++		struct workspace_v1 *workspace;
++		wl_list_for_each(workspace, &group->workspaces, link) {
++			copy_state(&workspace->current, &workspace->pending);
++			print_workspace(workspace);
++		}
++	}
++}
++
++static void workspace_manager_handle_finished(void *data,
++		struct zext_workspace_manager_v1 *zext_workspace_manager_v1) {
++	zext_workspace_manager_v1_destroy(zext_workspace_manager_v1);
++}
++
++static const struct zext_workspace_manager_v1_listener workspace_manager_impl = {
++	.workspace_group = workspace_manager_handle_workspace_group,
++	.done = workspace_manager_handle_done,
++	.finished = workspace_manager_handle_finished,
++};
++
++struct wl_seat *seat = NULL;
++static void handle_global(void *data, struct wl_registry *registry,
++		uint32_t name, const char *interface, uint32_t version) {
++	if (strcmp(interface, wl_output_interface.name) == 0) {
++		struct wl_output *output = wl_registry_bind(registry, name,
++				&wl_output_interface, version);
++		wl_output_set_user_data(output, (void*)(size_t)name); // assign some ID to the output
++	} else if (strcmp(interface,
++			zext_workspace_manager_v1_interface.name) == 0) {
++		workspace_manager = wl_registry_bind(registry, name,
++				&zext_workspace_manager_v1_interface, WLR_EXT_WORKSPACE_VERSION);
++
++		wl_list_init(&group_list);
++		zext_workspace_manager_v1_add_listener(workspace_manager,
++				&workspace_manager_impl, NULL);
++	}
++}
++
++static void handle_global_remove(void *data, struct wl_registry *registry,
++		uint32_t name) {
++	// who cares
++}
++
++static const struct wl_registry_listener registry_listener = {
++	.global = handle_global,
++	.global_remove = handle_global_remove,
++};
++
++static struct workspace_v1 *workspace_by_name_or_bail(const char *name) {
++	struct workspace_v1 *workspace;
++	struct group_v1 *group;
++
++	wl_list_for_each(group, &group_list, link) {
++		wl_list_for_each(workspace, &group->workspaces, link) {
++			if (workspace->current.name &&
++					strcmp(workspace->current.name, name) == 0) {
++				return workspace;
++			}
++		}
++	}
++
++	fprintf(stderr, "No workspace with the given name: %s\n", name);
++	exit(EXIT_FAILURE);
++}
++
++int main(int argc, char **argv) {
++	int c;
++	char *focus_name  = NULL;
++	char *create_name = NULL;
++	char *remove_name = NULL;
++	bool monitor = false;
++
++	while ((c = getopt(argc, argv, "c:r:w:m")) != -1) {
++		switch (c) {
++		case 'c':
++			create_name = strdup(optarg);
++			break;
++		case 'r':
++			remove_name = strdup(optarg);
++			break;
++		case 'w':
++			focus_name = strdup(optarg);
++			break;
++		case 'm':
++			monitor = true;
++			break;
++		}
++	}
++
++	struct wl_display *display = wl_display_connect(NULL);
++	if (display == NULL) {
++		fprintf(stderr, "Failed to create display\n");
++		return EXIT_FAILURE;
++	}
++
++	struct wl_registry *registry = wl_display_get_registry(display);
++	wl_registry_add_listener(registry, &registry_listener, NULL);
++	wl_display_dispatch(display);
++	wl_display_roundtrip(display);
++
++	if (workspace_manager == NULL) {
++		fprintf(stderr, "wlr-workspace not available\n");
++		return EXIT_FAILURE;
++	}
++	wl_display_roundtrip(display); // load workspace groups
++	wl_display_roundtrip(display); // load details
++
++	if (focus_name != NULL) {
++		struct workspace_v1 *focus = workspace_by_name_or_bail(focus_name);
++
++		// unfocus all workspaces
++		struct workspace_v1 *workspace;
++		struct group_v1 *group;
++
++		wl_list_for_each(group, &group_list, link) {
++			wl_list_for_each(workspace, &group->workspaces, link) {
++				zext_workspace_handle_v1_deactivate(workspace->handle);
++			}
++		}
++		zext_workspace_handle_v1_activate(focus->handle);
++		zext_workspace_manager_v1_commit(workspace_manager);
++	}
++
++	if (create_name != NULL) {
++		struct group_v1 *group;
++		wl_list_for_each(group, &group_list, link) {
++			zext_workspace_group_handle_v1_create_workspace(group->handle, create_name);
++			break;
++		}
++	}
++
++	if (remove_name != NULL) {
++		struct workspace_v1 *remove = workspace_by_name_or_bail(remove_name);
++		zext_workspace_handle_v1_remove(remove->handle);
++	}
++
++	wl_display_flush(display);
++
++	if (monitor != false) {
++		while (wl_display_dispatch(display) != -1) {
++			// This space intentionally left blank
++		}
++	}
++
++	return EXIT_SUCCESS;
++}
+diff --git a/examples/meson.build b/examples/meson.build
+index f2d8b93d..82e53b1c 100644
+--- a/examples/meson.build
++++ b/examples/meson.build
+@@ -188,6 +188,11 @@ clients = {
+ 			'input-method-unstable-v2',
+ 		],
+ 	},
++	'ext-workspace': {
++		'src': 'ext-workspace.c',
++		'dep': [wlroots],
++		'proto': ['ext-workspace-unstable-v1'],
++	},
+ }
+ 
+ foreach name, info : compositors
+diff --git a/examples/meson.build.orig b/examples/meson.build.orig
+new file mode 100644
+index 00000000..f2d8b93d
+--- /dev/null
++++ b/examples/meson.build.orig
+@@ -0,0 +1,221 @@
++threads = dependency('threads')
++wayland_egl = dependency('wayland-egl')
++wayland_cursor = dependency('wayland-cursor')
++wayland_client = dependency('wayland-client')
++libpng = dependency('libpng', required: false, disabler: true)
++egl = dependency('egl', required: false, disabler: true)
++glesv2 = dependency('glesv2', required: false, disabler: true)
++gbm = dependency('gbm', required: false, disabler: true)
++# These versions correspond to ffmpeg 4.0
++libavutil = dependency('libavutil', version: '>=56.14.100', required: false, disabler: true)
++libavcodec = dependency('libavcodec', version: '>=58.18.100', required: false, disabler: true)
++libavformat = dependency('libavformat', version: '>=58.12.100', required: false, disabler: true)
++# Only needed for drm_fourcc.h
++libdrm = dependency('libdrm').partial_dependency(compile_args: true, includes: true)
++
++# epoll is a separate library in FreeBSD
++if host_machine.system() == 'freebsd'
++	libepoll = dependency('epoll-shim')
++else
++	libepoll = dependency('', required: false)
++endif
++
++if not cc.has_header('libavutil/hwcontext_drm.h', dependencies: libavutil)
++	libavutil = disabler()
++endif
++
++compositors = {
++	'simple': {
++		'src': 'simple.c',
++	},
++	'pointer': {
++		'src': 'pointer.c',
++	},
++	'touch': {
++		'src': ['touch.c', 'cat.c'],
++	},
++	'tablet': {
++		'src': 'tablet.c',
++	},
++	'rotation': {
++		'src': ['rotation.c', 'cat.c'],
++	},
++	'output-layout': {
++		'src': ['output-layout.c', 'cat.c'],
++	},
++	'fullscreen-shell': {
++		'src': 'fullscreen-shell.c',
++		'proto': ['fullscreen-shell-unstable-v1'],
++	},
++	'scene-graph': {
++		'src': 'scene-graph.c',
++		'proto': ['xdg-shell'],
++	},
++	'output-layers': {
++		'src': 'output-layers.c',
++		'proto': [
++			'xdg-shell',
++		],
++	},
++}
++
++clients = {
++	'idle': {
++		'src': 'idle.c',
++		'dep': threads,
++		'proto': ['kde-idle'],
++	},
++	'idle-inhibit': {
++		'src': ['idle-inhibit.c', 'egl_common.c'],
++		'dep': [wayland_egl, egl, glesv2],
++		'proto': [
++			'idle-inhibit-unstable-v1',
++			'xdg-shell',
++		],
++	},
++	'keyboard-shortcuts-inhibit': {
++		'src': ['keyboard-shortcuts-inhibit.c', 'egl_common.c'],
++		'dep': [wayland_egl, wayland_cursor, egl, glesv2],
++		'proto': [
++			'keyboard-shortcuts-inhibit-unstable-v1',
++			'xdg-shell',
++		],
++	},
++	'layer-shell': {
++		'src': ['layer-shell.c', 'egl_common.c'],
++		'dep': [wayland_egl, wayland_cursor, egl, glesv2],
++		'proto': [
++			'wlr-layer-shell-unstable-v1',
++			'xdg-shell',
++		],
++	},
++	'input-inhibitor': {
++		'src': ['input-inhibitor.c', 'egl_common.c'],
++		'dep': [wayland_egl, wayland_cursor, egl, glesv2],
++		'proto': [
++			'wlr-input-inhibitor-unstable-v1',
++			'xdg-shell',
++		],
++	},
++	'gamma-control': {
++		'src': 'gamma-control.c',
++		'dep': [wayland_cursor, math],
++		'proto': ['wlr-gamma-control-unstable-v1'],
++	},
++	'output-power-management': {
++		'src': 'output-power-management.c',
++		'dep': [wayland_client],
++		'proto': ['wlr-output-power-management-unstable-v1'],
++	},
++	'pointer-constraints': {
++		'src': ['pointer-constraints.c', 'egl_common.c'],
++		'dep': [wayland_egl, egl, glesv2],
++		'proto': [
++			'pointer-constraints-unstable-v1',
++			'xdg-shell',
++		],
++	},
++	'relative-pointer': {
++		'src': ['relative-pointer-unstable-v1.c', 'egl_common.c'],
++		'dep': [wayland_egl, egl, glesv2],
++		'proto': [
++			'pointer-constraints-unstable-v1',
++			'relative-pointer-unstable-v1',
++			'xdg-shell',
++		],
++	},
++	'dmabuf-capture': {
++		'src': 'dmabuf-capture.c',
++		'dep': [
++			libavcodec,
++			libavformat,
++			libavutil,
++			drm,
++			threads,
++		],
++		'proto': ['wlr-export-dmabuf-unstable-v1'],
++	},
++	'screencopy': {
++		'src': 'screencopy.c',
++		'dep': [libpng, rt],
++		'proto': ['wlr-screencopy-unstable-v1'],
++	},
++	'screencopy-dmabuf': {
++		'src': 'screencopy-dmabuf.c',
++		'dep': [libpng, rt, gbm, drm],
++		'proto': [
++			'wlr-screencopy-unstable-v1',
++			'linux-dmabuf-unstable-v1',
++		],
++	},
++	'toplevel-decoration': {
++		'src': ['toplevel-decoration.c', 'egl_common.c'],
++		'dep': [wayland_egl, egl, glesv2],
++		'proto': [
++			'xdg-decoration-unstable-v1',
++			'xdg-shell',
++		],
++	},
++	'input-method': {
++		'src': 'input-method.c',
++		'dep': [wayland_egl, libepoll],
++		'proto': [
++			'input-method-unstable-v2',
++			'text-input-unstable-v3',
++			'xdg-shell',
++		],
++	},
++	'text-input': {
++		'src': ['text-input.c', 'egl_common.c'],
++		'dep': [wayland_egl, wayland_cursor, egl, glesv2],
++		'proto': [
++			'text-input-unstable-v3',
++			'xdg-shell',
++		],
++	},
++	'foreign-toplevel': {
++		'src': 'foreign-toplevel.c',
++		'proto': ['wlr-foreign-toplevel-management-unstable-v1'],
++	},
++	'virtual-pointer': {
++		'src': 'virtual-pointer.c',
++		'proto': ['wlr-virtual-pointer-unstable-v1'],
++	},
++	'input-method-keyboard-grab': {
++		'src': 'input-method-keyboard-grab.c',
++		'dep': xkbcommon,
++		'proto': [
++			'input-method-unstable-v2',
++		],
++	},
++}
++
++foreach name, info : compositors
++	extra_src = []
++	foreach p : info.get('proto', [])
++		extra_src += protocols_server_header[p]
++	endforeach
++
++	executable(
++		name,
++		[info.get('src'), extra_src],
++		dependencies: [wlroots, libdrm],
++		include_directories: [wlr_inc, proto_inc],
++		build_by_default: get_option('examples'),
++	)
++endforeach
++
++foreach name, info : clients
++	extra_src = []
++	foreach p : info.get('proto')
++		extra_src += protocols_code[p]
++		extra_src += protocols_client_header[p]
++	endforeach
++
++	executable(
++		name,
++		[info.get('src'), extra_src],
++		dependencies: [wayland_client, info.get('dep', [])],
++		build_by_default: get_option('examples'),
++	)
++endforeach
+diff --git a/include/wlr/types/wlr_ext_workspace_v1.h b/include/wlr/types/wlr_ext_workspace_v1.h
+new file mode 100644
+index 00000000..2ce74810
+--- /dev/null
++++ b/include/wlr/types/wlr_ext_workspace_v1.h
+@@ -0,0 +1,138 @@
++/*
++ * This an unstable interface of wlroots. No guarantees are made regarding the
++ * future consistency of this API.
++ */
++#ifndef WLR_USE_UNSTABLE
++#error "Add -DWLR_USE_UNSTABLE to enable unstable wlroots features"
++#endif
++
++#ifndef WLR_TYPES_WLR_WORKSPACE_V1_H
++#define WLR_TYPES_WLR_WORKSPACE_V1_H
++
++#include <wayland-server-core.h>
++#include <wlr/types/wlr_output.h>
++
++struct wlr_ext_workspace_manager_v1 {
++	struct wl_event_loop *event_loop;
++	struct wl_event_source *idle_source;
++
++	struct wl_global *global;
++	struct wl_list resources; // wl_resource_get_link
++	struct wl_list groups; // wlr_ext_workspace_group_handle_v1::link
++
++	struct wl_listener display_destroy;
++
++	struct {
++		struct wl_signal commit; // wlr_ext_workspace_manager_v1
++		struct wl_signal destroy;
++	} events;
++
++	void *data;
++};
++
++struct wlr_ext_workspace_group_handle_v1 {
++	struct wl_list link; // wlr_ext_workspace_manager_v1::groups
++	struct wl_list resources; // wl_ext_resource_get_link
++
++	struct wl_list workspaces; // wlr_ext_workspace_handle_v1::link
++	struct wl_list outputs; // wlr_ext_workspace_group_handle_v1_output::link
++
++	struct wlr_ext_workspace_manager_v1 *manager;
++
++	struct {
++		// wlr_ext_workspace_group_handle_v1_create_workspace_event
++		struct wl_signal create_workspace_request;
++		struct wl_signal destroy;
++	} events;
++
++	void *data;
++};
++
++struct wlr_ext_workspace_group_handle_v1_create_workspace_event {
++	struct wlr_ext_workspace_group_handle_v1 *workspace_group;
++	const char *name;
++};
++
++struct wlr_ext_workspace_group_handle_v1_output {
++	struct wl_list link; // wlr_ext_workspace_group_handle_v1::outputs
++	struct wl_listener output_destroy;
++	struct wlr_output *output;
++
++	struct wlr_ext_workspace_group_handle_v1 *group_handle;
++};
++
++enum wlr_ext_workspace_handle_v1_state
++{
++	WLR_EXT_WORKSPACE_HANDLE_V1_STATE_ACTIVE = 1 << 0,
++	WLR_EXT_WORKSPACE_HANDLE_V1_STATE_URGENT = 1 << 1,
++	WLR_EXT_WORKSPACE_HANDLE_V1_STATE_HIDDEN = 1 << 2,
++};
++
++struct wlr_ext_workspace_handle_v1 {
++	struct wl_list link; // wlr_ext_workspace_group_handle_v1::workspaces
++	struct wl_list resources;
++
++	struct wlr_ext_workspace_group_handle_v1 *group;
++
++	// request from the client
++	uint32_t pending, current;
++
++	// set by the compositor
++	uint32_t server_state;
++
++	char *name;
++	struct wl_array coordinates;
++
++	struct {
++		struct wl_signal remove_request;
++		struct wl_signal destroy;
++	} events;
++
++	void *data;
++};
++
++struct wlr_ext_workspace_manager_v1 *wlr_ext_workspace_manager_v1_create(
++		struct wl_display *display);
++
++struct wlr_ext_workspace_group_handle_v1 *wlr_ext_workspace_group_handle_v1_create(
++		struct wlr_ext_workspace_manager_v1 *manager);
++
++/**
++ * Destroy the workspace group and all workspaces inside it.
++ */
++void wlr_ext_workspace_group_handle_v1_destroy(
++	struct wlr_ext_workspace_group_handle_v1 *group);
++
++/**
++ * Create a new workspace in the workspace group.
++ * Note that the compositor must set the workspace name immediately after
++ * creating it.
++ */
++struct wlr_ext_workspace_handle_v1 *wlr_ext_workspace_handle_v1_create(
++		struct wlr_ext_workspace_group_handle_v1 *group);
++
++void wlr_ext_workspace_handle_v1_destroy(
++	struct wlr_ext_workspace_handle_v1 *workspace);
++
++void wlr_ext_workspace_group_handle_v1_output_enter(
++		struct wlr_ext_workspace_group_handle_v1 *group, struct wlr_output *output);
++
++void wlr_ext_workspace_group_handle_v1_output_leave(
++		struct wlr_ext_workspace_group_handle_v1 *group, struct wlr_output *output);
++
++void wlr_ext_workspace_handle_v1_set_name(
++		struct wlr_ext_workspace_handle_v1 *workspace, const char* name);
++
++void wlr_ext_workspace_handle_v1_set_coordinates(
++		struct wlr_ext_workspace_handle_v1 *workspace, struct wl_array *coordinates);
++
++void wlr_ext_workspace_handle_v1_set_active(
++		struct wlr_ext_workspace_handle_v1 *workspace, bool active);
++
++void wlr_ext_workspace_handle_v1_set_urgent(
++		struct wlr_ext_workspace_handle_v1 *workspace, bool urgent);
++
++void wlr_ext_workspace_handle_v1_set_hidden(
++		struct wlr_ext_workspace_handle_v1 *workspace, bool hidden);
++
++#endif
+diff --git a/protocol/ext-workspace-unstable-v1.xml b/protocol/ext-workspace-unstable-v1.xml
+new file mode 100644
+index 00000000..24410b62
+--- /dev/null
++++ b/protocol/ext-workspace-unstable-v1.xml
+@@ -0,0 +1,306 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<protocol name="ext_workspace_unstable_v1">
++  <copyright>
++    Copyright © 2019 Christopher Billington
++    Copyright © 2020 Ilia Bozhinov
++
++    Permission to use, copy, modify, distribute, and sell this
++    software and its documentation for any purpose is hereby granted
++    without fee, provided that the above copyright notice appear in
++    all copies and that both that copyright notice and this permission
++    notice appear in supporting documentation, and that the name of
++    the copyright holders not be used in advertising or publicity
++    pertaining to distribution of the software without specific,
++    written prior permission.  The copyright holders make no
++    representations about the suitability of this software for any
++    purpose.  It is provided "as is" without express or implied
++    warranty.
++
++    THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS
++    SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
++    FITNESS, IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
++    SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
++    WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
++    AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
++    ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
++    THIS SOFTWARE.
++  </copyright>
++
++  <interface name="zext_workspace_manager_v1" version="1">
++    <description summary="list and control workspaces">
++      Workspaces, also called virtual desktops, are groups of surfaces. A
++      compositor with a concept of workspaces may only show some such groups of
++      surfaces (those of 'active' workspaces) at a time. 'Activating' a
++      workspace is a request for the compositor to display that workspace's
++      surfaces as normal, whereas the compositor may hide or otherwise
++      de-emphasise surfaces that are associated only with 'inactive' workspaces.
++      Workspaces are grouped by which sets of outputs they correspond to, and
++      may contain surfaces only from those outputs. In this way, it is possible
++      for each output to have its own set of workspaces, or for all outputs (or
++      any other arbitrary grouping) to share workspaces. Compositors may
++      optionally conceptually arrange each group of workspaces in an
++      N-dimensional grid.
++
++      The purpose of this protocol is to enable the creation of taskbars and
++      docks by providing them with a list of workspaces and their properties,
++      and allowing them to activate and deactivate workspaces.
++
++      After a client binds the zext_workspace_manager_v1, each workspace will be
++      sent via the workspace event.
++    </description>
++
++    <event name="workspace_group">
++      <description summary="a workspace group has been created">
++        This event is emitted whenever a new workspace group has been created.
++
++        All initial details of the workspace group (workspaces, outputs) will be
++        sent immediately after this event via the corresponding events in
++        zext_workspace_group_handle_v1.
++      </description>
++      <arg name="workspace_group" type="new_id" interface="zext_workspace_group_handle_v1"/>
++    </event>
++
++    <request name="commit">
++      <description summary="all requests about the workspaces have been sent">
++        The client must send this request after it has finished sending other
++        requests. The compositor must process a series of requests preceding a
++        commit request atomically.
++
++        This allows changes to the workspace properties to be seen as atomic,
++        even if they happen via multiple events, and even if they involve
++        multiple zext_workspace_handle_v1 objects, for example, deactivating one
++        workspace and activating another.
++      </description>
++    </request>
++
++    <event name="done">
++      <description summary="all information about the workspace groups has been sent">
++        This event is sent after all changes in all workspace groups have been
++        sent.
++
++        This allows changes to one or more zext_workspace_group_handle_v1
++        properties to be seen as atomic, even if they happen via multiple
++        events. In particular, an output moving from one workspace group to
++        another sends an output_enter event and an output_leave event to the two
++        zext_workspace_group_handle_v1 objects in question. The compositor sends
++        the done event only after updating the output information in both
++        workspace groups.
++      </description>
++    </event>
++
++    <event name="finished">
++      <description summary="the compositor has finished with the workspace_manager">
++        This event indicates that the compositor is done sending events to the
++        zext_workspace_manager_v1. The server will destroy the object
++        immediately after sending this request, so it will become invalid and
++        the client should free any resources associated with it.
++      </description>
++    </event>
++
++    <request name="stop">
++      <description summary="stop sending events">
++        Indicates the client no longer wishes to receive events for new
++        workspace groups. However the compositor may emit further workspace
++        events, until the finished event is emitted.
++
++        The client must not send any more requests after this one.
++      </description>
++    </request>
++  </interface>
++
++  <interface name="zext_workspace_group_handle_v1" version="1">
++    <description summary="a workspace group assigned to a set of outputs">
++      A zext_workspace_group_handle_v1 object represents a a workspace group
++      that is assigned a set of outputs and contains a number of workspaces.
++
++      The set of outputs assigned to the workspace group is conveyed to the client via
++      output_enter and output_leave events, and its workspaces are conveyed with
++      workspace events.
++
++      For example, a compositor which has a set of workspaces for each output may
++      advertise a workspace group (and its workspaces) per output, whereas a compositor
++      where a workspace spans all outputs may advertise a single workspace group for all
++      outputs.
++    </description>
++
++    <event name="output_enter">
++      <description summary="output assigned to workspace group">
++        This event is emitted whenever an output is assigned to the workspace
++        group.
++      </description>
++      <arg name="output" type="object" interface="wl_output"/>
++    </event>
++
++    <event name="output_leave">
++      <description summary="output removed from workspace group">
++        This event is emitted whenever an output is removed from the workspace
++        group.
++      </description>
++      <arg name="output" type="object" interface="wl_output"/>
++    </event>
++
++    <event name="workspace">
++      <description summary="workspace added to workspace group">
++        This event is emitted whenever a new workspace has been created.
++
++        All initial details of the workspace (name, coordinates, state) will
++        be sent immediately after this event via the corresponding events in
++        zext_workspace_handle_v1.
++      </description>
++      <arg name="workspace" type="new_id" interface="zext_workspace_handle_v1"/>
++    </event>
++
++    <event name="remove">
++      <description summary="this workspace group has been destroyed">
++        This event means the zext_workspace_group_handle_v1 has been destroyed.
++        It is guaranteed there won't be any more events for this
++        zext_workspace_group_handle_v1. The zext_workspace_group_handle_v1 becomes
++        inert so any requests will be ignored except the destroy request.
++
++        The compositor must remove all workspaces belonging to a workspace group
++        before removing the workspace group.
++      </description>
++    </event>
++
++    <request name="create_workspace">
++      <description summary="create a new workspace">
++        Request that the compositor create a new workspace with the given name.
++
++        There is no guarantee that the compositor will create a new workspace,
++        or that the created workspace will have the provided name.
++      </description>
++      <arg name="workspace" type="string"/>
++    </request>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy the zext_workspace_handle_v1 object">
++        Destroys the zext_workspace_handle_v1 object.
++
++        This request should be called either when the client does not want to
++        use the workspace object any more or after the remove event to finalize
++        the destruction of the object.
++      </description>
++    </request>
++  </interface>
++
++  <interface name="zext_workspace_handle_v1" version="1">
++    <description summary="a workspace handing a group of surfaces">
++      A zext_workspace_handle_v1 object represents a a workspace that handles a
++      group of surfaces.
++
++      Each workspace has a name, conveyed to the client with the name event; a
++      list of states, conveyed to the client with the state event; and
++      optionally a set of coordinates, conveyed to the client with the
++      coordinates event. The client may request that the compositor activate or
++      deactivate the workspace.
++
++      Each workspace can belong to only a single workspace group.
++      Depepending on the compositor policy, there might be workspaces with
++      the same name in different workspace groups, but these workspaces are still
++      separate (e.g. one of them might be active while the other is not).
++    </description>
++
++    <event name="name">
++      <description summary="workspace name changed">
++        This event is emitted immediately after the zext_workspace_handle_v1 is
++        created and whenever the name of the workspace changes.
++      </description>
++      <arg name="name" type="string"/>
++    </event>
++
++    <event name="coordinates">
++      <description summary="workspace coordinates changed">
++        This event is used to organize workspaces into an N-dimensional grid
++        within a workspace group, and if supported, is emitted immediately after
++        the zext_workspace_handle_v1 is created and whenever the coordinates of
++        the workspace change. Compositors may not send this event if they do not
++        conceptually arrange workspaces in this way. If compositors simply
++        number workspaces, without any geometric interpretation, they may send
++        1D coordinates, which clients should not interpret as implying any
++        geometry. Sending an empty array means that the compositor no longer
++        orders the workspace geometrically.
++
++        Coordinates have an arbitrary number of dimensions N with an uint32
++        position along each dimension. By convention if N > 1, the first
++        dimension is X, the second Y, the third Z, and so on. The compositor may
++        chose to utilize these events for a more novel workspace layout
++        convention, however. No guarantee is made about the grid being filled or
++        bounded; there may be a workspace at coordinate 1 and another at
++        coordinate 1000 and none in between. Within a workspace group, however,
++        workspaces must have unique coordinates of equal dimensionality.
++      </description>
++      <arg name="coordinates" type="array"/>
++    </event>
++
++    <event name="state">
++      <description summary="the state of the workspace changed">
++        This event is emitted immediately after the zext_workspace_handle_v1 is
++        created and each time the workspace state changes, either because of a
++        compositor action or because of a request in this protocol.
++      </description>
++      <arg name="state" type="array"/>
++    </event>
++
++    <enum name="state">
++      <description summary="types of states on the workspace">
++        The different states that a workspace can have.
++      </description>
++
++      <entry name="active" value="0" summary="the workspace is active"/>
++      <entry name="urgent" value="1" summary="the workspace requests attention"/>
++      <entry name="hidden" value="2">
++        <description summary="the workspace is not visible">
++          The workspace is not visible in its workspace group, and clients
++          attempting to visualize the compositor workspace state should not
++          display such workspaces.
++        </description>
++      </entry>
++    </enum>
++
++    <event name="remove">
++      <description summary="this workspace has been destroyed">
++        This event means the zext_workspace_handle_v1 has been destroyed. It is
++        guaranteed there won't be any more events for this
++        zext_workspace_handle_v1. The zext_workspace_handle_v1 becomes inert so
++        any requests will be ignored except the destroy request.
++      </description>
++    </event>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy the zext_workspace_handle_v1 object">
++        Destroys the zext_workspace_handle_v1 object.
++
++        This request should be called either when the client does not want to
++        use the workspace object any more or after the remove event to finalize
++        the destruction of the object.
++      </description>
++    </request>
++
++    <request name="activate">
++      <description summary="activate the workspace">
++        Request that this workspace be activated.
++
++        There is no guarantee the workspace will be actually activated, and
++        behaviour may be compositor-dependent. For example, activating a
++        workspace may or may not deactivate all other workspaces in the same
++        group.
++      </description>
++    </request>
++
++    <request name="deactivate">
++      <description summary="activate the workspace">
++        Request that this workspace be deactivated.
++
++        There is no guarantee the workspace will be actually deactivated.
++      </description>
++    </request>
++
++    <request name="remove">
++      <description summary="remove the workspace">
++        Request that this workspace be removed.
++
++        There is no guarantee the workspace will be actually removed.
++      </description>
++    </request>
++  </interface>
++</protocol>
+diff --git a/protocol/meson.build b/protocol/meson.build
+index f4a91b94..c85ffe32 100644
+--- a/protocol/meson.build
++++ b/protocol/meson.build
+@@ -59,6 +59,7 @@ protocols = {
+ 	'wlr-output-power-management-unstable-v1': 'wlr-output-power-management-unstable-v1.xml',
+ 	'wlr-screencopy-unstable-v1': 'wlr-screencopy-unstable-v1.xml',
+ 	'wlr-virtual-pointer-unstable-v1': 'wlr-virtual-pointer-unstable-v1.xml',
++	'ext-workspace-unstable-v1': 'ext-workspace-unstable-v1.xml',
+ }
+ 
+ protocols_code = {}
+diff --git a/protocol/meson.build.orig b/protocol/meson.build.orig
+new file mode 100644
+index 00000000..f4a91b94
+--- /dev/null
++++ b/protocol/meson.build.orig
+@@ -0,0 +1,95 @@
++wayland_protos = dependency('wayland-protocols',
++	version: '>=1.31',
++	fallback: 'wayland-protocols',
++	default_options: ['tests=false'],
++)
++wl_protocol_dir = wayland_protos.get_variable('pkgdatadir')
++
++wayland_scanner_dep = dependency('wayland-scanner', native: true)
++wayland_scanner = find_program(
++	wayland_scanner_dep.get_variable('wayland_scanner'),
++	native: true,
++)
++
++protocols = {
++	# Stable upstream protocols
++	'presentation-time': wl_protocol_dir / 'stable/presentation-time/presentation-time.xml',
++	'viewporter': wl_protocol_dir / 'stable/viewporter/viewporter.xml',
++	'xdg-shell': wl_protocol_dir / 'stable/xdg-shell/xdg-shell.xml',
++
++	# Staging upstream protocols
++	'content-type-v1': wl_protocol_dir / 'staging/content-type/content-type-v1.xml',
++	'drm-lease-v1': wl_protocol_dir / 'staging/drm-lease/drm-lease-v1.xml',
++	'ext-idle-notify-v1': wl_protocol_dir / 'staging/ext-idle-notify/ext-idle-notify-v1.xml',
++	'ext-session-lock-v1': wl_protocol_dir / 'staging/ext-session-lock/ext-session-lock-v1.xml',
++	'fractional-scale-v1': wl_protocol_dir / 'staging/fractional-scale/fractional-scale-v1.xml',
++	'single-pixel-buffer-v1': wl_protocol_dir / 'staging/single-pixel-buffer/single-pixel-buffer-v1.xml',
++	'xdg-activation-v1': wl_protocol_dir / 'staging/xdg-activation/xdg-activation-v1.xml',
++	'xwayland-shell-v1': wl_protocol_dir / 'staging/xwayland-shell/xwayland-shell-v1.xml',
++
++	# Unstable upstream protocols
++	'fullscreen-shell-unstable-v1': wl_protocol_dir / 'unstable/fullscreen-shell/fullscreen-shell-unstable-v1.xml',
++	'idle-inhibit-unstable-v1': wl_protocol_dir / 'unstable/idle-inhibit/idle-inhibit-unstable-v1.xml',
++	'keyboard-shortcuts-inhibit-unstable-v1': wl_protocol_dir / 'unstable/keyboard-shortcuts-inhibit/keyboard-shortcuts-inhibit-unstable-v1.xml',
++	'linux-dmabuf-unstable-v1': wl_protocol_dir / 'unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml',
++	'pointer-constraints-unstable-v1': wl_protocol_dir / 'unstable/pointer-constraints/pointer-constraints-unstable-v1.xml',
++	'pointer-gestures-unstable-v1': wl_protocol_dir / 'unstable/pointer-gestures/pointer-gestures-unstable-v1.xml',
++	'primary-selection-unstable-v1': wl_protocol_dir / 'unstable/primary-selection/primary-selection-unstable-v1.xml',
++	'relative-pointer-unstable-v1': wl_protocol_dir / 'unstable/relative-pointer/relative-pointer-unstable-v1.xml',
++	'tablet-unstable-v2': wl_protocol_dir / 'unstable/tablet/tablet-unstable-v2.xml',
++	'text-input-unstable-v3': wl_protocol_dir / 'unstable/text-input/text-input-unstable-v3.xml',
++	'xdg-decoration-unstable-v1': wl_protocol_dir / 'unstable/xdg-decoration/xdg-decoration-unstable-v1.xml',
++	'xdg-foreign-unstable-v1': wl_protocol_dir / 'unstable/xdg-foreign/xdg-foreign-unstable-v1.xml',
++	'xdg-foreign-unstable-v2': wl_protocol_dir / 'unstable/xdg-foreign/xdg-foreign-unstable-v2.xml',
++	'xdg-output-unstable-v1': wl_protocol_dir / 'unstable/xdg-output/xdg-output-unstable-v1.xml',
++
++	# Other protocols
++	'drm': 'drm.xml',
++	'input-method-unstable-v2': 'input-method-unstable-v2.xml',
++	'kde-idle': 'idle.xml',
++	'kde-server-decoration': 'server-decoration.xml',
++	'virtual-keyboard-unstable-v1': 'virtual-keyboard-unstable-v1.xml',
++	'wlr-data-control-unstable-v1': 'wlr-data-control-unstable-v1.xml',
++	'wlr-export-dmabuf-unstable-v1': 'wlr-export-dmabuf-unstable-v1.xml',
++	'wlr-foreign-toplevel-management-unstable-v1': 'wlr-foreign-toplevel-management-unstable-v1.xml',
++	'wlr-gamma-control-unstable-v1': 'wlr-gamma-control-unstable-v1.xml',
++	'wlr-input-inhibitor-unstable-v1': 'wlr-input-inhibitor-unstable-v1.xml',
++	'wlr-layer-shell-unstable-v1': 'wlr-layer-shell-unstable-v1.xml',
++	'wlr-output-management-unstable-v1': 'wlr-output-management-unstable-v1.xml',
++	'wlr-output-power-management-unstable-v1': 'wlr-output-power-management-unstable-v1.xml',
++	'wlr-screencopy-unstable-v1': 'wlr-screencopy-unstable-v1.xml',
++	'wlr-virtual-pointer-unstable-v1': 'wlr-virtual-pointer-unstable-v1.xml',
++}
++
++protocols_code = {}
++protocols_server_header = {}
++protocols_client_header = {}
++foreach name, path : protocols
++	code = custom_target(
++		name.underscorify() + '_c',
++		input: path,
++		output: '@BASENAME@-protocol.c',
++		command: [wayland_scanner, 'private-code', '@INPUT@', '@OUTPUT@'],
++	)
++	wlr_files += code
++
++	server_header = custom_target(
++		name.underscorify() + '_server_h',
++		input: path,
++		output: '@BASENAME@-protocol.h',
++		command: [wayland_scanner, 'server-header', '@INPUT@', '@OUTPUT@'],
++	)
++	wlr_files += server_header
++
++	client_header = custom_target(
++		name.underscorify() + '_client_h',
++		input: path,
++		output: '@BASENAME@-client-protocol.h',
++		command: [wayland_scanner, 'client-header', '@INPUT@', '@OUTPUT@'],
++		build_by_default: false,
++	)
++
++	protocols_code += { name: code }
++	protocols_server_header += { name: server_header }
++	protocols_client_header += { name: client_header }
++endforeach
+diff --git a/types/meson.build b/types/meson.build
+index 1e5769d7..bc8948c4 100644
+--- a/types/meson.build
++++ b/types/meson.build
+@@ -41,6 +41,7 @@ wlr_files += files(
+ 	'wlr_data_control_v1.c',
+ 	'wlr_drm.c',
+ 	'wlr_export_dmabuf_v1.c',
++	'wlr_ext_workspace_v1.c',
+ 	'wlr_foreign_toplevel_management_v1.c',
+ 	'wlr_fullscreen_shell_v1.c',
+ 	'wlr_gamma_control_v1.c',
+diff --git a/types/meson.build.orig b/types/meson.build.orig
+new file mode 100644
+index 00000000..1e5769d7
+--- /dev/null
++++ b/types/meson.build.orig
+@@ -0,0 +1,100 @@
++wlr_files += files(
++	'data_device/wlr_data_device.c',
++	'data_device/wlr_data_offer.c',
++	'data_device/wlr_data_source.c',
++	'data_device/wlr_drag.c',
++	'output/cursor.c',
++	'output/output.c',
++	'output/render.c',
++	'output/state.c',
++	'output/swapchain.c',
++	'output/transform.c',
++	'scene/drag_icon.c',
++	'scene/subsurface_tree.c',
++	'scene/surface.c',
++	'scene/wlr_scene.c',
++	'scene/output_layout.c',
++	'scene/xdg_shell.c',
++	'scene/layer_shell_v1.c',
++	'seat/wlr_seat_keyboard.c',
++	'seat/wlr_seat_pointer.c',
++	'seat/wlr_seat_touch.c',
++	'seat/wlr_seat.c',
++	'tablet_v2/wlr_tablet_v2_pad.c',
++	'tablet_v2/wlr_tablet_v2_tablet.c',
++	'tablet_v2/wlr_tablet_v2_tool.c',
++	'tablet_v2/wlr_tablet_v2.c',
++	'xdg_shell/wlr_xdg_popup.c',
++	'xdg_shell/wlr_xdg_positioner.c',
++	'xdg_shell/wlr_xdg_shell.c',
++	'xdg_shell/wlr_xdg_surface.c',
++	'xdg_shell/wlr_xdg_toplevel.c',
++	'buffer/buffer.c',
++	'buffer/client.c',
++	'buffer/dmabuf.c',
++	'buffer/readonly_data.c',
++	'buffer/resource.c',
++	'wlr_compositor.c',
++	'wlr_content_type_v1.c',
++	'wlr_cursor.c',
++	'wlr_damage_ring.c',
++	'wlr_data_control_v1.c',
++	'wlr_drm.c',
++	'wlr_export_dmabuf_v1.c',
++	'wlr_foreign_toplevel_management_v1.c',
++	'wlr_fullscreen_shell_v1.c',
++	'wlr_gamma_control_v1.c',
++	'wlr_idle_inhibit_v1.c',
++	'wlr_idle.c',
++	'wlr_idle_notify_v1.c',
++	'wlr_input_device.c',
++	'wlr_input_inhibitor.c',
++	'wlr_input_method_v2.c',
++	'wlr_keyboard.c',
++	'wlr_keyboard_group.c',
++	'wlr_keyboard_shortcuts_inhibit_v1.c',
++	'wlr_layer_shell_v1.c',
++	'wlr_linux_dmabuf_v1.c',
++	'wlr_matrix.c',
++	'wlr_output_damage.c',
++	'wlr_output_layer.c',
++	'wlr_output_layout.c',
++	'wlr_output_management_v1.c',
++	'wlr_output_power_management_v1.c',
++	'wlr_pointer_constraints_v1.c',
++	'wlr_pointer_gestures_v1.c',
++	'wlr_pointer.c',
++	'wlr_presentation_time.c',
++	'wlr_primary_selection_v1.c',
++	'wlr_primary_selection.c',
++	'wlr_region.c',
++	'wlr_relative_pointer_v1.c',
++	'wlr_screencopy_v1.c',
++	'wlr_server_decoration.c',
++	'wlr_session_lock_v1.c',
++	'wlr_shm.c',
++	'wlr_single_pixel_buffer_v1.c',
++	'wlr_subcompositor.c',
++	'wlr_fractional_scale_v1.c',
++	'wlr_switch.c',
++	'wlr_tablet_pad.c',
++	'wlr_tablet_tool.c',
++	'wlr_text_input_v3.c',
++	'wlr_touch.c',
++	'wlr_viewporter.c',
++	'wlr_virtual_keyboard_v1.c',
++	'wlr_virtual_pointer_v1.c',
++	'wlr_xcursor_manager.c',
++	'wlr_xdg_activation_v1.c',
++	'wlr_xdg_decoration_v1.c',
++	'wlr_xdg_foreign_v1.c',
++	'wlr_xdg_foreign_v2.c',
++	'wlr_xdg_foreign_registry.c',
++	'wlr_xdg_output_v1.c',
++)
++
++if features.get('drm-backend')
++	wlr_files += files(
++		'wlr_drm_lease_v1.c',
++	)
++endif
+diff --git a/types/wlr_ext_workspace_v1.c b/types/wlr_ext_workspace_v1.c
+new file mode 100644
+index 00000000..87d9e57d
+--- /dev/null
++++ b/types/wlr_ext_workspace_v1.c
+@@ -0,0 +1,618 @@
++#define _POSIX_C_SOURCE 200809L
++
++#include <assert.h>
++#include <string.h>
++#include <stdlib.h>
++#include <wlr/types/wlr_ext_workspace_v1.h>
++#include <wlr/types/wlr_seat.h>
++#include <wlr/util/log.h>
++
++#include "ext-workspace-unstable-v1-protocol.h"
++
++#define WORKSPACE_V1_VERSION 1
++
++static void workspace_manager_idle_send_done(void *data) {
++	struct wlr_ext_workspace_manager_v1 *manager = data;
++	struct wl_resource *resource, *tmp;
++	wl_resource_for_each_safe(resource, tmp, &manager->resources) {
++		zext_workspace_manager_v1_send_done(resource);
++	}
++
++	manager->idle_source = NULL;
++}
++
++static void workspace_manager_update_idle_source(
++		struct wlr_ext_workspace_manager_v1 *manager) {
++	if (manager->idle_source) {
++		return;
++	}
++
++	manager->idle_source = wl_event_loop_add_idle(manager->event_loop,
++			workspace_manager_idle_send_done, manager);
++}
++
++static const struct zext_workspace_handle_v1_interface workspace_handle_impl;
++static const struct zext_workspace_group_handle_v1_interface workspace_group_impl;
++
++static struct wlr_ext_workspace_handle_v1 *workspace_from_resource(
++		struct wl_resource *resource) {
++	assert(wl_resource_instance_of(resource,
++			&zext_workspace_handle_v1_interface,
++			&workspace_handle_impl));
++	return wl_resource_get_user_data(resource);
++}
++
++static struct wlr_ext_workspace_group_handle_v1 *workspace_group_from_resource(
++		struct wl_resource *resource) {
++	assert(wl_resource_instance_of(resource,
++			&zext_workspace_group_handle_v1_interface,
++			&workspace_group_impl));
++	return wl_resource_get_user_data(resource);
++}
++
++static void workspace_handle_destroy(struct wl_client *client,
++		struct wl_resource *resource) {
++	wl_resource_destroy(resource);
++}
++
++static void workspace_handle_activate(struct wl_client *client,
++		struct wl_resource *resource) {
++	struct wlr_ext_workspace_handle_v1 *workspace = workspace_from_resource(resource);
++	if (!workspace) {
++		return;
++	}
++
++	workspace->pending |= WLR_EXT_WORKSPACE_HANDLE_V1_STATE_ACTIVE;
++}
++
++static void workspace_handle_remove(struct wl_client *client,
++		struct wl_resource *resource) {
++	struct wlr_ext_workspace_handle_v1 *workspace = workspace_from_resource(resource);
++	if (!workspace) {
++		return;
++	}
++
++	wl_signal_emit_mutable(&workspace->events.remove_request, NULL);
++}
++
++static void workspace_handle_deactivate(struct wl_client *client,
++		struct wl_resource *resource) {
++	struct wlr_ext_workspace_handle_v1 *workspace = workspace_from_resource(resource);
++	if (!workspace) {
++		return;
++	}
++
++	workspace->pending &= ~WLR_EXT_WORKSPACE_HANDLE_V1_STATE_ACTIVE;
++}
++
++static void workspace_handle_resource_destroy(struct wl_resource *resource) {
++	wl_list_remove(wl_resource_get_link(resource));
++}
++
++static bool push_entry_in_array(struct wl_array *array, uint32_t entry) {
++	uint32_t *index = wl_array_add(array, sizeof(uint32_t));
++	if (index == NULL) {
++		return false;
++	}
++	*index = entry;
++	return true;
++}
++
++static bool fill_array_from_workspace_state(struct wl_array *array,
++		uint32_t state) {
++	if ((state & WLR_EXT_WORKSPACE_HANDLE_V1_STATE_ACTIVE) &&
++			!push_entry_in_array(array, ZEXT_WORKSPACE_HANDLE_V1_STATE_ACTIVE)) {
++		return false;
++	}
++	if ((state & WLR_EXT_WORKSPACE_HANDLE_V1_STATE_URGENT) &&
++			!push_entry_in_array(array, ZEXT_WORKSPACE_HANDLE_V1_STATE_URGENT)) {
++		return false;
++	}
++	if ((state & WLR_EXT_WORKSPACE_HANDLE_V1_STATE_HIDDEN) &&
++			!push_entry_in_array(array, ZEXT_WORKSPACE_HANDLE_V1_STATE_HIDDEN)) {
++		return false;
++	}
++
++	return true;
++}
++
++static void workspace_handle_send_details_to_resource(
++		struct wlr_ext_workspace_handle_v1 *workspace, struct wl_resource *resource) {
++	if (workspace->name) {
++		zext_workspace_handle_v1_send_name(resource, workspace->name);
++	}
++
++	if (workspace->coordinates.size > 0) {
++		zext_workspace_handle_v1_send_coordinates(resource,
++			&workspace->coordinates);
++	}
++
++	struct wl_array state;
++	wl_array_init(&state);
++	if (!fill_array_from_workspace_state(&state, workspace->server_state)) {
++		wl_resource_post_no_memory(resource);
++		wl_array_release(&state);
++		return;
++	}
++
++	zext_workspace_handle_v1_send_state(resource, &state);
++}
++
++static const struct zext_workspace_handle_v1_interface workspace_handle_impl = {
++	.destroy    = workspace_handle_destroy,
++	.activate   = workspace_handle_activate,
++	.deactivate = workspace_handle_deactivate,
++	.remove     = workspace_handle_remove,
++};
++
++void wlr_ext_workspace_handle_v1_set_name(struct wlr_ext_workspace_handle_v1 *workspace,
++		const char* name) {
++	free(workspace->name);
++	workspace->name = strdup(name);
++
++	struct wl_resource *tmp, *resource;
++	wl_resource_for_each_safe(resource, tmp, &workspace->resources) {
++		zext_workspace_handle_v1_send_name(resource, name);
++	}
++
++	workspace_manager_update_idle_source(workspace->group->manager);
++}
++
++void wlr_ext_workspace_handle_v1_set_coordinates(
++		struct wlr_ext_workspace_handle_v1 *workspace, struct wl_array *coordinates) {
++	wl_array_copy(&workspace->coordinates, coordinates);
++
++	struct wl_resource *tmp, *resource;
++	wl_resource_for_each_safe(resource, tmp, &workspace->resources) {
++		zext_workspace_handle_v1_send_coordinates(resource, coordinates);
++	}
++
++	workspace_manager_update_idle_source(workspace->group->manager);
++}
++
++static void workspace_send_state(struct wlr_ext_workspace_handle_v1 *workspace) {
++	struct wl_array state;
++	wl_array_init(&state);
++
++	if (!fill_array_from_workspace_state(&state, workspace->server_state)) {
++		struct wl_resource *resource;
++		wl_resource_for_each(resource, &workspace->resources) {
++			wl_resource_post_no_memory(resource);
++		}
++
++		wl_array_release(&state);
++		return;
++	}
++
++	struct wl_resource *tmp, *resource;
++	wl_resource_for_each_safe(resource, tmp, &workspace->resources) {
++		zext_workspace_handle_v1_send_state(resource, &state);
++	}
++
++	wl_array_release(&state);
++	workspace_manager_update_idle_source(workspace->group->manager);
++}
++
++void wlr_ext_workspace_handle_v1_set_active(
++		struct wlr_ext_workspace_handle_v1 *workspace, bool activate) {
++	if (activate) {
++		workspace->server_state |= WLR_EXT_WORKSPACE_HANDLE_V1_STATE_ACTIVE;
++	} else {
++		workspace->server_state &= ~WLR_EXT_WORKSPACE_HANDLE_V1_STATE_ACTIVE;
++	}
++
++	workspace_send_state(workspace);
++}
++
++void wlr_ext_workspace_handle_v1_set_urgent(
++		struct wlr_ext_workspace_handle_v1 *workspace, bool urgent) {
++	if (urgent) {
++		workspace->server_state |= WLR_EXT_WORKSPACE_HANDLE_V1_STATE_URGENT;
++	} else {
++		workspace->server_state &= ~WLR_EXT_WORKSPACE_HANDLE_V1_STATE_URGENT;
++	}
++
++	workspace_send_state(workspace);
++}
++
++void wlr_ext_workspace_handle_v1_set_hidden(
++		struct wlr_ext_workspace_handle_v1 *workspace, bool hidden) {
++	if (hidden) {
++		workspace->server_state |= WLR_EXT_WORKSPACE_HANDLE_V1_STATE_HIDDEN;
++	} else {
++		workspace->server_state &= ~WLR_EXT_WORKSPACE_HANDLE_V1_STATE_HIDDEN;
++	}
++
++	workspace_send_state(workspace);
++}
++
++static struct wl_resource *create_workspace_resource_for_group_resource(
++		struct wlr_ext_workspace_handle_v1 *workspace,
++		struct wl_resource *group_resource) {
++
++	struct wl_client *client = wl_resource_get_client(group_resource);
++	struct wl_resource *resource = wl_resource_create(client,
++			&zext_workspace_handle_v1_interface,
++			wl_resource_get_version(group_resource), 0);
++	if (!resource) {
++		wl_client_post_no_memory(client);
++		return NULL;
++	}
++
++	wl_resource_set_implementation(resource, &workspace_handle_impl, workspace,
++			workspace_handle_resource_destroy);
++
++	wl_list_insert(&workspace->resources, wl_resource_get_link(resource));
++	zext_workspace_group_handle_v1_send_workspace(group_resource, resource);
++
++	return resource;
++}
++
++struct wlr_ext_workspace_handle_v1 *wlr_ext_workspace_handle_v1_create(
++		struct wlr_ext_workspace_group_handle_v1 *group) {
++	struct wlr_ext_workspace_handle_v1 *workspace = calloc(1,
++			sizeof(struct wlr_ext_workspace_handle_v1));
++	if (!workspace) {
++		return NULL;
++	}
++
++	workspace->group = group;
++	wl_list_insert(&group->workspaces, &workspace->link);
++	wl_array_init(&workspace->coordinates);
++	wl_list_init(&workspace->resources);
++	wl_signal_init(&workspace->events.remove_request);
++	wl_signal_init(&workspace->events.destroy);
++
++	struct wl_resource *tmp, *group_resource;
++	wl_resource_for_each_safe(group_resource, tmp, &group->resources) {
++		create_workspace_resource_for_group_resource(workspace, group_resource);
++	}
++
++	return workspace;
++}
++
++void wlr_ext_workspace_handle_v1_destroy(
++		struct wlr_ext_workspace_handle_v1 *workspace) {
++	if (!workspace) {
++		return;
++	}
++
++	wl_signal_emit_mutable(&workspace->events.destroy, workspace);
++
++	workspace_manager_update_idle_source(workspace->group->manager);
++
++	struct wl_resource *tmp, *resource;
++	wl_resource_for_each_safe(resource, tmp, &workspace->resources) {
++		zext_workspace_handle_v1_send_remove(resource);
++
++		wl_resource_set_user_data(resource, NULL);
++		wl_list_remove(&resource->link);
++		wl_list_init(&resource->link);
++	}
++
++	wl_array_release(&workspace->coordinates);
++	wl_list_remove(&workspace->link);
++	free(workspace->name);
++}
++
++static void workspace_group_handle_handle_create_workspace(struct wl_client *client,
++		struct wl_resource *resource, const char *arg) {
++	struct wlr_ext_workspace_group_handle_v1 *group =
++		workspace_group_from_resource(resource);
++
++	struct wlr_ext_workspace_group_handle_v1_create_workspace_event event;
++	event.workspace_group = group;
++	event.name = arg;
++	wl_signal_emit_mutable(&group->events.create_workspace_request, &event);
++}
++
++static void workspace_group_handle_handle_destroy(struct wl_client *client,
++		struct wl_resource *resource) {
++	wl_resource_destroy(resource);
++}
++
++static const struct zext_workspace_group_handle_v1_interface workspace_group_impl = {
++	.create_workspace = workspace_group_handle_handle_create_workspace,
++	.destroy          = workspace_group_handle_handle_destroy,
++};
++
++static void workspace_group_resource_destroy(struct wl_resource *resource) {
++	wl_list_remove(wl_resource_get_link(resource));
++}
++
++/**
++ * Create the workspace group resource and child workspace resources as well.
++ */
++static struct wl_resource *create_workspace_group_resource_for_resource(
++		struct wlr_ext_workspace_group_handle_v1 *group,
++		struct wl_resource *manager_resource) {
++	struct wl_client *client = wl_resource_get_client(manager_resource);
++	struct wl_resource *resource = wl_resource_create(client,
++			&zext_workspace_group_handle_v1_interface,
++			wl_resource_get_version(manager_resource), 0);
++	if (!resource) {
++		wl_client_post_no_memory(client);
++		return NULL;
++	}
++
++	wl_resource_set_implementation(resource, &workspace_group_impl, group,
++			workspace_group_resource_destroy);
++
++	wl_list_insert(&group->resources, wl_resource_get_link(resource));
++	zext_workspace_manager_v1_send_workspace_group(manager_resource, resource);
++
++	struct wlr_ext_workspace_handle_v1 *tmp, *workspace;
++	wl_list_for_each_safe(workspace, tmp, &group->workspaces, link) {
++		struct wl_resource *workspace_resource =
++			create_workspace_resource_for_group_resource(workspace, resource);
++		workspace_handle_send_details_to_resource(workspace, workspace_resource);
++	}
++
++	return resource;
++}
++
++static void send_output_to_group_resource(struct wl_resource *group_resource,
++		struct wlr_output *output, bool enter) {
++	struct wl_client *client = wl_resource_get_client(group_resource);
++	struct wl_resource *output_resource, *tmp;
++
++	wl_resource_for_each_safe(output_resource, tmp, &output->resources) {
++		if (wl_resource_get_client(output_resource) == client) {
++			if (enter) {
++				zext_workspace_group_handle_v1_send_output_enter(group_resource,
++					output_resource);
++			} else {
++				zext_workspace_group_handle_v1_send_output_leave(group_resource,
++					output_resource);
++			}
++		}
++	}
++}
++
++static void group_send_output(struct wlr_ext_workspace_group_handle_v1 *group,
++		struct wlr_output *output, bool enter) {
++	struct wl_resource *resource, *tmp;
++	wl_resource_for_each_safe(resource, tmp, &group->resources) {
++		send_output_to_group_resource(resource, output, enter);
++	}
++}
++
++static void workspace_handle_output_destroy(struct wl_listener *listener,
++		void *data) {
++	struct wlr_ext_workspace_group_handle_v1_output *output =
++		wl_container_of(listener, output, output_destroy);
++	wlr_ext_workspace_group_handle_v1_output_leave(output->group_handle,
++		output->output);
++}
++
++void wlr_ext_workspace_group_handle_v1_output_enter(
++		struct wlr_ext_workspace_group_handle_v1 *group, struct wlr_output *output) {
++	struct wlr_ext_workspace_group_handle_v1_output *group_output;
++	wl_list_for_each(group_output, &group->outputs, link) {
++		if (group_output->output == output) {
++			return; // we have already sent output_enter event
++		}
++	}
++
++	group_output = calloc(1, sizeof(struct wlr_ext_workspace_group_handle_v1_output));
++	if (!group_output) {
++		wlr_log(WLR_ERROR, "failed to allocate memory for workspace output");
++		return;
++	}
++
++	group_output->output = output;
++	group_output->group_handle = group;
++	wl_list_insert(&group->outputs, &group_output->link);
++
++	group_output->output_destroy.notify = workspace_handle_output_destroy;
++	wl_signal_add(&output->events.destroy, &group_output->output_destroy);
++
++	group_send_output(group, output, true);
++}
++
++static void group_output_destroy(
++		struct wlr_ext_workspace_group_handle_v1_output *output) {
++	wl_list_remove(&output->link);
++	wl_list_remove(&output->output_destroy.link);
++	free(output);
++}
++
++void wlr_ext_workspace_group_handle_v1_output_leave(
++		struct wlr_ext_workspace_group_handle_v1 *group, struct wlr_output *output) {
++	struct wlr_ext_workspace_group_handle_v1_output *group_output_iterator;
++	struct wlr_ext_workspace_group_handle_v1_output *group_output = NULL;
++
++	wl_list_for_each(group_output_iterator, &group->outputs, link) {
++		if (group_output_iterator->output == output) {
++			group_output = group_output_iterator;
++			break;
++		}
++	}
++
++	if (group_output) {
++		group_send_output(group, output, false);
++		group_output_destroy(group_output);
++	} else {
++		// XXX: log an error? crash?
++	}
++}
++
++static void group_send_details_to_resource(
++		struct wlr_ext_workspace_group_handle_v1 *group,
++		struct wl_resource *resource) {
++	struct wlr_ext_workspace_group_handle_v1_output *output;
++	wl_list_for_each(output, &group->outputs, link) {
++		send_output_to_group_resource(resource, output->output, true);
++	}
++}
++
++struct wlr_ext_workspace_group_handle_v1 *wlr_ext_workspace_group_handle_v1_create(
++		struct wlr_ext_workspace_manager_v1 *manager) {
++
++	struct wlr_ext_workspace_group_handle_v1 *group = calloc(1,
++			sizeof(struct wlr_ext_workspace_group_handle_v1));
++	if (!group) {
++		return NULL;
++	}
++
++	group->manager = manager;
++	wl_list_insert(&manager->groups, &group->link);
++
++	wl_list_init(&group->outputs);
++	wl_list_init(&group->resources);
++	wl_list_init(&group->workspaces);
++	wl_signal_init(&group->events.create_workspace_request);
++	wl_signal_init(&group->events.destroy);
++
++	struct wl_resource *tmp, *manager_resource;
++	wl_resource_for_each_safe(manager_resource, tmp, &manager->resources) {
++		create_workspace_group_resource_for_resource(group, manager_resource);
++	}
++
++	return group;
++}
++
++void wlr_ext_workspace_group_handle_v1_destroy(
++		struct wlr_ext_workspace_group_handle_v1 *group) {
++	if (!group) {
++		return;
++	}
++
++	struct wlr_ext_workspace_handle_v1 *workspace, *tmp;
++	wl_list_for_each_safe(workspace, tmp, &group->workspaces, link) {
++		wlr_ext_workspace_handle_v1_destroy(workspace);
++	}
++
++	wl_signal_emit_mutable(&group->events.destroy, group);
++	workspace_manager_update_idle_source(group->manager);
++
++	struct wlr_ext_workspace_group_handle_v1_output *output, *tmp2;
++	wl_list_for_each_safe(output, tmp2, &group->outputs, link) {
++		group_output_destroy(output);
++	}
++
++	struct wl_resource *tmp3, *resource;
++	wl_resource_for_each_safe(resource, tmp3, &group->resources) {
++		zext_workspace_group_handle_v1_send_remove(resource);
++
++		wl_resource_set_user_data(resource, NULL);
++		wl_list_remove(&resource->link);
++		wl_list_init(&resource->link);
++	}
++
++	free(group);
++}
++
++static const struct zext_workspace_manager_v1_interface workspace_manager_impl;
++
++static struct wlr_ext_workspace_manager_v1 *manager_from_resource(
++		struct wl_resource *resource) {
++	assert(wl_resource_instance_of(resource,
++			&zext_workspace_manager_v1_interface,
++			&workspace_manager_impl));
++	return wl_resource_get_user_data(resource);
++}
++
++static void workspace_manager_commit(struct wl_client *client,
++		struct wl_resource *resource) {
++	struct wlr_ext_workspace_manager_v1 *manager = manager_from_resource(resource);
++	if (!manager) {
++		return;
++	}
++
++	struct wlr_ext_workspace_group_handle_v1 *group;
++	struct wlr_ext_workspace_handle_v1 *workspace;
++	wl_list_for_each(group, &manager->groups, link) {
++		wl_list_for_each(workspace, &group->workspaces, link) {
++			workspace->current = workspace->pending;
++		}
++	}
++
++	wl_signal_emit_mutable(&manager->events.commit, manager);
++}
++
++static void workspace_manager_stop(struct wl_client *client,
++		     struct wl_resource *resource) {
++	struct wlr_ext_workspace_manager_v1 *manager = manager_from_resource(resource);
++	if (!manager) {
++		return;
++	}
++
++	zext_workspace_manager_v1_send_finished(resource);
++	wl_resource_destroy(resource);
++}
++
++static const struct zext_workspace_manager_v1_interface
++		workspace_manager_impl = {
++	.commit = workspace_manager_commit,
++	.stop   = workspace_manager_stop,
++};
++
++static void workspace_manager_resource_destroy( struct wl_resource *resource) {
++	wl_list_remove(wl_resource_get_link(resource));
++}
++
++static void workspace_manager_bind(struct wl_client *client, void *data,
++		uint32_t version, uint32_t id) {
++	struct wlr_ext_workspace_manager_v1 *manager = data;
++	struct wl_resource *resource = wl_resource_create(client,
++			&zext_workspace_manager_v1_interface, version, id);
++	if (!resource) {
++		wl_client_post_no_memory(client);
++		return;
++	}
++	wl_resource_set_implementation(resource, &workspace_manager_impl,
++			manager, workspace_manager_resource_destroy);
++
++	wl_list_insert(&manager->resources, wl_resource_get_link(resource));
++
++	struct wlr_ext_workspace_group_handle_v1 *group, *tmp;
++	wl_list_for_each_safe(group, tmp, &manager->groups, link) {
++		struct wl_resource *group_resource =
++			create_workspace_group_resource_for_resource(group, resource);
++		group_send_details_to_resource(group, group_resource);
++	}
++
++	zext_workspace_manager_v1_send_done(resource);
++}
++
++static void handle_display_destroy(struct wl_listener *listener, void *data) {
++	struct wlr_ext_workspace_manager_v1 *manager =
++		wl_container_of(listener, manager, display_destroy);
++
++	wl_signal_emit_mutable(&manager->events.destroy, manager);
++	wl_list_remove(&manager->display_destroy.link);
++	wl_global_destroy(manager->global);
++
++	free(manager);
++}
++
++struct wlr_ext_workspace_manager_v1 *wlr_ext_workspace_manager_v1_create(
++		struct wl_display *display) {
++
++	struct wlr_ext_workspace_manager_v1 *manager = calloc(1,
++			sizeof(struct wlr_ext_workspace_manager_v1));
++	if (!manager) {
++		return NULL;
++	}
++
++	manager->event_loop = wl_display_get_event_loop(display);
++	manager->global = wl_global_create(display,
++			&zext_workspace_manager_v1_interface,
++			WORKSPACE_V1_VERSION, manager,
++			workspace_manager_bind);
++	if (!manager->global) {
++		free(manager);
++		return NULL;
++	}
++
++	wl_signal_init(&manager->events.destroy);
++	wl_signal_init(&manager->events.commit);
++	wl_list_init(&manager->resources);
++	wl_list_init(&manager->groups);
++
++	manager->display_destroy.notify = handle_display_destroy;
++	wl_display_add_destroy_listener(display, &manager->display_destroy);
++
++	return manager;
++}
