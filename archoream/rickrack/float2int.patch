@@ -1,0 +1,260 @@
+diff --git a/src/main/python/main.py b/src/main/python/main.py
+index 114190e..1e62daa 100644
+--- a/src/main/python/main.py
++++ b/src/main/python/main.py
+@@ -362,7 +362,7 @@ class Rickrack(QMainWindow, Ui_MainWindow):
+                 new_y = (scr_geometry.height() - cur_geometry.height()) / 2
+                 new_x = 0 if new_x < 0 else new_x
+                 new_y = 0 if new_y < 0 else new_y
+-                self.setGeometry(new_x, new_y, cur_geometry.width(), cur_geometry.height())
++                self.setGeometry(int(new_x), int(new_y), int(cur_geometry.width()), int(cur_geometry.height()))
+ 
+     def _setup_workarea(self):
+         """
+diff --git a/src/main/python/ricore/transpt.py b/src/main/python/ricore/transpt.py
+index 6f92119..98e19dc 100644
+--- a/src/main/python/ricore/transpt.py
++++ b/src/main/python/ricore/transpt.py
+@@ -115,7 +115,7 @@ def get_outer_box(center, radius):
+         outer box.
+     """
+ 
+-    box = np.array((center[0] - radius, center[1] - radius, 2 * radius, 2 * radius))
++    box = np.array((int(center[0] - radius), int(center[1] - radius), int(2 * radius), int(2 * radius)))
+     return box
+ 
+ def get_box_center(box):
+diff --git a/src/main/python/wgets/board.py b/src/main/python/wgets/board.py
+index 2eb993e..bbd9455 100644
+--- a/src/main/python/wgets/board.py
++++ b/src/main/python/wgets/board.py
+@@ -301,7 +301,7 @@ class Board(QWidget):
+             self._show_points = False
+ 
+         self._cs_wid = int(min(self.width(), self.height()) * self._args.board_ratio)
+-        self._cs_box = ((self.width() - self._cs_wid) / 2, (self.height() - self._cs_wid) / 2, self._cs_wid, self._cs_wid)
++        self._cs_box = (int((self.width() - self._cs_wid) / 2), int((self.height() - self._cs_wid) / 2), int(self._cs_wid), int(self._cs_wid))
+         painter = QPainter()
+         painter.begin(self)
+         painter.setRenderHint(QPainter.Antialiasing, True)
+@@ -446,7 +446,7 @@ class Board(QWidget):
+                 painter.drawEllipse(*outer_circle[0])
+ 
+                 for line in outer_circle[1:]:
+-                    painter.drawLine(QPoint(*line[0]), QPoint(*line[1]))
++                    painter.drawLine(QPoint(int(line[0][0]), int(line[0][1])), QPoint(int(line[1][0]), int(line[1][1])))
+ 
+                 if len(self._outer_circles[4]) > 2:
+                     if self._outer_circles[5] == 1:
+@@ -461,7 +461,7 @@ class Board(QWidget):
+                     painter.drawEllipse(*outer_circle[0])
+ 
+                     for line in outer_circle[1:]:
+-                        painter.drawLine(QPoint(*line[0]), QPoint(*line[1]))
++                        painter.drawLine(QPoint(int(line[0][0]), int(line[0][1])), QPoint(int(line[1][0]), int(line[1][1])))
+ 
+                     if self._outer_circles[5] == 2:
+                         painter.setPen(QPen(QColor(*frame_color, ), self._args.negative_wid * 2/3))
+@@ -476,9 +476,9 @@ class Board(QWidget):
+ 
+                     if self._outer_circles[1] < len(self._args.sys_grid_assitlocs[self._outer_circles[0]]) and self._args.sys_grid_assitlocs[self._outer_circles[0]][self._outer_circles[1]][5]:
+                         line = outer_circle[1]
+-                        painter.drawLine(QPoint(*line[0]), QPoint(*line[1]))
++                        painter.drawLine(QPoint(int(line[0][0]), int(line[0][1])), QPoint(int(line[1][0]), int(line[1][1])))
+ 
+-                    poly = QPolygon([QPoint(*i) for i in outer_circle[2]])
++                    poly = QPolygon([QPoint(int(point[0]), int(point[1])) for point in outer_circle[2]])
+                     painter.drawPolygon(poly)
+ 
+         painter.end()
+diff --git a/src/main/python/wgets/cube.py b/src/main/python/wgets/cube.py
+index 2a3aebe..7ec4782 100644
+--- a/src/main/python/wgets/cube.py
++++ b/src/main/python/wgets/cube.py
+@@ -65,7 +65,7 @@ class Square(QWidget):
+             self._assit_idx_seq = self._assit_idx_seq[self._args.sys_activated_assit_idx + 1: ] + self._assit_idx_seq[: self._args.sys_activated_assit_idx + 1]
+ 
+         for assit_idx in self._assit_idx_seq:
+-            assit_box = (start_w + assit_w * assit_idx, start_h, assit_w, assit_h)
++            assit_box = (int(start_w + assit_w * assit_idx), int(start_h), int(assit_w), int(assit_h))
+             assit_color = gen_assit_color(self._args.sys_color_set[self._idx], *self._args.sys_grid_assitlocs[self._idx][assit_idx][2:6])
+             assit_frame_color = self._args.positive_color if self._idx == self._args.sys_activated_idx and assit_idx == self._args.sys_activated_assit_idx else self._args.negative_color
+             self._assit_boxes.append(assit_box)
+@@ -196,8 +196,8 @@ class Cube(QWidget, Ui_ScrollCube):
+ 
+     def paintEvent(self, event):
+         wid = self.cube_color.width() * self._args.cubic_ratio
+-        self.cube_color.setMinimumHeight(wid * 0.618)
+-        self.cube_color.setMaximumHeight(wid * 0.618)
++        self.cube_color.setMinimumHeight(int(wid * 0.618))
++        self.cube_color.setMaximumHeight(int(wid * 0.618))
+ 
+ class CubeTable(QWidget):
+     """
+@@ -362,7 +362,7 @@ class CubeTable(QWidget):
+ 
+             for lc_ctp in ("h", "s", "v"):
+                 obj = getattr(self._cubes[lc_idx], "hs_hsv_{}".format(lc_ctp))
+-                obj.setValue(vars()["curr_{}".format(lc_ctp)] * 1E3)
++                obj.setValue(int(vars()["curr_{}".format(lc_ctp)] * 1E3))
+ 
+                 if not (skip_dp and skip_dp[0] == lc_idx and skip_dp[1] == lc_ctp):
+                     obj = getattr(self._cubes[lc_idx], "dp_hsv_{}".format(lc_ctp))
+diff --git a/src/main/python/wgets/depot.py b/src/main/python/wgets/depot.py
+index e12f0c2..8681f88 100644
+--- a/src/main/python/wgets/depot.py
++++ b/src/main/python/wgets/depot.py
+@@ -334,11 +334,11 @@ class UnitCell(QWidget):
+     def paintEvent(self, event):
+         cs_wid = int(min(self.width(), self.height()) * self._args.coset_ratio / 2)
+         cs_boxes = (
+-            (self.width() / 2 - cs_wid, self.height() / 2 - cs_wid, cs_wid, cs_wid),
+-            (self.width() / 2, self.height() / 2 - cs_wid, cs_wid, cs_wid),
+-            (self.width() / 2 - cs_wid, self.height() / 2, cs_wid, cs_wid),
+-            (self.width() / 2, self.height() / 2, cs_wid, cs_wid),
+-            (self.width() / 2 - cs_wid / 2, self.height() / 2 - cs_wid / 2, cs_wid, cs_wid),
++            (int(self.width() / 2 - cs_wid), int(self.height() / 2 - cs_wid), int(cs_wid), int(cs_wid)),
++            (int(self.width() / 2), int(self.height() / 2 - cs_wid), int(cs_wid), int(cs_wid)),
++            (int(self.width() / 2 - cs_wid), int(self.height() / 2), int(cs_wid), int(cs_wid)),
++            (int(self.width() / 2), int(self.height() / 2), int(cs_wid), int(cs_wid)),
++            (int(self.width() / 2 - cs_wid / 2), int(self.height() / 2 - cs_wid / 2), int(cs_wid), int(cs_wid)),
+         )
+ 
+         painter = QPainter()
+@@ -365,7 +365,7 @@ class UnitCell(QWidget):
+             else:
+                 painter.setBrush(QBrush(Qt.NoBrush))
+ 
+-            painter.drawRoundedRect(*cs_boxes[idx], cs_wid / 9, cs_wid / 9)
++            painter.drawRoundedRect(*cs_boxes[idx], int(cs_wid / 9), int(cs_wid / 9))
+ 
+         if self.grid_list[0]:
+             painter.drawEllipse(*cs_boxes[idx])
+diff --git a/src/main/python/wgets/image.py b/src/main/python/wgets/image.py
+index 5fbe2bf..909a666 100644
+--- a/src/main/python/wgets/image.py
++++ b/src/main/python/wgets/image.py
+@@ -101,7 +101,7 @@ class Image(QWidget):
+             alpha = 255 if self._args.style_id < 5 else 120
+             painter.setPen(QPen(QColor(*self._args.wheel_ed_color), self._args.wheel_ed_wid, Qt.PenStyle(Qt.DashLine)))
+             painter.setBrush(QColor(*self._args.negative_color, alpha))
+-            self._tip_box = (self.width() * 0.2, self.height() * 0.2, self.width() * 0.6, self.height() * 0.6)
++            self._tip_box = (int(self.width() * 0.2), int(self.height() * 0.2), int(self.width() * 0.6), int(self.height() * 0.6))
+             radius = int(min(self.width() * 0.1, self.height() * 0.1))
+             painter.drawRoundedRect(*self._tip_box, radius, radius)
+             self._tip_label.setGeometry(QRect(*self._tip_box))
+@@ -114,14 +114,14 @@ class Image(QWidget):
+             self._tip_label.show()
+             bar_wid = int(self.width() * 0.8)
+             bar_hig = int(self.height() * 0.1)
+-            self._loading_bar.setGeometry((self.width() - bar_wid) / 2, self.height() * 0.88, bar_wid, bar_hig)
+-            self._tip_label.setGeometry((self.width() - bar_wid) / 2, self.height() * 0.76, bar_wid, bar_hig)
++            self._loading_bar.setGeometry(int((self.width() - bar_wid) / 2), int(self.height() * 0.88), int(bar_wid), int(bar_hig))
++            self._tip_label.setGeometry(int((self.width() - bar_wid) / 2), int(self.height() * 0.76), int(bar_wid), int(bar_hig))
+             img_wid = int(min(self.width() * 0.8, self.height() * 0.6))
+-            resized_pix = self._ico.scaled(img_wid * self.devicePixelRatioF(), img_wid * self.devicePixelRatioF(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
++            resized_pix = self._ico.scaled(int(img_wid * self.devicePixelRatioF()), int(img_wid * self.devicePixelRatioF()), int(Qt.KeepAspectRatio), int(Qt.SmoothTransformation))
+             resized_pix = QPixmap.fromImage(resized_pix)
+             resized_pix.setDevicePixelRatio(self.devicePixelRatioF())
+             self._ico_label.setPixmap(resized_pix)
+-            self._ico_label.setGeometry((self.width() - img_wid) / 2, (self.height() * 0.76 - img_wid) / 2, img_wid, img_wid)
++            self._ico_label.setGeometry(int((self.width() - img_wid) / 2), int((self.height() * 0.76 - img_wid) / 2), int(img_wid), int(img_wid))
+ 
+         else:
+             self._loading_bar.hide()
+@@ -287,7 +287,8 @@ class Image(QWidget):
+                 painter.drawEllipse(*outer_circle[0])
+ 
+                 for line in outer_circle[1:]:
+-                    painter.drawLine(QPoint(*line[0]), QPoint(*line[1]))
++                    painter.drawLine(QPoint(int(line[0][0]), int(line[0][1])), QPoint(int(line[1][0]), int(line[1][1])))
++
+ 
+                 if len(self._outer_circles[4]) > 2:
+                     if self._outer_circles[5] == 1:
+@@ -302,7 +303,7 @@ class Image(QWidget):
+                     painter.drawEllipse(*outer_circle[0])
+ 
+                     for line in outer_circle[1:]:
+-                        painter.drawLine(QPoint(*line[0]), QPoint(*line[1]))
++                        painter.drawLine(QPoint(int(line[0][0]), int(line[0][1])), QPoint(int(line[1][0]), int(line[1][1])))
+ 
+                     if self._outer_circles[5] == 2:
+                         painter.setPen(QPen(QColor(*frame_color, ), self._args.negative_wid * 2/3))
+@@ -317,9 +318,9 @@ class Image(QWidget):
+ 
+                     if self._outer_circles[1] < len(self._args.sys_grid_assitlocs[self._outer_circles[0]]) and self._args.sys_grid_assitlocs[self._outer_circles[0]][self._outer_circles[1]][5]:
+                         line = outer_circle[1]
+-                        painter.drawLine(QPoint(*line[0]), QPoint(*line[1]))
++                        painter.drawLine(QPoint(int(line[0][0]), int(line[0][1])), QPoint(int(line[1][0]), int(line[1][1])))
+ 
+-                    poly = QPolygon([QPoint(*i) for i in outer_circle[2]])
++                    poly = QPolygon([QPoint(int(point[0]), int(point[1])) for point in outer_circle[2]])
+                     painter.drawPolygon(poly)
+ 
+         painter.end()
+diff --git a/src/main/python/wgets/splash.py b/src/main/python/wgets/splash.py
+index 3509d64..a34a9cb 100644
+--- a/src/main/python/wgets/splash.py
++++ b/src/main/python/wgets/splash.py
+@@ -57,7 +57,7 @@ class DPSplash(QSplashScreen):
+                     display_lang = "zh"
+ 
+         super().__init__()
+-        design_img = QImage(":/images/images/design_{}.png".format(display_lang)).scaled(780 * 1.2 * self.devicePixelRatioF(), 500 * 1.2 * self.devicePixelRatioF(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
++        design_img = QImage(":/images/images/design_{}.png".format(display_lang)).scaled(int(780 * 1.2 * self.devicePixelRatioF()), int(500 * 1.2 * self.devicePixelRatioF()), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+         design_img.setDevicePixelRatio(self.devicePixelRatioF())
+         self.setPixmap(QPixmap.fromImage(design_img))
+ 
+diff --git a/src/main/python/wgets/wheel.py b/src/main/python/wgets/wheel.py
+index 577a92a..c7d1ae3 100644
+--- a/src/main/python/wgets/wheel.py
++++ b/src/main/python/wgets/wheel.py
+@@ -137,7 +137,7 @@ class Wheel(QWidget):
+             re_wid = int(self._v_tag_radius * 3)
+ 
+         bar_1_center = np.array(((self.width() - self._radius * 2) / 4, self.height() / 2), dtype=int)
+-        self._bar_1_box = (bar_1_center[0] - re_wid / 2, bar_1_center[1] - self.height() * self._args.volum_ratio / 2, re_wid, self.height() * self._args.volum_ratio)
++        self._bar_1_box = (int(bar_1_center[0] - re_wid / 2), int(bar_1_center[1] - self.height() * self._args.volum_ratio / 2), int(re_wid), int(self.height() * self._args.volum_ratio))
+         painter.setPen(QPen(QColor(*self._args.wheel_ed_color), self._args.wheel_ed_wid))
+         lgrad = QLinearGradient(self._bar_1_box[0], self._bar_1_box[1], self._bar_1_box[0], self._bar_1_box[3])
+         lgrad.setColorAt(1.0, QColor(*bar_rgb_1))
+@@ -150,7 +150,7 @@ class Wheel(QWidget):
+         painter.setBrush(QBrush(Qt.NoBrush))
+         painter.drawEllipse(*cir_1_box)
+         bar_2_center = np.array((self.width() - (self.width() - self._radius * 2) / 4, self.height() / 2), dtype=int)
+-        self._bar_2_box = (bar_2_center[0] - re_wid / 2, bar_2_center[1] - self.height() * self._args.volum_ratio / 2, re_wid, self.height() * self._args.volum_ratio)
++        self._bar_2_box = (int(bar_2_center[0] - re_wid / 2), int(bar_2_center[1] - self.height() * self._args.volum_ratio / 2), int(re_wid), int(self.height() * self._args.volum_ratio))
+         painter.setPen(QPen(QColor(*self._args.wheel_ed_color), self._args.wheel_ed_wid))
+         lgrad = QLinearGradient(self._bar_2_box[0], self._bar_2_box[1], self._bar_2_box[0], self._bar_2_box[3])
+         lgrad.setColorAt(1.0, QColor(*bar_rgb_2))
+@@ -253,7 +253,7 @@ class Wheel(QWidget):
+             painter.drawEllipse(*outer_circle[0])
+ 
+             for line in outer_circle[1:]:
+-                painter.drawLine(QPoint(*line[0]), QPoint(*line[1]))
++                painter.drawLine(QPoint(int(line[0][0]), int(line[0][1])), QPoint(int(line[1][0]), int(line[1][1])))
+ 
+             if len(self._outer_circles[4]) > 2:
+                 if self._outer_circles[5] == 1:
+@@ -268,7 +268,7 @@ class Wheel(QWidget):
+                 painter.drawEllipse(*outer_circle[0])
+ 
+                 for line in outer_circle[1:]:
+-                    painter.drawLine(QPoint(*line[0]), QPoint(*line[1]))
++                    painter.drawLine(QPoint(int(line[0][0]), int(line[0][1])), QPoint(int(line[1][0]), int(line[1][1])))
+ 
+                 if self._outer_circles[5] == 2:
+                     painter.setPen(QPen(QColor(*frame_color, 160), self._args.negative_wid * 2/3))
+@@ -283,9 +283,9 @@ class Wheel(QWidget):
+ 
+                 if self._outer_circles[1] < len(self._args.sys_grid_assitlocs[self._outer_circles[0]]) and self._args.sys_grid_assitlocs[self._outer_circles[0]][self._outer_circles[1]][5]:
+                     line = outer_circle[1]
+-                    painter.drawLine(QPoint(*line[0]), QPoint(*line[1]))
++                    painter.drawLine(QPoint(int(line[0][0]), int(line[0][1])), QPoint(int(line[1][0]), int(line[1][1])))
+ 
+-                poly = QPolygon([QPoint(*i) for i in outer_circle[2]])
++                poly = QPolygon([QPoint(int(point[0]), int(point[1])) for point in outer_circle[2]])
+                 painter.drawPolygon(poly)
+ 
+         painter.end()
