@@ -13,4 +13,4 @@ update_on:
     gitlab: wlroots/wlroots
     host: gitlab.freedesktop.org
 
-managed: false
+managed: true
