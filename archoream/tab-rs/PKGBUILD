@@ -2,7 +2,7 @@
 pkgname=tab-rs
 pkgver=0.5.7
 epoch=1
-pkgrel=1
+pkgrel=2
 pkgdesc="The intuitive config-driven terminal multiplexer"
 arch=('x86_64')
 url="https://github.com/austinjones/tab-rs"
