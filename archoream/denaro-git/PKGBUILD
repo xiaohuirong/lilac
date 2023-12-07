@@ -2,7 +2,7 @@
 
 pkgname=denaro-git
 pkgver=2023.11.0.r3.gc890b717
-pkgrel=1
+pkgrel=2
 pkgdesc='A personal finance manager'
 arch=(aarch64 armv7h x86_64 i686)
 url=https://github.com/NickvisionApps/${pkgname%-git}
