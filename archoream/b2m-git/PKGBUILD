@@ -1,0 +1,46 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="b2m"
+pkgname="${_pkgname}-git"
+pkgver=0.25.0.r19.g9830fa6
+pkgrel=1
+pkgdesc="Play bilibili or other videos with mpv"
+url="https://github.com/snylonue/b2m"
+license=("MIT")
+arch=('x86_64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=(gcc-libs glibc openssl)
+makedepends=("cargo" "git")
+source=(${_pkgname}::git+${url})
+sha256sums=('SKIP')
+optdepends=('mpv')
+
+prepare() {
+    cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
+}
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//'
+}
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_TARGET_DIR=target
+    cargo build --frozen --release --all-features
+}
+
+check() {
+    cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo test --frozen --all-features
+}
+
+package() {
+	install -d "${pkgdir}/usr/bin"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}" "${pkgdir}/usr/bin/${pkg_name}"
+    install -Dm644 "${srcdir}/${_pkgname}/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+}
