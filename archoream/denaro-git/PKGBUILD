@@ -1,7 +1,7 @@
 # Maintainer: Mattia Borda <mattiagiovanni.borda@icloud.com>
 
 pkgname=denaro-git
-pkgver=2023.11.0.r0.gb053cc0e
+pkgver=2023.11.0.r3.gc890b717
 pkgrel=1
 pkgdesc='A personal finance manager'
 arch=(aarch64 armv7h x86_64 i686)
