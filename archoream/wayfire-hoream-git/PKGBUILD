@@ -16,15 +16,30 @@ conflicts=(wayfire wayfire-git)
 replaces=()
 options=(debug)
 source=(wayfire::git+$url.git#branch=hoream
+        wf-touch::git+https://github.com/WayfireWM/wf-touch
+        wf-utils::git+https://github.com/WayfireWM/wf-utils
         sdl_decor.patch
         0001-patch.patch
         decoration.patch
-        fix_wofi_crash.patch)
+        fix_wofi_crash.patch
+        xwayland_no_mapped.patch)
 sha256sums=(SKIP
             SKIP
             SKIP
             SKIP
+            SKIP
+            SKIP
+            SKIP
             SKIP)
+
+prepare() {
+    cd "$srcdir/wayfire"
+    git config submodule.subprojects/wf-touch.url "${srcdir}/wf-touch"
+    git -c protocol.file.allow=always submodule update --init subprojects/wf-touch
+
+    git config submodule.subprojects/wf-utils.url "${srcdir}/wf-utils"
+    git -c protocol.file.allow=always submodule update --init subprojects/wf-utils
+}
 
 pkgver () {
     cd "$srcdir/wayfire"
@@ -50,6 +65,7 @@ build() {
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/decoration.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/sdl_decor.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/fix_wofi_crash.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/xwayland_no_mapped.patch
     ninja -C build
 }
 
