@@ -2,7 +2,7 @@
 
 _pkgname=wlroots
 pkgname="${_pkgname}-git"
-pkgver=0.18.0.20231207.145907
+pkgver=0.18.0.20231208.110033
 pkgrel=1
 license=('MIT')
 pkgdesc='Modular Wayland compositor library'
@@ -49,12 +49,7 @@ sha256sums=('SKIP')
 
 pkgver() {
     cd "${_pkgname}"
-  (
-     set -o pipefail
-     version=$(grep -zoP "project\([^)]*\)" meson.build | xargs --null echo | grep -oP "^\sversion:\s'\K[^-']*")
-     printf "${version}.%s" "$(TZ=UTC git log -1 --pretty='%cd' --date=format-local:%Y%m%d.%H%M%S)"
-  )
-
+    git describe --long --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
