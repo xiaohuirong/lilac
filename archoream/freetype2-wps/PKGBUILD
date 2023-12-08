@@ -4,7 +4,7 @@
 
 pkgname=freetype2-wps
 pkgver=2.13.0
-pkgrel=1
+pkgrel=2
 pkgdesc="fix fakebold render issue for Kingsoft Office (WPS Office) when freetype2>2.13.0."
 url="https://www.freetype.org/"
 arch=(x86_64)
