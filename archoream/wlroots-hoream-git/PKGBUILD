@@ -54,7 +54,7 @@ pkgver () {
 
 build () {
   arch-meson \
-    --buildtype=debug \
+    --buildtype=release \
     -Dwerror=false \
     -Dexamples=false \
     "${pkgname}" build
