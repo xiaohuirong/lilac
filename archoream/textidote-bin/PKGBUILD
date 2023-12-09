@@ -5,7 +5,7 @@
 _base=textidote
 pkgname=${_base}-bin
 pkgver=0.8.3
-pkgrel=5
+pkgrel=6
 pkgdesc="Spelling, grammar and style checking on LaTeX documents"
 arch=(any)
 url="https://github.com/sylvainhalle/${_base}"
