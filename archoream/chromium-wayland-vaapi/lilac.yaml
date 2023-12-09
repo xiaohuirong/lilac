@@ -11,4 +11,4 @@ update_on:
     aur: chromium-wayland-vaapi 
 
 time_limit_hours: 5
-managed: true
+managed: false
