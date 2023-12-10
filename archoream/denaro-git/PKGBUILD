@@ -1,8 +1,8 @@
 # Maintainer: Mattia Borda <mattiagiovanni.borda@icloud.com>
 
 pkgname=denaro-git
-pkgver=2023.11.0.r3.gc890b717
-pkgrel=2
+pkgver=2023.11.0.r4.gf156cdfd
+pkgrel=1
 pkgdesc='A personal finance manager'
 arch=(aarch64 armv7h x86_64 i686)
 url=https://github.com/NickvisionApps/${pkgname%-git}
