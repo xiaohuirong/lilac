@@ -4,7 +4,7 @@
 _pkgname=drafting
 pkgname="$_pkgname-git"
 pkgver=r857.0c81b82
-pkgrel=1
+pkgrel=2
 epoch=0
 pkgdesc='UI designer for GTK 4 that can be used standalone or integrated with GTK 4-based IDEs'
 arch=('x86_64')
