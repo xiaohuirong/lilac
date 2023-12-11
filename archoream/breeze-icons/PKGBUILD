@@ -31,6 +31,9 @@ package_breeze-dark-icons() {
   DESTDIR="$pkgdir" cmake --install build
   rsync -av --ignore-existing --exclude='breeze-icons.rcc' $pkgdir/usr/share/icons/breeze/ $pkgdir/usr/share/icons/breeze-dark/
   rm ${pkgdir}/usr/share/icons/breeze -r
+  mkdir ${pkgdir}/usr/share/icons/breeze
+  cd ${pkgdir}/usr/share/icons/breeze
+  ln -s ../breeze-dark/* .
 }
 
 package_breeze-light-icons() {
@@ -40,4 +43,7 @@ package_breeze-light-icons() {
 
   DESTDIR="$pkgdir" cmake --install build
   rm ${pkgdir}/usr/share/icons/breeze-dark -r
+  mkdir ${pkgdir}/usr/share/icons/breeze-dark
+  cd ${pkgdir}/usr/share/icons/breeze-dark
+  ln -s ../breeze/* .
 }
