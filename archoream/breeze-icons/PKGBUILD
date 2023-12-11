@@ -6,7 +6,7 @@
 pkgbase=breeze-icons
 pkgname=('breeze-dark-icons' 'breeze-light-icons')
 pkgver=5.112.0
-pkgrel=1
+pkgrel=2
 arch=(any)
 url='https://community.kde.org/Frameworks'
 license=(LGPL)
