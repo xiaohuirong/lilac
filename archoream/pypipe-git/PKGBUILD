@@ -2,7 +2,7 @@
 
 pkgname=pypipe-git
 _gitpkgname=pypipe
-pkgver=r71.62585ff
+pkgver=r77.9b24d72
 pkgrel=1
 pkgdesc='Python command-line tool for pipeline processing'
 arch=('any')
