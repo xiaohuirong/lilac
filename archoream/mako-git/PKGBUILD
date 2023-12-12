@@ -2,8 +2,8 @@
 # Contributor: Drew DeVault <sir@cmpwn.com>
 pkgname=mako-git
 _pkgname=mako
-pkgver=v1.8.0.r3.gb8a82ce
-pkgrel=2
+pkgver=v1.8.0.r4.g52b4354
+pkgrel=1
 license=('MIT')
 pkgdesc='Lightweight notification daemon for Wayland'
 makedepends=("meson" "scdoc" "systemd" "wayland-protocols" "git")
