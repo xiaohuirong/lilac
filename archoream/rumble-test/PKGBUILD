@@ -1,0 +1,34 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+_pkgname=rumble-test
+pkgname=rumble-test-git
+pkgver=
+pkgrel=1
+pkgdesc=""
+url="https://github.com/sre/rumble-test.git"
+license=("MIT")
+arch=("x86_64")
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=()
+makedepends=(gcc)
+source=("$_pkgname::git+$url"
+        "001.patch")
+
+sha256sums=("SKIP"
+            "SKIP")
+
+
+build() {
+    patch -Np1 -i ${srcdir}/001.patch -d ${srcdir}/${_pkgname}
+    cd ${_pkgname}
+    make
+}
+
+package() {
+    install -d "${pkgdir}/usr/bin"    
+    install -Dm755 "${srcdir}/${_sourcename}" "${pkgdir}/usr/bin/${pkgname}"
+}
+
+
+

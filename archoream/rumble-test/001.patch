@@ -1,0 +1,12 @@
+diff --git a/rumble-test.c b/rumble-test.c
+index ad0ead4..a0c69a9 100644
+--- a/rumble-test.c
++++ b/rumble-test.c
+@@ -35,6 +35,7 @@ int main(int argc, char **argv) {
+ 
+ 	if (argc != 3) {
+ 		fprintf(stderr, "%s /dev/input/event<num> <strength>\n", argv[0]);
++        fprintf(stderr, "example: ./rumble-test /dev/input/event23 0xff00\n");
+ 		return 1;
+ 	}
+ 
