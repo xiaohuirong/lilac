@@ -9,6 +9,8 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: ros-noetic-class-loader
+  - source: manual
+
 repo_depends:
   - ros-build-tools
   - ros-noetic-cmake-modules
