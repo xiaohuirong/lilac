@@ -4,7 +4,7 @@
 # Tested with Kernel 4.16, Dell D3000 SuperSpeed USB 3.0 Docking Station, 17e9:4318 DisplayLink
 
 pkgname='evdi-git'
-pkgver=1.14.1.r2.ga943d98
+pkgver=1.14.1.r3.gaa81edc
 _pkgver="${pkgver%%.r*}"
 pkgrel=1
 pkgdesc='kernel module that enables management of multiple screens, primarily for DisplayLink USB VGA DVI HDMI DisplayPort video'
