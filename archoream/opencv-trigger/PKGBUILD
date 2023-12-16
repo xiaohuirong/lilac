@@ -2,7 +2,7 @@
 
 pkgname=opencv-trigger
 pkgver=4.8.1
-pkgrel=3
+pkgrel=4
 pkgdesc='Opencv package rebuild trigger.'
 url='https://mirrors.hoream.top'
 arch=('any')
