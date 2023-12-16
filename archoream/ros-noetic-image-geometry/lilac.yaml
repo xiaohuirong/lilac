@@ -9,7 +9,13 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: ros-noetic-image-geometry
+  - source: manual
+
 repo_depends:
   - ros-build-tools
   - ros-noetic-catkin
   - ros-noetic-sensor-msgs
+  - opencv-trigger
+
+update_on_build:
+  - pkgbase: opencv-trigger
