@@ -19,3 +19,8 @@ repo_depends:
   - ros-noetic-rostest
   - ros-noetic-rosconsole
   - ros-noetic-sensor-msgs
+  - opencv-trigger
+
+update_on_build:
+  - pkgbase: opencv-trigger
+
