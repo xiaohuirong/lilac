@@ -30,3 +30,7 @@ repo_depends:
   - ros-noetic-tf2-ros
   - ros-noetic-tf2
   - ros-noetic-image-transport
+  - opencv-trigger
+
+update_on_build:
+  - pkgbase: opencv-trigger
