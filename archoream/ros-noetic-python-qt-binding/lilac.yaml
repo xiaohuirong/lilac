@@ -13,3 +13,4 @@ repo_depends:
   - ros-build-tools
   - ros-noetic-catkin
   - ros-noetic-rosbuild
+  - python-pyqt5-sip4
