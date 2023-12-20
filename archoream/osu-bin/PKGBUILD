@@ -1,0 +1,26 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=osu-bin
+pkgver=
+pkgrel=1
+pkgdesc=""
+url=""
+license=("")
+arch=("x86_64")
+provides=()
+conflicts=()
+depends=()
+makedepends=()
+source=("")
+install=install.install
+_sourcename=""
+
+sha256sums=("")
+
+package() {
+    install -d "${pkgdir}/usr/bin"    
+    install -Dm755 "${srcdir}/${_sourcename}" "${pkgdir}/usr/bin/${pkgname}"
+}
+
+
+

@@ -14,6 +14,7 @@ backup=("etc/alist/config.json")
 optdepends=('aria2: download by aria2.')
 source=("alist.service" "config.json" "alist.sysusers" "alist.tmpfiles")
 install=alist.install
+options=(!strip)
 source_aarch64=("$_pkgname-$pkgver-aarch64.tar.gz"::"${url}/releases/download/v${pkgver//_/-}/alist-linux-arm64.tar.gz")
 source_x86_64=("$_pkgname-$pkgver-x86_64.tar.gz"::"${url}/releases/download/v${pkgver//_/-}/alist-linux-amd64.tar.gz")
 source_riscv64=("$_pkgname-$pkgver-riscv64.tar.gz"::"${url}/releases/download/v${pkgver//_/-}/alist-linux-riscv64.tar.gz")
