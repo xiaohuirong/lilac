@@ -1,8 +1,8 @@
 # Maintainer: Hoream <horeawm@qq.com>
 
 pkgname=zotero-beta-bin
-pkgver=7.0.0.r51.7c5600913
-pkgrel=11
+pkgver=7.0.0.r53.969031a37
+pkgrel=1
 pkgdesc="Zotero is a free, easy-to-use tool to help you collect, organize, annotate, cite, and share research."
 arch=('x86_64')
 url="https://www.zotero.org/download"
