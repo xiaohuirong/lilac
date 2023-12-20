@@ -11,3 +11,4 @@ update_on:
     aur: wayshot-git
   - source: github
     github: waycrate/wayshot
+  - source: manual
