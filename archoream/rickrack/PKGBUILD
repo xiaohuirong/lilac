@@ -2,7 +2,7 @@
 
 pkgname="python-rickrack"
 _pkgname=${pkgname#python-}
-pkgver=r67.766dc7c
+pkgver=r71.ff9d2e3
 pkgrel=1
 pkgdesc="Generate harmonious colors freely."
 url="https://github.com/eigenmiao/Rickrack"
