@@ -1,26 +1,45 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname=osu-bin
-pkgver=
+pkgver=2023.1220.0
 pkgrel=1
-pkgdesc=""
-url=""
-license=("")
+pkgdesc="A free-to-win rhythm game. Rhythm is just a click away!"
+url="https://osu.ppy.sh"
+license=("MIT")
 arch=("x86_64")
-provides=()
-conflicts=()
-depends=()
+provides=(osu)
+conflicts=(osu)
+depends=(gcc-libs zlib lttng-ust2.12 glibc)
 makedepends=()
-source=("")
-install=install.install
-_sourcename=""
+source=("osu-${pkgver}.AppImage::https://github.com/ppy/osu/releases/download/2023.1220.0/osu.AppImage")
+sha256sums=("SKIP")
+options=(!strip)
 
-sha256sums=("")
+build() {
+    cd ${srcdir}
+    chmod +x osu-${pkgver}.AppImage 
+    ./osu-${pkgver}.AppImage --appimage-extract
+    cat <<EOL > osu!.desktop
+[Desktop Entry]
+Type=Application
+Name=osu!
+GenericName=osu!
+Exec=env COMPlus_GCGen0MaxBudget=600000 /opt/game/osu/osu!
+Icon=/usr/share/pixmaps/osu!.png
+Categories=Game;
+Comment=A free-to-win rhythm game. Rhythm is just a *click* away!;
+SingleMainWindow=true
+EOL
 
-package() {
-    install -d "${pkgdir}/usr/bin"    
-    install -Dm755 "${srcdir}/${_sourcename}" "${pkgdir}/usr/bin/${pkgname}"
 }
 
+package() {
+    install -d "${pkgdir}/usr/share/applications"
+    install -d "${pkgdir}/usr/share/pixmaps"
+    install -d "${pkgdir}/opt/game/osu"
 
+    install -Dm644 "${srcdir}/squashfs-root/osu!.png" "${pkgdir}/usr/share/pixmaps/osu!.png"
+    install -Dm644 "${srcdir}/osu!.desktop" "${pkgdir}/usr/share/applications/osu!.desktop"
 
+    cp "${srcdir}/squashfs-root/usr/bin/"* "${pkgdir}/opt/game/osu" -r
+}
