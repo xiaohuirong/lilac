@@ -9,3 +9,4 @@ update_on:
   - source: github
     github: gabm/satty
   - source: manual
+    manual: 1
