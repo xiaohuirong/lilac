@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname=osu-bin
-pkgver=2023.1220.0
+pkgver=None
 pkgrel=1
 pkgdesc="A free-to-win rhythm game. Rhythm is just a click away!"
 url="https://osu.ppy.sh"
@@ -12,7 +12,7 @@ conflicts=(osu)
 depends=(gcc-libs zlib lttng-ust2.12 glibc)
 makedepends=()
 source=("osu-${pkgver}.AppImage::https://github.com/ppy/osu/releases/download/2023.1220.0/osu.AppImage")
-sha256sums=("SKIP")
+sha256sums=('3d4f2566d532a2e62535c18edcd8907506fcedb90129653993e96e0daca292d3')
 options=(!strip)
 
 build() {
