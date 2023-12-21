@@ -2,7 +2,7 @@
 
 pkgname=gradience-git
 _pkgname=Gradience
-pkgver=0.8.0.beta1.r102.g06b83cee
+pkgver=0.8.0.beta1.r104.gc878099d
 pkgrel=1
 pkgdesc="Change the look of Adwaita, with ease"
 arch=('x86_64')
