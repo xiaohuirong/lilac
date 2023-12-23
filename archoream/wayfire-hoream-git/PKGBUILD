@@ -19,12 +19,10 @@ source=(wayfire::git+$url.git#branch=hoream
         wf-touch::git+https://github.com/WayfireWM/wf-touch
         wf-utils::git+https://github.com/WayfireWM/wf-utils
         sdl_decor.patch
-        0001-patch.patch
         decoration.patch
         fix_wofi_crash.patch
         xwayland_no_mapped.patch)
 sha256sums=(SKIP
-            SKIP
             SKIP
             SKIP
             SKIP
@@ -61,7 +59,6 @@ build() {
         -Ddebug_ipc=false \
         . \
         build
-    patch -b -d ${srcdir}/wayfire/subprojects/wf-utils -Np1 -i ${srcdir}/0001-patch.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/decoration.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/sdl_decor.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/fix_wofi_crash.patch

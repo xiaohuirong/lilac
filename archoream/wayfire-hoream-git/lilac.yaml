@@ -7,7 +7,7 @@ post_build: git_pkgbuild_commit
 
 update_on:
   - source: manual
-    manual: 12
+    manual: 13
   - source: github
     github: xiaohuirong/wayfire
 
