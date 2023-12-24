@@ -1,0 +1,22 @@
+# Maintainer: Jovan Lanik <jox969@gmail.com>
+pkgname=gtklock-userinfo-module
+pkgver=2.1.0
+pkgrel=1
+pkgdesc="gtklock module adding user info to the lockscreen"
+arch=('x86_64')
+url="https://github.com/jovanlanik/gtklock-userinfo-module"
+license=('GPL3')
+depends=(gtk3 accountsservice gtklock)
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('046436e5229db1bd888a6b3bee5981ad44e065fb76206ac0d263fdfca006a5a4')
+LDFLAGS="${LDFLAGS/--as-needed/--no-as-needed}"
+
+build() {
+	cd "$pkgname-$pkgver"
+	make
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	make PREFIX="/usr" DESTDIR="$pkgdir/" install
+}
