@@ -8,8 +8,4 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: kando-bin
-  - source: manual
-
-repo_depends:
-  - electron28-bin
+    aur: electron28-bin
