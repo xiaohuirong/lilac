@@ -2,7 +2,7 @@
 
 _pkgname=pcmanfm-qt
 pkgname="${_pkgname}-patched-git"
-pkgver=1.4.0.3.g655cc287
+pkgver=1.4.0.4.g8d1b1955
 pkgrel=1
 pkgdesc="The LXQt file manager, Qt port of PCManFM"
 arch=("i686" "x86_64")
