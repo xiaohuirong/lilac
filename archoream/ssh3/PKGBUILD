@@ -3,7 +3,7 @@
 pkgbase=ssh3
 pkgname=(ssh3 ssh3-server)
 pkgver=0.1.4
-pkgrel=1
+pkgrel=2
 pkgdesc='faster and rich secure shell using HTTP/3'
 url='https://github.com/francoismichel/ssh3'
 license=('Apache')
