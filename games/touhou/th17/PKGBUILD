@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname="th17"
 pkgver=1.01
-pkgrel=2
+pkgrel=3
 pkgdesc="东方鬼形兽(Wily Beast and Weakest Creature)."
 url="https://thwiki.cc/%E4%B8%9C%E6%96%B9%E9%AC%BC%E5%BD%A2%E5%85%BD"
 license=("custom")
@@ -25,6 +25,11 @@ Exec=/usr/bin/bash /opt/wine-game/${pkgname}/start.sh
 Icon=/usr/share/pixmaps/${pkgname}.ico
 Categories=Game;
 Comment=${pkgname};wine;touhou;东方鬼形兽
+Actions=Configure
+
+[Desktop Action Configure]
+Name=Configure ${pkgname}
+Exec=/usr/bin/bash /opt/wine-game/${pkgname}/start.sh --config
 EOL
 
     cat <<EOL > start.sh
@@ -45,10 +50,18 @@ fi
 
 cd /opt/wine-game/${pkgname}
 
-bwrap --bind / / \\
-      --dev-bind /dev /dev \\
-      --bind \$source_dir \$target_dir \\
-      wine ${pkgname}c.exe > \$log_file 2>&1
+if [ "\$1" == "--config" ]; then
+    bwrap --bind / / \\
+          --dev-bind /dev /dev \\
+          --bind \$source_dir \$target_dir \\
+          wine custom.exe > \$log_file 2>&1
+else
+    bwrap --bind / / \\
+          --dev-bind /dev /dev \\
+          --bind \$source_dir \$target_dir \\
+          wine ${pkgname}c.exe > \$log_file 2>&1
+fi
+
 EOL
 
     cd "${srcdir}/${pkgname}"
