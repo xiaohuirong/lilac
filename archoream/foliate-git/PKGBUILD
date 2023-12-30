@@ -2,7 +2,7 @@
 # Contributor: schw0reismus <schw0reismus@protonmail.com>
 
 pkgname=foliate-git
-pkgver=3.0.1.r96.gfbecca7
+pkgver=3.0.1.r99.gf74ba7c
 pkgrel=1
 pkgdesc="Simple and modern GTK eBook reader"
 arch=(any)
