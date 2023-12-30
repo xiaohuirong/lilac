@@ -1,0 +1,120 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+########### edit base information ##################
+pkgname="thmhj2"
+pkgver=1.02
+pkgrel=1
+pkgdesc="东方幕华祭 春雪篇 ~ Fantastic Danmaku Festival Part Ⅱ "
+url="https://thwiki.cc/%E6%9D%B1%E6%96%B9%E5%B9%95%E8%8F%AF%E7%A5%AD_%E6%98%A5%E9%9B%AA%E7%AF%87_%EF%BD%9E_Fantastic_Danmaku_Festival_Part_II"
+####################################################
+
+license=("custom")
+arch=('x86_64')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+depends=("wine" "wine-mono" "fuse-overlayfs")
+makedepends=("icoutils")
+source=(${pkgname}.tar.gz::http://app.hoream.top:8000/games/${pkgname}.tar.gz)
+sha256sums=('SKIP')
+install=game.install
+
+build(){
+ 	cd "${srcdir}"
+
+########### desktop entry ##################
+    cat <<EOL > ${pkgname}.desktop
+[Desktop Entry]
+Type=Application
+Name=${pkgname}
+Exec=/usr/bin/bash /opt/wine-game/${pkgname}/start.sh
+Icon=/usr/share/pixmaps/${pkgname}.ico
+Categories=Game;
+Comment=${pkgname};wine;东方幕华祭 春雪篇;touhou;
+Actions=Configure
+
+[Desktop Action Configure]
+Name=Configure ${pkgname}
+Exec=/usr/bin/bash /opt/wine-game/${pkgname}/start.sh --config
+
+EOL
+####################################################
+
+
+########### launch script ##################
+    cat <<EOL > start.sh
+#!/bin/bash
+unset SDL_VIDEODRIVER
+
+lowerlay=/opt/wine-game/${pkgname}
+upperlay=\$HOME/.local/share/wine-game/${pkgname}
+work=\$HOME/.local/share/wine-game/.${pkgname}-work
+merged=/tmp/${pkgname}-merged
+
+log_file=\$merged/log
+
+if [ ! -d "\$upperlay" ]; then
+	mkdir -p "\$upperlay"
+fi
+
+if [ ! -d "\$work" ]; then
+	mkdir -p "\$work"
+fi
+
+if [ ! -d "\$merged" ]; then
+	mkdir -p "\$merged"
+fi
+
+uid=\$(id -u)
+gid=\$(id -g)
+
+fuse-overlayfs -o squash_to_uid=\$uid,squash_to_gid=\$gid,lowerdir=\$lowerlay,upperdir=\$upperlay,workdir=\$work \$merged
+
+if [ \$? -ne 0 ]; then
+  echo "fuse-overlayfs 失败，退出脚本"
+  exit 1
+fi
+
+cd \$merged
+
+if [ "\$1" == "--config" ]; then
+   wine custom.exe
+else
+   wine THMHJ.exe 
+fi
+
+cd /
+
+while true; do
+    umount \$merged
+
+    if [ \$? -eq 0 ]; then
+        break
+    fi
+
+    sleep 0.5
+done
+
+rm \$merged -r
+#rm \$work -r
+    
+
+EOL
+####################################################
+
+    cd "${srcdir}/${pkgname}"
+############### copy exe and generate ico################
+    wrestool -x --output=${srcdir}/${pkgname}.ico -t14 THMHJ.exe
+####################################################
+}
+
+package() {
+	install -d "${pkgdir}/usr/share/pixmaps"
+	install -d "${pkgdir}/usr/share/applications"
+	install -d "${pkgdir}/opt/wine-game/"
+
+	install -Dm644 "${srcdir}/${pkgname}.ico" "${pkgdir}/usr/share/pixmaps/${pkgname}.ico"
+	install -Dm644 "${srcdir}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+    install -Dm755 "${srcdir}/start.sh" "${pkgdir}/opt/wine-game/${pkgname}/start.sh"
+
+    cp -r "${srcdir}/${pkgname}" "${pkgdir}/opt/wine-game"
+}
