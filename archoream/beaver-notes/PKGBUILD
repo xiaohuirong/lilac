@@ -2,7 +2,7 @@
 
 pkgname=beaver-notes
 pkgver=2.2.2
-pkgrel=1
+pkgrel=2
 epoch=
 pkgdesc="A privacy-focused, cross-platform note-taking application."
 _electron=electron13
