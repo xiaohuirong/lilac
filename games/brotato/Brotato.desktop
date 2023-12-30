@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Brotato
+Exec=/opt/gog/brotato/run.sh
+Icon=/opt/gog/brotato/icon.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Brotato

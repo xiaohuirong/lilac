@@ -1,0 +1,43 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=brotato
+pkgver=0.6.5
+pkgrel=1
+pkgdesc="an arena shooter with bagel elements."
+arch=('x86_64')
+url="https://freelinuxpcgames.com/brotato/"
+license=('custom')
+source=("brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run" "Brotato.desktop" "install.sh")
+sha256sums=('SKIP'
+    'SKIP'
+    'SKIP')
+#options=('staticlibs')
+options=(!strip)
+makedepends=('expect')
+install="${pkgname}.install"
+
+prepare() {
+	cd $srcdir
+    chmod +x brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run
+	./install.sh .
+}
+
+package() {
+	install -Dm644 "$srcdir"/"Brotato.desktop" "$pkgdir"/usr/share/applications/"Brotato.desktop"
+	install -d "${pkgdir}/opt/gog/${pkgname}"
+    cp $srcdir/"Brotato"/* ${pkgdir}/opt/gog/${pkgname} -r
+    rm ${pkgdir}/opt/gog/${pkgname}/uninstall.sh
+    find ${pkgdir}/opt/gog/${pkgname} -type d -exec chmod 755 {} \;
+    find ${pkgdir}/opt/gog/${pkgname} -type f -exec chmod 644 {} \;
+    chmod +x ${pkgdir}/opt/gog/${pkgname}/{run.sh,Brotato}
+
+   # enable wayland support
+    sed -i '2i\
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then\
+    export SDL_VIDEODRIVER=wayland\
+    export SDL_DYNAMIC_API="/usr/lib/libSDL2-2.0.so"\
+else \
+    export SDL_VIDEODRIVER=x11\
+fi
+' "$pkgdir"/opt/gog/"${pkgname}"/run.sh
+
+}
