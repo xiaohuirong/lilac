@@ -12,4 +12,4 @@ update_on:
   - source: github
     github: ClementTsang/bottom
 
-managed: false
+managed: true
