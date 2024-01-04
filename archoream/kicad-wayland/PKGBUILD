@@ -9,7 +9,7 @@
 _appname=kicad
 pkgname="$_appname-wayland"
 pkgver=7.0.9
-pkgrel=1
+pkgrel=2
 pkgdesc='Electronic schematic and printed circuit board (PCB) design tools, patched for Wayland'
 arch=('x86_64')
 url='http://kicad.org/'
