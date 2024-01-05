@@ -13,4 +13,5 @@ update_on:
     gitlab: wine/wine
     host: gitlab.winehq.org
     lilac_throttle: 7d
+  - source: manual
 
