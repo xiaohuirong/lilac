@@ -1,5 +1,5 @@
 pkgname=kcolorpicker-git
-pkgver=r77.15e1637
+pkgver=r82.cddaa83
 pkgrel=1
 pkgdesc='Qt basd Color Picker with popup menu'
 arch=('i686' 'x86_64')
