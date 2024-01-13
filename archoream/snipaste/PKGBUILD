@@ -2,7 +2,7 @@
 
 pkgname=snipaste
 pkgver=2.8.8_Beta2
-pkgrel=1
+pkgrel=2
 pkgdesc="Snip & Paste!"
 arch=('x86_64')
 url="https://www.snipaste.com"
