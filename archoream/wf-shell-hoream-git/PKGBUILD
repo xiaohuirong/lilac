@@ -1,6 +1,6 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=wf-shell-hoream-git
-pkgver=r251.f057457
+pkgver=r252.a750421
 pkgrel=1
 pkgdesc='GTK3-based panel for the Wayfire compositor'
 url=https://wayfire.org
