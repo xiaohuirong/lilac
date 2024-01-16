@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="lan-mouse"
 pkgname="${_pkgname}-git"
-pkgver=r215.118c0df
+pkgver=r216.535cd05
 pkgrel=1
 pkgdesc="mouse & keyboard sharing via LAN "
 url="https://github.com/feschber/lan-mouse"
