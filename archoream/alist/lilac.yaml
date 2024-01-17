@@ -12,5 +12,4 @@ update_on:
   - source: github
     github: alist-org/alist
     use_latest_release: true
-
-
+  - source: manual
