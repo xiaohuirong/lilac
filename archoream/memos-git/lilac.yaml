@@ -13,3 +13,5 @@ update_on:
     github: usememos/memos
     lilac_throttle: 7d
 
+managed: false
+
