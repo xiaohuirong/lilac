@@ -11,5 +11,6 @@ update_on:
     aur: bottom-git
   - source: github
     github: ClementTsang/bottom
+  - source: manual
 
 managed: true
