@@ -16,7 +16,7 @@ for i in ${_pkgname[@]} ; do
   pkgname+=("$i-git")
 done
 
-pkgver=4.13.4.r33.gf99e725391
+pkgver=4.13.5.r127.gd16d2135e6
 pkgrel=1
 pkgdesc="GObject-based multi-platform GUI toolkit"
 url="https://gitlab.gnome.org/GNOME/gtk"
@@ -61,7 +61,7 @@ depends=(
   tracker3
   wayland
 )
-makedepends=("libdrm"
+makedepends=("libdrm" "vulkan-headers"
   docbook-xsl
   gi-docgen
   git
