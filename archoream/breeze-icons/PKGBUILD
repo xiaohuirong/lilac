@@ -5,14 +5,14 @@
 
 pkgbase=breeze-icons
 pkgname=('breeze-dark-icons' 'breeze-light-icons')
-pkgver=5.113.0
+pkgver=5.114.0
 pkgrel=1
 arch=(any)
 url='https://community.kde.org/Frameworks'
 license=(LGPL)
-makedepends=(extra-cmake-modules qt5-base python-lxml rsync)
+makedepends=("extra-cmake-modules" "python-lxml" "qt5-base" "rsync")
 source=(https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgbase-$pkgver.tar.xz)
-sha256sums=('88dc60fbc04fddabda0d4eb3fe94d4e3c149ff4d2b44fdcf89b711d421e3634d')
+sha256sums=('3ea4e5e511563db2eedad01c52af4a426e723d34d29e3a9de44d7a09c2beac7c')
 
 build() {
   cmake -B build -S $pkgbase-$pkgver \
