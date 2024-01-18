@@ -3,7 +3,7 @@
 ########### edit base information ##################
 pkgname="th17.5"
 pkgver=1.14
-pkgrel=2
+pkgrel=3
 pkgdesc="东方刚欲异闻~被水淹没的沉愁地狱"
 url="https://thwiki.cc/%E4%B8%9C%E6%96%B9%E5%88%9A%E6%AC%B2%E5%BC%82%E9%97%BB"
 ####################################################
@@ -63,7 +63,7 @@ touch \$system_dat
 
 dll_source_dir=/opt/wine-game/$pkgname/syswow64
 dll_target_dir=\$HOME/.wine/drive_c/windows/syswow64
-mpkir -p \$dll_target_dir
+mkdir -p \$dll_target_dir
 touch \$dll_target_dir/d3dcompiler_47.dll
 touch \$dll_target_dir/d3dx11_43.dll
 
