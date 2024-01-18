@@ -3,7 +3,7 @@ maintainers:
     email: hoream@qq.com
 
 build_prefix: multilib
-pre_build: aur_pre_build
+  #pre_build: aur_pre_build
 post_build: git_pkgbuild_commit
 
 update_on:
@@ -14,5 +14,5 @@ update_on:
     host: gitlab.winehq.org
     lilac_throttle: 7d
   - source: manual
-    manual: 1
+    manual: 2
 
