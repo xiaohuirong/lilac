@@ -14,5 +14,5 @@ update_on:
     host: gitlab.winehq.org
     lilac_throttle: 7d
   - source: manual
-    manual: 3
+    manual: 4
 
