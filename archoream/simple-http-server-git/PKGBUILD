@@ -4,7 +4,7 @@
 
 _pkgname=simple-http-server
 pkgname=$_pkgname-git
-pkgver=0.6.7.r4.gb6accc8
+pkgver=0.6.8.r0.g8f4ea75
 pkgrel=1
 pkgdesc="Simple http server in Rust"
 arch=('i686' 'x86_64' 'armv7h' 'aarch64')
