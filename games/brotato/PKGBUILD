@@ -1,15 +1,16 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=brotato
-pkgver=0.6.5
+pkgver=1.0.1.3
 pkgrel=1
 pkgdesc="an arena shooter with bagel elements."
 arch=('x86_64')
 url="https://freelinuxpcgames.com/brotato/"
 license=('custom')
-source=("brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run" "Brotato.desktop" "install.sh")
-sha256sums=('SKIP'
-    'SKIP'
-    'SKIP')
+_filename=Brotato_v1.0.1.3.run
+source=("${_filename}::http://app.hoream.top:8000/games/${_filename}" "Brotato.desktop" "install.sh")
+sha256sums=('bfdafa36727c2f63cfe05bbff455263f440f9894c01edcedbed9b08f4214d525'
+            '7d0afd5a72cf7467eba76eaef54689248d2a10d2bce8209cc30c72eadc0750e5'
+            '911007b0d922f9e82bf1a48470c7a7eb9e874c2117c90fae448965f059c5f7dd')
 #options=('staticlibs')
 options=(!strip)
 makedepends=('expect')
@@ -17,7 +18,7 @@ install="${pkgname}.install"
 
 prepare() {
 	cd $srcdir
-    chmod +x brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run::http://app.hoream.top:8000/games/brotato_v0.6.5.run
+    chmod +x ${_filename}
 	./install.sh .
 }
 
@@ -28,7 +29,8 @@ package() {
     rm ${pkgdir}/opt/gog/${pkgname}/uninstall.sh
     find ${pkgdir}/opt/gog/${pkgname} -type d -exec chmod 755 {} \;
     find ${pkgdir}/opt/gog/${pkgname} -type f -exec chmod 644 {} \;
-    chmod +x ${pkgdir}/opt/gog/${pkgname}/{run.sh,Brotato}
+    chmod +x ${pkgdir}/opt/gog/${pkgname}/run.sh
+    chmod +x ${pkgdir}/opt/gog/${pkgname}/bin/x86_64/Brotato.x86_64
 
    # enable wayland support
     sed -i '2i\

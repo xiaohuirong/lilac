@@ -15,4 +15,4 @@ update_on:
     lilac_throttle: 7d
 
 # too high build frequency.
-managed: true
+managed: false
