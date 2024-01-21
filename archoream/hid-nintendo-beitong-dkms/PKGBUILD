@@ -2,7 +2,7 @@
 _pkgbase=hid-nintendo
 pkgname=${_pkgbase}-beitong-dkms
 pkgver=3.2
-pkgrel=2
+pkgrel=3
 pkgdesc="hid-nintendo Driver (DKMS) with patch for beitong"
 arch=('any')
 url="https://github.com/nicman23/dkms-hid-nintendo"
