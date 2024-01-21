@@ -1,0 +1,64 @@
+diff --color -ru dkms-hid-nintendo-3.2/src/hid-nintendo.c src/dkms-hid-nintendo-3.2/src/hid-nintendo.c
+--- dkms-hid-nintendo-3.2/src/hid-nintendo.c	2021-07-26 19:21:47.000000000 +0800
++++ dkms-hid-nintendo-3.2/src/hid-nintendo.c	2024-01-21 14:53:26.212993671 +0800
+@@ -862,14 +862,26 @@
+  */
+ static void joycon_calc_imu_cal_divisors(struct joycon_ctlr *ctlr)
+ {
+-	int i;
++	int i, divz = 0;
+ 
+ 	for (i = 0; i < 3; i++) {
+ 		ctlr->imu_cal_accel_divisor[i] = ctlr->accel_cal.scale[i] -
+ 						ctlr->accel_cal.offset[i];
+ 		ctlr->imu_cal_gyro_divisor[i] = ctlr->gyro_cal.scale[i] -
+ 						ctlr->gyro_cal.offset[i];
++        if (ctlr->imu_cal_accel_divisor[i] == 0) {
++			ctlr->imu_cal_accel_divisor[i] = 1;
++			divz++;
++		}
++
++		if (ctlr->imu_cal_gyro_divisor[i] == 0) {
++			ctlr->imu_cal_gyro_divisor[i] = 1;
++			divz++;
++		}
+ 	}
++
++    if (divz)
++		hid_warn(ctlr->hdev, "inaccurate IMU divisors (%d)\n", divz);
+ }
+ 
+ static const s16 DFLT_ACCEL_OFFSET /*= 0*/;
+@@ -1098,16 +1110,17 @@
+ 		    JC_IMU_SAMPLES_PER_DELTA_AVG) {
+ 			ctlr->imu_avg_delta_ms = ctlr->imu_delta_samples_sum /
+ 						 ctlr->imu_delta_samples_count;
+-			/* don't ever want divide by zero shenanigans */
+-			if (ctlr->imu_avg_delta_ms == 0) {
+-				ctlr->imu_avg_delta_ms = 1;
+-				hid_warn(ctlr->hdev,
+-					 "calculated avg imu delta of 0\n");
+-			}
+ 			ctlr->imu_delta_samples_count = 0;
+ 			ctlr->imu_delta_samples_sum = 0;
+ 		}
+ 
++        /* don't ever want divide by zero shenanigans */
++		if (ctlr->imu_avg_delta_ms == 0) {
++			ctlr->imu_avg_delta_ms = 1;
++			hid_warn(ctlr->hdev, "calculated avg imu delta of 0\n");
++		}
++
++
+ 		/* useful for debugging IMU sample rate */
+ 		hid_dbg(ctlr->hdev,
+ 			"imu_report: ms=%u last_ms=%u delta=%u avg_delta=%u\n",
+@@ -2186,7 +2199,7 @@
+ 		ret = joycon_send_usb(ctlr, JC_USB_CMD_BAUDRATE_3M, HZ);
+ 		if (ret) {
+ 			hid_err(hdev, "Failed to set baudrate; ret=%d\n", ret);
+-			goto err_mutex;
++			// goto err_mutex;
+ 		}
+ 		/* handshake */
+ 		ret = joycon_send_usb(ctlr, JC_USB_CMD_HANDSHAKE, HZ);

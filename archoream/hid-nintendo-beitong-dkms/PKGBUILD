@@ -1,0 +1,31 @@
+# Maintainer: nicman23
+_pkgbase=hid-nintendo
+pkgname=${_pkgbase}-beitong-dkms
+pkgver=3.2
+pkgrel=2
+pkgdesc="hid-nintendo Driver (DKMS) with patch for beitong"
+arch=('any')
+url="https://github.com/nicman23/dkms-hid-nintendo"
+license=('GPLv2')
+depends=('dkms' 'bc')
+provides=('hid-nintendo' 'hid-nintendo-dkms')
+conflicts=('hid-nintendo' 'hid-nintendo-dkms' 'hid-nintendo-nso-dkms')
+source=("https://github.com/nicman23/dkms-hid-nintendo/archive/$pkgver.tar.gz"
+        "dkms.conf"
+        "beitong.patch")
+md5sums=('3f740b13f9be87730f216aaa5e3d7fc7'
+         '83f006e3f55c7a43e47b198ea7b30b2a'
+         '8aa2aa96d89575c0296b4202a110338b')
+
+package() {
+  mkdir -p "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/
+  chmod 755 "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/
+
+  cp -r dkms-hid-nintendo*/* "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/
+  install -Dm644 dkms.conf "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+  sed -e "s/@_PKGBASE@/${_pkgbase}/" \
+      -e "s/@PKGVER@/${pkgver}/" \
+      -i "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+
+  patch -Np1 -i "${srcdir}/beitong.patch" -d "${pkgdir}/usr/src/${_pkgbase}-${pkgver}"
+}
