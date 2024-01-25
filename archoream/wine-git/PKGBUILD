@@ -3,7 +3,7 @@
 # Contributor: sxe <sxxe@gmx.de>
 
 pkgname=wine-git
-pkgver=9.0.r54.g1932c3a2516
+pkgver=9.0.r220.gab28825acee
 pkgrel=1
 pkgdesc='A compatibility layer for running Windows programs (git version)'
 arch=('x86_64')
