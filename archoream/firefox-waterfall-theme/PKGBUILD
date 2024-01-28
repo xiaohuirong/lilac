@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname="firefox-waterfall-theme"
-pkgver=r27.8fd033a
+pkgver=r29.6e525b9
 pkgrel=1
 pkgdesc='Firefox waterfall theme'
 url='https://github.com/crambaud/waterfall'
