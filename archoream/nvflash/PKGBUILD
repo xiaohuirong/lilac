@@ -3,7 +3,7 @@
 #   Shayne Hartford<shayneehartford@gmail.com>
 pkgname=nvflash
 pkgver=5.814
-pkgrel=2
+pkgrel=3
 pkgdesc="A tool to update the the firmware of Nvidia display adapters."
 url="https://www.techpowerup.com/download/nvidia-nvflash/"
 arch=('x86_64' 'i686' 'aarch64')
