@@ -1,8 +1,8 @@
 # Maintainer: Pablo Arias <pabloariasal at gmail dot com>
 pkgname=fontpreview-ueberzug-git
 _pkgname=${pkgname%-git}
-pkgver=r52.f10f40c
-pkgrel=2
+pkgver=r53.ec1280c
+pkgrel=1
 pkgdesc="Preview system fonts in the terminal"
 arch=('any')
 url="https://github.com/OliverLew/fontpreview-ueberzug"
