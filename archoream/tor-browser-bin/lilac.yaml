@@ -9,6 +9,7 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: tor-browser-bin
+  - source: manual
 
 # can't download tor browser
-managed: false
+managed: true
