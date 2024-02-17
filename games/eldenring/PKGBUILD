@@ -1,0 +1,51 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+########### edit base information ##################
+pkgname="eldenring"
+pkgver=1.10
+pkgrel=1
+pkgdesc="以正统黑暗奇幻世界为舞台的动作RPG游戏。"
+url="https://store.steampowered.com/app/1245620"
+####################################################
+
+license=("custom")
+arch=('x86_64')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+depends=("wine" "vkd3d-proton-bin" "dxvk-bin")
+source=("${pkgname}".jpg user.reg start.sh d3d12.dll)
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
+# d3d12.dll is from https://github.com/tuffee88/d3d12ProxyEdrDx11_0
+install=game.install
+
+build(){
+ 	cd "${srcdir}"
+
+########### desktop entry ##################
+    cat <<EOL > ${pkgname}.desktop
+[Desktop Entry]
+Type=Application
+Name=${pkgname}
+Exec=/usr/bin/bash /opt/wine-game/${pkgname}/Game/start.sh
+Icon=/usr/share/pixmaps/${pkgname}.jpg
+Categories=Game;
+Comment=${pkgname};wine;艾尔登法环
+Actions=Configure
+EOL
+####################################################
+
+}
+
+package() {
+	install -d "${pkgdir}/usr/share/pixmaps"
+	install -d "${pkgdir}/usr/share/applications"
+	install -d "${pkgdir}/opt/wine-game/"
+
+	install -Dm644 "${srcdir}/${pkgname}.jpg" "${pkgdir}/usr/share/pixmaps/${pkgname}.jpg"
+	install -Dm644 "${srcdir}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+
+    cp -r "${srcdir}/../${pkgname}" "${pkgdir}/opt/wine-game"
+	install -Dm644 "${srcdir}/user.reg" "${pkgdir}/opt/wine-game/${pkgname}/Game"
+	install -Dm644 "${srcdir}/start.sh" "${pkgdir}/opt/wine-game/${pkgname}/Game"
+	install -Dm644 "${srcdir}/d3d12.dll" "${pkgdir}/opt/wine-game/${pkgname}/Game"
+}
