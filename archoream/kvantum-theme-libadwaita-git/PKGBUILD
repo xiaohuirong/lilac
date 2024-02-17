@@ -2,7 +2,7 @@
 
 pkgname=kvantum-theme-libadwaita-git
 _pkgname=KvLibadwaita
-pkgver=r22.06d9a42
+pkgver=r24.f4bdbb6
 pkgrel=1
 pkgdesc="Libaidwaita theme for Kvantum"
 arch=('any')
