@@ -2,7 +2,7 @@
 # Maintainer: Andri Yngvason <andri@yngvason.is>
 
 pkgname=neatvnc-git
-pkgver=0.6.0+95.g1647505e94
+pkgver=0.6.0+96.gd654e06eea
 pkgrel=1
 pkgdesc="VNC server library that's intended to be fast and neat"
 arch=(x86_64 i686 aarch64 armv7h)
