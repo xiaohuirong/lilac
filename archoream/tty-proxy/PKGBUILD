@@ -2,7 +2,7 @@
 
 pkgname=tty-proxy
 pkgver=0.0.2
-pkgrel=2
+pkgrel=3
 pkgdesc="Proxy for tty-share"
 arch=('any')
 url="https://github.com/elisescu/tty-proxy"
