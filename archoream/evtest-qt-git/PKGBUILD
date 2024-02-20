@@ -16,12 +16,6 @@ md5sums=('SKIP'
 provides=("$_pkgname")
 conflicts=("$_pkgname")
 
-prepare() {
-	cd "$srcdir/${_pkgname}"
-
-	patch -p1 < "$srcdir/fix-compilation-with-newer-gcc.patch"
-}
-
 pkgver()  {
 	printf "r%s.%s" "$(git -C ${_pkgname} rev-list --count HEAD)" "$(git -C ${_pkgname} rev-parse --short HEAD)"
 }
