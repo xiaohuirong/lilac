@@ -2,7 +2,7 @@
 
 pkgname=tty-share
 pkgver=2.4.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Shares terminal session with no setup on remote end (browser)"
 arch=('any')
 url="https://github.com/elisescu/tty-share"
