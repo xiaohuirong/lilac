@@ -11,4 +11,4 @@ update_on:
   - source: manual
 
 repo_depends:
-  - srm-git
+  - libsrm
