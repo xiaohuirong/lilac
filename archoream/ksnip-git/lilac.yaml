@@ -11,6 +11,7 @@ update_on:
     aur: ksnip-git
   - source: github
     github: ksnip/ksnip
+  - source: manual
 
 repo_depends:
   - kimageannotator-git
