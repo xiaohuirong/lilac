@@ -9,7 +9,7 @@ conflicts=(${pkgname%-git})
 arch=('x86_64')
 url="https://github.com/SeaDve/kooha"
 license=('GPL3')
-depends=('gst-plugin-pipewire' 'gstreamer-vaapi' 'gst-plugins-ugly' 'gtk4' 'libadwaita'
+depends=('gst-plugin-pipewire' 'gstreamer-vaapi' 'gst-plugins-ugly' 'gtk4' 'libadwaita-git'
          'x264' 'xdg-desktop-portal' 'libpulse')
 makedepends=('cargo' 'meson' 'git')
 b2sums=('SKIP')
