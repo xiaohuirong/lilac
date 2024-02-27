@@ -1,7 +1,7 @@
 # Maintainer: Daniel Bowring <aur@daniel.bowring.email>
 pkgname=gitbutler-bin
 pkgver=0.10.17
-pkgrel=1
+pkgrel=2
 pkgdesc="Version control client, backed by Git, powered by Tauri/Rust/Svelte "
 arch=('x86_64')
 url="https://gitbutler.com/"
