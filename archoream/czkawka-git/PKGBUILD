@@ -20,7 +20,7 @@
 
 _basename=czkawka
 pkgname=${_basename}-git
-pkgver=7.0.0.r2.g4dbc26e
+pkgver=7.0.0.r4.g2a32a52
 pkgrel=1
 pkgdesc="Multi functional app to find duplicates, empty folders etc."
 arch=(any)
