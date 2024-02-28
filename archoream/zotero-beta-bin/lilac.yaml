@@ -9,4 +9,4 @@ update_on:
   - source: github
     github: zotero/zotero
   - source: manual
-    manual: 8
+    manual: 9

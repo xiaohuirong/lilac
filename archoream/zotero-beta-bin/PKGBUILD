@@ -17,7 +17,7 @@ install='zotero.install'
 
 # https://www.zotero.org/download/client/dl?platform=linux-x86_64&channel=beta
 source=("zotero.desktop"
-        "https://download.zotero.org/client/beta/7.0.0-beta.53%2B969031a37/Zotero-7.0.0-beta.53%2B969031a37_linux-x86_64.tar.bz2")
+        "https://download.zotero.org/client/beta/7.0.0-beta.63%2B52856ae69/Zotero-7.0.0-beta.63%2B52856ae69_linux-x86_64.tar.bz2")
 sha256sums=('eab76db7a56a4d9aaa17baaf240b82fcf57944a4ddf8ef1b58cc64182426cedc'
             'SKIP')
 
