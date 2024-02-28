@@ -2,7 +2,7 @@
 # Contributor: Drew DeVault <sir@cmpwn.com>
 pkgname=mako-git
 _pkgname=mako
-pkgver=v1.8.0.r19.g683d882
+pkgver=v1.8.0.r20.g8960eb9
 pkgrel=1
 license=('MIT')
 pkgdesc='Lightweight notification daemon for Wayland'
