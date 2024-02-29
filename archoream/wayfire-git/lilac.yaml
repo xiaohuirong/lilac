@@ -11,9 +11,6 @@ update_on:
   # - source: aur
   #   aur: wayfire-git
   - source: manual
-    manual: 3
+    manual: 4
   - source: github
     github: WayfireWM/wayfire
-
-
-
