@@ -1,6 +1,6 @@
 # Maintainer: Hoream <hoream@qq.com>
 
-pkgname=qt6-trigger
+pkgname=glm-trigger
 pkgver=0.0.1
 pkgrel=1
 pkgdesc='glm package rebuild trigger.'
