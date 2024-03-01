@@ -14,3 +14,8 @@ update_on:
 repo_depends:
   - wlroots-hoream-git
   - wf-config-hoream-git
+  - glm-trigger
+
+update_on_build:
+  - pkgbase: glm-trigger
+
