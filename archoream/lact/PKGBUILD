@@ -2,7 +2,7 @@
 pkgname=('lact' 'lact-libadwaita')
 pkgbase=lact
 pkgver=0.5.3
-pkgrel=1
+pkgrel=2
 pkgdesc="AMDGPU Controller application"
 arch=('x86_64' 'aarch64')
 url="https://github.com/ilya-zlobintsev/LACT"
