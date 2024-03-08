@@ -2,7 +2,7 @@
 
 _pkgname=yuvviewer
 pkgname="${_pkgname}-git"
-pkgver=0.5.6.r11.g56e52c4
+pkgver=0.5.8.r1.ge70b15c
 pkgrel=1
 pkgdesc="A small tool for developers to view and preview various original image formats."
 arch=("x86_64")
@@ -44,7 +44,8 @@ build() {
     # extra-x86_64 will fail without this.
     sed -i '/^PRE_TARGETDEPS/d' ./YUVviewer.pro
     sed -i '/^QMAKE_EXTRA_TARGETS/d' ./YUVviewer.pro
-    sed -i "s/#include <git_tag.inc>/\"${pkgver}\"/" ./src/YUVviewer.cpp
+    # sed -i "s/#include <git_tag.inc>/\"${pkgver}\"/" ./src/YUVviewer.cpp
+    ./tools/generate_info.sh > build_info.inc
 
     lrelease ./YUVviewer.pro
     qmake6 ./YUVviewer.pro -spec linux-g++ CONFIG+=qtquickcompiler
