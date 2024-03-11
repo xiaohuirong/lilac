@@ -2,7 +2,7 @@
 _pkgname=snapd-xdg-open
 pkgname=$_pkgname-git
 pkgver=r44.6fed357
-pkgrel=2
+pkgrel=3
 pkgdesc="Software for opening links from snaps in desktop"
 arch=('i686' 'x86_64')
 url="https://github.com/snapcore/snapd-xdg-open"
