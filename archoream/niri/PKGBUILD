@@ -12,7 +12,7 @@
 
 pkgname=niri
 pkgver=0.1.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Scrollable-tiling Wayland compositor"
 arch=(aarch64 x86_64)
 url="https://github.com/YaLTeR/$pkgname"
