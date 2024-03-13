@@ -3,7 +3,7 @@
 _pkgbase=eww
 pkgbase=eww-git
 pkgname=(eww-x11-git eww-wayland-git)
-pkgver=0.4.0.r51.g65d622c
+pkgver=0.5.0.r2.g7bfd47e
 pkgrel=1
 arch=("x86_64")
 url="https://github.com/elkowar/eww"
