@@ -1,7 +1,7 @@
 # Maintainer: Chocobo1 <chocobo1 AT archlinux DOT net>
 
 pkgname=hyperfine-git
-pkgver=1.18.0.r22.g09c39d8
+pkgver=1.18.0.r24.g5493cf5
 pkgrel=1
 pkgdesc="A command-line benchmarking tool"
 arch=('i686' 'x86_64')
