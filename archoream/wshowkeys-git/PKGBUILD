@@ -4,7 +4,7 @@
 pkgname=wshowkeys-git
 _pkgname=wshowkeys
 pkgver=r5.e8bfc78
-pkgrel=2
+pkgrel=3
 pkgdesc='Displays keys being pressed on a Wayland session'
 arch=('x86_64' 'armv7h' 'aarch64')
 url='https://github.com/ammgws/wshowkeys'
