@@ -8,6 +8,6 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: wf-config
-  - source: manual
-    manual: 1
+    aur: espanso-wayland-git
+  - source: github
+    github: espanso/espanso
