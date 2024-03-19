@@ -5,7 +5,7 @@
 _pkgname=wechat-universal
 pkgname=${_pkgname}-bwrap
 pkgver=1.0.0.238
-pkgrel=13
+pkgrel=14
 pkgdesc="WeChat (Universal) with bwrap sandbox"
 arch=('x86_64' 'aarch64' 'loong64')
 url="https://weixin.qq.com"
