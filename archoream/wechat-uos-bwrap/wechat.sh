@@ -119,7 +119,6 @@ function execApp() {
 		--setenv LD_LIBRARY_PATH /opt/wechat-uos-bwrap/files:/usr/lib/wechat-uos-bwrap/so \
 		--setenv QT_AUTO_SCREEN_SCALE_FACTOR 1 \
 		--setenv PATH /sandbox:"${PATH}" \
-		--setenv QT_PLUGIN_PATH "/usr/lib/qt/plugins /opt/wechat-uos-bwrap/files/wechat" \
 		/opt/wechat-uos-bwrap/files/wechat
 }
 
@@ -150,6 +149,7 @@ EOF
 }
 
 function execAppUnsafe() {
+	killall wechat
 	bwrap \
 		--dev-bind / / \
 		--ro-bind /usr/share/wechat-uos-bwrap/license/var/ /var/ \
@@ -163,21 +163,42 @@ function execAppUnsafe() {
 		/opt/wechat-uos-bwrap/files/wechat
 }
 
+function disableSandbox() {
+	if [[ $@ =~ "f5aaebc6-0014-4d30-beba-72bce57e0650" ]] && [[ $@ =~ "--actions" ]]; then
+		if [[ "LANG" =~ 'zh_CN' ]]; then
+			zenity --title "警告" --question --text="确认以继续危险操作..."
+		else
+			zenity --title "Alert" --question --text="Confirm to proceed dangerous operation..."
+		fi
+		if [[ $? = 0 ]]; then
+			export trashAppUnsafe=1
+		else
+			echo "[Critical] Request canceled by user"
+			exit 1
+		fi
+	fi
+	if [[ ${wechatUnsafe} = 1 ]]; then
+		export trashAppUnsafe=1
+	fi
+}
+
 function launch() {
 	detectXauth
 	inputMethod
 	moeDect
 	lnDir
-	echo "Launching WeChat Beta..."
 	if [[ ${trashAppUnsafe} = 1 ]]; then
+		echo "Launching WeChat UOS (unsafe)..."
 		execAppUnsafe
 	else
+		echo "Launching WeChat UOS..."
 		dbusProxy &
 		sleep 0.1
 		execApp
 	fi
 }
 
+disableSandbox $@
 sourceXDG
 manageDirs
 launch $@
