@@ -3,7 +3,7 @@
 
 pkgname="uad-ng-bin"
 pkgver=1.0.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Cross-platform GUI written in Rust using ADB to debloat non-rooted Android devices (next generation)"
 arch=('x86_64')
 url="https://github.com/Universal-Debloater-Alliance/universal-android-debloater-next-generation"
