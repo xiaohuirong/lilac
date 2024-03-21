@@ -2,7 +2,7 @@
 
 pkgname=rom-parser-git
 pkgver=20170330
-pkgrel=1
+pkgrel=2
 pkgdesc="PCI device rom parser/fixer."
 arch=('x86_64')
 url="https://github.com/awilliam/rom-parser"
