@@ -2,7 +2,7 @@
 
 pkgname=parallel-hashmap
 pkgver=1.3.12
-pkgrel=1
+pkgrel=2
 pkgdesc='A family of header-only, very fast and memory-friendly hashmap and btree containers.'
 url='https://greg7mdp.github.io/parallel-hashmap/'
 license=('Apache-2.0')
