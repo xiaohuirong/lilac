@@ -3,13 +3,17 @@ maintainers:
     email: hoream@qq.com
 
 build_prefix: extra-x86_64
-pre_build: aur_pre_build
+pre_build_script: 
+  aur_pre_build()
+  add_makedepends(['python-pytorch'])
+
 post_build: aur_post_build
 
 update_on:
   - source: aur
     aur: python-torch-sparse
   - source: manual
+    manual: 1
 
 repo_depends:
   - parallel-hashmap
