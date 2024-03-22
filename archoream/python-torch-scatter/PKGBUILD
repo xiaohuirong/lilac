@@ -17,6 +17,7 @@ _pkgname=pytorch_scatter
 
 build() {
   cd "${srcdir}/${_pkgname}-${pkgver}"
+  export TORCH_CUDA_ARCH_LIST = "6.0 6.1 7.2+PTX 7.5+PTX"
   python -m build --wheel --no-isolation
 }
 
