@@ -2,7 +2,7 @@
 _pkgname=wf-wallpaper
 pkgname=wf-wallpaper-hoream-git
 pkgver=r37.67baec5
-pkgrel=1
+pkgrel=2
 pkgdesc="Advanced wallpaper plugin for Wayfire."
 arch=('any')
 url="https://codeberg.org/valpackett/wf-wallpaper"
