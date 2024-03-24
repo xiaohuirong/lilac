@@ -1,7 +1,7 @@
 # Maintainer: Antoine Bertin <antoine.bertin@archlinux.org>
 
 pkgname=gruvbox-plus-icon-theme-git
-pkgver=5.2.r65.g2ba4fd1
+pkgver=5.2.r66.gf649b6d
 pkgrel=1
 pkgdesc="Icon theme based on Gruvbox color scheme"
 arch=(any)
