@@ -10,6 +10,7 @@ update_on:
   - source: aur
     aur: kando-bin
   - source: manual
+    manual: 1
 
 repo_depends:
   - electron28-bin
