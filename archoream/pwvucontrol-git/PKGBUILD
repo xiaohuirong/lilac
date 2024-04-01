@@ -1,0 +1,46 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="pwvucontrol"
+pkgname="${_pkgname}-git"
+pkgver=0.3.r42.g2175331
+pkgrel=1
+pkgdesc="Pipewire Volume Control"
+url="https://github.com/saivert/pwvucontrol"
+license=("GPL-3.0")
+arch=('x86_64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=()
+makedepends=("cargo" "git")
+source=(${_pkgname}::git+${url})
+sha256sums=('SKIP')
+
+prepare() {
+    cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
+}
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  # tag
+  git describe --long --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_TARGET_DIR=target
+    cargo build --frozen --release --all-features
+}
+
+check() {
+    cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo test --frozen --all-features
+}
+
+package() {
+	install -d "${pkgdir}/usr/bin"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}" "${pkgdir}/usr/bin/${pkg_name}"
+    install -Dm644 "${srcdir}/${_pkgname}/LICENSE" -t "${pkgdir}/usr/share/licenses/${_pkgname}/"
+}
