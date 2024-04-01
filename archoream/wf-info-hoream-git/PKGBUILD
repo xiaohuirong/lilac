@@ -2,7 +2,7 @@
 
 _pkgname=wf-info
 pkgname="${_pkgname}-hoream-git"
-pkgver=r13.022800f
+pkgver=r15.20085ec
 pkgrel=1
 pkgdesc="A simple wayfire plugin and program to get information from wayfire"
 arch=(x86_64)
@@ -12,15 +12,8 @@ depends=(wayfire-hoream-git)
 makedepends=(meson ninja pkg-config git cmake  wayland-protocols glm)
 conflicts=("${_pkgname}")
 provides=("${_pkgname}")
-source=("git+https://github.com/soreau/wf-info.git"
-        "wlroots-update.patch")
-sha256sums=('SKIP'
-            'SKIP')
-
-prepare() {
-    cd ${srcdir}/${_pkgname}
-    git checkout 022800f180b1e6adfd4824c770ea9fd94ea4b5bf
-}
+source=("git+https://github.com/xiaohuirong/wf-info.git#branch=hoream")
+sha256sums=('SKIP')
 
 pkgver() {
     cd $_pkgname
@@ -29,7 +22,6 @@ pkgver() {
 
 build() {
 	rm -rf build
-    patch -b -d ${srcdir}/${_pkgname} -Np1 -i ${srcdir}/wlroots-update.patch
 	arch-meson "${_pkgname}" build
 	ninja -C build
 }
