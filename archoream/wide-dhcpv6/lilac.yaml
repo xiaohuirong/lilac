@@ -1,0 +1,13 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+pre_build_script: |
+  aur_pre_build()
+  add_makedepends(['patch', 'bison'])
+post_build: aur_post_build
+
+update_on:
+  - source: aur
+    aur: wide-dhcpv6
