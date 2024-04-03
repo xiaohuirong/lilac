@@ -1,0 +1,31 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+_pkgname=archiso-hoream
+pkgname="${_pkgname}-git"
+pkgver=r48.9238020
+pkgrel=1
+pkgdesc="Hoream's archiso config"
+url="https://github.com/xiaohuirong/custom_archiso.git"
+license=("MIT")
+arch=("any")
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=('archiso')
+optdepends=()
+makedepends=('git')
+source=("${_pkgname}::git+${url}")
+
+sha256sums=("SKIP")
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+package() {
+    install -d "${pkgdir}/usr/share/archiso/configs/hoream"    
+    cp -r "${srcdir}/${_pkgname}/"* "${pkgdir}/usr/share/archiso/configs/hoream"
+}
