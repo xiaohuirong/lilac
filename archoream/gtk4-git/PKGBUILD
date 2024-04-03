@@ -16,7 +16,7 @@ for i in ${_pkgname[@]} ; do
   pkgname+=("$i-git")
 done
 
-pkgver=4.14.1.r62.gb1eed1c1
+pkgver=4.14.1.r95.g4a75c288
 pkgrel=1
 pkgdesc="GObject-based multi-platform GUI toolkit"
 url="https://gitlab.gnome.org/GNOME/gtk"
