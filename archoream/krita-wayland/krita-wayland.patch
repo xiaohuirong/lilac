@@ -1,0 +1,89 @@
+diff -Naur krita-5.2.0/CMakeLists.txt krita-5.2.0-wayland/CMakeLists.txt
+--- krita-5.2.0/CMakeLists.txt	2023-10-04 16:06:16.000000000 +0800
++++ krita-5.2.0-wayland/CMakeLists.txt	2023-10-06 15:37:24.438565256 +0800
+@@ -530,7 +530,7 @@
+ 
+ if (NOT WIN32 AND NOT APPLE AND NOT ANDROID)
+ 
+-    find_package(Qt5 ${MIN_QT_VERSION} REQUIRED X11Extras)
++    #find_package(Qt5 ${MIN_QT_VERSION} REQUIRED X11Extras)
+ 
+     find_package(Qt5DBus ${MIN_QT_VERSION})
+     set(HAVE_DBUS ${Qt5DBus_FOUND})
+@@ -548,9 +548,9 @@
+         TYPE OPTIONAL
+         PURPOSE "Optionally used to provide crash reporting on Linux")
+ 
+-    find_package(X11 REQUIRED COMPONENTS Xinput)
+-    set(HAVE_X11 TRUE)
+-    add_definitions(-DHAVE_X11)
++    #find_package(X11 REQUIRED COMPONENTS Xinput)
++    #set(HAVE_X11 TRUE)
++    #add_definitions(-DHAVE_X11)
+ 
+ else()
+     set(HAVE_DBUS FALSE)
+diff -Naur krita-5.2.0/krita/main.cc krita-5.2.0-wayland/krita/main.cc
+--- krita-5.2.0/krita/main.cc	2023-10-04 16:06:16.000000000 +0800
++++ krita-5.2.0-wayland/krita/main.cc	2023-10-06 16:11:58.061797895 +0800
+@@ -543,13 +543,6 @@
+ 
+     installTranslators(app);
+ 
+-    if (KisApplication::platformName() == "wayland") {
+-        QMessageBox::critical(nullptr,
+-                              i18nc("@title:window", "Fatal Error"),
+-                              i18n("Krita does not support the Wayland platform. Use XWayland to run Krita on Wayland. Krita will close now."));
+-        return -1;
+-    }
+-
+     KisUsageLogger::writeHeader();
+     KisOpenGL::initialize();
+ 
+diff -Naur krita-5.2.0/libs/ui/CMakeLists.txt krita-5.2.0-wayland/libs/ui/CMakeLists.txt
+--- krita-5.2.0/libs/ui/CMakeLists.txt	2023-10-04 16:06:16.000000000 +0800
++++ krita-5.2.0-wayland/libs/ui/CMakeLists.txt	2023-10-06 16:13:20.170986685 +0800
+@@ -731,15 +731,6 @@
+   target_link_libraries(kritaui PUBLIC ${LINK_OPENEXR_LIB})
+ endif()
+ 
+-# Add VSync disable workaround
+-if(NOT WIN32 AND NOT APPLE AND NOT ANDROID)
+-    target_link_libraries(kritaui PRIVATE ${CMAKE_DL_LIBS} Qt5::X11Extras)
+-endif()
+-
+-if(X11_FOUND)
+-    target_link_libraries(kritaui PRIVATE Qt5::X11Extras ${X11_LIBRARIES})
+-endif()
+-
+ target_include_directories(kritaui
+     PUBLIC
+     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/canvas>
+diff -Naur krita-5.2.0/libs/ui/opengl/KisOpenGLModeProber.cpp krita-5.2.0-wayland/libs/ui/opengl/KisOpenGLModeProber.cpp
+--- krita-5.2.0/libs/ui/opengl/KisOpenGLModeProber.cpp	2023-10-04 16:06:16.000000000 +0800
++++ krita-5.2.0-wayland/libs/ui/opengl/KisOpenGLModeProber.cpp	2023-10-06 15:37:24.441898547 +0800
+@@ -196,6 +196,8 @@
+         dbgOpenGL << "OpenGL context is not valid while checking Qt's OpenGL status";
+         return boost::none;
+     }
++	//std::cout << context << std::endl;
++	//std::cout << surface << std::endl;
+     if (!context.makeCurrent(&surface)) {
+         dbgOpenGL << "OpenGL context cannot be made current";
+         return boost::none;
+diff -Naur krita-5.2.0/libs/widgets/CMakeLists.txt krita-5.2.0-wayland/libs/widgets/CMakeLists.txt
+--- krita-5.2.0/libs/widgets/CMakeLists.txt	2023-10-04 16:06:16.000000000 +0800
++++ krita-5.2.0-wayland/libs/widgets/CMakeLists.txt	2023-10-06 15:37:24.441898547 +0800
+@@ -111,9 +111,9 @@
+     KF5::Completion
+ )
+ 
+-if(X11_FOUND)
+-    target_link_libraries(kritawidgets Qt5::X11Extras ${X11_LIBRARIES})
+-endif()
++#if(X11_FOUND)
++#    target_link_libraries(kritawidgets Qt5::X11Extras ${X11_LIBRARIES})
++#endif()
+ 
+ set_target_properties(kritawidgets PROPERTIES
+     VERSION ${GENERIC_KRITA_LIB_VERSION} SOVERSION ${GENERIC_KRITA_LIB_SOVERSION}
