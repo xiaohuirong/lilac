@@ -12,3 +12,5 @@ update_on:
 
 repo_depends:
   - gtk4-git
+
+managed: false
