@@ -2,11 +2,11 @@
 # Contributor: Dimitris Kiziridis <ragouel at outlook dot com>
 pkgname=linux-wifi-hotspot
 pkgver=4.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Feature-rich wifi hotspot creator"
 arch=('x86_64' 'aarch64')
 url="https://github.com/lakinduakash/linux-wifi-hotspot"
-license=('BSD')
+license=('BSD-2-Clause')
 depends=('gtk3' 'hostapd' 'iproute2' 'iw' 'procps-ng' 'qrencode')
 optdepends=("dnsmasq: For 'NATed' or 'None' Internet sharing method"
             "iptables: For 'NATed' or 'None' Internet sharing method"
