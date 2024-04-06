@@ -6,4 +6,4 @@ def pre_build():
     for line in edit_file('PKGBUILD'):
         print(line)
         if line.startswith('options='):
-            print('makedepends=(patch, bison, flex)')
+            print('makedepends=(patch bison flex)')
