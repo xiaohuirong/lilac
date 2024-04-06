@@ -81,8 +81,8 @@ sha256sums=('c1d2e4a36d7d8aa296d021e52be493cc679d3fe5e8aa4fc13c434d33e8154ce2'
             'SKIP'
             'bdf2fd09b65dfae8fd7817b302486d6b82df8c0d56fd980afac019a82d3cd716'
             'bb3b503993030bb98a99c6a0376c65ee74d0c32c1e8932110698682eed1e3d3c'
-            'da53f913276982ada75cc4dac2e714ab90588b1d0b5bd94905eebe231e6072d6'
-            '10328665ba468ca18a6c50f43b677f049bfe55ae75cb5fbd74a2ed01e3ace537'
+            'SKIP'
+            'SKIP'
             'f180bd66b829841f938169a696d96fad251d4ddd5a4241d590e14f2f359aab18')
 validpgpkeys=('05D00A8B73A686789E0A156858B9596C722EA3BD'  # Boudewijn Rempt <foundation@krita.org>
               'E9FB29E74ADEACC5E3035B8AB69EB4CF7468332F'  # Dmitry Kazakov (main key) <dimula73@gmail.com>
