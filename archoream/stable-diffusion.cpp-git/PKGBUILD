@@ -7,7 +7,7 @@ pkgname=(
   "${_name}-cublas-git"
   "${_name}-hipblas-git"
 )
-pkgver=r111.607e394
+pkgver=r114.afea457
 pkgrel=1
 pkgdesc="Stable Diffusion in pure C/C++"
 arch=('armv7h' 'aarch64' 'x86_64')
