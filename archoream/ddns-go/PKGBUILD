@@ -1,6 +1,6 @@
 _pkgname=ddns-go
 pkgname=${_pkgname}
-pkgver=6.2.2
+pkgver=6.3.1
 pkgrel=1
 pkgdesc='简单好用的DDNS。自动更新域名解析到公网IP(支持阿里云、腾讯云dnspod、Cloudflare、华为云)'
 license=('MIT')
@@ -14,10 +14,10 @@ source_i686=("https://github.com/jeessy2/${_pkgname}/releases/download/v${pkgver
 source_aarch64=("https://github.com/jeessy2/${_pkgname}/releases/download/v${pkgver}/${_pkgname}_${pkgver}_Linux_arm64.tar.gz")
 source_armv6h=("https://github.com/jeessy2/${_pkgname}/releases/download/v${pkgver}/${_pkgname}_${pkgver}_Linux_armv6.tar.gz")
 sha256sums=('c264ee5afaee8abed884cdd167f2e3281e08c3d74778790263163c114cd650d5')
-sha256sums_x86_64=('77f3570574d581cbb569fda34efd2e3e0a482a2c562ffdcee17fe6f8f91a0e6c')
-sha256sums_i686=('1f80a1ae576820d540db1c59985d9a2523538ef6763214df4505caf8279ee6b7')
-sha256sums_aarch64=('80886ba0d5909f54dca393e98eae9d1fd423374c48edc55ada93bce2d190edff')
-sha256sums_armv6h=('9acbf33fd3fb7588bf0af941f56829d6be59bacff343264972055198a9577ff5')
+sha256sums_x86_64=('fd1e52312d824f37cb643ccfb65b97c413a626734f92dae488a1b7733d6bd6b6')
+sha256sums_i686=('9462d3c74a3a197b4cf61a8261bb2877507b2725f39dae2440b4e72ff114ce5c')
+sha256sums_aarch64=('70a9aaba9f41a14bffa80fbf5608b0fea0b532f83ad691b9086ddfb4f89037bf')
+sha256sums_armv6h=('3f61760328f5dc84e4218c83a5f4f98b8771afd5721eb20110ad9d1a8bd242b5')
  
 package() {
     install -Dm755 "${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}"
