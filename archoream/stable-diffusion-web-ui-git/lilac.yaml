@@ -11,3 +11,4 @@ update_on:
     aur: stable-diffusion-web-ui-git 
   - source: github
     github: AUTOMATIC1111/stable-diffusion-webui
+  - source: manual
