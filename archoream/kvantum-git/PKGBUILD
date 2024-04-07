@@ -1,51 +1,66 @@
-# Maintainer: Hoream <hoream@qq.com>
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Bruno Pagani <archange@archlinux.org>
 
-_pkgname=kvantum
-pkgname=kvantum-git
+pkgbase=kvantum
+pkgname=(kvantum-git
+         kvantum-qt5-git)
 pkgver=1.1.0.r2.g4ea962c9
-pkgrel=2
-pkgdesc='SVG-based theme engine for Qt5/6 (including config tool and extra themes)'
+pkgrel=1
+pkgdesc='SVG-based theme engine for Qt6 (including config tool and extra themes)'
 arch=(x86_64)
 url='https://github.com/tsujan/Kvantum'
-license=(GPL)
-depends=(kwindowsystem
-         qt5-svg)
+license=(GPL-3.0-or-later)
+depends=(gcc-libs
+         glibc
+         libx11)
 makedepends=(cmake
+             kwindowsystem5
+             qt5-svg
              qt5-tools
+             qt5-x11extras
+             kwindowsystem
              qt6-svg
-             qt6-tools
-             git)
-optdepends=('qt6-svg: Qt6 style')
-source=(${_pkgname}::git+https://github.com/tsujan/Kvantum.git)
+             qt6-tools)
+source=(${pkgbase}::git+https://github.com/tsujan/Kvantum.git)
 sha256sums=('SKIP')
-provides=("${_pkgname}")
-conflicts=("${_pkgname}")
-
-prepare() {
-  # Fix Qt6 build with Qt5 installed
-  sed -e 's|Qt6 Qt5|Qt6|' -i ${_pkgname}/Kvantum/*/CMakeLists.txt
-}
 
 pkgver() {
-  cd "${srcdir}/${_pkgname}"
+  cd "${srcdir}/${pkgbase}"
   ( set -o pipefail
     git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/V//' ||
     printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
   )
 }
 
+
 build() {
-  cmake -B build5 -S ${_pkgname}/Kvantum \
-    -DCMAKE_INSTALL_PREFIX=/usr
+  cmake -B build5 -S ${pkgbase}/Kvantum \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DENABLE_QT5=ON
   make -C build5
 
-  cmake -B build6 -S ${_pkgname}/Kvantum \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DENABLE_QT5=OFF
+  cmake -B build6 -S ${pkgbase}/Kvantum \
+    -DCMAKE_INSTALL_PREFIX=/usr
   make -C build6
 }
 
-package() {
-  DESTDIR="$pkgdir" cmake --install build5 
+package_kvantum-git() {
+  depends+=(kwindowsystem
+            qt6-base
+            qt6-svg)
+  optdepends=('kvantum-qt5: Qt5 style')
+
   DESTDIR="$pkgdir" cmake --install build6
 }
+
+package_kvantum-qt5-git() {
+  pkgdesc='SVG-based theme engine for Qt5'
+  depends+=(kvantum
+            kwindowsystem5
+            qt5-base
+            qt5-svg
+            qt5-x11extras)
+
+  DESTDIR="$pkgdir" cmake --install build5/style
+}
+
