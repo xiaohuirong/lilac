@@ -1,0 +1,55 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="serverstatus-rust"
+pkgname="${_pkgname}-git"
+pkgver=1.8.1.r0.g1dd5c41
+pkgrel=1
+pkgdesc="Rust 版 ServerStatus 探针、威力加强版"
+url="https://github.com/zdz/ServerStatus-Rust"
+license=('Apache-2.0')
+arch=('x86_64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=()
+makedepends=("cargo" "git")
+source=(${_pkgname}::git+${url})
+sha256sums=('SKIP')
+options=(!lto)
+
+prepare() {
+    cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
+}
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//'
+}
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_TARGET_DIR=target
+    cargo build --frozen --release --all-features
+}
+
+check() {
+    cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo test --frozen --all-features
+}
+
+package() {
+	install -d "${pkgdir}/usr/bin"
+	install -d "${pkgdir}/usr/lib/systemd/system"
+	install -d "${pkgdir}/etc/${_pkgname}"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/stat_client" "${pkgdir}/usr/bin/stat_client"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/stat_server" "${pkgdir}/usr/bin/stat_server"
+    install -Dm644 "${srcdir}/${_pkgname}/LICENSE" -t "${pkgdir}/usr/share/licenses/${_pkgname}/"
+    install -Dm644 "${srcdir}/${_pkgname}/systemd/stat_server.service" -t "${pkgdir}/usr/lib/systemd/system"
+    install -Dm644 "${srcdir}/${_pkgname}/systemd/stat_client.service" -t "${pkgdir}/usr/lib/systemd/system"
+    install -Dm644 "${srcdir}/${_pkgname}/config.toml" -t "${pkgdir}/etc/${_pkgname}"
+
+    sed -i 's@/opt/ServerStatus@/usr/bin@g' "${pkgdir}/usr/lib/systemd/system/stat_server.service"
+    sed -i 's@/opt/ServerStatus@/usr/bin@g' "${pkgdir}/usr/lib/systemd/system/stat_client.service"
+}
