@@ -9,3 +9,4 @@ update_on:
   - source: github
     github: glfw/glfw
   - source: manual
+    manual: 1

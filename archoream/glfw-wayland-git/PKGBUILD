@@ -30,7 +30,7 @@ build() {
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DBUILD_SHARED_LIBS=ON \
-      -DGLFW_USE_WAYLAND=ON \
+      -DGLFW_BUILD_WAYLAND=ON \
       -DGLFW_BUILD_EXAMPLES=no \
       -DGLFW_BUILD_TESTS=no \
       -DGLFW_BUILD_DOCS=no
