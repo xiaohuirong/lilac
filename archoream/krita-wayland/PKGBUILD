@@ -1,6 +1,7 @@
 # Maintainer: Antonio Rojas <arojas@archlinux,org>
 
-pkgname=krita
+_pkgname=krita
+pkgname="${_pkgname}-wayland"
 _pkgver=5.2.2
 pkgver=${_pkgver/-/}
 pkgrel=9
@@ -8,6 +9,8 @@ pkgdesc='Edit and paint images'
 arch=(x86_64)
 url='https://krita.org'
 license=(GPL3)
+provides=("${_pkgname}")
+conflicts=("${_pkgname}" "${_pkgname}-git")
 depends=(exiv2
          ffmpeg
          fftw
@@ -71,7 +74,7 @@ optdepends=('kimageformats5: PSD support'
             'libmypaint: support for MyPaint brushes'
             'poppler-qt5: PDF filter'
             'python-pyqt5: for the Python plugins')
-source=(https://download.kde.org/stable/krita/$_pkgver/$pkgname-$_pkgver.tar.gz{,.sig}
+source=(https://download.kde.org/stable/krita/$_pkgver/$_pkgname-$_pkgver.tar.gz{,.sig}
         xsimd-12.patch
         sip-6.8.patch
         https://invent.kde.org/graphics/krita/-/commit/ace7edcc.patch
@@ -89,15 +92,15 @@ validpgpkeys=('05D00A8B73A686789E0A156858B9596C722EA3BD'  # Boudewijn Rempt <fou
               '064182440C674D9F8D0F6F8B4DA79EDA231C852B') # Stichting Krita Foundation <foundation@krita.org>
 
 prepare() {
-  patch -d $pkgname-$_pkgver -p1 < sip-6.8.patch
-  patch -d $pkgname-$_pkgver -p1 < xsimd-12.patch
-  patch -d $pkgname-$_pkgver -p1 < ace7edcc.patch # Fix build with libjxl 0.9
-  patch -d $pkgname-$_pkgver -p1 < 5dfe4918.patch # Fix global menu on Plasma 6
-  patch -d $pkgname-$_pkgver -p1 < krita-wayland.patch
+  patch -d $_pkgname-$_pkgver -p1 < sip-6.8.patch
+  patch -d $_pkgname-$_pkgver -p1 < xsimd-12.patch
+  patch -d $_pkgname-$_pkgver -p1 < ace7edcc.patch # Fix build with libjxl 0.9
+  patch -d $_pkgname-$_pkgver -p1 < 5dfe4918.patch # Fix global menu on Plasma 6
+  patch -d $_pkgname-$_pkgver -p1 < krita-wayland.patch
 }
 
 build() {
-  cmake -B build -S $pkgname-$_pkgver \
+  cmake -B build -S $_pkgname-$_pkgver \
     -DBUILD_KRITA_QT_DESIGNER_PLUGINS=ON \
     -DBUILD_TESTING=OFF
   cmake --build build
