@@ -8,6 +8,7 @@ url="https://sourceforge.net/projects/wide-dhcpv6/"
 license=('custom')
 backup=('etc/wide-dhcpv6/dhcp6c.conf' 'etc/conf.d/startpd.conf')
 options=('emptydirs')
+makedepends=(patch bison flex)
 
 source=("https://downloads.sourceforge.net/project/${pkgname}/${pkgname}/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.gz"
         "https://deb.debian.org/debian/pool/main/w/${pkgname}/${pkgname}_${pkgver}-23.debian.tar.xz"
