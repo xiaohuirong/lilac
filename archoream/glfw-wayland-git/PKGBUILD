@@ -3,7 +3,7 @@
 _pkgname=glfw
 pkgname="${_pkgname}-wayland-git"
 pkgdesc="A free, open source, portable framework for graphical application development wayland"
-pkgver=3.3.r847.gd79afa80
+pkgver=3.4.r11.g228e5826
 pkgrel=1
 arch=('x86_64')
 url="https://github.com/Admicos/minecraft-wayland"
