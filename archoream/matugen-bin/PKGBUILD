@@ -4,7 +4,7 @@
 
 pkgname=matugen-bin
 pkgver=2.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A material you color generation tool with templates"
 url="https://github.com/InioX/matugen"
 license=("GPL-2.0")
