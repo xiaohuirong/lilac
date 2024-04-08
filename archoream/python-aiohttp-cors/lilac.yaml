@@ -8,8 +8,4 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: gns3-server
-  - source: manual
-
-repo_depends:
-  - python-aiohttp-cors
+    aur: python-aiohttp-cors

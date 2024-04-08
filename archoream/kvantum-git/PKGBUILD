@@ -20,7 +20,8 @@ makedepends=(cmake
              qt5-x11extras
              kwindowsystem
              qt6-svg
-             qt6-tools)
+             qt6-tools
+             git)
 source=(${pkgbase}::git+https://github.com/tsujan/Kvantum.git)
 sha256sums=('SKIP')
 
