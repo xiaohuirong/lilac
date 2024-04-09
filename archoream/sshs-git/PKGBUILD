@@ -2,7 +2,7 @@
 _pkgname="sshs"
 pkgname="${_pkgname}-git"
 pkgver=4.3.0.r0.g116cb8d
-pkgrel=1
+pkgrel=2
 pkgdesc="Terminal user interface for SSH"
 url="https://github.com/quantumsheep/sshs"
 license=("MIT")
