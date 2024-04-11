@@ -10,3 +10,4 @@ update_on:
   - source: aur
     aur: bun
   - source: manual
+    manual: 1
