@@ -2,7 +2,7 @@
 # https://github.com/orhun/pkgbuilds
 
 pkgname=kmon-git
-pkgver=1.6.4.r2.geb91117
+pkgver=1.6.4.r6.g4607bfe
 pkgrel=1
 pkgdesc="Linux kernel manager and activity monitor (git)"
 arch=('x86_64')
