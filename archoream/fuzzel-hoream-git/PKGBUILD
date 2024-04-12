@@ -1,0 +1,58 @@
+# Maintainer: Hoream <hoream at qq dot com>
+# Maintainer: Justine Smithies <justine at smithies dot me dot uk>
+# Maintainer: Daniel Eklöf <daniel at ekloef dot se>
+
+pkgname=fuzzel-hoream-git
+_pkgname=fuzzel
+pkgver=1.10.0.r3.g659b132
+pkgrel=1
+pkgdesc='Application launcher for wlroots based Wayland compositors.'
+arch=('x86_64')
+url='https://codeberg.org/dnkl/fuzzel'
+license=('MIT')
+provides=('fuzzel')
+conflicts=('fuzzel' 'fuzzel-git')
+depends=(cairo
+         fcft
+         fontconfig
+         libfcft.so
+         libpng
+         libxkbcommon
+         pixman
+         wayland) # nanosvg is bundled
+makedepends=(meson
+             scdoc
+             tllist
+             wayland-protocols git patch)
+
+source=("git+$url"
+        "anchor_workround.patch")
+sha256sums=('SKIP'
+            'SKIP')
+
+pkgver() {
+    cd "$srcdir/$_pkgname"
+    git describe --long | sed 's/-/.r/;s/-/./'
+}
+
+prepare() {
+    cd "$srcdir/$_pkgname"
+    patch -Np1 -d "$srcdir/$_pkgname" -i "$srcdir/anchor_workround.patch"
+}
+
+build() {
+    cd "$srcdir/$_pkgname"
+	arch-meson \
+		-Denable-cairo=enabled \
+		-Dpng-backend=libpng \
+		-Dsvg-backend=nanosvg \
+		. build
+	meson compile -C build
+}
+
+package() {
+    cd "$srcdir/$_pkgname"
+    meson install -C build --destdir "$pkgdir"
+    rm -f "$pkgdir/usr/share/doc/$_pkgname/LICENSE"
+    install -Dm644 LICENSE -t "$pkgdir/usr/share/licenses/$_pkgname"
+}
