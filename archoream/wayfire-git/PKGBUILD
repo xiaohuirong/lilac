@@ -1,7 +1,7 @@
 # Maintainer: Solomon Choina <shlomochoina@gmail.com>
 # Co-Maintainer: Frank Tao <frank.tao@uwaterloo.ca>
 pkgname=wayfire-git
-pkgver=0.8.1.r254.gd675db63
+pkgver=0.8.1.r255.ge0554e09
 pkgrel=1
 pkgdesc="3D wayland compositor"
 arch=('x86_64')
