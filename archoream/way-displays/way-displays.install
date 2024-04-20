@@ -32,21 +32,12 @@ magen() {
 }
 
 post_install() {
-    yello "1.10.0"
+    yello "1.11.0"
     blue  "New Features:"
-    plain "  ${magenta}#135${all_off} add AUTO_SCALE_MIN/MAX by @dancek in ${green}#136${all_off}"
-    plain "  ${magenta}#151${all_off} add VRR_OFF hint on adaptive sync failure by @alex-courtis in ${green}#152${all_off}"
+    plain "  ${magenta}#146${all_off} capture and log xdg logical box by @alex-courtis in ${green}#157${all_off}"
+    plain "  ${magenta}#65${all_off} add CHANGE_SUCCESS_CMD to run a shell command in handle_success by @PaideiaDilemma in ${green}#162${all_off}"
     blue  "Bug Fixes:"
-    plain "  ${magenta}#147${all_off} retry after cancellations up to 3 times by @alex-courtis in ${green}#149${all_off}"
-    plain ""
-    yello "1.10.1"
-    blue  "Bug Fixes:"
-    plain "  ${magenta}#147${all_off} retry up to 25 cancellations, complete resolution incoming in ${green}#154${all_off}"
-    plain ""
-    yello "1.10.2"
-    blue  "Bug Fixes:"
-    plain "  ${magenta}#153${all_off} revert cancellation behaviour to 1.9.0, awaiting comprehensive fix"
-    plain ""
+    plain "  ${magenta}#138${all_off} always round scales to nearest 1/8 to support fractional scaling and other recent compositor changes; use --log-threshold debug to see details by @fberg in ${green}#145${all_off}"
 }
 
 post_upgrade() {
