@@ -2,8 +2,8 @@
 
 _pkgname=yuvviewer
 pkgname="${_pkgname}-git"
-pkgver=0.5.8.r1.ge70b15c
-pkgrel=2
+pkgver=0.5.8.r3.g064fd7a
+pkgrel=1
 pkgdesc="A small tool for developers to view and preview various original image formats."
 arch=("x86_64")
 url="https://github.com/QQxiaoming/TTFviewer"
