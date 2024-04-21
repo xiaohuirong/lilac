@@ -2,8 +2,8 @@
 
 _pkgname=ttfviewer
 pkgname="${_pkgname}-git"
-pkgver=0.2.8.r1.g2e33242
-pkgrel=2
+pkgver=0.2.8.r3.g52b2e11
+pkgrel=1
 pkgdesc="A small tool for developers to view and preview various ttf font/icon image formats."
 arch=("x86_64")
 url="https://github.com/QQxiaoming/TTFviewer"
