@@ -1,0 +1,33 @@
+# Contributor: Lex Black <autumn-wind@web.de>
+
+_pkgname=mpvpaper
+pkgname=mpvpaper-git
+pkgver=1.4.r2.ga25ec0c
+pkgrel=1
+pkgdesc="video wallpaper program for wlroots based wayland compositors"
+arch=('i686' 'x86_64')
+url="https://github.com/GhostNaN/$pkgname"
+license=('GPL3')
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+depends=('mpv' 'wlroots')
+makedepends=('meson' 'ninja' 'wayland-protocols' 'git')
+optdepends=('socat: control via sockets')
+#source=($_pkgname::git+https://github.com/GhostNaN/mpvpaper.git)
+#b2sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  arch-meson "$_pkgname" build
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir "$pkgdir"
+
+  install -vDm644 "$_pkgname"/mpvpaper.man "$pkgdir"/usr/share/man/man1/${_pkgname}.1
+}
