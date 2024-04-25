@@ -28,4 +28,6 @@ pkgver() {
 package() {
     install -d "${pkgdir}/usr/share/archiso/configs/hoream"    
     cp -r "${srcdir}/${_pkgname}/"* "${pkgdir}/usr/share/archiso/configs/hoream"
+    sed -i '/^Server = file:\/\//s/^/#/' "${pkgdir}/usr/share/archiso/configs/hoream/pacman.conf"
+    sed -i '/^#Server = https:\/\//s/^#//' "${pkgdir}/usr/share/archiso/configs/hoream/pacman.conf"
 }
