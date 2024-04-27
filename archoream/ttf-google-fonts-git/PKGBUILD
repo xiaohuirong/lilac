@@ -9,7 +9,7 @@
 # Contributor: Alexander De Sousa <archaur.xandy21@spamgourmet.com>
 
 pkgname=ttf-google-fonts-git
-pkgver=r7547.8c9a9848e
+pkgver=r7603.99448dfe1
 pkgrel=1
 epoch=1
 pkgdesc="TrueType fonts from the Google Fonts project (git version)"
