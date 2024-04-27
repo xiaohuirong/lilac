@@ -1,7 +1,7 @@
 # Maintainer: Mark Wagie <mark dot wagie at proton dot me>
 pkgname=musicpod-git
 _app_id=org.feichtmeier.Musicpod
-pkgver=1.3.4.r1.g48919bd
+pkgver=1.3.6.r0.g78a0290
 pkgrel=1
 _flutter_ver=3.19.6
 pkgdesc="Music, radio, television and podcast player"
