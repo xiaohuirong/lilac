@@ -1,7 +1,7 @@
 # Maintainer: seiuneko <chfsefefgesfen foxmail>
 pkgname=dufs-git
 _pkgname=dufs
-pkgver=0.39.0.r24.gffc0991
+pkgver=0.39.0.r25.gd0c79a9
 pkgrel=1
 pkgdesc="A file server that supports static serving, uploading, searching, accessing control, webdav..."
 arch=('x86_64')
