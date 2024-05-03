@@ -8,8 +8,4 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: gtklock
-  - source: manual
-
-repo_depends:
-  - gtk-session-lock
+    aur: gtk-session-lock
