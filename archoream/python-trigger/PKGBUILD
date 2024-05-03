@@ -1,0 +1,12 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=python
+pkgver=0.0.1
+pkgrel=1
+pkgdesc='python package rebuild trigger.'
+url='https://mirrors.hoream.top'
+arch=('any')
+license=('GPL')
+
+# vim:set sw=2 sts=-1 et:
+
