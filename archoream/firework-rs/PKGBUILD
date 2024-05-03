@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="firework-rs"
 pkgname="${_pkgname}-git"
-pkgver=r28.a75d197
+pkgver=r33.dc9213d
 pkgrel=1
 pkgdesc="a cross-platform ascii-art firework simulator in terminal."
 url="https://github.com/Wayoung7/firework-rs"
