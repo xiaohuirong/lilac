@@ -61,7 +61,7 @@ depends=(
   tracker3
   wayland
 )
-makedepends=("libdrm" "vulkan-headers"
+makedepends=("libdrm"
   docbook-xsl
   gi-docgen
   git
@@ -99,7 +99,6 @@ build() {
     -D broadway-backend=true
     -D cloudproviders=enabled
     -D colord=enabled
-    -D gtk_doc=true
     -D man-pages=true
     -D tracker=enabled
   )
