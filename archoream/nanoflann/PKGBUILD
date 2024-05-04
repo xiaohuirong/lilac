@@ -2,7 +2,7 @@
 
 pkgname=nanoflann
 pkgver=1.5.0
-pkgrel=1
+pkgrel=2
 pkgdesc='a C++ header-only library for Nearest Neighbor (NN) search wih KD-trees'
 arch=('any')
 url='https://github.com/jlblancoc/nanoflann'
