@@ -46,6 +46,7 @@ package_eww-x11-git() {
 		libglib-2.0.so=0-64
 		gcc-libs
 		glibc
+        libdbusmenu-glib
 	)
 	conflicts=("eww-wayland" "eww" "eww-x11" "eww-wayland-git")
     provides=("eww-x11")
