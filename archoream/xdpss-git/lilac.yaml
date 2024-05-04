@@ -11,3 +11,9 @@ update_on:
     aur: xdpss-git
   - source: github
     github: MikeWalrus/xdpss
+
+repo_depends:
+  - python-trigger
+
+update_on_build:
+  - pkgbase: python-trigger

@@ -10,3 +10,4 @@ update_on:
   - source: archpkg
     archpkg: python
     strip_release: true
+  - source: manual
