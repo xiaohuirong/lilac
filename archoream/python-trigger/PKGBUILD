@@ -2,7 +2,7 @@
 
 pkgname=python-trigger
 pkgver=3.12.3
-pkgrel=1
+pkgrel=2
 pkgdesc='python package rebuild trigger.'
 url='https://mirrors.hoream.top'
 arch=('any')
