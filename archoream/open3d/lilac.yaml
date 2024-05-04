@@ -13,3 +13,5 @@ update_on:
 
       #repo_depends:
       #  - glfw-wayland-minecraft-git
+repo_depends:
+  - nanoflann
