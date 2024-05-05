@@ -10,7 +10,7 @@ update_on:
   - source: aur
     aur: octopi
   - source: manual
-    manual: 4
+    manual: 5
 
 repo_depends:
   - alpm_octopi_utils
