@@ -1,8 +1,8 @@
 # Maintainer: Antoine Bertin <antoine.bertin@archlinux.org>
 
 pkgname=gruvbox-plus-icon-theme-git
-pkgver=5.3.1.r196.gc82d485
-pkgrel=2
+pkgver=5.3.1.r207.gb1cf550
+pkgrel=1
 pkgdesc="Icon theme based on Gruvbox color scheme"
 arch=(any)
 url=https://github.com/SylEleuth/gruvbox-plus-icon-pack
