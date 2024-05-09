@@ -1,0 +1,46 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="easytier"
+pkgname="${_pkgname}-git"
+pkgver=1.0.0.r113.g076f6cd
+pkgrel=1
+pkgdesc="A simple, decentralized mesh VPN with WireGuard support."
+url="https://github.com/KKRainbow/EasyTier"
+license=("Apache-2.0")
+arch=('x86_64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=("protobuf-c")
+makedepends=("cargo" "git")
+source=(${_pkgname}::git+${url})
+sha256sums=('SKIP')
+
+prepare() {
+    cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
+}
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//'
+}
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_TARGET_DIR=target
+    cargo build --frozen --release --all-features
+}
+
+#check() {
+#    cd "${srcdir}/${_pkgname}"
+#    export RUSTUP_TOOLCHAIN=stable
+#    cargo test --frozen --all-features
+#}
+
+package() {
+	install -d "${pkgdir}/usr/bin"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}-core" "${pkgdir}/usr/bin/${_pkgname}"
+    install -Dm644 "${srcdir}/${_pkgname}/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+}
+

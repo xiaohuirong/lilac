@@ -1,8 +1,8 @@
 # Maintainer: Hoream <hoream@qq.com>
 # Contributor: Solomon Choina <shlomochoina@gmail.com0
 pkgname=wayfire-hoream-git
-pkgver=0.8.0.20231223.070344.gd73ec3e7
-pkgrel=4
+pkgver=0.8.0.20240509.023836.g83daa255
+pkgrel=1
 pkgdesc="3D wayland compositor (hoream's version)"
 arch=('x86_64')
 url="https://github.com/xiaohuirong/wayfire"
@@ -18,11 +18,13 @@ options=(debug)
 source=(wayfire::git+$url.git#branch=hoream
         wf-touch::git+https://github.com/WayfireWM/wf-touch
         wf-utils::git+https://github.com/WayfireWM/wf-utils
+        wlroots::git+https://github.com/xiaohuirong/wlroots
         sdl_decor.patch
         decoration.patch
         fix_wofi_crash.patch
         xwayland_no_mapped.patch)
 sha256sums=(SKIP
+            SKIP
             SKIP
             SKIP
             SKIP
@@ -37,6 +39,9 @@ prepare() {
 
     git config submodule.subprojects/wf-utils.url "${srcdir}/wf-utils"
     git -c protocol.file.allow=always submodule update --init subprojects/wf-utils
+
+    git config submodule.subprojects/wlroots.url "${srcdir}/wlroots"
+    git -c protocol.file.allow=always submodule update --init subprojects/wlroots
 }
 
 pkgver () {
