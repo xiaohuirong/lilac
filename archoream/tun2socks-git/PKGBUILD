@@ -2,7 +2,7 @@
 
 pkgname=tun2socks-git
 _pkgname=tun2socks
-pkgver=v2.5.2.r32.g0d819e1
+pkgver=v2.5.2.r33.g488e5b2
 pkgrel=1
 pkgdesc='create a network interface which passes all traffic through proxy'
 arch=('x86_64')
