@@ -13,6 +13,7 @@ depends=("protobuf-c")
 makedepends=("cargo" "git")
 source=(${_pkgname}::git+${url})
 sha256sums=('SKIP')
+options=('!lto')
 
 prepare() {
     cd "${srcdir}/${_pkgname}"
