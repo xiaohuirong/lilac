@@ -13,3 +13,8 @@ update_on:
 repo_depends:
   - python-mpv-jsonipc
   - python-jellyfin-apiclient
+  - python-trigger
+
+update_on_build:
+  - pkgbase: python-trigger
+

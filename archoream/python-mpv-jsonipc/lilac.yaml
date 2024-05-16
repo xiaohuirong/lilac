@@ -9,3 +9,10 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: python-mpv-jsonipc
+  - source: manual
+
+repo_depends:
+  - python-trigger
+
+update_on_build:
+  - pkgbase: python-trigger
