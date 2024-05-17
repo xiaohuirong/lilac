@@ -12,6 +12,7 @@ update_on:
   - source: github
     github: ubuntu-flutter-community/musicpod
   - source: manual
+    manual: 1
 
 repo_depends:
   - fvm
