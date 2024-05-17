@@ -5,10 +5,10 @@
 # Contributor: rhabbachi
 
 pkgname=displaylink
-pkgver=5.8
-_releasedate=2023-08
-_pkgfullver=5.8.0-63.33
-pkgrel=1
+pkgver=6.0
+_releasedate=2024-05
+_pkgfullver=6.0.0-24
+pkgrel=0
 pkgdesc="Linux driver for DisplayLink devices"
 arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h' 'aarch64')
 url="https://www.synaptics.com/products/displaylink-graphics"
@@ -24,8 +24,8 @@ source=(displaylink-driver-${pkgver}.zip::https://www.synaptics.com/sites/defaul
         99-displaylink.rules
 	displaylink.service
         displaylink-sleep.sh)
-sha256sums=('22c552ead448c80d9e8dd48a842bb511184d07a74180ac76bd89dd144ddda816'
-            '83167d307d030abc42f2bbe6ad6a23802433cf5d8fab50afb0d519036518f22b'
+sha256sums=('fc7aa51afabe6a19ee0423b749c95d242669f005f4d8733c2b821f33399db9c7'
+            'b2b42abdbf04fab78a8d7f9d36a28ee30d0a35e3c993ba733cf9adfabe3ebcd1'
             '2f81fea43332a62b2cf1dd47e56ea01caf1e886bcd16c3f82b18bfe148fb21a9'
             '53aac00fecfc04ec9e3d88ea13f5bf7bb05f669ff33e1834ba671f9240fe9641'
             '530c488fa9b2833ff64611ff2b533f63212a85f8ebed446d5a4d51cf9a52c7ea'
@@ -39,7 +39,11 @@ prepare() {
      --target $pkgname-$pkgver \
      --nox11 \
      --noprogress
-  test -d $pkgname-$pkgver || (echo "Extracting the driver with the .run installer failed"; exit 1)
+  if [[ ! -d $pkgname-$pkgver ]]
+  then
+    echo "Extracting the driver with the .run installer failed"
+    exit 1
+  fi
 }
 
 package() {
