@@ -2,7 +2,7 @@
 
 pkgname=fvm
 pkgver=3.1.4
-pkgrel=1
+pkgrel=2
 pkgdesc="Flutter Version Management: A simple cli to manage Flutter SDK versions."
 arch=('x86_64')
 url="https://github.com/leoafarias/fvm"
