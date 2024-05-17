@@ -8,10 +8,4 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: musicpod-git
-  - source: github
-    github: ubuntu-flutter-community/musicpod
-  - source: manual
-
-repo_depends:
-  - fvm
+    aur: fvm
