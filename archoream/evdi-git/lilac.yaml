@@ -11,3 +11,4 @@ update_on:
     aur: evdi-git
   - source: github
     github: DisplayLink/evdi
+  - source: manual

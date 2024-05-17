@@ -9,6 +9,7 @@ post_build: git_pkgbuild_commit
 update_on:
   - source: aur
     aur: displaylink
+  - source: manual
 
 repo_depends:
   - evdi-git
