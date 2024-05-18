@@ -13,7 +13,8 @@ url='https://community.kde.org/Frameworks'
 license=(LGPL)
 makedepends=(extra-cmake-modules
              python-lxml
-             qt6-base)
+             qt6-base
+             rsync)
 source=(https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgbase-$pkgver.tar.xz)
 sha256sums=('df5a3b150768dd5c781a6c3d1848d79f4b0eb2f327e248c5426a1234aa4c135b')
 
