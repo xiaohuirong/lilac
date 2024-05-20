@@ -18,8 +18,8 @@ prepare() {
     cd "${srcdir}/${_pkgname}"
     export RUSTUP_TOOLCHAIN=stable
     cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
-    sed -i 's/let mut color = Color::WHITE;/let mut color = Color::from_rgba8(13, 185, 215, 255);/g' "${srcdir}/${_pkgname}/src/main.rs"
-    sed -i 's/color.apply_opacity(0.25);/color.apply_opacity(0.5);/g' "${srcdir}/${_pkgname}/src/main.rs"
+    sed -i 's/let mut color = Color::WHITE;/let mut color = Color::from_rgba8(135, 83, 238, 255);/g' "${srcdir}/${_pkgname}/src/main.rs"
+    sed -i 's/color.apply_opacity(0.25);/color.apply_opacity(0.8);/g' "${srcdir}/${_pkgname}/src/main.rs"
     sed -i 's/let border_color = Color::WHITE;/let border_color = Color::from_rgba8(238, 83, 135, 255);/g' "${srcdir}/${_pkgname}/src/main.rs"
 }
 
