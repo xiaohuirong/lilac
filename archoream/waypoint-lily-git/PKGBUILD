@@ -1,15 +1,15 @@
 # Maintainer: Hoream <hoream@qq.com>
-_pkgname="pwvucontrol"
+_pkgname="waypoint-lily"
 pkgname="${_pkgname}-git"
-pkgver=0.3.r71.gf0863ad
+pkgver=r55.a7e4b39
 pkgrel=1
-pkgdesc="Pipewire Volume Control"
-url="https://github.com/saivert/pwvucontrol"
-license=("GPL-3.0")
+pkgdesc="Wayland clone of keynav "
+url="https://github.com/lilydjwg/waypoint"
+license=("MPL-2.0")
 arch=('x86_64')
-provides=("${_pkgname}")
-conflicts=("${_pkgname}")
-depends=()
+provides=("${_pkgname}" "waypoint")
+conflicts=("${_pkgname}" "waypoint")
+depends=("libxkbcommon" "gcc-libs" "glibc")
 makedepends=("cargo" "git")
 source=(${_pkgname}::git+${url})
 sha256sums=('SKIP')
@@ -22,8 +22,10 @@ prepare() {
 
 pkgver() {
   cd "${srcdir}/${_pkgname}"
-  # tag
-  git describe --long --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
 }
 
 build(){
@@ -41,6 +43,6 @@ check() {
 
 package() {
 	install -d "${pkgdir}/usr/bin"
-	install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}" "${pkgdir}/usr/bin/${pkg_name}"
-    install -Dm644 "${srcdir}/${_pkgname}/LICENSE" -t "${pkgdir}/usr/share/licenses/${_pkgname}/"
+	install -Dm755 "${srcdir}/${_pkgname}/target/release/waypoint" "${pkgdir}/usr/bin/waypoint"
+    install -Dm644 "${srcdir}/${_pkgname}/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}/"
 }
