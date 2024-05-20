@@ -1,6 +1,6 @@
 pkgname=wl-screenrec-git
-pkgver=r195.ad0dd42
-pkgrel=2
+pkgver=r196.098b973
+pkgrel=1
 pkgdesc="High performance hardware accelerated wlroots screen recorder"
 arch=('i686' 'x86_64' 'aarch64')
 url="https://github.com/russelltg/wl-screenrec"
