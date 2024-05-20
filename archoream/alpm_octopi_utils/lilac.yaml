@@ -3,12 +3,12 @@ maintainers:
     email: hoream@qq.com
 
 build_prefix: extra-x86_64
-#pre_build: aur_pre_build
-#post_build: aur_post_build
-post_build: git_pkgbuild_commit
+pre_build: aur_pre_build
+post_build: aur_post_build
+#post_build: git_pkgbuild_commit
 
 update_on:
   - source: aur
     aur: alpm_octopi_utils
   - source: manual
-    manual: 5
+    manual: 6
