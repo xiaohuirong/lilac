@@ -21,6 +21,7 @@ prepare() {
     sed -i 's/let mut color = Color::WHITE;/let mut color = Color::from_rgba8(135, 83, 238, 255);/g' "${srcdir}/${_pkgname}/src/main.rs"
     sed -i 's/color.apply_opacity(0.25);/color.apply_opacity(0.8);/g' "${srcdir}/${_pkgname}/src/main.rs"
     sed -i 's/let border_color = Color::WHITE;/let border_color = Color::from_rgba8(238, 83, 135, 255);/g' "${srcdir}/${_pkgname}/src/main.rs"
+    sed -i 's/border_thickness = 1.0;/border_thickness = 2.0;/g' "${srcdir}/${_pkgname}/src/main.rs"
 }
 
 pkgver() {

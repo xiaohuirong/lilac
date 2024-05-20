@@ -9,4 +9,5 @@ update_on:
   - source: github
     github: lilydjwg/waypoint
   - source: manual
+    manual: 1
     
