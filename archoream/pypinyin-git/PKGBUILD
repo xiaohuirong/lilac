@@ -1,0 +1,52 @@
+# Maintainer: Hoream <hoream@qq.com>
+# Contributor: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Štěpán Němec <stepnem@gmail.com>
+
+_pkgname=pypinyin
+pkgname="${_pkgname}-git"
+pkgver=0.51.0.r0.g29cacd8
+pkgrel=1
+pkgdesc='Chinese characters transliteration module and tool'
+arch=('any')
+url='https://github.com/mozillazg/python-pinyin'
+license=('MIT')
+depends=('python')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+makedepends=('python-setuptools' 'python-build' 'python-installer' 'python-wheel' 'phrase-pinyin-data' 'pinyin-data' 'git')
+checkdepends=('python-pytest-cov')
+source=("${_pkgname}::git+${url}"
+        "pinyin-data::git+https://github.com/mozillazg/pinyin-data.git"
+        "phrase-pinyin-data::git+https://github.com/mozillazg/phrase-pinyin-data.git")
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//'
+}
+
+prepare() {
+  cd "${_pkgname}"
+  git config submodule.pinyin-data.url "$srcdir/pinyin-data"
+  git config submodule.phrase-pinyin-data.url "$srcdir/phrase-pinyin-data"
+  git -c protocol.file.allow=always submodule update
+}
+
+build() {
+  cd "${_pkgname}"
+  make gen_data
+  python -m build --wheel --no-isolation
+}
+
+check() {
+  cd "${_pkgname}"
+  pytest pypinyin tests
+}
+
+package() {
+  cd "${_pkgname}"
+  python -m installer --destdir="$pkgdir" dist/*.whl
+  install -Dm644 LICENSE.txt -t "$pkgdir"/usr/share/licenses/$pkgname/
+}
