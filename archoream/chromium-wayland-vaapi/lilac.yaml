@@ -3,13 +3,14 @@ maintainers:
     email: hoream@qq.com
 
 build_prefix: extra-x86_64
-pre_build: aur_pre_build
+#pre_build: aur_pre_build
 post_build: git_pkgbuild_commit
 
 update_on:
-  - source: aur
-    aur: chromium-wayland-vaapi 
+  #- source: aur
+  #  aur: chromium-wayland-vaapi 
   - source: manual
+    manual: 1
 
 time_limit_hours: 5
 managed: true
