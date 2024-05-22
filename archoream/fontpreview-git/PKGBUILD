@@ -1,8 +1,8 @@
 # Maintainer: crian <crian84 at gmail dot com>
 
 pkgname=fontpreview-git
-pkgver=1.0.6.r5.g467befa
-pkgrel=2
+pkgver=1.0.6.r10.g9d52daa
+pkgrel=1
 pkgdesc="Very customizable and minimal font previewer written in bash"
 arch=('any')
 url="https://github.com/sdushantha/fontpreview"
