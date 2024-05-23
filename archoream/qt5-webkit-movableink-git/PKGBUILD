@@ -26,8 +26,15 @@ optdepends=('gst-plugins-good: Webm codec support')
 provides=(qt5-webkit) #qt5-webkit-movableink
 conflicts=(qt5-webkit) #qt5-webkit-movableink
 options=(!lto)
-source=("movableink-webkit::git+https://github.com/movableink/webkit.git")
-sha256sums=('SKIP')
+source=("movableink-webkit::git+https://github.com/movableink/webkit.git"
+        "fix.patch")
+sha256sums=('SKIP'
+            'SKIP')
+
+prepare() {
+  cd "$srcdir/movableink-webkit"
+  patch -Np1 -i "$srcdir/fix.patch" 
+}
 
 pkgver() {
   cd "$srcdir/movableink-webkit"
