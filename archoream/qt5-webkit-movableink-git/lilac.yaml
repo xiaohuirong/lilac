@@ -10,3 +10,4 @@ update_on:
   - source: aur
     aur: qt5-webkit-movableink-git
   - source: manual
+    manual: 1
