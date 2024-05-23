@@ -3,12 +3,12 @@
 # Contributor: sxe <sxxe@gmx.de>
 
 pkgname=wine-git
-pkgver=9.9.r0.gfd1da4521e6
+pkgver=9.9.r71.g1bccb4cf9a5
 pkgrel=1
 pkgdesc='A compatibility layer for running Windows programs (git version)'
 arch=('x86_64')
 url='https://www.winehq.org/'
-license=('LGPL')
+license=('LGPL-2.1-or-later')
 depends=("lib32-libxkbcommon" "lib32-wayland" "libxkbcommon" "wayland"
     'desktop-file-utils'
     'fontconfig'      'lib32-fontconfig'
@@ -96,6 +96,11 @@ pkgver() {
 
 build() {
     export CFLAGS+=' -ffat-lto-objects'
+    
+    # apply flags for cross-compilation
+    export CROSSCFLAGS="${CFLAGS/-Werror=format-security/}"
+    export CROSSCXXFLAGS="${CXXFLAGS/-Werror=format-security/}"
+    export CROSSLDFLAGS="${LDFLAGS//-Wl,-z*([^[:space:]])/}"
     
     # build wine 64-bit
     # (according to the wine wiki, this 64-bit/32-bit building order is mandatory)
