@@ -29,9 +29,9 @@ optdepends=('pipewire: WebRTC desktop sharing under Wayland'
             'wayland-chromium: EGL support for chromium'
             'kwallet: support for storing passwords in KWallet on Plasma')
 options=('!lto') # Chromium adds its own flags for ThinLTO
-source=(https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$pkgver.tar.xz
-        https://github.com/foutrelis/chromium-launcher/archive/v$_launcher_ver/chromium-launcher-$_launcher_ver.tar.gz
-        https://gitlab.com/Matt.Jolly/chromium-patches/-/archive/${pkgver%%.*}/chromium-patches-${pkgver%%.*}.tar.bz2
+source=(chromium-$pkgver.tar.xz::https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$pkgver.tar.xz
+        chromium-launcher-$_launcher_ver.tar.gz::https://github.com/foutrelis/chromium-launcher/archive/v$_launcher_ver/chromium-launcher-$_launcher_ver.tar.gz
+        chromium-patches-${pkgver%%.*}.tar.gz::https://gitlab.com/Matt.Jolly/chromium-patches/-/archive/${pkgver%%.*}/chromium-patches-${pkgver%%.*}.tar.bz2
         libxml2-2.12.patch
         icu-74.patch
         drop-flags-unsupported-by-clang16.patch
