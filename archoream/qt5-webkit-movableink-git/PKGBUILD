@@ -2,7 +2,7 @@
 
 pkgname=qt5-webkit-movableink-git
 pkgver=r275665.2d2b3794dd79
-pkgrel=1
+pkgrel=2
 pkgdesc='Classes for a WebKit2 based implementation and a new QML API'
 arch=(x86_64)
 url='https://github.com/qtwebkit/qtwebkit'
