@@ -9,6 +9,7 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: whisper.cpp
+  - source: manual
 
 repo_depends:
   - openvino

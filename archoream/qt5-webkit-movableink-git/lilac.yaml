@@ -12,3 +12,5 @@ update_on:
     aur: qt5-webkit-movableink-git
   - source: manual
     manual: 2
+
+managed: false
