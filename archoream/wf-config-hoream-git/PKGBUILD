@@ -23,6 +23,11 @@ pkgver () {
   )
 }
 
+prepare() {
+  cd "${srcdir}/${pkgname}"
+  sed -i '/#include <set>/a #include <algorithm>' src/file.cpp
+}
+
 build() {
     arch-meson "$srcdir/${pkgname}/" build
     ninja -C build

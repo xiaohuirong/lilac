@@ -10,7 +10,7 @@ update_on:
   - source: github
     github: xiaohuirong/wayfire-plugins-extra
   - source: manual
-    manual: 3
+    manual: 4
 
 
 repo_depends:
