@@ -10,7 +10,7 @@ update_on:
   #- source: aur
   #  aur: chromium-wayland-vaapi 
   - source: manual
-    manual: 3
+    manual: 4
 
 time_limit_hours: 5
 managed: true
