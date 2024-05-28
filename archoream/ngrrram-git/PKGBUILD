@@ -1,8 +1,8 @@
 # Maintainer: Gallifreyan <gallifreyan at protonmail dot ch>
 
 pkgname=ngrrram-git
-pkgver=1.0.3.r2.gac122c3
-pkgrel=2
+pkgver=1.0.3.r9.gb22f3e8
+pkgrel=1
 pkgdesc='A TUI tool to help you type faster and learn new layouts. Includes a free cat.'
 arch=(
     'i686'
