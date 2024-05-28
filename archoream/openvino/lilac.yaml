@@ -10,3 +10,4 @@ update_on:
   - source: aur
     aur: openvino
   - source: manual
+    manual: 1
