@@ -11,3 +11,4 @@ update_on:
     aur: gruvbox-plus-icon-theme-git
   - source: github
     github: SylEleuth/gruvbox-plus-icon-pack
+  - source: manual
