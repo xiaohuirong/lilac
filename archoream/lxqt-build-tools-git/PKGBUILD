@@ -3,7 +3,7 @@
 _pkgname=lxqt-build-tools
 pkgname=$_pkgname-git
 pkgver=2.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Tools to build LXQt and components maintained by the project.'
 arch=('any')
 url='https://github.com/lxqt/lxqt-build-tools'
