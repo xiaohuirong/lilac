@@ -1,7 +1,7 @@
 # Maintainer: Efe Çetin <efectn@protonmail.com>
 
 pkgname=grub-theme-minegrub-git
-pkgver=r127.6078b52
+pkgver=r128.2f0fd69
 pkgrel=1
 pkgdesc="A Grub Theme in the style of Minecraft!"
 arch=('any')
