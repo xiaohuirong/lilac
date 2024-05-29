@@ -2,7 +2,7 @@
 
 pkgname=gruvbox-plus-icon-theme-git
 pkgver=5.3.1.r445.gf520fc5
-pkgrel=1
+pkgrel=2
 pkgdesc="Icon theme based on Gruvbox color scheme"
 arch=(any)
 url=https://github.com/SylEleuth/gruvbox-plus-icon-pack
