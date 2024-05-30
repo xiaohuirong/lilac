@@ -9,3 +9,7 @@ post_build: aur_post_build
 update_on:
   - source: aur
     aur: lxqt-menu-data-git
+  - source: manual
+
+repo_depends:
+  - lxqt-build-tools-git
