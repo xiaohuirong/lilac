@@ -11,5 +11,8 @@ update_on:
   - source: archpkg
     archpkg: libfm-qt
   - source: manual
-    manual: 1
+    manual: 2
   
+repo_depends:
+  - lxqt-menu-data-git
+  - lxqt-build-tools-git
