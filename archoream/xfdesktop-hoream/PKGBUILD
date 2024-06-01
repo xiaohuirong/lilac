@@ -1,0 +1,46 @@
+# Maintainer: Hoream <hoream@qq.com>
+# Contributor: Evangelos Foutras <evangelos@foutrelis.com>
+# Contributor: tobias <tobias funnychar archlinux.org>
+
+_pkgname=xfdesktop
+pkgname="$_pkgname-hoream"
+pkgver=4.18.1
+pkgrel=1
+pkgdesc="Xfce's desktop manager"
+arch=('x86_64')
+url="https://docs.xfce.org/xfce/xfdesktop/start"
+license=('GPL2')
+groups=('xfce4')
+depends=('libxfce4ui' 'libwnck3' 'exo' 'thunar' 'garcon' 'hicolor-icon-theme')
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+makedepends=('intltool')
+source=($_pkgname-$pkgver.tar.bz2::https://archive.xfce.org/src/xfce/$_pkgname/${pkgver%.*}/$_pkgname-$pkgver.tar.bz2
+        background.png::https://lsky.hoream.top/i/2024/06/01/665b1b9ba4b1e.png)
+sha256sums=('ef9268190c25877e22a9ff5aa31cc8ede120239cb0dfca080c174e7eed4ff756'
+            'SKIP')
+
+prepare() {
+  cd $_pkgname-$pkgver
+  sed -i 's#/backgrounds/xfce/xfce-shapes.svg#/backgrounds/xfce/background.png#g' common/xfdesktop-common.h
+}
+
+build() {
+  cd $_pkgname-$pkgver
+
+  ./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --enable-thunarx \
+    --enable-notifications \
+    --disable-debug
+  make
+}
+
+package() {
+  cd $_pkgname-$pkgver
+  make DESTDIR="$pkgdir" install
+  install -Dm644 "${srcdir}/background.png" "${pkgdir}/usr/share/backgrounds/xfce"
+}
+
+# vim:set ts=2 sw=2 et:
