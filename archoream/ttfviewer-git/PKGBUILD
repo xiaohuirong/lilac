@@ -2,7 +2,7 @@
 
 _pkgname=ttfviewer
 pkgname="${_pkgname}-git"
-pkgver=0.2.8.r5.gd2d6837
+pkgver=0.2.8.r7.g5a5c323
 pkgrel=1
 pkgdesc="A small tool for developers to view and preview various ttf font/icon image formats."
 arch=("x86_64")
