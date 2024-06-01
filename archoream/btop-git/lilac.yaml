@@ -11,3 +11,4 @@ update_on:
     aur: btop-git
   - source: github
     github: aristocratos/btop
+  - source: manual
