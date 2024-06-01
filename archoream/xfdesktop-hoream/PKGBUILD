@@ -10,7 +10,6 @@ pkgdesc="Xfce's desktop manager"
 arch=('x86_64')
 url="https://docs.xfce.org/xfce/xfdesktop/start"
 license=('GPL2')
-groups=('xfce4')
 depends=('libxfce4ui' 'libwnck3' 'exo' 'thunar' 'garcon' 'hicolor-icon-theme')
 provides=("$_pkgname")
 conflicts=("$_pkgname")

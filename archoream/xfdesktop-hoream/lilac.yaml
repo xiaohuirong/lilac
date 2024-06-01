@@ -10,3 +10,4 @@ update_on:
     archpkg: obs-studio
     strip_release: true
   - source: manual
+    manual: 1
