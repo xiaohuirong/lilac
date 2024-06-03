@@ -11,3 +11,4 @@ update_on:
     aur: iio-oscilloscope-git
   - source: github
     github: analogdevicesinc/iio-oscilloscope
+  - source: manual
