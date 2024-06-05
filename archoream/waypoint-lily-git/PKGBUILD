@@ -1,8 +1,8 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="waypoint-lily"
 pkgname="${_pkgname}-git"
-pkgver=r55.a7e4b39
-pkgrel=3
+pkgver=r56.bfe748e
+pkgrel=1
 pkgdesc="Wayland clone of keynav "
 url="https://github.com/lilydjwg/waypoint"
 license=("MPL-2.0")
