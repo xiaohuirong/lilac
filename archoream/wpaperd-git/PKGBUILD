@@ -2,8 +2,8 @@
 # Maintainer: Rolv Apneseth <rolv.apneseth [at] gmail [dot] com>
 
 pkgname=wpaperd-git
-pkgver=r222.204b1c5
-pkgrel=2
+pkgver=r234.e6c0b73
+pkgrel=1
 pkgdesc='Wallpaper daemon for Wayland.'
 arch=('x86_64')
 url='https://github.com/danyspin97/wpaperd'
