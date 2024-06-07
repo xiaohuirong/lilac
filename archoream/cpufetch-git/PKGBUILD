@@ -2,7 +2,7 @@
 # Contributor: Dr-Noob <peibolms at gmail dot com>
 _name=cpufetch
 pkgname="$_name-git"
-pkgver=1.05.r6.g29768e8
+pkgver=1.05.r8.gdfa2b77
 pkgrel=1
 pkgdesc="Simple yet fancy CPU architecture fetching tool"
 arch=('x86_64' 'i686' 'armv6h' 'armv7h' 'aarch64')
