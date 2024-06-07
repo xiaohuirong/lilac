@@ -4,8 +4,8 @@
 
 _pkgname=pcmanfm-qt
 pkgname=$_pkgname-patched-git
-pkgver=2.0.0.r2.g749240b2
-pkgrel=2
+pkgver=2.0.0.r5.gca90cd7d
+pkgrel=1
 pkgdesc="The LXQt file manager, Qt port of PCManFM"
 arch=("i686" "x86_64")
 url="https://lxqt-project.org"
