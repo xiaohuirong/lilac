@@ -2,7 +2,7 @@
 _pkgname="serverstatus-rust"
 pkgname="${_pkgname}-git"
 pkgver=1.8.1.r0.g1dd5c41
-pkgrel=2
+pkgrel=3
 pkgdesc="Rust 版 ServerStatus 探针、威力加强版"
 url="https://github.com/zdz/ServerStatus-Rust"
 license=('Apache-2.0')
