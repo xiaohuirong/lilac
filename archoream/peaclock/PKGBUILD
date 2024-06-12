@@ -3,7 +3,7 @@
 
 pkgname=peaclock
 pkgver=0.4.3
-pkgrel=2
+pkgrel=3
 pkgdesc="A colourful binary clock for the terminal"
 arch=('x86_64')
 url="https://github.com/octobanana/peaclock"
