@@ -1,7 +1,7 @@
 # Maintainer: Mark Wagie <mark dot wagie at proton dot me>
 pkgname=musicpod-git
 _app_id=org.feichtmeier.Musicpod
-pkgver=1.4.4.r1.gb19908a
+pkgver=1.4.4.r2.gb511295
 pkgrel=1
 pkgdesc="Music, radio, television and podcast player"
 arch=('x86_64' 'aarch64')
