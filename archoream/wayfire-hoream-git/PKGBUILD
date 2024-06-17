@@ -22,8 +22,10 @@ source=(wayfire::git+$url.git#branch=hoream
         sdl_decor.patch
         decoration.patch
         fix_wofi_crash.patch
-        xwayland_no_mapped.patch)
+        xwayland_no_mapped.patch
+        fix_mirror_crash.patch)
 sha256sums=(SKIP
+            SKIP
             SKIP
             SKIP
             SKIP
@@ -68,6 +70,7 @@ build() {
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/sdl_decor.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/fix_wofi_crash.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/xwayland_no_mapped.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/fix_mirror_crash.patch
     ninja -C build
 }
 
