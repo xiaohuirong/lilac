@@ -2,7 +2,7 @@
 # Contributor: Solomon Choina <shlomochoina@gmail.com0
 pkgname=wayfire-hoream-git
 pkgver=0.8.0.20240509.023836.g83daa255
-pkgrel=5
+pkgrel=6
 pkgdesc="3D wayland compositor (hoream's version)"
 arch=('x86_64')
 url="https://github.com/xiaohuirong/wayfire"
