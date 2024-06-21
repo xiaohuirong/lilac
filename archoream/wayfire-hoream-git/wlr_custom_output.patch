@@ -13,7 +13,7 @@ index fa6e83e3..5fde2b1a 100644
      wl_output_transform transform = WL_OUTPUT_TRANSFORM_NORMAL;
      /* The scale of the output */
 diff --git a/src/core/output-layout.cpp b/src/core/output-layout.cpp
-index cdee8a45..4ad56a25 100644
+index cdee8a45..c6521571 100644
 --- a/src/core/output-layout.cpp
 +++ b/src/core/output-layout.cpp
 @@ -56,7 +56,7 @@ static wl_output_transform get_transform_from_string(std::string transform)
@@ -64,11 +64,24 @@ index cdee8a45..4ad56a25 100644
          if (state.source & OUTPUT_IMAGE_SOURCE_SELF)
          {
              if (handle->transform != state.transform)
-@@ -1012,6 +1017,7 @@ class output_layout_t::impl
+@@ -1007,8 +1012,18 @@ class output_layout_t::impl
+             }
+ 
+             state.source = OUTPUT_IMAGE_SOURCE_SELF;
+-            state.mode   = head->state.mode ? *head->state.mode :
+-                this->outputs[handle]->current_state.mode;
++
++            if (head->state.mode)
++            {
++                state.mode = *head->state.mode;
++            } else
++            {
++                state.mode.width = head->state.custom_mode.width;
++                state.mode.height = head->state.custom_mode.height;
++                state.mode.refresh = head->state.custom_mode.refresh;
++                state.uses_custom_mode = true;
++            }
++
              state.position  = {head->state.x, head->state.y};
              state.scale     = head->state.scale;
              state.transform = head->state.transform;
-+            state.uses_custom_mode = true;
-         }
- 
-         return result;
