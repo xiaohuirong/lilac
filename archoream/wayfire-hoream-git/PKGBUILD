@@ -24,19 +24,27 @@ source=(wayfire::git+$url.git#branch=hoream
         fix_wofi_crash.patch
         xwayland_no_mapped.patch
         fix_mirror_crash.patch
+        select_closest_refresh_rate.patch
+        068e59749f94d9d303117a5e955c233c31fcca07.patch
+        599ace91aca3f3c7a3faa66ce467c074c562fa12.patch
+        54cd3b9a1b48072f19e3b6d1707c41a73dc7ef6b.patch
         support_custom_modes.patch
         wlr_custom_output.patch)
-sha256sums=(SKIP
-            SKIP
-            SKIP
-            SKIP
-            SKIP
-            SKIP
-            SKIP
-            SKIP
-            SKIP
-            SKIP
-            SKIP)
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'dc7d68cc861cc85111e734baadc8ada99cfd99715cdef0b8fb2dd20c79bf08a1'
+            '2b964484cbe7153d9417b4f885cd4ee7892b686a781c94611dae2f315a286164'
+            '6a87a424869d37a219ab3bd23077c5da6dd443b51e9da599c68c73de372beb5b'
+            '88fb119c3db7e544ae89448d040e49e7abaa772bd226cd4e847049f64fa54aac'
+            'b7d734e31326ee0fa2277224d9cbfefb973b3e22bc2d53fcd699fafc8cc13376'
+            '6959d2cfff2259acb8b42d12622c580a813f1e44a4642b6b5e9a5e3df1def0a7'
+            'd350cc95d16c74311752b032fd615de8f11c5ca39781133dc23cc811978e0c3a'
+            'b42554ce9ab61a2561e649bfff5f527baa94534cdda02ddbfbde14c523cd49ce'
+            '599bbd5938a226acb09eb8f096d8c1f259ed4f1f6eef71e27b630823af9ad72f'
+            'cab5edf604ba93c0c02706477bd80f063de04db1bef63e438b7462e052ee2ba7'
+            '6c8d5d0281933b0467ecc355146109ee6090fd84d3c16793ea362b26cc1a0a02')
 
 prepare() {
     cd "$srcdir/wayfire"
@@ -77,6 +85,10 @@ build() {
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/fix_mirror_crash.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/support_custom_modes.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/wlr_custom_output.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/select_closest_refresh_rate.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/068e59749f94d9d303117a5e955c233c31fcca07.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/599ace91aca3f3c7a3faa66ce467c074c562fa12.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/54cd3b9a1b48072f19e3b6d1707c41a73dc7ef6b.patch
     ninja -C build
 }
 

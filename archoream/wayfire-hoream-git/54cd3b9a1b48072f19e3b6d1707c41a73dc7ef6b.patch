@@ -1,0 +1,22 @@
+From 54cd3b9a1b48072f19e3b6d1707c41a73dc7ef6b Mon Sep 17 00:00:00 2001
+From: Ilia Bozhinov <ammen99@gmail.com>
+Date: Fri, 19 Apr 2024 14:48:57 +0200
+Subject: [PATCH] output-layout: fix uninitialized read
+
+---
+ src/core/output-layout.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/core/output-layout.cpp b/src/core/output-layout.cpp
+index 7497cf49d..e8c8ea2e8 100644
+--- a/src/core/output-layout.cpp
++++ b/src/core/output-layout.cpp
+@@ -253,7 +253,7 @@ static const char *get_format_name(uint32_t format)
+ struct output_layout_output_t
+ {
+     wlr_output *handle;
+-    output_state_t current_state;
++    output_state_t current_state{};
+     bool is_externally_managed = false;
+     bool is_nested_compositor  = false;
+     bool inhibited = false;
