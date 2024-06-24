@@ -7,6 +7,6 @@ post_build: git_pkgbuild_commit
 
 update_on:
   - source: manual
-    manual: 3
+    manual: 4
   - source: github
     github: xiaohuirong/useful-scripts
