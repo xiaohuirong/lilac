@@ -3,7 +3,7 @@
 
 pkgname=lib2geom-git
 pkgver=1.1.r93.g5957e323
-pkgrel=1
+pkgrel=2
 pkgdesc="a library developed to provide a robust computational geometry framework"
 arch=('x86_64')
 url="http://lib2geom.sourceforge.net/"
