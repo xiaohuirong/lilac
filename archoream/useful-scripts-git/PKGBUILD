@@ -2,7 +2,7 @@
 
 _pkgname=useful-scripts
 pkgname="${_pkgname}-git"
-pkgver=r32.f2feccf
+pkgver=r33.950d9cb
 pkgrel=1
 pkgdesc="Some useful scripts."
 url="https://github.com/xiaohuirong/useful-scripts"
