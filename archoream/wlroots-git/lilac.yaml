@@ -10,5 +10,6 @@ update_on:
     gitlab: wlroots/wlroots
     host: gitlab.freedesktop.org
   - source: manual
+    manual: 1
 
 managed: true

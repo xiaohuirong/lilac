@@ -25,6 +25,7 @@ depends=(
     'xcb-util-renderutil'
     'xcb-util-wm'
     'lcms2'
+    'libliftoff'
 )
 makedepends=(
     'glslang'
