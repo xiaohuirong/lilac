@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname=osu-bin
-pkgver=2024.625.0
+pkgver=2024.625.2
 pkgrel=1
 pkgdesc="A free-to-win rhythm game. Rhythm is just a click away!"
 url="https://osu.ppy.sh"
