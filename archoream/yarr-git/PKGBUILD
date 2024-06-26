@@ -6,7 +6,7 @@ _gitbranch="master"
 _outdir="_output/linux"
 
 pkgname="${_pkgname}-git"
-pkgver=v2.4.r37.gb13cd85
+pkgver=v2.4.r41.gb571042
 pkgrel=1
 pkgdesc="Self-hosted RSS reader with Vue.js front and Go/SQLite back."
 arch=("any")
