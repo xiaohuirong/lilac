@@ -2,7 +2,7 @@
 
 _pkgname=warehouse
 pkgname=warehouse-git
-pkgver=1.6.3.r0.g12743c9
+pkgver=1.6.4.r0.geb9f68b
 pkgrel=1
 pkgdesc='A versatile toolbox for managing flatpak user data, viewing flatpak app info, and batch managing installed flatpaks.'
 url="https://github.com/flattool/warehouse"
