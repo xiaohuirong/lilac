@@ -2,7 +2,7 @@
 
 _pkgname=mpvpaper
 pkgname=mpvpaper-git
-pkgver=1.6.r2.g18e3197
+pkgver=1.6.r5.ga445391
 pkgrel=1
 pkgdesc="video wallpaper program for wlroots based wayland compositors"
 arch=('i686' 'x86_64')
