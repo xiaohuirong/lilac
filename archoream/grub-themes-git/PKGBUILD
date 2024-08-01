@@ -57,7 +57,7 @@ pkgname=('grub-theme-tela-color-1080p-git'
          'grub-theme-whitesur-whitesur-1080p-git'
          'grub-theme-whitesur-whitesur-2k-git'
          'grub-theme-whitesur-whitesur-4k-git')
-pkgver=2021.12.05.r21.gfa74d1b
+pkgver=2022.10.30.r56.gc47af2e
 pkgrel=1
 pkgdesc="Flat Design themes for Grub"
 arch=('any')
