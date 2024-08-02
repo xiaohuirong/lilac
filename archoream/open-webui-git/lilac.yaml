@@ -11,3 +11,6 @@ update_on:
     aur: open-webui-git
   - source: github
     github: open-webui/open-webui
+
+repo_depends:
+  - python311
