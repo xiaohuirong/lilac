@@ -15,3 +15,5 @@ update_on:
     lilac_throttle: 7d
   - source: manual
     manual: 5
+
+managed: false
