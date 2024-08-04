@@ -12,4 +12,5 @@ update_on:
   - source: github
     github: tvrzna/emptty
 
-makechrootpkg_args: GOPROXY=https://goproxy.cn
+makechrootpkg_args: 
+  - GOPROXY=https://goproxy.cn
