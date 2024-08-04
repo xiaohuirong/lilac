@@ -11,3 +11,6 @@ update_on:
     aur: mpv-uosc-git
   - source: github
     github: tomasklaen/uosc
+
+makechrootpkg_args: 
+  - GOPROXY=https://goproxy.cn
