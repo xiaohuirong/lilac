@@ -3,7 +3,7 @@
 
 pkgname=kmon-git
 pkgver=1.6.5.r8.g862148f
-pkgrel=3
+pkgrel=4
 pkgdesc="Linux kernel manager and activity monitor (git)"
 arch=('x86_64')
 url="https://github.com/orhun/kmon"
