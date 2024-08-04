@@ -2,7 +2,7 @@
 
 pkgname=clipman
 pkgver=1.6.4
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple clipboard manager for Wayland"
 url="https://github.com/chmouel/clipman"
 depends=("wl-clipboard>=2.0")
