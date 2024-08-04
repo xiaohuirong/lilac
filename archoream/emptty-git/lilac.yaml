@@ -11,3 +11,5 @@ update_on:
     aur: emptty-git
   - source: github
     github: tvrzna/emptty
+
+makechrootpkg_args: GOPROXY=https://goproxy.cn
