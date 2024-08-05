@@ -10,7 +10,7 @@ pkgname=(
   libportal-inputcapture-docs
 )
 pkgver=0.7.1+r24+ga1530a9
-pkgrel=1
+pkgrel=2
 pkgdesc="GIO-style async APIs for most Flatpak portals with patches to support input capture for input-leap"
 url="https://github.com/flatpak/libportal"
 arch=(x86_64)
