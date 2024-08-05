@@ -9,13 +9,13 @@ pkgname=(
   libportal-inputcapture-qt6
   libportal-inputcapture-docs
 )
-pkgver=0.7.1+r21+gffd3f83
+pkgver=0.7.1+r24+ga1530a9
 pkgrel=1
 pkgdesc="GIO-style async APIs for most Flatpak portals with patches to support input capture for input-leap"
 url="https://github.com/flatpak/libportal"
 arch=(x86_64)
 license=(LGPL3)
-makedepends=(
+makedepends=("qt6-base"
   gi-docgen
   glib2-devel
   git
