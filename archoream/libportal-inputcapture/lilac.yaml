@@ -8,10 +8,4 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: input-leap-git
-  - source: github
-    github: input-leap/input-leap
-  - source: manual
-
-repo_depends:
-  - libportal-inputcapture
+    aur: libportal-inputcapture
