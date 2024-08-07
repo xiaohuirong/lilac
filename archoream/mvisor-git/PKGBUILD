@@ -1,0 +1,43 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="mvisor"
+pkgname="${_pkgname}-git"
+pkgver=r297.52fe3c8
+pkgrel=1
+pkgdesc="A mini x86 hypervisor"
+url="https://github.com/tenclass/mvisor"
+license=("GPL-3.0-only")
+arch=('x86_64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=("protobuf" "yaml-cpp" "glib2" "openssl" "pixman" "alsa-lib" "glibc" "zlib" "sdl2" "zstd" "gcc-libs" "abseil-cpp" "virglrenderer")
+makedepends=("meson" "git" "ninja" "acpica" "gdb")
+source=(${_pkgname}::git+${url})
+sha256sums=('SKIP')
+options=("!lto")
+
+prepare() {
+    cd "${srcdir}/${_pkgname}"
+    sed -i "s|install_dir: '/mnt/server/opt/mvisor/build/bin/'|install_dir: '/usr/bin'|" meson.build
+}
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    meson setup build -Dsdl=true -Dvgpu=true
+    meson compile -C build
+}
+
+package() {
+    cd "${srcdir}/${_pkgname}"
+    meson install --destdir ${pkgdir} -C build
+    install -Dm644 LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+	install -d "${pkgdir}/usr/share/${_pkgname}/config"
+    cp config/* "${pkgdir}/usr/share/${_pkgname}/config"
+}
