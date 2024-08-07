@@ -18,6 +18,8 @@ options=("!lto")
 prepare() {
     cd "${srcdir}/${_pkgname}"
     sed -i "s|install_dir: '/mnt/server/opt/mvisor/build/bin/'|install_dir: '/usr/bin'|" meson.build
+    # remove werror option for makepkg auto compile
+    sed -i "/'werror=true'/d" meson.build
 }
 
 pkgver() {
