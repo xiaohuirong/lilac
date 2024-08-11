@@ -1,0 +1,71 @@
+From 1aa6bf3b9e0258ccc707b797de3cfb7f5b9deeb8 Mon Sep 17 00:00:00 2001
+From: 0xCA <undefined>
+Date: Thu, 11 Jan 2024 19:14:07 +0500
+Subject: [PATCH] Case-insensitive search by notes; display notes on the client
+ card
+
+---
+ custom/js/helper.js    | 6 ++++--
+ templates/clients.html | 7 ++++---
+ 2 files changed, 8 insertions(+), 5 deletions(-)
+
+diff --git a/custom/js/helper.js b/custom/js/helper.js
+index 6f329009..5b432724 100644
+--- a/custom/js/helper.js
++++ b/custom/js/helper.js
+@@ -40,7 +40,7 @@ function renderClientList(data) {
+ 
+         let additionalNotesHtml = "";
+         if (obj.Client.additional_notes && obj.Client.additional_notes.length > 0) {
+-            additionalNotesHtml = `<span class="info-box-text" style="display: none"><i class="fas fa-additional_notes"></i>${obj.Client.additional_notes}</span>`
++            additionalNotesHtml = `<span class="info-box-text" style="display: none"><i class="fas fa-additional_notes"></i>${obj.Client.additional_notes.toUpperCase()}</span>`
+         }
+ 
+         // render client html content
+@@ -49,7 +49,7 @@ function renderClientList(data) {
+                             <div class="overlay" id="paused_${obj.Client.id}"` + clientStatusHtml
+                                 + `<i class="paused-client fas fa-3x fa-play" onclick="resumeClient('${obj.Client.id}')"></i>
+                             </div>
+-                            <div class="info-box-content">
++                            <div class="info-box-content" style="overflow: hidden">
+                                 <div class="btn-group">
+                                     <a href="download?clientid=${obj.Client.id}" class="btn btn-outline-primary btn-sm">Download</a>
+                                 </div>
+@@ -94,6 +94,8 @@ function renderClientList(data) {
+                                     ${prettyDateTime(obj.Client.updated_at)}</span>
+                                 <span class="info-box-text"><i class="fas fa-server" style="${obj.Client.use_server_dns ? "opacity: 1.0" : "opacity: 0.5"}"></i>
+                                     ${obj.Client.use_server_dns ? 'DNS enabled' : 'DNS disabled'}</span>
++                                <span class="info-box-text"><i class="fas fa-file"></i>
++                                    ${obj.Client.additional_notes}</span>
+                                 <span class="info-box-text"><strong>IP Allocation</strong></span>`
+                                 + allocatedIpsHtml
+                                 + `<span class="info-box-text"><strong>Allowed IPs</strong></span>`
+diff --git a/templates/clients.html b/templates/clients.html
+index fada01e7..0ab87339 100644
+--- a/templates/clients.html
++++ b/templates/clients.html
+@@ -416,7 +416,7 @@ <h4 class="modal-title">Remove</h4>
+         // hide all clients and display only the ones that meet the search criteria (name, email, IP)
+         $('#search-input').keyup(function () {
+             $("#status-selector").val("All");
+-            var query = $(this).val();
++            let query = $(this).val().trim();
+             $('.col-lg-4').hide();
+             $(".info-box-text").each(function() {
+                 if($(this).children('i.fa-user').length > 0 || $(this).children('i.fa-envelope').length > 0)
+@@ -426,12 +426,13 @@ <h4 class="modal-title">Remove</h4>
+                 })
+             $(".badge-secondary").filter(':contains("' + query + '")').parent().parent().parent().show();
+             $(".fa-tguserid").each(function () {
+-                if ($(this).parent().text().trim().indexOf(query.trim()) != -1) {
++                if ($(this).parent().text().trim().indexOf(query) != -1) {
+                     $(this).closest('.col-lg-4').show();
+                 }
+             })
++            let upperQuery = query.toUpperCase()
+             $(".fa-additional_notes").each(function () {
+-                if ($(this).parent().text().trim().indexOf(query.trim()) != -1) {
++                if ($(this).parent().text().trim().indexOf(upperQuery) != -1) {
+                     $(this).closest('.col-lg-4').show();
+                 }
+             })

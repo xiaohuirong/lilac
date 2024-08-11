@@ -1,0 +1,193 @@
+From ecea82d1724359cd7a1b554bdd87b68da449fd16 Mon Sep 17 00:00:00 2001
+From: 0xCA <0xCA@users.noreply.github.com>
+Date: Wed, 10 Jan 2024 01:03:27 +0500
+Subject: [PATCH] Support for notes about clients (#527)
+
+---
+ custom/js/helper.js    |  6 ++++++
+ handler/routes.go      |  1 +
+ model/client.go        |  1 +
+ templates/base.html    |  9 ++++++++-
+ templates/clients.html | 15 ++++++++++++++-
+ templates/wg.conf      |  4 ++++
+ util/util.go           | 11 ++++++++++-
+ 7 files changed, 44 insertions(+), 3 deletions(-)
+
+diff --git a/custom/js/helper.js b/custom/js/helper.js
+index d98eacb3..6f329009 100644
+--- a/custom/js/helper.js
++++ b/custom/js/helper.js
+@@ -38,6 +38,11 @@ function renderClientList(data) {
+             subnetRangesString = obj.Client.subnet_ranges.join(',')
+         }
+ 
++        let additionalNotesHtml = "";
++        if (obj.Client.additional_notes && obj.Client.additional_notes.length > 0) {
++            additionalNotesHtml = `<span class="info-box-text" style="display: none"><i class="fas fa-additional_notes"></i>${obj.Client.additional_notes}</span>`
++        }
++
+         // render client html content
+         let html = `<div class="col-sm-6 col-md-6 col-lg-4" id="client_${obj.Client.id}">
+                         <div class="info-box">
+@@ -81,6 +86,7 @@ function renderClientList(data) {
+                                 <span class="info-box-text" style="display: none"><i class="fas fa-key"></i> ${obj.Client.public_key}</span>
+                                 <span class="info-box-text" style="display: none"><i class="fas fa-subnetrange"></i>${subnetRangesString}</span>
+                                 ${telegramHtml}
++                                ${additionalNotesHtml}
+                                 <span class="info-box-text"><i class="fas fa-envelope"></i> ${obj.Client.email}</span>
+                                 <span class="info-box-text"><i class="fas fa-clock"></i>
+                                     ${prettyDateTime(obj.Client.created_at)}</span>
+diff --git a/handler/routes.go b/handler/routes.go
+index ef01d086..42047dc0 100644
+--- a/handler/routes.go
++++ b/handler/routes.go
+@@ -720,6 +720,7 @@ func UpdateClient(db store.IStore) echo.HandlerFunc {
+ 		client.PublicKey = _client.PublicKey
+ 		client.PresharedKey = _client.PresharedKey
+ 		client.UpdatedAt = time.Now().UTC()
++		client.AdditionalNotes = strings.ReplaceAll(strings.Trim(_client.AdditionalNotes, "\r\n"), "\r\n", "\n")
+ 
+ 		// write to the database
+ 		if err := db.SaveClient(client); err != nil {
+diff --git a/model/client.go b/model/client.go
+index cb00016f..d8351248 100644
+--- a/model/client.go
++++ b/model/client.go
+@@ -18,6 +18,7 @@ type Client struct {
+ 	AllowedIPs      []string  `json:"allowed_ips"`
+ 	ExtraAllowedIPs []string  `json:"extra_allowed_ips"`
+ 	Endpoint        string    `json:"endpoint"`
++	AdditionalNotes string    `json:"additional_notes"`
+ 	UseServerDNS    bool      `json:"use_server_dns"`
+ 	Enabled         bool      `json:"enabled"`
+ 	CreatedAt       time.Time `json:"created_at"`
+diff --git a/templates/base.html b/templates/base.html
+index 0c2b9eeb..3640699e 100644
+--- a/templates/base.html
++++ b/templates/base.html
+@@ -288,6 +288,10 @@ <h4 class="modal-title">New Wireguard Client</h4>
+                                     <label for="client_telegram_userid" class="control-label">Telegram userid</label>
+                                     <input type="text" class="form-control" id="client_telegram_userid" name="client_telegram_userid">
+                                 </div>
++                                <div class="form-group">
++                                    <label for="additional_notes" class="control-label">Notes</label>
++                                    <textarea class="form-control" style="min-height: 6rem;" id="additional_notes" name="additional_notes" placeholder="Additional notes about this client"></textarea>
++                                </div>
+                             </details>
+                         </div>
+                         <div class="modal-footer justify-content-between">
+@@ -480,10 +484,12 @@ <h1>{{template "page_title" .}}</h1>
+             }
+             const public_key = $("#client_public_key").val();
+             const preshared_key = $("#client_preshared_key").val();
++            
++            const additional_notes = $("#additional_notes").val();
+ 
+             const data = {"name": name, "email": email, "telegram_userid": telegram_userid, "allocated_ips": allocated_ips, "allowed_ips": allowed_ips,
+                 "extra_allowed_ips": extra_allowed_ips, "endpoint": endpoint, "use_server_dns": use_server_dns, "enabled": enabled,
+-                "public_key": public_key, "preshared_key": preshared_key};
++                "public_key": public_key, "preshared_key": preshared_key, "additional_notes": additional_notes};
+ 
+             $.ajax({
+                 cache: false,
+@@ -624,6 +630,7 @@ <h1>{{template "page_title" .}}</h1>
+                 $("#client_extra_allowed_ips").importTags('');
+                 $("#client_endpoint").val('');
+                 $("#client_telegram_userid").val('');
++                $("#additional_notes").val('');
+                 updateSubnetRangesList("#subnet_ranges");
+                 updateIPAllocationSuggestion(true);
+             });
+diff --git a/templates/clients.html b/templates/clients.html
+index 8c24d4ec..fada01e7 100644
+--- a/templates/clients.html
++++ b/templates/clients.html
+@@ -195,6 +195,10 @@ <h4 class="modal-title">Edit Client</h4>
+                             <label for="_client_telegram_userid" class="control-label">Telegram userid</label>
+                             <input type="text" class="form-control" id="_client_telegram_userid" name="_client_telegram_userid">
+                         </div>
++                        <div class="form-group">
++                            <label for="_additional_notes" class="control-label">Notes</label>
++                            <textarea class="form-control" style="min-height: 6rem;" id="_additional_notes" name="_additional_notes" placeholder="Additional notes about this client"></textarea>
++                        </div>
+                     </details>
+                 </div>
+                 <div class="modal-footer justify-content-between">
+@@ -426,6 +430,11 @@ <h4 class="modal-title">Remove</h4>
+                     $(this).closest('.col-lg-4').show();
+                 }
+             })
++            $(".fa-additional_notes").each(function () {
++                if ($(this).parent().text().trim().indexOf(query.trim()) != -1) {
++                    $(this).closest('.col-lg-4').show();
++                }
++            })
+         })
+ 
+         $("#status-selector").on('change', function () {
+@@ -649,6 +658,8 @@ <h4 class="modal-title">Remove</h4>
+ 
+                         modal.find("#_client_public_key").val(client.public_key);
+                         modal.find("#_client_preshared_key").val(client.preshared_key);
++                        
++                        modal.find("#_additional_notes").val(client.additional_notes);
+ 
+                         // handle subnet range select
+                         $('#_subnet_ranges').on('select2:select', function (e) {
+@@ -770,9 +781,11 @@ <h4 class="modal-title">Remove</h4>
+                 enabled = true;
+             }
+ 
++            const additional_notes = $("#_additional_notes").val();
++
+             const data = {"id": client_id, "name": name, "email": email, "telegram_userid": telegram_userid, "allocated_ips": allocated_ips,
+                 "allowed_ips": allowed_ips, "extra_allowed_ips": extra_allowed_ips, "endpoint": endpoint,
+-                "use_server_dns": use_server_dns, "enabled": enabled, "public_key": public_key, "preshared_key": preshared_key};
++                "use_server_dns": use_server_dns, "enabled": enabled, "public_key": public_key, "preshared_key": preshared_key, "additional_notes": additional_notes};
+ 
+             $.ajax({
+                 cache: false,
+diff --git a/templates/wg.conf b/templates/wg.conf
+index a8389cf8..34891f0c 100644
+--- a/templates/wg.conf
++++ b/templates/wg.conf
+@@ -20,6 +20,10 @@ Table = {{ .globalSettings.Table }}
+ # Telegram:     {{ .Client.TgUserid }}
+ # Created at:   {{ .Client.CreatedAt }}
+ # Update at:    {{ .Client.UpdatedAt }}
++{{- if .Client.AdditionalNotes}}
++
++# Notes:
++# {{ .Client.AdditionalNotes }}{{end}}
+ [Peer]
+ PublicKey = {{ .Client.PublicKey }}
+ {{if .Client.PresharedKey}}PresharedKey = {{ .Client.PresharedKey }}{{end}}
+diff --git a/util/util.go b/util/util.go
+index 06b87c3d..ec700ff3 100644
+--- a/util/util.go
++++ b/util/util.go
+@@ -560,6 +560,15 @@ func WriteWireGuardServerConfig(tmplDir fs.FS, serverConfig model.Server, client
+ 		tmplWireguardConf = fileContent
+ 	}
+ 
++	// escape multiline notes
++	escapedClientDataList := []model.ClientData{}
++	for _, cd := range clientDataList {
++		if cd.Client.AdditionalNotes != "" {
++			cd.Client.AdditionalNotes = strings.ReplaceAll(cd.Client.AdditionalNotes, "\n", "\n# ")
++		}
++		escapedClientDataList = append(escapedClientDataList, cd)
++	}
++
+ 	// parse the template
+ 	t, err := template.New("wg_config").Parse(tmplWireguardConf)
+ 	if err != nil {
+@@ -574,7 +583,7 @@ func WriteWireGuardServerConfig(tmplDir fs.FS, serverConfig model.Server, client
+ 
+ 	config := map[string]interface{}{
+ 		"serverConfig":   serverConfig,
+-		"clientDataList": clientDataList,
++		"clientDataList": escapedClientDataList,
+ 		"globalSettings": globalSettings,
+ 		"usersList":      usersList,
+ 	}

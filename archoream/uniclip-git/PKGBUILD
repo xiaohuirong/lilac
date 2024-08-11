@@ -1,12 +1,12 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="uniclip"
 pkgname="${_pkgname}-git"
-pkgver=r10.a294a22
+pkgver=r12.e276aec
 pkgrel=1
 pkgdesc='Unify the clipboard operations for X11 and Wayland'
 url='https://github.com/lilydjwg/uniclip'
 license=('BSD')
-arch=('x86_64')
+arch=('x86_64' 'aarch64')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
 depends=("xclip" "wl-clipboard")

@@ -1,0 +1,21 @@
+From 32339d5d5a606874257589d74664f76f2cd60d89 Mon Sep 17 00:00:00 2001
+From: 0xCA <undefined>
+Date: Thu, 11 Jan 2024 19:33:29 +0500
+Subject: [PATCH] Cache user crc32 on db init (fix for #523)
+
+---
+ store/jsondb/jsondb.go | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/store/jsondb/jsondb.go b/store/jsondb/jsondb.go
+index 1401b2cd..1cd0a437 100644
+--- a/store/jsondb/jsondb.go
++++ b/store/jsondb/jsondb.go
+@@ -154,6 +154,7 @@ func (o *JsonDB) Init() error {
+ 		}
+ 
+ 		o.conn.Write("users", user.Username, user)
++		results, _ = o.conn.ReadAll("users")
+ 		err = util.ManagePerms(path.Join(path.Join(o.dbPath, "users"), user.Username+".json"))
+ 		if err != nil {
+ 			return err

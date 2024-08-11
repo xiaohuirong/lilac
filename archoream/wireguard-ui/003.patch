@@ -1,0 +1,28 @@
+From 7856ce9555a4c6bfba63029947f1e03a7505c70f Mon Sep 17 00:00:00 2001
+From: 0xCA <0xCA@users.noreply.github.com>
+Date: Thu, 11 Jan 2024 00:27:01 +0500
+Subject: [PATCH] Status page: display peers IPs only to admins (#521)
+
+---
+ handler/routes.go | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/handler/routes.go b/handler/routes.go
+index 42047dc0..ede3654d 100644
+--- a/handler/routes.go
++++ b/handler/routes.go
+@@ -979,10 +979,13 @@ func Status(db store.IStore) echo.HandlerFunc {
+ 						LastHandshakeTime: devices[i].Peers[j].LastHandshakeTime,
+ 						LastHandshakeRel:  time.Since(devices[i].Peers[j].LastHandshakeTime),
+ 						AllocatedIP:       allocatedIPs,
+-						Endpoint:          devices[i].Peers[j].Endpoint.String(),
+ 					}
+ 					pVm.Connected = pVm.LastHandshakeRel.Minutes() < 3.
+ 
++					if isAdmin(c) {
++						pVm.Endpoint = devices[i].Peers[j].Endpoint.String()
++					}
++
+ 					if _client, ok := m[pVm.PublicKey]; ok {
+ 						pVm.Name = _client.Name
+ 						pVm.Email = _client.Email
