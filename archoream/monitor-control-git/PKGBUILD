@@ -1,17 +1,17 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="monitor-control"
 pkgname="${_pkgname}-git"
-pkgver=0.0.1
-pkgrel=2
+pkgver=r13.bc6ee05
+pkgrel=1
 pkgdesc="A simple tool suitable for adjusting external monitor's brightness."
-url='https://github.com/lilydjwg/monitor-control'
+url='https://github.com/xiaohuirong/monitor-control'
 license=('GPL3')
 arch=('x86_64')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
 depends=()
 makedepends=("cargo" "git")
-source=(${_pkgname}::git+https://github.com/lilydjwg/monitor-control)
+source=(${_pkgname}::git+${url})
 sha256sums=('SKIP')
 
 pkgver() {
