@@ -2,7 +2,7 @@
 
 _pkgname=devtools-archoream
 pkgname=devtools-archoream-git
-pkgver=15.b8d8b29
+pkgver=16.2bb643d
 pkgrel=1
 pkgdesc='Tools for archoream package maintainers'
 arch=('any')
