@@ -1,6 +1,6 @@
 # Maintainer: Raimar Buehmann (raimar)
 
-pkgname=lxtask-git
+pkgname=lxtask-rpi-git
 pkgver=0.1.10.r20.20240715
 pkgrel=1
 pkgdesc="Lightweight X11 task manager and system monitor for LXDE Desktop"
@@ -9,8 +9,8 @@ license=('GPL2')
 groups=('lxde-git')
 depends=('gtk2')
 makedepends=('autoconf' 'automake' 'gcc' 'libtool' 'make' 'pkgconfig' 'git' 'intltool')
-provides=('lxtask')
-conflicts=('lxtask')
+provides=('lxtask' 'lxtask-git')
+conflicts=('lxtask' 'lxtask-git')
 replaces=('lxtask')
 url="https://lxde.org/"
 source=(
