@@ -3,9 +3,9 @@
 _pkgbase=eww
 pkgbase=eww-git
 pkgname=(eww-x11-git eww-wayland-git)
-pkgver=0.5.0.r2.g7bfd47e
+pkgver=0.6.0.r8.g4d55e9a
 pkgrel=1
-arch=("x86_64")
+arch=("x86_64" "aarch64") 
 url="https://github.com/elkowar/eww"
 license=("MIT")
 makedepends=("cargo-nightly" "rust-nightly"

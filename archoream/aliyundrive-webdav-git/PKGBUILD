@@ -1,0 +1,43 @@
+# Maintainer: Your Name <youremail@domain.com>
+_pkgname=aliyundrive-webdav
+pkgname="$_pkgname"-git
+pkgver=v2.3.3.r18.g24925dd
+pkgrel=1
+pkgdesc="阿里云盘 WebDAV 服务"
+arch=('x86_64' 'aarch64')
+provides=('aliyundrive-webdav')
+url="https://github.com/messense/aliyundrive-webdav/"
+license=('MIT')
+depends=('gcc-libs')
+makedepends=('cargo')
+#options=('!lto')
+source=("$_pkgname::git+${url}")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+# template start; name=rust; version=1;
+prepare() {
+	cd "$_pkgname"
+    sed -i 's/time = { version = "0\.3", features = \[.*\] }/time = { version = "0.3.36", features = ["formatting", "parsing"] }/' Cargo.toml
+	cargo fetch --target "$CARCH-unknown-linux-gnu"
+}
+
+build() {
+	cd "$_pkgname"
+	CFLAGS+=" -ffat-lto-objects"
+	cargo build --frozen --release --all-features
+}
+# template end;
+package() {
+	cd "$_pkgname"
+	install -Dm755 "target/release/${_pkgname}" -t "${pkgdir}/usr/bin/"
+	install -Dm644 "LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+	install -Dm644 "systemd.service" -T "${pkgdir}/usr/lib/systemd/system/$_pkgname.service"
+}
