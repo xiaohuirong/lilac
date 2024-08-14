@@ -29,7 +29,8 @@ source=(wayfire::git+$url.git#branch=hoream
         599ace91aca3f3c7a3faa66ce467c074c562fa12.patch
         54cd3b9a1b48072f19e3b6d1707c41a73dc7ef6b.patch
         support_custom_modes.patch
-        wlr_custom_output.patch)
+        wlr_custom_output.patch
+        subsurface.patch)
 sha256sums=('SKIP'
             'SKIP'
             'SKIP'
@@ -44,7 +45,8 @@ sha256sums=('SKIP'
             'b42554ce9ab61a2561e649bfff5f527baa94534cdda02ddbfbde14c523cd49ce'
             '599bbd5938a226acb09eb8f096d8c1f259ed4f1f6eef71e27b630823af9ad72f'
             'cab5edf604ba93c0c02706477bd80f063de04db1bef63e438b7462e052ee2ba7'
-            '6c8d5d0281933b0467ecc355146109ee6090fd84d3c16793ea362b26cc1a0a02')
+            '6c8d5d0281933b0467ecc355146109ee6090fd84d3c16793ea362b26cc1a0a02'
+            '8ea0171d6d40f57d287a28b5dd09889ecdd5b79f225c3661407a804894f51e4b')
 
 prepare() {
     cd "$srcdir/wayfire"
@@ -89,6 +91,7 @@ build() {
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/068e59749f94d9d303117a5e955c233c31fcca07.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/599ace91aca3f3c7a3faa66ce467c074c562fa12.patch
     patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/54cd3b9a1b48072f19e3b6d1707c41a73dc7ef6b.patch
+    patch -b -d ${srcdir}/wayfire -Np1 -i ${srcdir}/subsurface.patch
     ninja -C build
 }
 
