@@ -1,0 +1,51 @@
+diff --git a/src/piclone.c b/src/piclone.c
+index 1fbadf0..05db079 100644
+--- a/src/piclone.c
++++ b/src/piclone.c
+@@ -35,6 +35,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ #include <ctype.h>
+ #include <dirent.h>
+ 
++#include <locale.h>
++
+ #include <glib.h>
+ #include <glib/gi18n.h>
+ #include <glib/gstdio.h>
+@@ -241,7 +243,7 @@ static gpointer backup_thread (gpointer data)
+     FILE *fp;
+ 
+     // get a new partition UUID
+-    get_string ("uuid | cut -f1 -d-", npuuid);
++    get_string ("uuidgen | cut -f1 -d-", npuuid);
+ 
+     // check the source has an msdos partition table
+     sprintf (buffer, SUDO_PREFIX "parted %s unit s print | tail -n +4 | head -n 1", src_dev);
+@@ -573,6 +575,7 @@ static gpointer backup_thread (gpointer data)
+                 return NULL;
+             }
+         }
++        /*
+         else
+         {
+             if (sys_printf (SUDO_PREFIX "parted -s %s set %d lba off", dst_dev, parts[p].pnum))
+@@ -581,13 +584,19 @@ static gpointer backup_thread (gpointer data)
+                 return NULL;
+             }
+         }
++        */
+         CANCEL_CHECK;
+     }
+ 
+     if (getenv ("WAYLAND_DISPLAY"))
+         sys_printf ("wfpanelctl ejecter %s", dst_dev);
+     else
+-        sys_printf ("lxpanelctl command ejecter %s", dst_dev);
++        for (p = 0; p < n; p++)
++        {
++           sys_printf ("udisksctl unmount -b %s%d", dst_dev, parts[p].pnum);
++        }
++        sys_printf ("udisksctl power-off -b %s", dst_dev);
++
+     terminate_dialog (_("Copy complete."));
+     return NULL;
+ }

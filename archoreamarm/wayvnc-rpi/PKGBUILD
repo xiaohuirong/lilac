@@ -1,0 +1,60 @@
+# Maintainer: Maxime Gauduin <alucryd@archlinux.org>
+# Contributor: Andri Yngvason <andri@yngvason.is>
+
+pkgname=wayvnc-rpi
+pkgver=0.7.2
+pkgrel=1
+pkgdesc='VNC server for wlroots-based Wayland compositors'
+arch=(x86_64 aarch64)
+url=https://github.com/any1/wayvnc
+license=(custom:ISC)
+depends=(
+  ffmpeg-rpi
+  neatvnc-rpi
+  glibc
+  jansson
+  libaml.so
+  libdrm
+  libneatvnc.so
+  libpixman-1.so
+  libxkbcommon.so
+  wayland
+)
+makedepends=(
+  git
+  meson
+  ninja
+  pam
+  scdoc
+)
+conflicts=(wayvnc)
+optdepends=('pam: PAM authentication')
+_tag=4de85acadbabdcebad0f8d8076f6c9f7df6052b0
+source=(
+  git+https://github.com/any1/wayvnc.git#tag=${_tag}
+  wayvnc.service
+)
+b2sums=(
+  SKIP
+  083d7ddbf353d06126b76152e51807ed7572684e0c995b71802fcf36ca133c48401126907fcac657271bf9590b4a304a103f7bf9104b73e0699af98f7388f65c
+)
+
+pkgver() {
+  cd wayvnc
+  git describe --tags | sed 's/^v//'
+}
+
+build() {
+  PKG_CONFIG_PATH=/usr/lib/ffmpeg-rpi/pkgconfig/ arch-meson wayvnc build \
+    -Dman-pages=enabled \
+    -Dpam=enabled
+  meson compile -C build
+}
+
+package() {
+  DESTDIR="${pkgdir}" meson install -C build
+  install -Dm 644 wayvnc.service -t "${pkgdir}"/usr/lib/systemd/user
+  install -Dm 644 wayvnc/COPYING -t "${pkgdir}"/usr/share/licenses/wayvnc-rpi
+}
+
+# vim: ts=2 sw=2 et:

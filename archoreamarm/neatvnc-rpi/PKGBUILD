@@ -1,0 +1,51 @@
+# Maintainer: Maxime Gauduin <alucryd@archlinux.org>
+# Contributor: Andri Yngvason <andri@yngvason.is>
+
+pkgname=neatvnc-rpi
+pkgver=0.7.2
+pkgrel=1
+pkgdesc='Fast and neat VNC server library'
+arch=(x86_64 aarch64)
+url=https://github.com/any1/neatvnc
+license=(custom:ISC)
+depends=(
+  ffmpeg-rpi
+  glibc
+  gnutls
+  libaml.so
+  libavcodec.so
+  libdrm
+  libpixman-1.so
+  libturbojpeg.so
+  mesa
+  zlib
+)
+makedepends=(
+  git
+  meson
+  ninja
+)
+conflicts=(neatvnc)
+provides=(libneatvnc.so)
+_tag=14619e6281136a02e376ad23e3cfaedc8de00ffb
+source=(git+https://github.com/any1/neatvnc.git#tag=${_tag})
+b2sums=(SKIP)
+
+pkgver() {
+  cd neatvnc
+  git describe --tags | sed 's/^v//'
+}
+
+build() {
+  PKG_CONFIG_PATH=/usr/lib/ffmpeg-rpi/pkgconfig/ arch-meson neatvnc build \
+    -Djpeg=enabled \
+    -Dtls=enabled
+  meson compile -C build
+}
+
+package() {
+  DESTDIR="${pkgdir}" meson install -C build
+  install -Dm 644 neatvnc/COPYING -t "${pkgdir}"/usr/share/licenses/neatvnc-rpi
+}
+
+# vim: ts=2 sw=2 et:

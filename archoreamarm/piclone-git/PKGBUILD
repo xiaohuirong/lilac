@@ -1,0 +1,39 @@
+# Maintainer: Frede Hundewadt <fh@uex.dk>
+
+pkgname=piclone-git
+pkgver=r145.3406914
+pkgrel=1
+pkgdesc="Raspberry Pi system clone utility"
+arch=(x86_64 i686 armv7h aarch64)
+url="https://github.com/raspberrypi-ui/piclone"
+license=(GPL2)
+depends=(gtk3 glib2 parted dosfstools e2fsprogs coreutils util-linux zenity dbus gvfs)
+makedepends=(git intltool autoconf automake)
+source=("git+https://github.com/raspberrypi-ui/piclone.git"
+        "arch.patch")
+sha256sums=('SKIP'
+            'b3b5cbdf36a9d9bd0524b72097b071aa0de3985f9ac5458485cc3bc8a4c1f6cb')
+
+pkgver() {
+    cd piclone
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+    cd piclone
+    patch -N -p1 < ${srcdir}/arch.patch
+    ./autogen.sh
+}
+
+build() {
+    cd piclone
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    cd piclone
+    make DESTDIR="${pkgdir}/" install
+    install -D -t "${pkgdir}/usr/lib/piclone/" data/pwdpic.sh
+}
+
