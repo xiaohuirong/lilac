@@ -1,0 +1,33 @@
+# Maintainer: Łukasz Moroz <lukaszmoroz@gmail.com>
+
+_pkgname=nautilus-copy-path
+pkgname="$_pkgname-git"
+pkgver=r91.b591559
+pkgrel=1
+pkgdesc="Configurable extension for Nautilus to copy path, URI, or name"
+arch=('any')
+url="https://github.com/xiaohuirong/nautilus-copy-path"
+license=('MIT')
+makedepends=('git')
+depends=('python-nautilus' 'python-gobject')
+backup=("usr/share/nautilus-python/extensions/nautilus-copy-path/config.json")
+install=$_pkgname.install
+source=("$_pkgname::git+${url}")
+sha512sums=('SKIP')
+conflicts=('nautilus-copy-path')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+package() {
+    cd "$_pkgname"
+    install -Dm644 -t "$pkgdir/usr/share/licenses/nautilus-copy-path-git" LICENSE
+    install -Dm644 -t "$pkgdir/usr/share/nautilus-python/extensions" nautilus-copy-path.py
+    install -Dm644 -t "$pkgdir/usr/share/nautilus-python/extensions/nautilus-copy-path" nautilus_copy_path.py config.json translation.py
+    install -Dm644 -t "$pkgdir/usr/share/nautilus-python/extensions/nautilus-copy-path/translations" translations/*.json
+}
