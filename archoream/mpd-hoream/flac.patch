@@ -1,0 +1,17 @@
+diff --git a/src/decoder/Thread.cxx b/src/decoder/Thread.cxx
+index c9635e70b..c6fa5f46d 100644
+--- a/src/decoder/Thread.cxx
++++ b/src/decoder/Thread.cxx
+@@ -191,9 +192,7 @@ static bool
+ decoder_check_plugin(const DecoderPlugin &plugin, const InputStream &is,
+ 		     std::string_view suffix) noexcept
+ {
+-	return plugin.stream_decode != nullptr &&
+-		(decoder_check_plugin_mime(plugin, is) ||
+-		 decoder_check_plugin_suffix(plugin, suffix));
++	return plugin.stream_decode != nullptr && decoder_check_plugin_suffix(plugin, suffix);
+ }
+ 
+ static bool
+ 
+ /**
