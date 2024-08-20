@@ -2,7 +2,7 @@
 
 pkgname=nautilus-copy-path
 pkgver=1.10.2
-pkgrel=9
+pkgrel=10
 pkgdesc="Configurable extension for Nautilus to copy path, URI, or name"
 arch=('any')
 url="https://github.com/chr314/nautilus-copy-path"
