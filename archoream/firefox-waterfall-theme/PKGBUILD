@@ -2,7 +2,7 @@
 
 pkgname="firefox-waterfall-theme"
 pkgver=r29.6e525b9
-pkgrel=3
+pkgrel=4
 pkgdesc='Firefox waterfall theme'
 url='https://github.com/crambaud/waterfall'
 license=('MIT')
