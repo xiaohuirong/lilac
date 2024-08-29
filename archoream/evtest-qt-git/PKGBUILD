@@ -3,7 +3,7 @@
 _pkgname=evtest-qt
 pkgname=${_pkgname}-git
 pkgver=r133.6fb1b84
-pkgrel=1
+pkgrel=2
 pkgdesc="Linux Joystick Tester for Qt"
 arch=('i686' 'x86_64')
 url="https://github.com/Grumbel/${_pkgname}"
