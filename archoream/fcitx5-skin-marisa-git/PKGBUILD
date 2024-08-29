@@ -2,7 +2,7 @@
 _pkgname="fcitx5-skin-marisa"
 pkgname="${_pkgname}-git"
 pkgver=r4.15d5403
-pkgrel=3
+pkgrel=4
 pkgdesc='Fcitx Marisa Skin'
 url='https://github.com/xiaohuirong/fcitx5-skin-marisa.git'
 license=('MIT')
