@@ -4,7 +4,7 @@
 
 pkgname=gnome-shell-extension-dash-to-panel-git
 pkgver=62.r17.g7af6ce4
-pkgrel=2
+pkgrel=3
 pkgdesc='Extension for GNOME shell to combine the dash and main panel'
 arch=(any)
 _githubname=dash-to-panel
