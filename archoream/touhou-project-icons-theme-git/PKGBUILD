@@ -2,7 +2,7 @@
 _pkgname="touhou-project-icons-theme"
 pkgname="${_pkgname}-git"
 pkgver=r3.8264b33
-pkgrel=1
+pkgrel=2
 pkgdesc='Touhou Project Icons theme'
 url='https://github.com/xiaohuirong/Touhou-Project-Icons-theme'
 license=('GPL3')
