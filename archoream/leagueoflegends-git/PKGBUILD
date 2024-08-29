@@ -4,7 +4,7 @@
 pkgname=(leagueoflegends-git)
 _srcname=${pkgname%-git}
 pkgver=13.7.2.r26.gb9e7ec7
-pkgrel=1
+pkgrel=2
 pkgdesc="League of Legends helper script"
 arch=('any')
 url="https://github.com/kyechou/leagueoflegends"
