@@ -2,7 +2,7 @@
 pkgname=hawck-git
 _pkgname=hawck
 pkgver=20240503
-pkgrel=1
+pkgrel=2
 pkgdesc="Keyboard macro system"
 arch=("x86_64")
 url="https://github.com/snyball/hawck"
