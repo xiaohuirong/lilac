@@ -5,7 +5,7 @@
 _gitname=udis86
 pkgname=lib32-${_gitname}-git
 pkgver=1.7.2.186.g5336633
-pkgrel=2
+pkgrel=3
 pkgdesc="Disassembler library for x86 (32-bit shared library)"
 arch=('x86_64')
 url="http://${_gitname}.sourceforge.net"
