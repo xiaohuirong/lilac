@@ -2,7 +2,7 @@
 _pkgname="x-pixiv"
 pkgname="${_pkgname}-git"
 pkgver=r181.a66561d
-pkgrel=2
+pkgrel=3
 pkgdesc='A simple pixiv downloader'
 url='https://github.com/xiaoxigua-1/XPixiv'
 license=('MIT')
