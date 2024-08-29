@@ -2,7 +2,7 @@
 
 pkgname=scitopdf-git
 pkgver=r158.8090a3d
-pkgrel=1
+pkgrel=2
 pkgdesc="bash script to quickly fetch, download and open scientific papers from Sci-Hub's database"
 arch=(x86_64)
 url="https://github.com/dougy147/scitopdf"
