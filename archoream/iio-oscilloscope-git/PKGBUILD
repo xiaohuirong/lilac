@@ -2,7 +2,7 @@
 
 pkgname=iio-oscilloscope-git
 pkgver=v0.17.r41.fbd5aa5
-pkgrel=1
+pkgrel=2
 pkgdesc="A GTK+ based oscilloscope application for interfacing with various IIO devices"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url="https://github.com/analogdevicesinc/iio-oscilloscope"
