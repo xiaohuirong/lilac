@@ -3,7 +3,7 @@
 pkgname=kvantum-theme-libadwaita-git
 _pkgname=KvLibadwaita
 pkgver=r25.87c1ef9
-pkgrel=1
+pkgrel=2
 pkgdesc="Libaidwaita theme for Kvantum"
 arch=('any')
 url="https://github.com/GabePoel/$_pkgname"
