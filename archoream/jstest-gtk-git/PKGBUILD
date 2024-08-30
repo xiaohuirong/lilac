@@ -4,7 +4,7 @@
 
 pkgname=jstest-gtk-git
 pkgver=0.1.0.r125.g60fe6eb
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple GTK2-based joystick tester and calibrator"
 arch=('i686' 'x86_64')
 url="https://gitlab.com/jstest-gtk/jstest-gtk/"
