@@ -3,7 +3,7 @@
 
 pkgname=flamegraph-git
 pkgver=r390.cd9ee4c
-pkgrel=1
+pkgrel=2
 pkgdesc="Stack trace visualizer"
 arch=('any')
 url='http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html'
