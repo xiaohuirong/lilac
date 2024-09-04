@@ -3,7 +3,7 @@
 
 pkgname=avizo-git
 _pkgname=avizo
-pkgver=r115.1ce0828
+pkgver=r117.2499ba7
 pkgrel=1
 pkgdesc="A neat notification daemon"
 arch=("x86_64")
