@@ -1,4 +1,4 @@
 921c921
 < ARCH ?= $(SUBARCH)
 ---
-> ARCH := arm64
+> ARCH := arm
