@@ -4,7 +4,7 @@
 # Contributor: xduugu
 
 pkgname=diff-pdf-git
-pkgver=0.5.2.r1.g6cf5110
+pkgver=0.5.2.r3.g0262c85
 pkgrel=1
 pkgdesc='A simple tool for visually comparing two PDF files'
 arch=(x86_64 i686)
