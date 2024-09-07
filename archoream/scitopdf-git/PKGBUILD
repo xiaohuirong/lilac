@@ -1,7 +1,7 @@
 # Maintainer: Parham Alvani <parham.alvani@gmail.com>
 
 pkgname=scitopdf-git
-pkgver=r176.2a20b62
+pkgver=r181.35ee266
 pkgrel=1
 pkgdesc="bash script to quickly fetch, download and open scientific papers from Sci-Hub's database"
 arch=(x86_64)
