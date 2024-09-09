@@ -4,7 +4,7 @@
 
 pkgname=fuzzel-hoream-git
 _pkgname=fuzzel
-pkgver=1.10.2.r2.gb1d29ee
+pkgver=1.11.0.r2.g3e6d682
 pkgrel=1
 pkgdesc='Application launcher for wlroots based Wayland compositors.'
 arch=('x86_64')
