@@ -4,7 +4,7 @@
 
 _pkgname=wf-recorder
 pkgname=wf-recorder-git
-pkgver=r210.e360252
+pkgver=r215.a5485cf
 pkgrel=1
 pkgdesc="Screen recorder for wlroots-based compositors such as sway"
 arch=("x86_64")

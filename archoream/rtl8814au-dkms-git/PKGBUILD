@@ -6,7 +6,7 @@
 pkgname=rtl8814au-dkms-git
 _pkgbase=rtl8814au
 pkgver=5.8.5.1.r183.gd8208c8
-pkgrel=1
+pkgrel=2
 pkgdesc="RTL8814AU and RTL8813AU chipset driver with firmware v5.8.5.1"
 arch=('x86_64' 'i686' 'arm' 'armv6h' 'armv7h' 'aarch64')
 url="https://github.com/morrownr/8814au"
@@ -18,8 +18,8 @@ source=("git+https://github.com/morrownr/8814au.git"
         'dkms.conf'
         'arm.patch')
 sha256sums=('SKIP'
-            'f01d80e7925aac5b5282cf7a89683967d44d19f11c50de9c745316326e5c6adb'
-            'd707a2f39b70808dabca648d41796251726f6080b6c530cfc713c4fffca7274c')
+	    'f01d80e7925aac5b5282cf7a89683967d44d19f11c50de9c745316326e5c6adb'
+	    '2911f6c1285277d0507b2ad7a09c20edd682476be67502db63f63663cac97efb')
 
 pkgver() {
     cd ${srcdir}/8814au
@@ -29,7 +29,7 @@ pkgver() {
 package() {
 		if [ "$CARCH" = "arm" ] || [ "$CARCH" = "armv6h" ] || [ "$CARCH" = "armv7h" ] || [ "$CARCH" = "aarch64" ]; then
 			msg2 "Applying patch for ARM architecture..."
-			patch ${srcdir}/8814au/Makefile -i ${srcdir}/arm.patch
+			patch ${srcdir}/rtl8814au/Makefile -i ${srcdir}/arm.patch
 		fi
 		cd ${srcdir}/8814au
         mkdir -p ${pkgdir}/usr/src/${_pkgbase}-${pkgver}
