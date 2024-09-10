@@ -10,3 +10,5 @@ update_on:
     github: zotero/zotero
   - source: manual
     manual: 9
+
+managed: false
