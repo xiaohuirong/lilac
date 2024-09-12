@@ -3,7 +3,7 @@
 _pkgname=nautilus-copy-path
 pkgname="$_pkgname-git"
 pkgver=r91.b591559
-pkgrel=1
+pkgrel=2
 pkgdesc="Configurable extension for Nautilus to copy path, URI, or name"
 arch=('any')
 url="https://github.com/xiaohuirong/nautilus-copy-path"
