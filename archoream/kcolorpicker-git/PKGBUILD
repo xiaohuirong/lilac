@@ -1,6 +1,6 @@
 pkgname=kcolorpicker-git
 pkgver=r86.522e38b
-pkgrel=1
+pkgrel=2
 pkgdesc='Qt basd Color Picker with popup menu'
 arch=('i686' 'x86_64')
 url='https://github.com/DamirPorobic/kcolorpicker'
