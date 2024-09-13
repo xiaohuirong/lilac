@@ -3,8 +3,8 @@
 # Contributor: Sergej Pupykin <pupykin.s+arch at gmail.com> ([community] package)
 
 pkgname=remmina-git
-pkgver=1.4.35.r51.gc4bcfc3fa
-pkgrel=2
+pkgver=1.4.35.r99.gb196e1ea5
+pkgrel=1
 pkgdesc='A remote desktop client written in GTK+ - git checkout'
 arch=(i686 x86_64)
 url='http://www.remmina.org/'
@@ -44,7 +44,7 @@ build() {
 	cmake \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
-        -DWITH_FREERDP_MASTER=ON \
+        -DWITH_FREERDP3=ON \
         -DWITH_CUPS=ON \
 	-DWITH_LIBSSH=ON \
         -DWITH_NEWS=ON \
