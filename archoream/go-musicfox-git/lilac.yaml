@@ -13,3 +13,6 @@ update_on:
     manual: 4
   - source: github
     github: go-musicfox/go-musicfox
+
+makechrootpkg_args: 
+  - GOPROXY=https://goproxy.cn
