@@ -3,7 +3,7 @@
 _pkgname=devtools-archoream
 pkgname=devtools-archoream-git
 pkgver=16.2bb643d
-pkgrel=1
+pkgrel=2
 pkgdesc='Tools for archoream package maintainers'
 arch=('any')
 url='https://github.com/xiaohuirong/devtools-archoream'
