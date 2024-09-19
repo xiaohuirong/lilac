@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname=qbittorrent-nox-git
-pkgver=5.0.0rc1.r133.g0ea35c54a
+pkgver=5.0.0rc1.r142.g1c4328661
 pkgrel=1
 pkgdesc="A bittorrent client powered by C++, Qt6 and the good libtorrent library."
 arch=('armv7h' 'aarch64' 'i686' 'x86_64')
