@@ -2,7 +2,7 @@
 
 pkgname=simple-webdav-bin
 pkgver=5.3.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple and standalone WebDAV server. "
 url="https://github.com/hacdias/webdav"
 license=("MIT")
