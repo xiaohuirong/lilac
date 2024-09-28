@@ -1,0 +1,29 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=simple-webdav-bin
+pkgver=5.3.0
+pkgrel=1
+pkgdesc="A simple and standalone WebDAV server. "
+url="https://github.com/hacdias/webdav"
+license=("MIT")
+arch=("x86_64" "aarch64")
+provides=()
+conflicts=()
+depends=()
+backup=("etc/webdav.yaml")
+makedepends=()
+source=("webdav.yaml" "webdav.service")
+sha256sums=('9c68ba022f1f96f864e741591e4bb85f12be2381887fe7af7257d71965b84854'
+            '38cf704fe594323d51b787d615911db4495fe5ebb970a08d5f79616876f6c048')
+sha256sums_x86_64=('0a8788289000bdda2050518b1a907c7a09155b590673b5b359124af38dfb0542')
+sha256sums_aarch64=('dc1fe933d1d80b6abd4fb8a9c2c10ab8b7fc1bc328fd6052530f882a6d6fdd79')
+source_x86_64=("linux-amd64-webdav-${pkgver}.tar.gz::${url}/releases/download/v${pkgver}/linux-amd64-webdav.tar.gz")
+source_aarch64=("linux-arm64-webdav-${pkgver}.tar.gz::${url}/releases/download/v${pkgver}/linux-arm64-webdav.tar.gz")
+
+package() {
+    install -d "${pkgdir}/usr/bin"    
+    install -Dm755 "${srcdir}/webdav" "${pkgdir}/usr/bin/webdav"
+    install -Dm644 LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+    install -Dm644 "${srcdir}/webdav.service" -t "${pkgdir}/usr/lib/systemd/system/"
+    install -Dm644 "${srcdir}/webdav.yaml" -t "${pkgdir}/etc/"
+}
