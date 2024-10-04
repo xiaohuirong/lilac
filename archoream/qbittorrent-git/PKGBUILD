@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname=qbittorrent-git
-pkgver=5.0.0rc1.r148.g8b2d8f3af
+pkgver=5.0.0rc1.r167.gc48d2c1dd
 pkgrel=1
 pkgdesc="A bittorrent client powered by C++, Qt6 and the good libtorrent library."
 arch=('armv7h' 'aarch64' 'i686' 'x86_64')
