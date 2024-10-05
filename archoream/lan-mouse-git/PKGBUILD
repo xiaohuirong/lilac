@@ -2,7 +2,7 @@
 _pkgname="lan-mouse"
 pkgname="${_pkgname}-git"
 pkgver=v0.9.1.r17.gab1b45f
-pkgrel=1
+pkgrel=2
 pkgdesc="mouse & keyboard sharing via LAN "
 url="https://github.com/feschber/lan-mouse"
 license=("GPL3")
