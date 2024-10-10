@@ -1,6 +1,6 @@
 _pkgname=xdg-desktop-portal-luminous
 pkgname="${_pkgname}-git"
-pkgver=r104.c4cb40d
+pkgver=r105.0a74579
 pkgrel=1
 url='https://github.com/waycrate/xdg-desktop-portal-luminous'
 pkgdesc='xdg-desktop-portal backend for wlroots based compositors, providing screenshot and screencast'
