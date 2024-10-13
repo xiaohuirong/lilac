@@ -9,7 +9,7 @@ export CARGO_HOME CARGO_TARGET_DIR RUSTUP_TOOLCHAIN
 
 _pkgname=czkawka
 pkgname="$_pkgname-git"
-pkgver=8.0.0.r1.g784497d
+pkgver=8.0.0.r2.g1c99adb
 pkgrel=1
 pkgdesc="Multi-functional app to find duplicates, similar images, and empty folders"
 url="https://github.com/qarmin/czkawka"
