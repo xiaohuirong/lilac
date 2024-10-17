@@ -2,7 +2,7 @@
 
 pkgname=xi-core-git
 pkgver=r2115.a2dea305
-pkgrel=3
+pkgrel=4
 pkgdesc='A modern editor with a backend written in Rust.'
 arch=('i686' 'x86_64')
 url='https://github.com/google/xi-editor'
