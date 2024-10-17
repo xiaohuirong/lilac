@@ -2,7 +2,7 @@
 
 pkgname=xi-gtk-git
 pkgver=r146.753b5e0
-pkgrel=3
+pkgrel=4
 pkgdesc='a GTK+ front-end for the Xi editor'
 arch=('i686' 'x86_64')
 url='https://github.com/eyelash/xi-gtk'
