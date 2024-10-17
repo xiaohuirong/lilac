@@ -2,7 +2,7 @@
 
 pkgname=inochi-creator-bin
 pkgver=0.8.6
-pkgrel=1
+pkgrel=2
 pkgdesc="Open source editor for rigging Inochi2D puppets."
 arch=('x86_64')
 url="https://inochi2d.com"
