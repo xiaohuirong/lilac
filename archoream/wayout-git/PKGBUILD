@@ -2,7 +2,7 @@
 pkgname='wayout-git'
 _pkgname="wayout"
 pkgver=1.1.3.19.g324c792
-pkgrel=2
+pkgrel=3
 arch=('x86_64')
 url="https://git.sr.ht/~shinyzenith/wayout"
 pkgdesc="A simple output management tool for wlroots based compositors"
