@@ -2,7 +2,7 @@
 # Contributor:
 
 pkgname=waypaper-git
-pkgver=2.3.r23.g8bf2ced
+pkgver=2.3.r25.g4733dd3
 pkgrel=1
 pkgdesc='GUI wallpaper setter for Wayland and Xorg window managers. It works as a frontend for popular wallpaper backends like swaybg, swww, wallutils, hyprpaper and feh.'
 arch=('any')
