@@ -1,7 +1,7 @@
 # Maintainer: Ilaï Deutel <PlMWPh1WSmypRv0JQljz> (echo ... | tr 'A-Za-z' 'l-za-kL-ZA-K' | base64 -d)
 
 pkgname=bluetuith-git
-pkgver=0.2.3.r1.g85b4a15
+pkgver=0.2.3.r2.g2a02b2c
 pkgrel=1
 pkgdesc="TUI bluetooth manager"
 arch=('x86_64' 'i686' 'arm' 'aarch64' 'armv6h' 'armv7h')
