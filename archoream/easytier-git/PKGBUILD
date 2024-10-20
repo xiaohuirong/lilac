@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="easytier"
 pkgname="${_pkgname}-git"
-pkgver=2.0.3.r6.g0bf42c5
+pkgver=2.0.3.r7.gbbd3453
 pkgrel=1
 pkgdesc="A simple, decentralized mesh VPN with WireGuard support."
 url="https://github.com/KKRainbow/EasyTier"
