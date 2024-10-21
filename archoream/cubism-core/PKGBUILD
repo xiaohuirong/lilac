@@ -1,0 +1,36 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=cubism-core
+pkgver=5.0.0
+pkgrel=1
+pkgdesc="Cubism Core library"
+url="https://www.live2d.com/en/sdk/about/"
+license=("custom")
+arch=("x86_64")
+provides=(cubism-core)
+conflicts=()
+depends=()
+makedepends=()
+_name="CubismSdkForNative-5-r.1"
+source=("${_name}.zip::https://cubism.live2d.com/sdk-native/bin/${_name}.zip"
+        "cubism-core.pc"
+        "CubismCoreConfig.cmake")
+sha256sums=("SKIP"
+            "SKIP"
+            "SKIP")
+
+prepare() {
+    cd "${srcdir}"
+    sed -i "1i Version: ${pkgver}" "cubism-core.pc"
+    sed -i "1i set(CubismCore_VERSION \"${pkgver}\")" "CubismCoreConfig.cmake"
+}
+
+package() {
+    install -d "${pkgdir}/usr/lib/cubism/core"    
+    install -d "${pkgdir}/usr/include/cubism/core/"    
+    install -d "${pkgdir}/usr/lib/pkgconfig"    
+    install -d "${pkgdir}/usr/lib/cmake/CubismCore/"    
+    install -Dm755 "${srcdir}/${_name}/Core/lib/linux/x86_64/libLive2DCubismCore.a" "${pkgdir}/usr/lib/cubism/core/libLive2DCubismCore.a"
+    install -Dm644 "${srcdir}/${_name}/Core/include/Live2DCubismCore.h" "${pkgdir}/usr/include/cubism/core/Live2DCubismCore.h"
+    install -Dm644 "${srcdir}/cubism-core.pc" "${pkgdir}/usr/lib/pkgconfig/cubism-core.pc"
+    install -Dm644 "${srcdir}/CubismCoreConfig.cmake" "${pkgdir}/usr/lib/cmake/CubismCore/CubismCoreConfig.cmake"
+}

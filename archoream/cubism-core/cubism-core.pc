@@ -1,0 +1,8 @@
+prefix=/usr/lib
+libdir=${prefix}/cubism/core
+includedir=/usr/include/cubism/core
+
+Name: cubism-core
+Description: Static library for Live2D Cubism Core
+Libs: -L${libdir} -lLive2DCubismCore
+Cflags: -I${includedir}
