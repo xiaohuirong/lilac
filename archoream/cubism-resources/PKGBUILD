@@ -1,0 +1,20 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=cubism-resources
+pkgver=5.0.0
+pkgrel=1
+pkgdesc="Cubism Model Resources"
+url="https://www.live2d.com/en/sdk/about/"
+license=("custom")
+arch=("x86_64")
+provides=(cubism-resources)
+conflicts=()
+depends=()
+makedepends=()
+_name="CubismSdkForNative-5-r.1"
+source=("${_name}.zip::https://cubism.live2d.com/sdk-native/bin/${_name}.zip")
+sha256sums=("SKIP")
+
+package() {
+    install -d "${pkgdir}/usr/share/cubism/"    
+    cp -r "${srcdir}/${_name}/Samples/Resources" "${pkgdir}/usr/share/cubism/"
+}
