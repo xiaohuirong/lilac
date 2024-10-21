@@ -10,7 +10,7 @@ arch=('x86_64')
 provides=('musicfox' 'go-musicfox')
 conflicts=('go-musicfox-bin' 'musicfox' 'go-musicfox')
 depends=('flac' 'alsa-lib')
-makedepends=('gcc-objc' 'go' 'git')
+makedepends=('go' 'git')
 source=(${_pkgname}::git+https://github.com/go-musicfox/go-musicfox)
 sha256sums=('SKIP')
 
