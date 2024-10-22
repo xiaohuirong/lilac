@@ -17,6 +17,7 @@ source=("${_name}::git+${url}"
 sha256sums=("SKIP"
             "SKIP"
             "SKIP")
+options=('!strip')
 
 pkgver() {
     cd "${srcdir}/${_name}"
