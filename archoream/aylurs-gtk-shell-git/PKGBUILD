@@ -1,8 +1,8 @@
 # Maintainer: kotontrion <kotontrion@tutanota.de>
 pkgname=aylurs-gtk-shell-git
 _pkgname=ags
-pkgver=1.8.2.r10.g344ea72
-pkgrel=2
+pkgver=1.8.2.r25.g60180a1
+pkgrel=1
 pkgdesc="Aylurs's Gtk Shell (AGS), An eww inspired gtk widget system."
 arch=('x86_64')
 url="https://github.com/Aylur/ags"
