@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname="tokyonight-storm-b-gtk-theme"
 pkgver=r65.a6f983e1
-pkgrel=1
+pkgrel=2
 pkgdesc='Tokyonight-Storm-B gtk theme'
 url='https://github.com/Fausto-Korpsvart/Tokyo-Night-GTK-Theme'
 license=('GPL3')
