@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 # Contributor: Solomon Choina <shlomochoina@gmail.com0
 pkgname=wayfire-hoream-git
-pkgver=0.8.0.20241010.160757.g4f969a49
+pkgver=0.8.0.20241022.142105.gb87ef9a6
 pkgrel=1
 pkgdesc="3D wayland compositor (hoream's version)"
 arch=('x86_64' 'aarch64')
@@ -15,7 +15,7 @@ provides=(wayfire wayfire-git)
 conflicts=(wayfire wayfire-git)
 replaces=()
 options=(debug)
-source=(wayfire::git+$url.git#branch=hoream
+source=(wayfire::git+$url.git#commit=b87ef9a6abbda3785ffe207dbfa60cb4df287c87
         wf-touch::git+https://github.com/WayfireWM/wf-touch
         wf-utils::git+https://github.com/WayfireWM/wf-utils
         wlroots::git+https://github.com/xiaohuirong/wlroots
