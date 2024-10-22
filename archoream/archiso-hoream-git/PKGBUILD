@@ -2,8 +2,8 @@
 
 _pkgname=archiso-hoream
 pkgname="${_pkgname}-git"
-pkgver=r65.cdb821b
-pkgrel=10
+pkgver=r90.a28fd89
+pkgrel=1
 pkgdesc="Hoream's archiso config"
 url="https://github.com/xiaohuirong/custom_archiso.git"
 license=("MIT")
