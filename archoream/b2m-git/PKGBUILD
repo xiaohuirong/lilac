@@ -2,7 +2,7 @@
 _pkgname="b2m"
 pkgname="${_pkgname}-git"
 pkgver=0.25.0.r19.g9830fa6
-pkgrel=2
+pkgrel=3
 pkgdesc="Play bilibili or other videos with mpv"
 url="https://github.com/snylonue/b2m"
 license=("MIT")
