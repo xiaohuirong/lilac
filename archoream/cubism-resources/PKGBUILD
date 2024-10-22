@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=cubism-resources
 pkgver=5.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Cubism Model Resources"
 url="https://www.live2d.com/en/sdk/about/"
 license=("custom")
