@@ -3,7 +3,7 @@
 
 pkgname=szyszka-git
 pkgver=3.0.0.r2.gfb6938c
-pkgrel=2
+pkgrel=3
 pkgdesc="A simple but powerful batch file rename program"
 arch=('x86_64')
 url="https://github.com/qarmin/szyszka"
