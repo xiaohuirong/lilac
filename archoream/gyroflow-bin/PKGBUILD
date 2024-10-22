@@ -3,7 +3,7 @@
 _pkgname=gyroflow
 pkgname=${_pkgname}-bin
 pkgver=1.5.4
-pkgrel=1
+pkgrel=2
 pkgdesc="Video stabilization using gyroscope data"
 arch=("x86_64")
 license=("GPL3")
