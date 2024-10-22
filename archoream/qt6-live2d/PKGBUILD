@@ -1,0 +1,52 @@
+# Maintainer: Hoream <hoream@qq.com>
+pkgname=qt6-live2d
+pkgver=r3.0715ce1
+pkgrel=1
+pkgdesc="Qt6 live2d widget library"
+url="https://github.com/xiaohuirong/QtLive2dWidget"
+license=("MIT")
+arch=("x86_64")
+provides=()
+conflicts=()
+depends=("qt6-base" "cubism-core" "cubism-framework")
+makedepends=("git" "cmake")
+_name="QtLive2dWidget"
+source=("${_name}::git+${url}"
+        "live2d-widget.pc"
+        "Live2dWidgetConfig.cmake")
+sha256sums=("SKIP"
+            "SKIP"
+            "SKIP")
+
+pkgver() {
+    cd "${srcdir}/${_name}"
+    ( set -o pipefail
+        git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+        printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+    )
+}
+
+prepare() {
+    cd "${srcdir}"
+    sed -i "1i Version: ${pkgver}" "live2d-widget.pc"
+    sed -i "1i set(Live2dWidget_VERSION \"${pkgver}\")" "Live2dWidgetConfig.cmake"
+}
+
+build() {
+    cd "${srcdir}/${_name}"  
+    mkdir build
+    cd build
+    cmake ..
+    make
+}
+
+package() {
+    install -d "${pkgdir}/usr/lib/qt6/live2dwidget"    
+    install -d "${pkgdir}/usr/include/qt6/live2dwidget"    
+    install -d "${pkgdir}/usr/lib/pkgconfig"    
+    install -d "${pkgdir}/usr/lib/cmake/Live2dWidget/"    
+    install -Dm755 "${srcdir}/${_name}/build/libQLive2dWidget.a" "${pkgdir}/usr/lib/qt6/live2dwidget/libQLive2dWidget.a"
+    cp "${srcdir}/${_name}/src/"*.hpp "${pkgdir}/usr/include/qt6/live2dwidget/"
+    install -Dm644 "${srcdir}/live2d-widget.pc" "${pkgdir}/usr/lib/pkgconfig/live2d-widget.pc"
+    install -Dm644 "${srcdir}/Live2dWidgetConfig.cmake" "${pkgdir}/usr/lib/cmake/Live2dWidget/Live2dWidgetConfig.cmake"
+}

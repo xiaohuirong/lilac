@@ -1,0 +1,9 @@
+prefix=/usr/lib
+libdir=${prefix}/qt6/live2dwidget
+includedir=/usr/include/qt6/live2dwidget
+
+Name: live2d-widget
+Description: Static library for Qt Live2d Widget
+Requires: cubism-framework
+Libs: -L${libdir} -lQLive2dWidget -lGL
+Cflags: -I${includedir}
