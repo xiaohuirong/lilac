@@ -9,7 +9,7 @@ arch=("x86_64")
 provides=()
 conflicts=()
 depends=("qt6-base" "cubism-core" "cubism-framework")
-makedepends=("git" "cmake")
+makedepends=("git" "cmake" "stb")
 _name="QtLive2dWidget"
 source=("${_name}::git+${url}"
         "live2d-widget.pc"
