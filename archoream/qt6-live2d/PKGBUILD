@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=qt6-live2d
 pkgver=r3.0715ce1
-pkgrel=2
+pkgrel=3
 pkgdesc="Qt6 live2d widget library"
 url="https://github.com/xiaohuirong/QtLive2dWidget"
 license=("MIT")
