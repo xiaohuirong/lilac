@@ -10,12 +10,10 @@ provides=(cubism-core)
 conflicts=()
 depends=(cubism-core)
 makedepends=(cmake git)
-source=("git+${url}"
-        "cmake.patch"
+source=("git+https://github.com/xiaohuirong/CubismNativeFramework.git#branch=qt6"
         "CubismFrameworkConfig.cmake"
         "cubism-framework.pc")
 sha256sums=("SKIP"
-            "SKIP"
             "SKIP"
             "SKIP")
 
@@ -23,7 +21,6 @@ prepare() {
     cd "${srcdir}"
     sed -i "1i Version: ${pkgver}" "cubism-framework.pc"
     sed -i "1i set(CubismFramework_VERSION \"${pkgver}\")" "CubismFrameworkConfig.cmake"
-    patch -Np1 -i "${srcdir}/cmake.patch" -d "${srcdir}/CubismNativeFramework"
 }
 
 build() {

@@ -4,6 +4,6 @@ includedir=/usr/include/cubism/framework
 
 Name: cubism-framework
 Description: Library for Live2D Cubism Framework
-Libs: -L${libdir} -lFramework.so -lstdc++ -lm -lgcc_s -lc
+Libs: -L${libdir} -lFramework -lstdc++ -lm -lgcc_s -lc
 Libs.private: -ldl
 Cflags: -I${includedir}
