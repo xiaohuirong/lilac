@@ -2,7 +2,7 @@
 _pkgname="firework-rs"
 pkgname="${_pkgname}-git"
 pkgver=r33.dc9213d
-pkgrel=1
+pkgrel=2
 pkgdesc="a cross-platform ascii-art firework simulator in terminal."
 url="https://github.com/Wayoung7/firework-rs"
 license=("MIT")
