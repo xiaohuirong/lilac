@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=cubism-framework
 pkgver=5.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Cubism Framework library"
 url="https://github.com/Live2D/CubismNativeFramework"
 license=("custom")
