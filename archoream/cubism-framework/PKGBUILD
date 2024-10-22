@@ -8,7 +8,7 @@ license=("custom")
 arch=("x86_64")
 provides=(cubism-core)
 conflicts=()
-depends=(cubism-core)
+depends=(cubism-core qt6-base)
 makedepends=(cmake git)
 source=("git+https://github.com/xiaohuirong/CubismNativeFramework.git#branch=qt6"
         "CubismFrameworkConfig.cmake"
