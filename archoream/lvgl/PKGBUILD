@@ -15,6 +15,8 @@ sha256sums=('494f08dbe53b63e1a9891f8c3f535762eacb0b3318086951daf747c4f493bfea')
 build() {
         cd ${pkgname}-${pkgver}
         cp -a lv_conf_template.h lv_conf.h
+        echo "#define LV_WAYLAND_WINDOW_DECORATIONS 1" >> lv_conf.h
+        echo "#define LV_WAYLAND_WL_SHELL 1" >> lv_conf.h
         if [ ! -e build ]; then mkdir build; fi
 	cd build
         cmake .. -DCMAKE_INSTALL_PREFIX=/usr \
