@@ -2,7 +2,7 @@
 
 pkgname=lvgl
 pkgver=9.2.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Light and Versatile Graphics Library"
 url="https://lvgl.io/"
 license=("MIT")
