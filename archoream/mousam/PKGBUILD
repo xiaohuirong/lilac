@@ -3,7 +3,7 @@
 pkgname=mousam
 pkgver=1.3.2
 _commit=d05573ba49cfd16e6d20e35c85ae27710a2cb9cc
-pkgrel=1
+pkgrel=2
 pkgdesc='Weather at a Glance'
 url="https://github.com/amit9838/mousam"
 license=('GPL-3.0-or-later')
