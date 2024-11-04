@@ -10,7 +10,7 @@ license=("MIT")
 arch=("any")
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
-depends=('bat' 'bash' 'bash-completion' 'zsh' 'zsh-autosuggestions' 'fzf' 'ripgrep' 'pacman' 'pkgfile' 'wget' 'rsync')
+depends=('bat' 'bash' 'bash-completion' 'zsh' 'zsh-autosuggestions' 'fzf' 'ripgrep' 'pacman' 'pkgfile' 'wget' 'rsync' 'gptfdisk')
 optdepends=('uniclip: for clipboard'
             'wl-clipboard: for wayland clipboard'
             'gptfdisk: for mkarchqemu'
