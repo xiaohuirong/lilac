@@ -15,7 +15,7 @@
 
 _pkgname=mpd
 pkgname=${_pkgname}-git
-pkgver=0.23.15.r1576.g76562fc09
+pkgver=0.23.15.r1583.gbcab29d53
 pkgrel=1
 pkgdesc='Flexible, powerful, server-side application for playing music (from git)'
 url='https://www.musicpd.org/'
