@@ -1,0 +1,106 @@
+# Maintainer: Kevin Mihelich <kevin@archlinuxarm.org>
+# Contributor: Paul Adams <paul@thoughtcriminal.co.uk>
+
+_pkgname='wiringpi'
+pkgname="$_pkgname"-hoream-git
+pkgver=r336.a0b52b3
+pkgrel=1
+pkgdesc="The arguably fastest GPIO Library for the Raspberry Pi"
+arch=('armv7h' 'aarch64')
+url="https://github.com/wiringX/wiringX"
+license=('GPL')
+provides=('wiringpi')
+conflicts=('wiringpi')
+makedepends=('git' 'cmake' 'patch')
+source=(${_pkgname}::git+https://github.com/WiringPi/WiringPi
+        makefile.patch)
+md5sums=('SKIP'
+         'SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  patch -Np1 -i ${srcdir}/makefile.patch -d ${srcdir}/${_pkgname}
+}
+
+build() {
+  cd "${_pkgname}"
+
+  echo "Build WiringPi Library"
+  cd wiringPi
+  make
+
+  echo "Build WiringPi Devices Library"
+  cd ../devLib
+  make
+
+  echo "Build GPIO Utility"
+  cd ../gpio
+  make DESTDIR="${pkgdir}" PREFIX="/usr"
+}
+
+package() {
+  cd "${_pkgname}"
+
+  echo "Install WiringPi Library"
+  cd wiringPi
+  make DESTDIR="${pkgdir}" PREFIX="/usr" install
+
+  echo "Install WiringPi Devices Library"
+  cd ../devLib
+  make DESTDIR="${pkgdir}" PREFIX="/usr" install
+
+  echo "Install GPIO Utility"
+  cd ../gpio
+  make DESTDIR="${pkgdir}" PREFIX="/usr" install
+
+  _version=`cat ${srcdir}/${_pkgname}/VERSION`
+
+  install -dm755 "${pkgdir}/usr/lib/pkgconfig"
+  cat > "${pkgdir}/usr/lib/pkgconfig/${_pkgname}.pc" << EOF
+prefix=/usr
+libdir=\${prefix}/lib
+includedir=\${prefix}/include
+
+Name: ${_pkgname}
+Description: ${pkgdesc}
+Version: ${_version}
+Libs: -L\${libdir} -lwiringPi -lwiringPiDev
+Cflags: -I\${includedir}
+EOF
+
+  install -dm755 "${pkgdir}/usr/lib/cmake/WiringPi"
+  cat > "${pkgdir}/usr/lib/cmake/WiringPi/WiringPi.cmake" << EOF
+# Version
+set(WiringPi_VERSION ${_version})
+
+# Include directories
+set(WiringPi_INCLUDE_DIR "/usr/include")
+
+# Library path
+set(WiringPi_LIBRARY "/usr/lib/wiringPi.so.${_version};/usr/lib/wiringPiDev.so.${_version}")
+
+# Provide the imported target
+add_library(WiringPi SHARED IMPORTED)
+
+# Set properties for the imported target
+set_target_properties(WiringPi PROPERTIES
+    IMPORTED_LOCATION "\${WiringPi_LIBRARY}"
+    INTERFACE_INCLUDE_DIRECTORIES "\${WiringPi_INCLUDE_DIR}"
+)
+
+# Provide the variables to be found
+set(WiringPi_LIBRARIES WiringPi)
+set(WiringPi_INCLUDE_DIRS "\${WiringPi_INCLUDE_DIR}")
+
+# Create a target that other projects can link against
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(WiringPi
+    REQUIRED_VARS WiringPi_LIBRARY WiringPi_INCLUDE_DIR
+    VERSION_VAR WiringPi_VERSION
+)
+EOF
+}
