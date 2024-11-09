@@ -2,7 +2,7 @@
 
 pkgname=steamcmd
 pkgver=latest
-pkgrel=5
+pkgrel=6
 pkgdesc="Steam Command Line Tools"
 arch=('i686' 'x86_64')
 license=('LicenseRef-Steam-Subscriber-Agreement')
