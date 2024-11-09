@@ -2,7 +2,7 @@
 
 pkgname=weylus
 pkgver=0.11.4
-pkgrel=3
+pkgrel=4
 pkgdesc="Use your tablet as graphic tablet/touch screen on your computer."
 arch=("x86_64")
 url="https://github.com/H-M-H/Weylus"
