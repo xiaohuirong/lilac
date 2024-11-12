@@ -1,0 +1,51 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Contributor: csslayer <wengxt AT gmail com>
+
+_pkgname=fcitx5-chinese-addons
+pkgname="${_pkgname}"-noweb
+pkgver=5.1.7
+_py_stroke_ver=20121124
+_py_table_ver=20121124
+pkgrel=1
+pkgdesc="Addons related to Chinese, including IME previous bundled inside fcitx4"
+arch=('x86_64')
+url="https://github.com/fcitx/fcitx5-chinese-addons"
+license=('GPL')
+conflicts=('fcitx' 'fcitx5-chinese-addons')
+provides=('fcitx5-chinese-addons')
+depends=('curl' 'fcitx5-qt' 'libime' 'opencc')
+makedepends=('git' 'boost' 'extra-cmake-modules' 'fcitx5-lua' 'fmt' 'ninja' 'qt6-webengine')
+optdepends=('fcitx5-lua: Lua and imeapi support from pinyin')
+source=("git+https://github.com/fcitx/fcitx5-chinese-addons.git#tag=$pkgver"
+        "https://download.fcitx-im.org/data/py_stroke-$_py_stroke_ver.tar.gz"
+        "https://download.fcitx-im.org/data/py_table-$_py_table_ver.tar.gz")
+sha512sums=('6c44c99d2ae9545735f710c750a11c95009a44e94a80f26e8e32a48c5a2c261eca050e0dc4299485644d50b3ccb60be6c402800338dcbdc3e08246e4ff507f40'
+            'd80ff9a3549e07c7a6935e686785f9a076c58f1a782a832ae28ee65e2a213d67f089f450ce09bed87ec2a141c32b9c1fcb83c221ddcab436858fa9009f161fb3'
+            '0fa72ce6820a316e9729bc0d7a08af5ca3468134de9ff1bf0c559a398846a7bcf7313a3609d943e6bab637d930cf45ad9acfe25a8d3df078a774b071a7296486')
+noextract=("py_stroke-$_py_stroke_ver.tar.gz"
+           "py_table-$_py_table_ver.tar.gz")
+
+prepare() {
+  cd $_pkgname
+  mv ../py_stroke-$_py_stroke_ver.tar.gz modules/pinyinhelper/
+  mv ../py_table-$_py_table_ver.tar.gz modules/pinyinhelper/
+  # grep to make sure the version is correct
+  grep "PY_STROKE_VER $_py_stroke_ver" modules/pinyinhelper/CMakeLists.txt
+  grep "PY_TABLE_VER $_py_table_ver" modules/pinyinhelper/CMakeLists.txt
+}
+
+build() {
+  cd $_pkgname
+  cmake -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib -DUSE_WEBKIT=Off .
+  ninja
+}
+
+check() {
+  cd $_pkgname
+  ninja test
+}
+
+package() {
+  cd $_pkgname
+  DESTDIR="$pkgdir" ninja install
+}
