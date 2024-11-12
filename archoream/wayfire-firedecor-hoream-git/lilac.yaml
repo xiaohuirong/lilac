@@ -9,8 +9,8 @@ update_on:
   - source: manual
     manual: 3
 
-repo_depends:
-  - glm-trigger
-
-update_on_build:
-  - pkgbase: glm-trigger
+#repo_depends:
+#  - glm-trigger
+#
+#update_on_build:
+#  - pkgbase: glm-trigger
