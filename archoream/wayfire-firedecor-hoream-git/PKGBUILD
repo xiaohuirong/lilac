@@ -11,13 +11,8 @@ depends=('wayfire-hoream-git' 'librsvg')
 makedepends=('git' 'meson' 'ninja' 'boost')
 provides=("${_pkgname}" "${_pkgname}-git")
 conflicts=("${_pkgname}" "${_pkgname}-git")
-source=("${_pkgname}::git+https://github.com/AhoyISki/${_pkgname}.git")
+source=("${_pkgname}::git+https://github.com/AhoyISki/${_pkgname}.git#commit=3c6777dc64bc2e62ea495a8c99a712dee8c20edb")
 sha256sums=("SKIP")
-
-prepare() {
-    cd "${srcdir}/${_pkgname}"
-    git checkout 3c6777dc64bc2e62ea495a8c99a712dee8c20edb
-}
 
 pkgver() {
   cd "${srcdir}/${_pkgname}"
