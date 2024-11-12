@@ -2,7 +2,7 @@
 
 pkgname=airspyhf-git
 pkgver=r124.39f06a4
-pkgrel=1
+pkgrel=2
 pkgdesc="Host code for AirspyHF+ SDR."
 arch=('i686' 'x86_64' 'aarch64')
 url="http://www.airspy.com"
