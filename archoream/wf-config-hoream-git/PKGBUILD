@@ -9,8 +9,8 @@ license=('MIT')
 depends=('libevdev' 'libxml2')
 makedepends=('git' 'wlroots-hoream-git' 'meson' 'ninja' 'wayland-protocols' 
               'glm' 'doctest' 'cmake')
-provides=()
-conflicts=("wf-config" "wf-config-git")
+provides=(wf-config)
+#conflicts=("wf-config" "wf-config-git")
 replaces=()
 source=("${pkgname}::git+https://github.com/WayfireWM/wf-config#commit=e42a3870fb194842a505ad5a9671be1aebda0b0b")
 sha256sums=('SKIP')
@@ -29,10 +29,12 @@ prepare() {
 }
 
 build() {
-    arch-meson "$srcdir/${pkgname}/" build
+    arch-meson \
+    --prefix=/opt/wayfire-hoream \
+    "$srcdir/${pkgname}/" \
+    build
     ninja -C build
 }
-
 
 package() {
     DESTDIR="$pkgdir/" ninja -C build install
