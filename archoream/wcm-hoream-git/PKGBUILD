@@ -11,7 +11,7 @@ conflicts=("${pkgname%-git}")
 depends=(gtkmm3 wayfire-hoream-git wf-shell-hoream-git)
 makedepends=(wayland-protocols meson ninja git extra-cmake-modules)
 optdepends=("wayfire-plugins-extra: configuration for extra Wayfire plugins")
-source=("${pkgname}::git+https://github.com/WayfireWM/wcm")
+source=("${pkgname}::git+https://github.com/WayfireWM/wcm#commit=9f871a8e2b189cabb50da2130386937097e713a3")
 sha512sums=('SKIP')
 
 pkgver() {
@@ -22,8 +22,11 @@ pkgver() {
 }
 
 build () {
+    export PKG_CONFIG_PATH=/opt/wlroots-hoream/lib/pkgconfig:/opt/wayfire-hoream/lib/pkgconfig:$PKG_CONFIG_PATH
 	rm -rf build
-	arch-meson "${pkgname}" build
+	arch-meson \
+    --prefix=/opt/wayfire-hoream \
+    "${pkgname}" build
 	ninja -C build
 }
 
