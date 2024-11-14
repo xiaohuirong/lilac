@@ -9,7 +9,7 @@ pkgdesc='Modular Wayland compositor library (git version, with patches)'
 url=https://gitlab.freedesktop.org/wlroots/wlroots
 arch=(x86_64 aarch64)
 provides=("libwlroots.so" "wlroots=${pkgver%%.r*}")
-conflicts=(wlroots wlroots-git)
+conflicts=(wlroots-hoream)
 options=(debug)
 depends=(
 	glslang
@@ -42,6 +42,7 @@ makedepends=(
 	xorgproto)
 source=("${pkgname}::git+https://github.com/xiaohuirong/wlroots#branch=hoream")
 sha512sums=('SKIP')
+_prefix="/opt/wlroots-hoream"
 
 pkgver () {
   cd "${pkgname}"
@@ -57,6 +58,7 @@ build () {
     --buildtype=release \
     -Dwerror=false \
     -Dexamples=false \
+    --prefix=${_prefix} \
     "${pkgname}" build
   meson compile -C build
 }
@@ -64,5 +66,6 @@ build () {
 package () {
   DESTDIR="${pkgdir}" meson install -C build
   install -Dm644 "${pkgname}/"LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  install -d -m755 "${pkgdir}/etc/ld.so.conf.d"
+  echo "${_prefix}/lib" > "${pkgdir}/etc/ld.so.conf.d/wlroots-hoream.conf"
 }
-

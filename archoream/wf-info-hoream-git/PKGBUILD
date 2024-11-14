@@ -10,7 +10,7 @@ url="https://github.com/soreau/wf-info"
 license=(unknow)
 depends=(wayfire-hoream-git)
 makedepends=(meson ninja pkg-config git cmake  wayland-protocols glm)
-conflicts=("${_pkgname}")
+#conflicts=("${_pkgname}")
 provides=("${_pkgname}")
 source=("git+https://github.com/xiaohuirong/wf-info.git#branch=hoream")
 sha256sums=('SKIP')
@@ -21,8 +21,11 @@ pkgver() {
 }
 
 build() {
+    export PKG_CONFIG_PATH=/opt/wlroots-hoream/lib/pkgconfig:/opt/wayfire-hoream/lib/pkgconfig:$PKG_CONFIG_PATH
 	rm -rf build
-	arch-meson "${_pkgname}" build
+	arch-meson \
+    --libdir /opt/wayfire-hoream/lib \
+    "${_pkgname}" build
 	ninja -C build
 }
 

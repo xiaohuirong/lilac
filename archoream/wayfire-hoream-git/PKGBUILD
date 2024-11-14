@@ -11,18 +11,20 @@ depends=('wlroots-hoream-git' 'cairo' 'pango' 'glm' 'libjpeg' 'wf-config-hoream-
 makedepends=('git' 'meson' 'ninja' 'wayland-protocols' 'doctest' 'cmake')
 optdepends=('wf-shell-hoream-git: GTK3-based panel for the Wayfire compositor'
             'wf-sound-control-git: Small utility for the Wayfire compositor to control sound volume')
-provides=(wayfire wayfire-git)
-conflicts=(wayfire wayfire-git)
+provides=(wayfire "wayfire=0.8.0")
+conflicts=(wayfire-hoream)
 replaces=()
 options=(debug)
 source=(wayfire::git+$url.git#branch=hoream
         wf-touch::git+https://github.com/WayfireWM/wf-touch
         wf-utils::git+https://github.com/WayfireWM/wf-utils
         wlroots::git+https://github.com/xiaohuirong/wlroots)
+
 sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP')
+_prefix="/opt/wayfire-hoream"
 
 prepare() {
     cd "$srcdir/wayfire"
@@ -48,12 +50,14 @@ pkgver () {
 build() {
     cd "$srcdir/wayfire"
     # debug_ipc doesn't compile with wlroots 0.16.0
+    export PKG_CONFIG_PATH=/opt/wlroots-hoream/lib/pkgconfig:$PKG_CONFIG_PATH
     arch-meson \
         --buildtype=release \
         -Duse_system_wlroots=enabled \
         -Duse_system_wfconfig=enabled \
         -Dtests=disabled \
         -Ddebug_ipc=false \
+        --prefix=${_prefix} \
         . \
         build
     ninja -C build
@@ -62,6 +66,8 @@ build() {
 package() {
     cd "$srcdir/wayfire"
     DESTDIR="${pkgdir}/" ninja -C build install
-    install -m644 wayfire.ini "${pkgdir}/usr/share"
+    install -m644 wayfire.ini "${pkgdir}/${_prefix}/share"
+    install -d -m755 "${pkgdir}/etc/ld.so.conf.d"
+    echo "${_prefix}/lib" > "${pkgdir}/etc/ld.so.conf.d/wayfire-hoream.conf"
 }
 
