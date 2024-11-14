@@ -71,7 +71,7 @@ package() {
     echo "${_prefix}/lib" > "${pkgdir}/etc/ld.so.conf.d/wayfire-hoream.conf"
 
     sed -i 's/wayfire/\/opt\/wayfire-hoream\/bin\/wayfire/g; s/Wayfire/Wayfire075/g' ${pkgdir}${_prefix}/share/wayland-sessions/wayfire.desktop
-    install -d -m755 "${pkgdir}/share/wayland-sessions"
-    ln -sf ${_prefix}/share/wayland-sessions/wayfire.desktop "${pkgdir}/share/wayland-sessions/wayfire075.desktop"
+    install -d -m755 "${pkgdir}/usr/share/wayland-sessions"
+    ln -sf ${_prefix}/usr/share/wayland-sessions/wayfire.desktop "${pkgdir}/share/wayland-sessions/wayfire075.desktop"
 }
 
