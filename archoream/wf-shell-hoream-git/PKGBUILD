@@ -23,8 +23,12 @@ pkgver () {
 }
 
 build () {
+    export PKG_CONFIG_PATH=/opt/wlroots-hoream/lib/pkgconfig:/opt/wayfire-hoream/lib/pkgconfig:$PKG_CONFIG_PATH
 	rm -rf build
-	arch-meson "${pkgname}" build -Dpulse=enabled
+	arch-meson \
+    -Dpulse=enabled \
+    --prefix=/opt/wayfire-hoream \
+    "${pkgname}" build
 	ninja -C build
 }
 
