@@ -3,7 +3,7 @@
 
 pkgbase=wxgtk-git
 pkgname=(wxwidgets-gtk3-git wxwidgets-qt5-git wxwidgets-common-git)
-pkgver=3.2.0.rc1.r4133.g210e8a7a1c
+pkgver=3.2.0.rc1.r4255.g1ba62a6e78
 pkgrel=1
 pkgdesc="GTK+3 implementation of wxWidgets API for GUI"
 arch=(x86_64)
