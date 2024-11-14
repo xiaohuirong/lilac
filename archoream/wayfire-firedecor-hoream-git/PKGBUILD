@@ -2,7 +2,7 @@
 _pkgname=wayfire-firedecor
 pkgname=wayfire-firedecor-hoream-git
 pkgver=r89.3c6777d
-pkgrel=2
+pkgrel=3
 pkgdesc="An advanced window decoration plugin for the wayfire window manager."
 arch=('x86_64' 'aarch64')
 url="https://github.com/AhoyISki/wayfire-firedecor.git"
