@@ -14,8 +14,8 @@ depends=('cairo' 'pango' 'freetype2' 'glm' 'nlohmann-json'
          'xcb-util-wm' 'xorg-xwayland' 'wayland' 'wayland-protocols' 'libdisplay-info' 'libvulkan.so')
 makedepends=('git' 'glslang' 'meson' 'ninja' 'cmake' 'vulkan-headers' 'doctest')
 optdepends=('xorg-xeyes')
-provides=("${pkgname%-git}" 'wlroots' 'wf-config' 'wlroots-git' 'wf-config-git' 'libwlroots.so')
-conflicts=("$pkgname" 'wlroots-git' 'wlroots' 'wf-config-git' 'wf-config')
+provides=("${pkgname%-git}" 'wlroots' 'wf-config' 'libwlroots.so')
+#conflicts=("$pkgname" 'wlroots-git' 'wlroots' 'wf-config-git' 'wf-config')
 replaces=()
 options=()
 
