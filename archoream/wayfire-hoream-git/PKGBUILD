@@ -50,7 +50,7 @@ pkgver () {
 build() {
     cd "$srcdir/wayfire"
     # debug_ipc doesn't compile with wlroots 0.16.0
-    export PKG_CONFIG_PATH=/opt/wlroots-hoream/lib/pkgconfig:$PKG_CONFIG_PATH
+    export PKG_CONFIG_PATH=/opt/wlroots-hoream/lib/pkgconfig:/opt/wayfire-hoream/lib/pkgconfig:$PKG_CONFIG_PATH
     arch-meson \
         --buildtype=release \
         -Duse_system_wlroots=enabled \
