@@ -12,7 +12,7 @@ depends=('wayfire-hoream-git' 'glibmm' 'iio-sensor-proxy')
 makedepends=('git' 'meson' 'ninja' 'wayland-protocols')
 optdepends=('wcm-hoream-git: GTK3-based configuration tool for the Wayfire compositor')
 provides=("${_pkgname}")
-conflicts=("${_pkgname}" "${_pkgname}-git")
+#conflicts=("${_pkgname}" "${_pkgname}-git")
 replaces=()
 options=()
 source=("${_pkgname}::git+https://github.com/xiaohuirong/wayfire-plugins-extra#commit=0cdbc738f4756156c102a1d86c72743d7d241ce7"
@@ -46,10 +46,12 @@ pkgver() {
 }
 
 build() {
+  export PKG_CONFIG_PATH=/opt/wlroots-hoream/lib/pkgconfig:/opt/wayfire-hoream/lib/pkgconfig:$PKG_CONFIG_PATH
   patch -b -d ${srcdir}/${_pkgname} -Np1 -i ${srcdir}/rename.patch
   cd "$srcdir/$_pkgname"
   rm -rf build
-  arch-meson build
+  arch-meson build \
+  --prefix=/opt/wayfire-hoream
   ninja -C build
 }
 
