@@ -2,7 +2,7 @@
 
 pkgname=stdoutisatty-git
 pkgver=11.c770750
-pkgrel=1
+pkgrel=2
 pkgdesc="Make programs think their stdout is a tty / terminal."
 arch=('x86_64' 'aarch64')
 url='https://github.com/lilydjwg/stdoutisatty'
