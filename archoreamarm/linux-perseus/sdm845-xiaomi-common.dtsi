@@ -12,11 +12,13 @@
 #include <dt-bindings/sound/qcom,q6asm.h>
 #include <dt-bindings/sound/qcom,q6afe.h>
 #include "sdm845.dtsi"
+#include "sdm845-wcd9340.dtsi"
 
 // Needed for some GPIO (like the volume buttons)
 #include "pm8998.dtsi"
 #include "pmi8998.dtsi"
 #include "pm8005.dtsi"
+
 
 / {
 	aliases {
@@ -92,19 +94,19 @@
 		vin-supply = <&vph_pwr>;
 	};
 
-	// gpio_keys {
-	// 	compatible = "gpio-keys";
-	// 	autorepeat;
+	gpio_keys {
+		compatible = "gpio-keys";
+		autorepeat;
 
-	// 	pinctrl-names = "default";
-	// 	pinctrl-0 = <&vol_up_pin_a>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&vol_up_pin_a>;
 
-	// 	vol-up {
-	// 		label = "Volume Up";
-	// 		linux,code = <KEY_VOLUMEUP>;
-	// 		gpios = <&pm8998_gpio 6 GPIO_ACTIVE_LOW>;
-	// 	};
-	// };
+		vol-up {
+			label = "Volume Up";
+			linux,code = <KEY_VOLUMEUP>;
+			gpios = <&pm8998_gpios 6 GPIO_ACTIVE_LOW>;
+		};
+	};
 
 };
 
@@ -407,15 +409,15 @@
 	dma-names = "tx", "rx";
 };
 
-// &pm8998_gpio {
-// 	vol_up_pin_a: vol-up-active {
-// 		pins = "gpio6";
-// 		function = "normal";
-// 		input-enable;
-// 		bias-pull-up;
-// 		qcom,drive-strength = <PMIC_GPIO_STRENGTH_NO>;
-// 	};
-// };
+&pm8998_gpios {
+	vol_up_pin_a: vol-up-active {
+		pins = "gpio6";
+		function = "normal";
+		input-enable;
+		bias-pull-up;
+		qcom,drive-strength = <PMIC_GPIO_STRENGTH_NO>;
+	};
+};
 
 &pm8998_pon {
 	resin {

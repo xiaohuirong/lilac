@@ -24,6 +24,21 @@
 		};
 	};
 
+	battery: battery {
+		compatible = "simple-battery";
+		charge-full-design-microamp-hours = <3200000>;
+		voltage-min-design-microvolt = <3700000>;
+		voltage-max-design-microvolt = <4400000>;
+	};
+	// battery: battery {
+	// 	compatible = "simple-battery";
+
+	// 	charge-full-design-microamp-hours = <4000000>;
+	// 	voltage-min-design-microvolt = <3400000>;
+	// 	voltage-max-design-microvolt = <4400000>;
+	// };
+
+
 	disp_vci_vreg: disp_vci_vreg {
 		compatible = "regulator-fixed";
 		regulator-name = "disp_vci_vreg";
@@ -53,27 +68,27 @@
 		gpio = <&tlmm 50 0>;
 	};
 
-	// gpio_keys {
-	// 	compatible = "gpio-keys";
-	// 	autorepeat;
+	gpio_keys {
+		compatible = "gpio-keys";
+		autorepeat;
 
-	// 	pinctrl-names = "default";
-	// 	pinctrl-0 = <&vol_up_pin_a &ai_key_active_default>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&vol_up_pin_a &ai_key_active_default>;
 
-	// 	vol-up {
-	// 		label = "Volume Up";
-	// 		linux,code = <KEY_VOLUMEUP>;
-	// 		gpios = <&pm8998_gpio 6 GPIO_ACTIVE_LOW>;
-	// 		debounce-interval = <15>;
-	// 	};
+		vol-up {
+			label = "Volume Up";
+			linux,code = <KEY_VOLUMEUP>;
+			gpios = <&pm8998_gpios 6 GPIO_ACTIVE_LOW>;
+			debounce-interval = <15>;
+		};
 
-	// 	ai_key {
-	// 		label = "AI Key";
-	// 		linux,code = <KEY_ASSISTANT>;
-	// 		gpios = <&tlmm 44 GPIO_ACTIVE_LOW>;
-	// 		debounce-interval = <39>;
-	// 	};
-	// };
+		ai_key {
+			label = "AI Key";
+			linux,code = <KEY_ASSISTANT>;
+			gpios = <&tlmm 44 GPIO_ACTIVE_LOW>;
+			debounce-interval = <39>;
+		};
+	};
 };
 
 &adsp_pas {
@@ -91,39 +106,44 @@
 	firmware-name = "qcom/sdm845/xiaomi/venus.mbn";
 };
 
-// &dsi0 {
-// 	status = "okay";
-// 	vdda-supply = <&vdda_mipi_dsi0_1p2>;
-// 
-// 	#address-cells = <1>;
-// 	#size-cells = <0>;
-// 
-// 	panel@0 {
-// 		compatible = "samsung,fhd-ea8076";
-// 		#address-cells = <1>;
-// 		#size-cells = <0>;
-// 		reg = <0>;
-// 		vddio-supply = <&vreg_l14a_1p8>;
-// 		reset-gpios = <&tlmm 6 GPIO_ACTIVE_LOW>;
-// 		pinctrl-names = "default";
-// 		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
-// 		port {
-// 			panel_in: endpoint {
-// 				remote-endpoint = <&dsi0_out>;
-// 			};
-// 		};
-// 	};
-// };
+&mdss_dsi0 {
+	status = "okay";
+	vdda-supply = <&vdda_mipi_dsi0_1p2>;
 
-// &dsi0_out {
-// 	remote-endpoint = <&panel_in>;
-// 	data-lanes = <0 1 2 3>;
-// };
+	#address-cells = <1>;
+	#size-cells = <0>;
 
-// &dsi0_phy {
-// 	status = "okay";
-// 	vdds-supply = <&vreg_l1a_0p875>;
-// };
+	panel@0 {
+		// compatible = "samsung,fhd-ea8076";
+		// compatible = "jdi,fhd-nt35596s"; // yes
+		compatible = "samsung,sofef00"; // yes,yes
+		// compatible = "samsung,lsl080al03", "samsung,s6d7aa0";
+
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0>;
+
+		vddio-supply = <&vreg_l14a_1p8>;
+		reset-gpios = <&tlmm 6 GPIO_ACTIVE_LOW>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
+		port {
+			panel_in: endpoint {
+				remote-endpoint = <&mdss_dsi0_out>;
+			};
+		};
+	};
+};
+
+&mdss_dsi0_out {
+	remote-endpoint = <&panel_in>;
+	data-lanes = <0 1 2 3>;
+};
+
+&mdss_dsi0_phy {
+	status = "okay";
+	vdds-supply = <&vreg_l1a_0p875>;
+};
 
 &gpu {
 	status = "okay";
@@ -202,12 +222,26 @@
 	firmware-name = "qcom/sdm845/xiaomi/mba.mbn", "qcom/sdm845/xiaomi/modem.mbn";
 };
 
+/* battery */
+// &pmi8998_fg {
+// 	status = "okay";
+// 	qcom,max-voltage-uv = <4400000>;
+// 	qcom,min-voltage-uv = <3700000>;
+// 	qcom,battery-capacity-ua = <3200000>;
+// };
 &pmi8998_fg {
 	status = "okay";
-	qcom,max-voltage-uv = <4400000>;
-	qcom,min-voltage-uv = <3700000>;
-	qcom,battery-capacity-ua = <3200000>;
+
+	power-supplies = <&pmi8998_charger>;
+	monitored-battery = <&battery>;
 };
+
+&pmi8998_charger {
+	monitored-battery = <&battery>;
+
+	status = "okay";
+};
+
 
 &pmi8998_haptics {
 	status = "okay";
@@ -301,9 +335,9 @@
 			sound-dai = <&q6routing>;
 		};
 
-		// codec {
-		// 	sound-dai = <&wcd9340 0>;
-		// };
+		codec {
+			sound-dai = <&wcd9340 0>;
+		};
 	};
 
 	slimcap-dai-link {
@@ -316,9 +350,9 @@
 			sound-dai = <&q6routing>;
 		};
 
-		// codec {
-		// 	sound-dai = <&wcd9340 1>;
-		// };
+		codec {
+			sound-dai = <&wcd9340 1>;
+		};
 	};
 };
 
@@ -458,29 +492,29 @@
 		};
 	};
 
-	wcd_intr_default: wcd_intr_default {
-		pins = <54>;
-		function = "gpio";
-		input-enable;
-		bias-pull-down;
-		drive-strength = <2>;
-	};
+	// wcd_intr_default: wcd_intr_default {
+	// 	pins = <54>;
+	// 	function = "gpio";
+	// 	input-enable;
+	// 	bias-pull-down;
+	// 	drive-strength = <2>;
+	// };
 };
 
-// &wcd9340{
-// 	pinctrl-0 = <&wcd_intr_default>;
-// 	pinctrl-names = "default";
-// 	clock-names = "extclk";
-// 	clocks = <&rpmhcc RPMH_LN_BB_CLK2>;
-// 	reset-gpios = <&tlmm 64 0>;
-// 	vdd-buck-supply = <&vreg_s4a_1p8>;
-// 	vdd-buck-sido-supply = <&vreg_s4a_1p8>;
-// 	vdd-tx-supply = <&vreg_s4a_1p8>;
-// 	vdd-rx-supply = <&vreg_s4a_1p8>;
-// 	vdd-io-supply = <&vreg_s4a_1p8>;
-// 	qcom,micbias1-microvolt = <2700000>;
-// 	qcom,micbias2-microvolt = <1800000>;
-// 	qcom,micbias3-microvolt = <2700000>;
-// 	qcom,micbias4-microvolt = <2700000>;
-// };
+&wcd9340{
+	pinctrl-0 = <&wcd_intr_default>;
+	pinctrl-names = "default";
+	clock-names = "extclk";
+	clocks = <&rpmhcc RPMH_LN_BB_CLK2>;
+	reset-gpios = <&tlmm 64 0>;
+	vdd-buck-supply = <&vreg_s4a_1p8>;
+	vdd-buck-sido-supply = <&vreg_s4a_1p8>;
+	vdd-tx-supply = <&vreg_s4a_1p8>;
+	vdd-rx-supply = <&vreg_s4a_1p8>;
+	vdd-io-supply = <&vreg_s4a_1p8>;
+	qcom,micbias1-microvolt = <2700000>;
+	qcom,micbias2-microvolt = <1800000>;
+	qcom,micbias3-microvolt = <2700000>;
+	qcom,micbias4-microvolt = <2700000>;
+};
 
