@@ -518,3 +518,8 @@
 	qcom,micbias4-microvolt = <2700000>;
 };
 
+&bluetooth{
+	status = "okay";
+	/* This path is relative to the qca/ subdir under lib/firmware. */
+	firmware-name = "perseus/crnv21.bin";
+};
