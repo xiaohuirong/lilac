@@ -116,7 +116,9 @@
 	panel@0 {
 		// compatible = "samsung,fhd-ea8076";
 		// compatible = "jdi,fhd-nt35596s"; // yes
-		compatible = "samsung,sofef00"; // yes,yes
+		// https://www.kernelconfig.io/config_drm_panel_samsung_sofef00
+		// compatible = "samsung,sofef00"; // yes,yes (2280x1080@60Hz)
+		compatible = "samsung,s6e3fc2x01"; // yes,yes (2340x1080@60Hz)
 		// compatible = "samsung,lsl080al03", "samsung,s6d7aa0";
 
 		#address-cells = <1>;
