@@ -36,12 +36,14 @@ prepare() {
   cp "${srcdir}/sdm845-xiaomi-perseus.dts" arch/arm64/boot/dts/qcom/
   echo "dtb-\$(CONFIG_ARCH_QCOM)        += sdm845-xiaomi-perseus.dtb" >> arch/arm64/boot/dts/qcom/Makefile
 
+  echo "Setting config..."
   # first time
-  make ARCH=arm64 defconfig sdm845.config
+  # make ARCH=arm64 defconfig sdm845.config
 
   # after first time
-  # cp "${srcdir}/config" .config
-  # make ARCH=arm64 olddefconfig
+  cp ../config .config
+  make ARCH=arm64 olddefconfig
+  diff -u ../config .config || :
 
   make ARCH=arm64 -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
@@ -139,7 +141,7 @@ _package-headers() {
   echo "Removing unneeded architectures..."
   local arch
   for arch in "$builddir"/arch/*/; do
-    [[ $arch = */arm64/ || $arch == */arm/ ]] && continue
+    [[ $arch = */arm64/ ]] && continue
     echo "Removing $(basename "$arch")"
     rm -r "$arch"
   done
