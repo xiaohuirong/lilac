@@ -17,8 +17,10 @@ source=("${_srcname}::git+${url}#branch=sdm845/6.11-dev"
         'linux.preset'
         "sdm845-xiaomi-common.dtsi"
         "sdm845-xiaomi-perseus.dts"
-        "config")
+        "config"
+        "make.patch")
 md5sums=('SKIP'
+         'SKIP'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -34,7 +36,8 @@ prepare() {
   echo "Setting config..."
   cp "${srcdir}/sdm845-xiaomi-common.dtsi" arch/arm64/boot/dts/qcom/
   cp "${srcdir}/sdm845-xiaomi-perseus.dts" arch/arm64/boot/dts/qcom/
-  echo "dtb-\$(CONFIG_ARCH_QCOM)        += sdm845-xiaomi-perseus.dtb" >> arch/arm64/boot/dts/qcom/Makefile
+  # echo "dtb-\$(CONFIG_ARCH_QCOM)        += sdm845-xiaomi-perseus.dtb" >> arch/arm64/boot/dts/qcom/Makefile
+  patch -Np1 -i ${srcdir}/make.patch -d ${srcdir}/${_srcname}
 
   echo "Setting config..."
   # first time

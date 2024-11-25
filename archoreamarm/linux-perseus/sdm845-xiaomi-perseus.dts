@@ -189,12 +189,13 @@
 		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
 		vdd-supply = <&disp_vddio_vreg>;
 		avdd-supply = <&vreg_l28a_3p0>;
+		st,max-coords = <1079 2339>;
 		fts,pwr-reg-name = "avdd";
 		fts,bus-reg-name = "vdd";
-		fts,irq-gpio = <&tlmm 31 0x2008>;
+		st,irq-gpio = <&tlmm 31 0x2008>;
 		fts,irq-gpio-name = "fts_irq";
 		fts,reset-gpio-enable;
-		fts,reset-gpio = <&tlmm 32 0x00>;
+		st,reset-gpio = <&tlmm 32 0x00>;
 		fts,x-max = <1079>;
 		fts,y-max = <2339>;
 		fts,reset-gpio-name = "fts_rst";
@@ -202,13 +203,50 @@
 		fts,key-num = <2>;
 		fts,key-codes = <158 139>;
 		fts,config-array-size = <1>;
-		fts,default-fw-name = "st_fts_e5.ftb";
-		fts,cfg_0 {
+		st,default-fw-name = "st_fts_e5.ftb";
+		fts,rotate = <90>;
+		st,cfg_0 {
 			fts,tp-vendor = <0x52>;
-			fts,fw-name = "st_fts_e5.ftb";
+			st,tp-vendor = <0x52>;
+			st,fw-name = "st_fts_e5.ftb";
 			fts,limit-name = "stm_fts_production_limits.csv";
+			st,limit-name = "stm_fts_production_limits.csv";
 		};
 	};
+
+	// touchscreen@49 {
+	// 	status = "okay";
+	// 	compatible = "st,fts";
+	// 	reg = <0x49>;
+	// 	pinctrl-names = "default";
+	// 	pinctrl-0 = <&touchscreen_pins &touchscreen_reset>;
+	// 	interrupt-parent = <&tlmm>;
+	// 	// interrupts = <125 IRQ_TYPE_LEVEL_LOW>;
+	//  	interrupts = <31 0x2008>;
+
+	// 	// avdd-supply = <&vreg_l14a_1p88>;
+	// 	// vdd-supply = <&vreg_l19a_3p3>;
+	//  	vdd-supply = <&disp_vddio_vreg>;
+	//  	avdd-supply = <&vreg_l28a_3p0>;
+	// 	// touchscreen-size-x = <1080>;
+	// 	// touchscreen-size-y = <2160>;
+
+	// 	// st,irq-gpio = <&tlmm 125 0>;
+	//  	st,irq-gpio = <&tlmm 31 0x2008>;
+	// 	// st,reset-gpio = <&tlmm 99 0>;
+	//  	st,reset-gpio = <&tlmm 32 0x00>;
+	// 	// st,switch_gpio = <&tlmm 136 0>;
+	//  	st,max-coords = <1079 2339>;
+	// 	st,regulator_dvdd = "vdd";
+	// 	st,regulator_avdd = "avdd";
+	//  	fts,default-fw-name = "st_fts_e5.ftb";
+	//  	fts,cfg_0 {
+	//  		fts,tp-vendor = <0x52>;
+	//  		fts,fw-name = "st_fts_e5.ftb";
+	//  		fts,limit-name = "stm_fts_production_limits.csv";
+	//  	};
+	// };
+
 };
 
 &mdss {
@@ -359,6 +397,25 @@
 };
 
 &tlmm {
+	// touchscreen_reset: ts-reset {
+	// 	mux {
+	// 		pins = "gpio32";
+	// 		function = "gpio";
+	// 		drive-strength = <8>;
+	// 		bias-pull-up;
+	// 		//output-high;
+	// 	};
+	// };
+
+	// touchscreen_pins: ts-pins {
+	// 	mux {
+	// 		pins = "gpio31";
+	// 		function = "gpio";
+	// 		drive-strength = <2>;
+	// 		bias-disable;
+	// 	};
+	// };
+
 	ts_int_active: ts_int_active {
 		mux {
 			pins = "gpio31";
@@ -368,8 +425,9 @@
 		config {
 			pins = "gpio31";
 			drive-strength = <16>;
-			bias-pull-down;
-			input-enable;
+			// bias-pull-down;
+			// input-enable;
+			bias-pull-up;
 		};
 	};
 
@@ -382,7 +440,8 @@
 		config {
 			pins = "gpio32";
 			drive-strength = <16>;
-			output-high;
+			// output-high;
+			bias-pull-up;
 		};
 	};
 
@@ -395,8 +454,9 @@
 		config {
 			pins = "gpio32";
 			drive-strength = <2>;
+			// bias-disable;
+			// output-low;
 			bias-disable;
-			output-low;
 		};
 	};
 
@@ -409,8 +469,9 @@
 		config {
 			pins = "gpio31";
 			drive-strength = <2>;
-			bias-pull-down;
-			input-enable;
+			// bias-pull-down;
+			// input-enable;
+			bias-disable;
 		};
 	};
 

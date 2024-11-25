@@ -469,17 +469,16 @@
 // 		max-speed = <3200000>;
 // 	};
 // };
-
 &usb_1 {
-	status = "okay";
 	/* We'll use this as USB 2.0 only */
 	qcom,select-utmi-as-pipe-clk;
+	status = "okay";
 };
 
 &usb_1_dwc3 {
-	dr_mode = "host";
+	dr_mode = "peripheral";
 
-	/* fastest mode for USB 2 */
+	/* Fastest mode for USB 2 */
 	maximum-speed = "high-speed";
 
 	/* Remove USB3 phy */
@@ -488,24 +487,60 @@
 };
 
 &usb_1_hsphy {
-	status = "okay";
-
-	vdd-supply = <&vreg_l1a_0p875>;
-	vdda-pll-supply = <&vreg_l12a_1p8>;
 	vdda-phy-dpdm-supply = <&vreg_l24a_3p075>;
+	vdda-pll-supply = <&vreg_l12a_1p8>;
+	vdd-supply = <&vreg_l1a_0p875>;
 
-	qcom,imp-res-offset-value = <8>;
-	qcom,hstx-trim-value = <QUSB2_V2_HSTX_TRIM_21_6_MA>;
-	qcom,preemphasis-level = <QUSB2_V2_PREEMPHASIS_5_PERCENT>;
 	qcom,preemphasis-width = <QUSB2_V2_PREEMPHASIS_WIDTH_HALF_BIT>;
+	qcom,preemphasis-level = <QUSB2_V2_PREEMPHASIS_5_PERCENT>;
+	qcom,hstx-trim-value = <QUSB2_V2_HSTX_TRIM_21_6_MA>;
+	qcom,imp-res-offset-value = <8>;
+
+	status = "okay";
 };
 
 &usb_1_qmpphy {
-	status = "okay";
-
-	vdda-phy-supply = <&vreg_l26a_1p2>;
 	vdda-pll-supply = <&vreg_l1a_0p875>;
+	vdda-phy-supply = <&vreg_l26a_1p2>;
+	status = "okay";
 };
+
+// &usb_1 {
+// 	status = "okay";
+// 	/* We'll use this as USB 2.0 only */
+// 	qcom,select-utmi-as-pipe-clk;
+// };
+// 
+// &usb_1_dwc3 {
+// 	dr_mode = "host";
+// 
+// 	/* fastest mode for USB 2 */
+// 	maximum-speed = "high-speed";
+// 
+// 	/* Remove USB3 phy */
+// 	phys = <&usb_1_hsphy>;
+// 	phy-names = "usb2-phy";
+// };
+// 
+// &usb_1_hsphy {
+// 	status = "okay";
+// 
+// 	vdd-supply = <&vreg_l1a_0p875>;
+// 	vdda-pll-supply = <&vreg_l12a_1p8>;
+// 	vdda-phy-dpdm-supply = <&vreg_l24a_3p075>;
+// 
+// 	qcom,imp-res-offset-value = <8>;
+// 	qcom,hstx-trim-value = <QUSB2_V2_HSTX_TRIM_21_6_MA>;
+// 	qcom,preemphasis-level = <QUSB2_V2_PREEMPHASIS_5_PERCENT>;
+// 	qcom,preemphasis-width = <QUSB2_V2_PREEMPHASIS_WIDTH_HALF_BIT>;
+// };
+// 
+// &usb_1_qmpphy {
+// 	status = "okay";
+// 
+// 	vdda-phy-supply = <&vreg_l26a_1p2>;
+// 	vdda-pll-supply = <&vreg_l1a_0p875>;
+// };
 
 
 &ufs_mem_hc {
