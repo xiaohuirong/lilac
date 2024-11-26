@@ -388,6 +388,17 @@
 			   <GCC_LPASS_SWAY_CLK>;
 };
 
+&i2c3 {
+	status = "okay";
+	#dma-cells = <3>;
+	clock-frequency = <400000>;
+	dmas = <&gpi_dma0 0 3 QCOM_GPI_I2C>,
+	<&gpi_dma0 1 3 QCOM_GPI_I2C>;
+	dma-names = "tx", "rx";
+	
+	/* NFC nq-nci @ 0x28 */
+};
+
 /* Audio Codec tas2559/2557 */
 &i2c5 {
 	#dma-cells = <3>;
@@ -396,6 +407,18 @@
 	dmas = <&gpi_dma0 0 5 QCOM_GPI_I2C>,
 	       <&gpi_dma0 1 5 QCOM_GPI_I2C>;
 	dma-names = "tx", "rx";
+};
+
+&i2c10 {
+	status = "okay";
+	#dma-cells = <3>;
+	clock-frequency = <400000>;
+	dmas = <&gpi_dma1 0 2 QCOM_GPI_I2C>,
+	<&gpi_dma1 1 2 QCOM_GPI_I2C>;
+	dma-names = "tx", "rx";
+	
+	/* smb1355 charger @ 0x08, 0x0C */
+	/* idtp9220 wireless charger @ 0x61 */
 };
 
 /* touchscreen */
@@ -419,15 +442,20 @@
 	};
 };
 
-&pm8998_pon {
-	resin {
-		compatible = "qcom,pm8941-resin";
-		interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
-		debounce = <15625>;
-		bias-pull-up;
-		linux,code = <KEY_VOLUMEDOWN>;
-	};
+&pm8998_resin {
+	linux,code = <KEY_VOLUMEDOWN>;
+	status = "okay";
 };
+
+// &pm8998_pon {
+// 	resin {
+// 		compatible = "qcom,pm8941-resin";
+// 		interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
+// 		debounce = <15625>;
+// 		bias-pull-up;
+// 		linux,code = <KEY_VOLUMEDOWN>;
+// 	};
+// };
 
 &qupv3_id_0 {
 	status = "okay";

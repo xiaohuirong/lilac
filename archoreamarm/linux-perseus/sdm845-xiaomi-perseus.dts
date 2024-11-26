@@ -101,6 +101,7 @@
 	firmware-name = "qcom/sdm845/xiaomi/cdsp.mbn";
 };
 
+// hardware encoder/decoder
 &venus {
 	status = "okay";
 	firmware-name = "qcom/sdm845/xiaomi/venus.mbn";
