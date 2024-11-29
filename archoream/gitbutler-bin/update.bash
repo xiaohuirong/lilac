@@ -9,6 +9,7 @@ VER=$(echo $URL | grep -oE '[0-9]+.[0-9]+.[0-9]+-' | sed 's/-//g')
 echo $VER
 echo $BUILD
 
+sed -i "s/pkgrel=.*/pkgrel=1/" PKGBUILD
 sed -i "s/pkgver=.*/pkgver=$VER/" PKGBUILD
 sed -i "s/_pkgvernum=.*/_pkgvernum=$BUILD/" PKGBUILD
 updpkgsums
