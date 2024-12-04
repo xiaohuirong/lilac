@@ -2,7 +2,7 @@
 
 _pkgname=yuvviewer
 pkgname="${_pkgname}-git"
-pkgver=0.5.8.r22.g9641e0c
+pkgver=0.5.8.r27.g0d847c5
 pkgrel=1
 pkgdesc="A small tool for developers to view and preview various original image formats."
 arch=("x86_64")
