@@ -3,7 +3,7 @@
 pkgname=libwireplumber-4.0-compat
 _pkgname=wireplumber
 pkgver=0.4.17
-pkgrel=1
+pkgrel=2
 pkgdesc="Compatibility version 4.x of libwireplumber"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
