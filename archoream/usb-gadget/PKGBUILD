@@ -2,7 +2,7 @@
 
 pkgname=usb-gadget
 pkgver=0.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="usb-gadget config"
 url="https://blog.hoream.top/2024/11/11/Linux/rpi_usb_gadget"
 license=("MIT")

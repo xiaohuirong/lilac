@@ -1,5 +1,6 @@
 post_install() {
-    echo "remember to change mac address for host and gedget in /etc/usb-gadgets/net-ecm"
+    echo -e "\033[34mremember to change mac address for host and gedget in /etc/usb-gadgets/net-ecm\033[0m"
+    echo -e "\033[34mif you want to use serial to login, please enable getty@ttyGS0.service\033[0m"
 }
 
 post_upgrade() {
