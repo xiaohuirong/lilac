@@ -1,0 +1,13 @@
+[Unit]
+Description=USB gadget initialization for %i
+After=network-online.target
+Wants=network-online.target
+After=systemd-modules-load.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/usb-gadget.sh %i
+
+[Install]
+WantedBy=sysinit.target

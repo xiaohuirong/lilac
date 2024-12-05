@@ -1,0 +1,8 @@
+post_install() {
+    echo "remember to change mac address for host and gedget in /etc/usb-gadgets/net-ecm"
+}
+
+post_upgrade() {
+    post_install
+}
+

@@ -1,0 +1,25 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=usb-gadget
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="usb-gadget config"
+url="https://blog.hoream.top/2024/11/11/Linux/rpi_usb_gadget"
+license=("MIT")
+arch=("any")
+depends=()
+makedepends=()
+source=('net-ecm'
+        'usb-gadget.sh'
+        'usb-gadget@.service')
+sha256sums=("SKIP"
+            "SKIP"
+            "SKIP")
+install=usb-gadget.install
+backup=('etc/usb-gadgets/net-ecm')
+
+package() {
+    install -Dm755 "${srcdir}/usb-gadget.sh" "${pkgdir}/usr/bin/usb-gadget.sh"
+    install -Dm644 "${srcdir}/net-ecm" "${pkgdir}/etc/usb-gadgets/net-ecm"
+    install -Dm644 "${srcdir}/usb-gadget@.service" "${pkgdir}/usr/lib/systemd/system/usb-gadget@.service"
+}
