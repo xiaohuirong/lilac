@@ -6,4 +6,6 @@ build_prefix: extra-x86_64
 post_build: git_pkgbuild_commmit
 
 update_on:
+  - source: github
+    github: jjsullivan5196/wvkbd
   - source: manual
