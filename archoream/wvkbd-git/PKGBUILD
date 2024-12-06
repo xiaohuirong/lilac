@@ -1,0 +1,31 @@
+# Maintainer: Aren <rn+aur@peacevolution.org>
+
+_pkgname=wvkbd
+pkgname="${_pkgname}-git"
+pkgver=r227.ca53099
+pkgrel=1
+pkgdesc='On-screen keyboard for wlroots'
+url='https://git.sr.ht/~proycon/wvkbd'
+arch=('x86_64' 'i686' 'armv7h' 'aarch64')
+conflicts=('wvkbd')
+license=('GPL3')
+depends=('wayland' 'pango' 'cairo')
+makedepends=('fontconfig' 'libxkbcommon' 'git' 'scdoc')
+source=("${_pkgname}::git+${url}")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd ${_pkgname}
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+build() {
+  make -C "${_pkgname}"
+}
+
+package() {
+  make -C "${_pkgname}" PREFIX=/usr DESTDIR="$pkgdir" install
+}
