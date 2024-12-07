@@ -3,7 +3,7 @@ maintainers:
     email: hoream@qq.com
 
 build_prefix: extra-x86_64
-post_build: git_pkgbuild_commmit
+post_build: git_pkgbuild_commit
 
 update_on:
   - source: github
