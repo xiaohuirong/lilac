@@ -2,8 +2,8 @@
 # Maintainer: Kusoneko <kusoneko at kusoneko dot moe>
 
 pkgname=szyszka-git
-pkgver=3.0.0.r2.gfb6938c
-pkgrel=3
+pkgver=3.0.0.r4.g02e2626
+pkgrel=1
 pkgdesc="A simple but powerful batch file rename program"
 arch=('x86_64')
 url="https://github.com/qarmin/szyszka"
