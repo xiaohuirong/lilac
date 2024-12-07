@@ -1,6 +1,6 @@
 # Maintainer: coldBug <coldBug at e.mail dot de>
 pkgname=texstudio-git
-pkgver=4.8.5rc1.r1.g7b5279eb0
+pkgver=4.8.5rc1.r3.g5617dedd7
 pkgrel=1
 pkgdesc="Integrated writing environment for creating LaTeX documents"
 arch=('x86_64')
