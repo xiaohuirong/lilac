@@ -1,8 +1,8 @@
 # Maintainer: Ruturajn <nanotiruturaj@gmail.com>
 pkgname=sunity-cursors-git
 _pkgname=Sunity-cursors
-pkgver=2.0.r3.g0f4e801
-pkgrel=4
+pkgver=2.0.r4.g919a16a
+pkgrel=1
 pkgdesc="Cursor theme using a custom color palette and based on Breeze and Radioactive cursors themes."
 arch=('any')
 url="https://github.com/alvatip/${_pkgname}"
