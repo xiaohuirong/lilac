@@ -7,7 +7,7 @@ _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for msm8916(uz801)"
 pkgver=6.12.1
-pkgrel=1
+pkgrel=4
 arch=('any')
 url="https://github.com/msm8916-mainline/linux"
 license=('GPL2')
@@ -65,6 +65,7 @@ _package() {
 
   echo "Installing boot image and dtbs..."
   make ARCH=arm64 INSTALL_PATH="${pkgdir}/boot/" install
+  cp arch/arm64/boot/Image.gz "${pkgdir}/boot/"
   make ARCH=arm64 INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
 
   echo "Installing modules..."
