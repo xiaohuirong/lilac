@@ -1,5 +1,5 @@
 post_install() {
-    echo -e "\033[34m Remember to run generate_bootimg.sh to generate boot.img.\033[0m"
+    echo -e "\033[34m Remember to run\033[0m \033[32msudo generate_bootimg.sh\033[0m \033[34mto generate boot.img.\033[0m"
 }
 
 post_upgrade() {

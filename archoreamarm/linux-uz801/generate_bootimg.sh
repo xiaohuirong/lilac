@@ -11,7 +11,7 @@ mkbootimg \
     --pagesize 2048 \
     --second_offset 0x00f00000 \
     --ramdisk /boot/initramfs-linux-uz801.img \
-    --cmdline "earlycon root=PARTUUID=a7ab80e8-e9d1-e8cd-f157-93f69b1d141e console=ttyMSM0,115200 no_framebuffer=true rw" \
+    --cmdline "earlycon root=PARTUUID=a7ab80e8-e9d1-e8cd-f157-93f69b1d141e console=ttyMSM0,115200 rw zswap.enabled=0" \
     --kernel /boot/zImage.gz \
     -o /boot/boot.img
 
