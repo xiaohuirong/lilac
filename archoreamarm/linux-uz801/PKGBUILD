@@ -16,8 +16,10 @@ options=('!strip')
 source=("${_srcname}::git+${url}#branch=msm8916/6.12.1"
         'linux.preset'
         "config"
-        "generate_bootimg.sh")
+        "generate_bootimg.sh"
+        "over_frequence.patch")
 md5sums=('SKIP'
+         'SKIP'
          'SKIP'
          'SKIP'
          'SKIP')
@@ -30,6 +32,7 @@ prepare() {
   echo "${pkgbase#linux}" > localversion.20-pkgname
 
   echo "Setting patching..."
+  patch -Np1 -i ${srcdir}/over_frequence.patch -d ${srcdir}/${_srcname}
 
   echo "Setting config..."
   # first time
