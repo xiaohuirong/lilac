@@ -1,0 +1,88 @@
+diff --git a/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts b/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts
+index a98efcfe7..dc9cc0215 100644
+--- a/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts
++++ b/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts
+@@ -4,6 +4,18 @@
+ 
+ #include "msm8916-ufi.dtsi"
+ 
++/delete-node/ &mba_mem;
++/delete-node/ &gps_mem;
++/delete-node/ &mpss_mem;
++/delete-node/ &memshare_gps;
++/delete-node/ &memshare;
++/delete-node/ &memshare_mba;
++/delete-node/ &memshare_mpss;
++
++/delete-node/ &reserved;
++/delete-node/ &venus_mem;
++/delete-node/ &venus;
++
+ / {
+ 	model = "uz801 v3.0 4G Modem Stick";
+ 	compatible = "yiming,uz801-v3", "qcom,msm8916";
+diff --git a/arch/arm64/boot/dts/qcom/msm8916.dtsi b/arch/arm64/boot/dts/qcom/msm8916.dtsi
+index cb85f77cd..320ccdd0c 100644
+--- a/arch/arm64/boot/dts/qcom/msm8916.dtsi
++++ b/arch/arm64/boot/dts/qcom/msm8916.dtsi
+@@ -57,7 +57,7 @@ tz@86500000 {
+ 			no-map;
+ 		};
+ 
+-		reserved@86680000 {
++		reserved: reserved@86680000 {
+ 			reg = <0x0 0x86680000 0x0 0x80000>;
+ 			no-map;
+ 		};
+@@ -258,6 +258,23 @@ opp-800000000 {
+ 		opp-998400000 {
+ 			opp-hz = /bits/ 64 <998400000>;
+ 		};
++
++		// over clock-frequency
++		opp-1363200000 {
++		    opp-hz = /bits/ 64 <1363200000>;
++		};
++		opp-1401600000 {
++		    opp-hz = /bits/ 64 <1401600000>;
++		};
++		opp-1621600000 {
++		    opp-hz = /bits/ 64 <1621600000>;
++		};
++		opp-1841600000 {
++		    opp-hz = /bits/ 64 <1841600000>;
++		};
++		opp-1951600000 {
++		    opp-hz = /bits/ 64 <1951600000>;
++		};
+ 	};
+ 
+ 	firmware {
+@@ -1981,11 +1998,11 @@ mpss: remoteproc@4080000 {
+ 
+ 			status = "disabled";
+ 
+-			mba {
++			memshare_mba: mba {
+ 				memory-region = <&mba_mem>;
+ 			};
+ 
+-			mpss {
++			memshare_mpss: mpss {
+ 				memory-region = <&mpss_mem>;
+ 			};
+ 
+diff --git a/drivers/clk/qcom/a53-pll.c b/drivers/clk/qcom/a53-pll.c
+index f43d455ab..9a3ccc58b 100644
+--- a/drivers/clk/qcom/a53-pll.c
++++ b/drivers/clk/qcom/a53-pll.c
+@@ -25,6 +25,9 @@ static const struct pll_freq_tbl a53pll_freq[] = {
+ 	{ 1248000000, 65, 0x0, 0x1, 0 },
+ 	{ 1363200000, 71, 0x0, 0x1, 0 },
+ 	{ 1401600000, 73, 0x0, 0x1, 0 },
++	{ 1621600000, 84, 0x0, 0x1, 0 },
++	{ 1841600000, 96, 0x0, 0x1, 0 },
++	{ 1951600000, 103, 0x0, 0x1, 0 },
+ 	{ }
+ };
+ 
