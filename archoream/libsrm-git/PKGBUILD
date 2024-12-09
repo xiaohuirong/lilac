@@ -2,7 +2,7 @@
 
 _pkgname=libsrm
 pkgname="$_pkgname-git"
-pkgver=0.10.0.1.r0.g1978c20
+pkgver=0.11.0.1.r0.g38c1f54
 pkgrel=1
 pkgdesc="A C library that simplifies the development of Linux DRM/KMS applications."
 arch=('x86_64')
