@@ -12,5 +12,5 @@ options=('!strip')
 
 package() {
     install -d "${pkgdir}"/usr/lib/firmware
-    cp -r "${srcdir}/firmware/"* "${pkgdir}/usr/lib/firmware/"
+    cp -r "${srcdir}/firmware-uz801/"* "${pkgdir}/usr/lib/firmware/"
 }
