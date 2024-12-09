@@ -47,17 +47,6 @@ if [ "${config1}" = "ECM" ] ; then
     echo "${host_mac}" > ${gadget}/functions/ecm.usb0/host_addr
 
     ln -s ${gadget}/functions/ecm.usb0 ${gadget}/configs/c.1/
-    
-    # for serial
-    mkdir -p ${gadget}/functions/acm.usb0
-    ln -s ${gadget}/functions/acm.usb0 ${gadget}/configs/c.1/
-
-    # # for storage
-    # mkdir -p ${gadget}/functions/mass_storage.usb0
-    # echo 0 > ${gadget}/functions/mass_storage.usb0/lun.0/cdrom
-    # echo 0 > ${gadget}/functions/mass_storage.usb0/lun.0/ro
-    # echo /dev/sda > ${gadget}/functions/mass_storage.usb0/lun.0/file
-    # ln -s ${gadget}/functions/mass_storage.usb0 ${gadget}/configs/c.1/
 fi
  
 if [ "${config1}" = "RNDIS" ] ; then
@@ -75,6 +64,17 @@ if [ "${config1}" = "RNDIS" ] ; then
     ln -s ${gadget}/configs/c.1 ${gadget}/os_desc
     ln -s ${gadget}/functions/rndis.usb0 ${gadget}/configs/c.1
 fi
+
+# for serial
+mkdir -p ${gadget}/functions/acm.usb0
+ln -s ${gadget}/functions/acm.usb0 ${gadget}/configs/c.1/
+
+# # for storage
+# mkdir -p ${gadget}/functions/mass_storage.usb0
+# echo 0 > ${gadget}/functions/mass_storage.usb0/lun.0/cdrom
+# echo 0 > ${gadget}/functions/mass_storage.usb0/lun.0/ro
+# echo /dev/sda > ${gadget}/functions/mass_storage.usb0/lun.0/file
+# ln -s ${gadget}/functions/mass_storage.usb0 ${gadget}/configs/c.1/
 
 ls /sys/class/udc > ${gadget}/UDC
 
