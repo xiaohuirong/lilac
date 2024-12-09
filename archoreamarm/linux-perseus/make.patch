@@ -7,6 +7,19 @@ index c482e94564e6..108cd78a2f22 100644
  dtb-$(CONFIG_ARCH_QCOM)	+= x1e80100-lenovo-yoga-slim7x.dtb
  dtb-$(CONFIG_ARCH_QCOM)	+= x1e80100-qcp.dtb
 +dtb-$(CONFIG_ARCH_QCOM)        += sdm845-xiaomi-perseus.dtb
+diff --git a/arch/arm64/boot/dts/qcom/pm8998.dtsi b/arch/arm64/boot/dts/qcom/pm8998.dtsi
+index 3ecb330590e5..eaa880e41ed9 100644
+--- a/arch/arm64/boot/dts/qcom/pm8998.dtsi
++++ b/arch/arm64/boot/dts/qcom/pm8998.dtsi
+@@ -49,7 +49,7 @@ pm8998_pwrkey: pwrkey {
+ 				interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
+ 				debounce = <15625>;
+ 				bias-pull-up;
+-				linux,code = <KEY_POWER>;
++				linux,code = <KEY_ENTER>;
+ 			};
+ 
+ 			pm8998_resin: resin {
 diff --git a/drivers/input/touchscreen/stm/fts.c b/drivers/input/touchscreen/stm/fts.c
 index ed33835e84e1..2e3f3f96cfc2 100644
 --- a/drivers/input/touchscreen/stm/fts.c
