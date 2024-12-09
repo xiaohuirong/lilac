@@ -6,8 +6,8 @@ pkgbase=linux-uz801
 _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for msm8916(uz801)"
-pkgver=6.12.1
-pkgrel=8
+pkgver=6.12.1.r0.g1728ab7f6
+pkgrel=1
 arch=('any')
 url="https://github.com/msm8916-mainline/linux"
 license=('GPL2')
@@ -23,6 +23,10 @@ md5sums=('SKIP'
          'SKIP'
          'SKIP'
          'SKIP')
+pkgver() {
+    cd "${srcdir}/${_srcname}"
+    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//' | sed 's/\.msm8916//'
+}
 
 prepare() {
   cd $_srcname
