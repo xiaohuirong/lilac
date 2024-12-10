@@ -1,0 +1,16 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+pre_build: aur_pre_build
+post_build: aur_post_build
+
+update_on:
+  - source: aur
+    aur: wemeet-wayland-screenshare-git
+  - source: github
+    github: xuwd1/wemeet-wayland-screenshare
+
+repo_depends:
+  - wemeet-bin
