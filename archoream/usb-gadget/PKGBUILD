@@ -2,18 +2,21 @@
 
 pkgname=usb-gadget
 pkgver=0.0.1
-pkgrel=6
+pkgrel=8
 pkgdesc="usb-gadget config"
 url="https://blog.hoream.top/2024/11/11/Linux/rpi_usb_gadget"
 license=("MIT")
 arch=("any")
 depends=()
 makedepends=()
+optdepends=("adbd-linux: for adb gadget support")
 source=('net-ecm'
         'net-rndis'
         'usb-gadget.sh'
+        'usb-gadget-clean.sh'
         'usb-gadget@.service')
 sha256sums=("SKIP"
+            "SKIP"
             "SKIP"
             "SKIP"
             "SKIP")
@@ -22,6 +25,7 @@ backup=('etc/usb-gadgets/net-ecm' 'etc/usb-gadgets/net-rndis')
 
 package() {
     install -Dm755 "${srcdir}/usb-gadget.sh" "${pkgdir}/usr/bin/usb-gadget.sh"
+    install -Dm755 "${srcdir}/usb-gadget-clean.sh" "${pkgdir}/usr/bin/usb-gadget-clean.sh"
     install -Dm644 "${srcdir}/net-ecm" "${pkgdir}/etc/usb-gadgets/net-ecm"
     install -Dm644 "${srcdir}/net-rndis" "${pkgdir}/etc/usb-gadgets/net-rndis"
     install -Dm644 "${srcdir}/usb-gadget@.service" "${pkgdir}/usr/lib/systemd/system/usb-gadget@.service"

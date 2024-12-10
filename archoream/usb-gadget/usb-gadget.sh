@@ -20,17 +20,17 @@ echo "${product_id}" > ${gadget}/idProduct
 echo "${bcd_device}" > ${gadget}/bcdDevice
 echo "${usb_version}" > ${gadget}/bcdUSB
  
-if [ ! -z "${device_class}" ] ; then
-    echo "${device_class}" > ${gadget}/bDeviceClass
-    echo "${device_subclass}" > ${gadget}/bDeviceSubClass
-    echo "${device_protocol}" > ${gadget}/bDeviceProtocol
-fi
+# add this will make adb gadget not work
+# if [ ! -z "${device_class}" ] ; then
+#     echo "${device_class}" > ${gadget}/bDeviceClass
+#     echo "${device_subclass}" > ${gadget}/bDeviceSubClass
+#     echo "${device_protocol}" > ${gadget}/bDeviceProtocol
+# fi
  
 mkdir -p ${gadget}/strings/0x409
 echo "${manufacturer}" > ${gadget}/strings/0x409/manufacturer
 echo "${product}" > ${gadget}/strings/0x409/product
 echo "${serial}" > ${gadget}/strings/0x409/serialnumber
- 
  
 mkdir ${gadget}/configs/c.1
 echo "${power}" > ${gadget}/configs/c.1/MaxPower
@@ -69,6 +69,15 @@ fi
 mkdir -p ${gadget}/functions/acm.usb0
 ln -s ${gadget}/functions/acm.usb0 ${gadget}/configs/c.1/
 
+# for adb
+if [[ -e "/usr/bin/adbd" ]]; then
+    mkdir -p ${gadget}/functions/ffs.adb
+    ln -s ${gadget}/functions/ffs.adb ${gadget}/configs/c.1/
+    mkdir -p /dev/usb-ffs/adb
+    mount -o uid=1000,gid=1000 -t functionfs adb /dev/usb-ffs/adb
+    /usr/bin/adbd &
+fi
+
 # # for storage
 # mkdir -p ${gadget}/functions/mass_storage.usb0
 # echo 0 > ${gadget}/functions/mass_storage.usb0/lun.0/cdrom
@@ -76,7 +85,27 @@ ln -s ${gadget}/functions/acm.usb0 ${gadget}/configs/c.1/
 # echo /dev/sda > ${gadget}/functions/mass_storage.usb0/lun.0/file
 # ln -s ${gadget}/functions/mass_storage.usb0 ${gadget}/configs/c.1/
 
-ls /sys/class/udc > ${gadget}/UDC
+max_retries=5
+retry_count=0
+while [ $retry_count -lt $max_retries ]; do
+    ls /sys/class/udc > ${gadget}/UDC
+    if [ $? -eq 0 ]; then
+        echo "Run successful"
+        break
+    else
+	retry_count=$((retry_count + 1))
+        echo "Sleep 1s"
+        sleep 1
+    fi
+done
+
+if [ $retry_count -ge $max_retries ]; then
+    echo "disable adb"
+    pkill adbd
+    umount /dev/usb-ffs/adb
+    rm ${gadget}/configs/c.1/ffs.adb
+    ls /sys/class/udc > ${gadget}/UDC
+fi
 
 udevadm settle -t 5 || :
 
