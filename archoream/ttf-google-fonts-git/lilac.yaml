@@ -12,3 +12,6 @@ update_on:
   - source: github
     github: google/fonts
     lilac_throttle: 5d
+
+repo_depends: 
+  - ttf-oswald
