@@ -3,7 +3,7 @@
 pkgname=ttf-merriweather
 _commit='06e56b5a24d80a4a1ac94a71a0a05a98b5d02ef5'
 pkgver=2.100
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc='A typeface that is pleasant to read on screens by Sorkin Type Co'
 arch=('any')
