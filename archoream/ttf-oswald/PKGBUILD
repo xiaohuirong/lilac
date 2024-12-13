@@ -3,7 +3,7 @@
 pkgname=ttf-oswald
 _commit='dbb34644e36024fef3def6d268d30ead8f0ce113'
 pkgver=4.101
-pkgrel=3
+pkgrel=4
 pkgdesc='Sans-serif typeface from Google by Vernon Adams'
 arch=('any')
 url='https://fonts.google.com/specimen/Oswald'
