@@ -16,3 +16,4 @@ update_on:
 repo_depends: 
   - ttf-oswald
   - ttf-quintessential
+  - ttf-signika
