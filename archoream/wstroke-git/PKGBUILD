@@ -1,7 +1,7 @@
 # Maintainer: steve finkel <mrsteve0924 at verizon dot net>
 
 pkgname=wstroke-git
-pkgver=20241021.0f4dfce
+pkgver=20241126.31e1c41
 pkgrel=1
 pkgdesc="a mouse gesture plug-in for wayfire. port of easystroke"
 arch=('x86_64')
