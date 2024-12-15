@@ -22,6 +22,7 @@ depends=(
     gcc-libs
     glibc
     libdbusmenu-glib
+    libdbusmenu-gtk3
 )
 replaces=()
 source=("$_pkgbase::git+${url}"
