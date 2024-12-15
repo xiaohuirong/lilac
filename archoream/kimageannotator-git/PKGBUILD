@@ -1,6 +1,6 @@
 pkgname=kimageannotator-git
-pkgver=r1179.01d5d69
-pkgrel=2
+pkgver=r1182.8156d27
+pkgrel=1
 pkgdesc='Tool for annotating images'
 arch=('i686' 'x86_64')
 url='https://github.com/DamirPorobic/kimageannotator'
