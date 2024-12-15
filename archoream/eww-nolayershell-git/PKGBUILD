@@ -10,7 +10,6 @@ url="https://github.com/elkowar/eww"
 license=("MIT")
 makedepends=("cargo-nightly" "rust-nightly" "git")
 depends=(
-    gtk-layer-shell
     libgobject-2.0.so
     libgtk-3.so=0-64
     libgdk-3.so=0-64
@@ -21,6 +20,7 @@ depends=(
     libglib-2.0.so=0-64
     gcc-libs
     glibc
+    libdbusmenu-glib
 )
 replaces=()
 source=("$_pkgbase::git+${url}"
