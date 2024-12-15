@@ -1,8 +1,8 @@
 # Maintainer: Michael Armbruster <michael at armbrust dot me>
 
 pkgname=nsz-git
-pkgrel=2
-pkgver=4.6.1.r9.g921590a
+pkgrel=1
+pkgver=4.6.1.r17.ge7f58c0
 pkgdesc='Switch Homebrew compatible NSP/XCI compressor/decompressor'
 conflicts=("${pkgname%-*}")
 provides=("${pkgname%-*}=$pkgver")
