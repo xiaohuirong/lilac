@@ -3,7 +3,7 @@
 _pkgbase=eww
 pkgname=eww-nolayershell-git
 pkgver=0.6.0.r64.ga8dd2f2
-pkgrel=1
+pkgrel=2
 arch=("x86_64" "aarch64") 
 pkgdesc="ElKowars wacky widgets(For wayland only) without layer shell support"
 url="https://github.com/elkowar/eww"
