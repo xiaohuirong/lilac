@@ -2,7 +2,7 @@
 _pkgname="bili-live"
 pkgname="${_pkgname}-git"
 pkgver=v0.1.1.r0.g4f1d3df
-pkgrel=2
+pkgrel=3
 pkgdesc="A command line tool for starting and stopping live streams on bilibili.com, capable of providing the RTMP address and stream key for streaming software such as OBS."
 url="https://github.com/HellOwhatAs/bili-live"
 license=("custom")
