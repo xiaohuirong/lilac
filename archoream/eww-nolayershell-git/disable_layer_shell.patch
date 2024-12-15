@@ -1,0 +1,163 @@
+diff --git a/crates/eww/src/display_backend.rs b/crates/eww/src/display_backend.rs
+index fe80dcb..9880e2d 100644
+--- a/crates/eww/src/display_backend.rs
++++ b/crates/eww/src/display_backend.rs
+@@ -32,7 +32,7 @@ mod platform_wayland {
+     use gtk::gdk;
+     use gtk::prelude::*;
+     use gtk_layer_shell::LayerShell;
+-    use yuck::config::{window_definition::WindowStacking, window_geometry::AnchorAlignment};
++    // use yuck::config::{window_definition::WindowStacking, window_geometry::AnchorAlignment};
+ 
+     use super::DisplayBackend;
+ 
+@@ -42,10 +42,10 @@ mod platform_wayland {
+         const IS_X11: bool = false;
+         const IS_WAYLAND: bool = true;
+ 
+-        fn initialize_window(window_init: &WindowInitiator, monitor: gdk::Rectangle, x: i32, y: i32) -> Option<Window> {
++        fn initialize_window(window_init: &WindowInitiator, _monitor: gdk::Rectangle, x: i32, y: i32) -> Option<Window> {
+             let window = Window::new(gtk::WindowType::Toplevel, x, y);
+             // Initialising a layer shell surface
+-            window.init_layer_shell();
++            // window.init_layer_shell();
+             // Sets the monitor where the surface is shown
+             if let Some(ident) = window_init.monitor.clone() {
+                 let display = gdk::Display::default().expect("could not get default display");
+@@ -58,12 +58,12 @@ mod platform_wayland {
+             window.set_resizable(window_init.resizable);
+ 
+             // Sets the layer where the layer shell surface will spawn
+-            match window_init.stacking {
+-                WindowStacking::Foreground => window.set_layer(gtk_layer_shell::Layer::Top),
+-                WindowStacking::Background => window.set_layer(gtk_layer_shell::Layer::Background),
+-                WindowStacking::Bottom => window.set_layer(gtk_layer_shell::Layer::Bottom),
+-                WindowStacking::Overlay => window.set_layer(gtk_layer_shell::Layer::Overlay),
+-            }
++            // match window_init.stacking {
++            //     WindowStacking::Foreground => window.set_layer(gtk_layer_shell::Layer::Top),
++            //     WindowStacking::Background => window.set_layer(gtk_layer_shell::Layer::Background),
++            //     WindowStacking::Bottom => window.set_layer(gtk_layer_shell::Layer::Bottom),
++            //     WindowStacking::Overlay => window.set_layer(gtk_layer_shell::Layer::Overlay),
++            // }
+ 
+             if let Some(namespace) = &window_init.backend_options.wayland.namespace {
+                 window.set_namespace(namespace);
+@@ -72,46 +72,46 @@ mod platform_wayland {
+             // Sets the keyboard interactivity
+             window.set_keyboard_interactivity(window_init.backend_options.wayland.focusable);
+ 
+-            if let Some(geometry) = window_init.geometry {
+-                // Positioning surface
+-                let mut top = false;
+-                let mut left = false;
+-                let mut right = false;
+-                let mut bottom = false;
+-
+-                match geometry.anchor_point.x {
+-                    AnchorAlignment::START => left = true,
+-                    AnchorAlignment::CENTER => {}
+-                    AnchorAlignment::END => right = true,
+-                }
+-                match geometry.anchor_point.y {
+-                    AnchorAlignment::START => top = true,
+-                    AnchorAlignment::CENTER => {}
+-                    AnchorAlignment::END => bottom = true,
+-                }
+-
+-                window.set_anchor(gtk_layer_shell::Edge::Left, left);
+-                window.set_anchor(gtk_layer_shell::Edge::Right, right);
+-                window.set_anchor(gtk_layer_shell::Edge::Top, top);
+-                window.set_anchor(gtk_layer_shell::Edge::Bottom, bottom);
+-
+-                let xoffset = geometry.offset.x.pixels_relative_to(monitor.width());
+-                let yoffset = geometry.offset.y.pixels_relative_to(monitor.height());
+-
+-                if left {
+-                    window.set_layer_shell_margin(gtk_layer_shell::Edge::Left, xoffset);
+-                } else {
+-                    window.set_layer_shell_margin(gtk_layer_shell::Edge::Right, xoffset);
+-                }
+-                if bottom {
+-                    window.set_layer_shell_margin(gtk_layer_shell::Edge::Bottom, yoffset);
+-                } else {
+-                    window.set_layer_shell_margin(gtk_layer_shell::Edge::Top, yoffset);
+-                }
+-            }
+-            if window_init.backend_options.wayland.exclusive {
+-                window.auto_exclusive_zone_enable();
+-            }
++            // if let Some(geometry) = window_init.geometry {
++            //     // Positioning surface
++            //     let mut top = false;
++            //     let mut left = false;
++            //     let mut right = false;
++            //     let mut bottom = false;
++
++            //     match geometry.anchor_point.x {
++            //         AnchorAlignment::START => left = true,
++            //         AnchorAlignment::CENTER => {}
++            //         AnchorAlignment::END => right = true,
++            //     }
++            //     match geometry.anchor_point.y {
++            //         AnchorAlignment::START => top = true,
++            //         AnchorAlignment::CENTER => {}
++            //         AnchorAlignment::END => bottom = true,
++            //     }
++
++            //     window.set_anchor(gtk_layer_shell::Edge::Left, left);
++            //     window.set_anchor(gtk_layer_shell::Edge::Right, right);
++            //     window.set_anchor(gtk_layer_shell::Edge::Top, top);
++            //     window.set_anchor(gtk_layer_shell::Edge::Bottom, bottom);
++
++            //     let xoffset = geometry.offset.x.pixels_relative_to(monitor.width());
++            //     let yoffset = geometry.offset.y.pixels_relative_to(monitor.height());
++
++            //     if left {
++            //         window.set_layer_shell_margin(gtk_layer_shell::Edge::Left, xoffset);
++            //     } else {
++            //         window.set_layer_shell_margin(gtk_layer_shell::Edge::Right, xoffset);
++            //     }
++            //     if bottom {
++            //         window.set_layer_shell_margin(gtk_layer_shell::Edge::Bottom, yoffset);
++            //     } else {
++            //         window.set_layer_shell_margin(gtk_layer_shell::Edge::Top, yoffset);
++            //     }
++            // }
++            // if window_init.backend_options.wayland.exclusive {
++            //     window.auto_exclusive_zone_enable();
++            // }
+             Some(window)
+         }
+     }
+diff --git a/crates/eww/src/window_initiator.rs b/crates/eww/src/window_initiator.rs
+index f2dc559..455644c 100644
+--- a/crates/eww/src/window_initiator.rs
++++ b/crates/eww/src/window_initiator.rs
+@@ -5,7 +5,7 @@ use std::collections::HashMap;
+ use yuck::config::{
+     backend_window_options::BackendWindowOptions,
+     monitor::MonitorIdentifier,
+-    window_definition::{WindowDefinition, WindowStacking},
++    window_definition::WindowDefinition,
+     window_geometry::WindowGeometry,
+ };
+ 
+@@ -21,7 +21,7 @@ pub struct WindowInitiator {
+     pub monitor: Option<MonitorIdentifier>,
+     pub name: String,
+     pub resizable: bool,
+-    pub stacking: WindowStacking,
++    // pub stacking: WindowStacking,
+ }
+ 
+ impl WindowInitiator {
+@@ -39,7 +39,7 @@ impl WindowInitiator {
+             monitor,
+             name: window_def.name.clone(),
+             resizable: window_def.eval_resizable(&vars)?,
+-            stacking: window_def.eval_stacking(&vars)?,
++            // stacking: window_def.eval_stacking(&vars)?,
+             local_variables: vars,
+         })
+     }

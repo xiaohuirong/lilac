@@ -1,0 +1,11 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: archlinuxcn-x86_64
+post_build: git_pkgbuild_commit
+
+update_on:
+  - source: github
+    github: elkowar/eww
+  - source: manual

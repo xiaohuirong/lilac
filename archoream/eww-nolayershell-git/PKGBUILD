@@ -1,0 +1,47 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+_pkgbase=eww
+pkgname=eww-nolayershell-git
+pkgver=0.6.0.r64.ga8dd2f2
+pkgrel=1
+arch=("x86_64" "aarch64") 
+pkgdesc="ElKowars wacky widgets(For wayland only) without layer shell support"
+url="https://github.com/elkowar/eww"
+license=("MIT")
+makedepends=("cargo-nightly" "rust-nightly" "git")
+depends=(
+    libgobject-2.0.so
+    libgtk-3.so=0-64
+    libgdk-3.so=0-64
+    libpango-1.0.so=0-64
+    cairo
+    libgdk_pixbuf-2.0.so=0-64
+    libgio-2.0.so=0-64
+    libglib-2.0.so=0-64
+    gcc-libs
+    glibc
+)
+replaces=()
+source=("$_pkgbase::git+${url}"
+        "disable_layer_shell.patch")
+sha256sums=('SKIP'
+            'SKIP')
+conflicts=("eww-x11" "eww" "eww-wayland" "eww-x11-git" "eww-wayland-git")
+provides=("eww-wayland")
+
+pkgver() {
+  cd "$_pkgbase"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//'
+}
+
+prepare() {
+  patch -Np1 -i ${srcdir}/disable_layer_shell.patch -d ${srcdir}/${_pkgbase}
+}
+
+package() {
+  cd $_pkgbase
+  export CARGO_TARGET_DIR=target
+  cargo build --release --no-default-features --features=wayland
+  install -Dm755 target/release/$_pkgbase "$pkgdir/usr/bin/$_pkgbase"
+  install -D -m644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
