@@ -16,7 +16,8 @@ echo "Successful generate /boot/zImage.gz"
 #     -o /boot/boot.img
 
 mkbootimg \
-    --kernel zImage \
+    --kernel /boot/zImage.gz \
+    --ramdisk /boot/initramfs-linux-nabu.img \
     --cmdline "pd_ignore_unused clk_ignore_unused console=tty0 root=UUID=4175779f-0a77-4771-b035-308c38cd2356 rw rootwait" \
     --base 0x00000000 \
     --kernel_offset 0x00008000 \
