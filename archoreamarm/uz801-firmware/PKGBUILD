@@ -1,7 +1,7 @@
 # Maintainer: Hoream<hoream@qq.com>
 pkgname=uz801-firmware
 pkgver=1.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Firmware for wifi stick uz801_v2.1 and uz801_v3.0'
 arch=('aarch64')
 url='https://github.com/OpenStick/OpenStick/releases/download/v1/firmware-uz801.zip'
@@ -9,6 +9,8 @@ license=('Custom')
 source=("firmware.tar.gz::${url}")
 sha512sums=('SKIP')
 options=('!strip')
+provides=('linux-firmware')
+conflicts=('linux-firmware')
 
 package() {
     install -d "${pkgdir}"/usr/lib/firmware

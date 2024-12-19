@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cat /boot/Image.gz /boot/dtbs/qcom/msm8916-yiming-uz801v3.dtb > /boot/zImage.gz
+# cat /boot/Image.gz /boot/dtbs/qcom/msm8916-thwc-ufi001c.dtb > /boot/zImage.gz
 echo "Successful generate /boot/zImage.gz"
 
 mkbootimg \
