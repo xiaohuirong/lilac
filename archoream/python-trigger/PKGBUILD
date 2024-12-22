@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname=python-trigger
-pkgver=3.12.7
+pkgver=3.13.1
 pkgrel=1
 pkgdesc='python package rebuild trigger.'
 url='https://mirrors.hoream.top'
