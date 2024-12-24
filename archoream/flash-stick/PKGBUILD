@@ -2,7 +2,7 @@
 
 pkgname=stick-flash
 pkgver=0.0.1
-pkgrel=2
+pkgrel=3
 pkgdesc="wifi stick flash tool"
 url="https://github.com/OpenStick/OpenStick"
 license=("MIT")
