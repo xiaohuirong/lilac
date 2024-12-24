@@ -6,9 +6,9 @@ ALL_kver="%KERNVER%"
 PRESETS=('default' 'fallback')
 
 #default_config="/etc/mkinitcpio.conf"
-default_image="/boot/initramfs-linux-uz801.img"
+default_image="/boot/initramfs-linux-msm8916.img"
 #default_options=""
 
 #fallback_config="/etc/mkinitcpio.conf"
-fallback_image="/boot/initramfs-linux-uz801-fallback.img"
+fallback_image="/boot/initramfs-linux-msm8916-fallback.img"
 fallback_options="-S autodetect"
