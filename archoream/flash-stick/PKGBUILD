@@ -9,7 +9,7 @@ license=("MIT")
 arch=("any")
 depends=(android-tools)
 source=("base.zip::https://github.com/OpenStick/OpenStick/releases/download/v1/base.zip"
-        "stick-flash")
+        "flash-stick")
 sha256sums=("SKIP"
             "SKIP")
 options=(!strip)
@@ -25,5 +25,5 @@ package() {
     install base/tz.mbn ${target_dir}/tz.mbn
     install base/sbc_1.0_8016.bin ${target_dir}/sbc_1.0_8016.bin
 
-    install -Dm644 stick-flash ${pkgdir}/usr/bin/stick-flash
+    install -Dm755 flash-stick ${pkgdir}/usr/bin/flash-stick
 }
