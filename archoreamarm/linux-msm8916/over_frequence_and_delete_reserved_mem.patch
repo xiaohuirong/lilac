@@ -1,3 +1,26 @@
+diff --git a/arch/arm64/boot/dts/qcom/msm8916-thwc-ufi001c.dts b/arch/arm64/boot/dts/qcom/msm8916-thwc-ufi001c.dts
+index 6cb3911ba..bc900641f 100644
+--- a/arch/arm64/boot/dts/qcom/msm8916-thwc-ufi001c.dts
++++ b/arch/arm64/boot/dts/qcom/msm8916-thwc-ufi001c.dts
+@@ -4,6 +4,18 @@
+ 
+ #include "msm8916-ufi.dtsi"
+ 
++/delete-node/ &mba_mem;
++/delete-node/ &gps_mem;
++/delete-node/ &mpss_mem;
++/delete-node/ &memshare_gps;
++/delete-node/ &memshare;
++/delete-node/ &memshare_mba;
++/delete-node/ &memshare_mpss;
++
++/delete-node/ &reserved;
++/delete-node/ &venus_mem;
++/delete-node/ &venus;
++
+ / {
+ 	model = "ufi-001c/ufi-001b 4G Modem Stick";
+ 	compatible = "thwc,ufi001c", "qcom,msm8916";
 diff --git a/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts b/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts
 index a98efcfe7..dc9cc0215 100644
 --- a/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts
