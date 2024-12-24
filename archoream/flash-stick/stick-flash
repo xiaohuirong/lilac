@@ -1,0 +1,56 @@
+#!/bin/bash
+
+set -e
+trap 'echo -e "\033[31m[ERROR] Script encountered an error at line $LINENO.\033[0m"; exit 1' ERR
+
+if [ "$#" -ne 1 ]; then
+	echo "Usage: $0 <working directory>"
+	exit 1
+fi
+
+work_dir="$1"
+cd "$work_dir"
+
+bin_dir=/var/lib/stick-flash
+
+# let stick boot from aboot
+fastboot erase boot
+fastboot flash aboot "$bin_dir"/aboot.bin
+# fastboot reboot
+fastboot boot "$bin_dir"/aboot.bin
+
+# dump some partition
+fastboot oem dump fsc && fastboot get_staged fsc.bin
+fastboot oem dump fsg && fastboot get_staged fsg.bin
+fastboot oem dump modemst1 && fastboot get_staged modemst1.bin
+fastboot oem dump modemst2 && fastboot get_staged modemst2.bin
+
+# reboot to stock fastboot
+fastboot reboot bootloader
+
+# flash partition table
+fastboot flash partition "$bin_dir"/gpt_both0.bin
+
+# flash mbn
+fastboot flash hyp "$bin_dir"/hyp.mbn
+fastboot flash rpm "$bin_dir"/rpm.mbn
+fastboot flash sbl1 "$bin_dir"/sbl1.mbn
+fastboot flash tz "$bin_dir"/tz.mbn
+
+# flash back dumped partition
+fastboot flash fsc fsc.bin
+fastboot flash fsg fsg.bin
+fastboot flash modemst1 modemst1.bin
+fastboot flash modemst2 modemst2.bin
+
+fastboot flash cdt "$bin_dir"/sbc_1.0_8016.bin
+
+# erase boot and rootfs
+fastboot erase boot
+fastboot erase rootfs
+
+# clean dump
+rm fsc.bin
+rm fsg.bin
+rm modemst1.bin
+rm modemst2.bin

@@ -1,0 +1,29 @@
+# Maintainer: Hoream <hoream@qq.com>
+
+pkgname=stick-flash
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="wifi stick flash tool"
+url="https://github.com/OpenStick/OpenStick"
+license=("MIT")
+arch=("any")
+depends=(android-tools)
+source=("base.zip::https://github.com/OpenStick/OpenStick/releases/download/v1/base.zip"
+        "stick-flash")
+sha256sums=("SKIP"
+            "SKIP")
+options=(!strip)
+
+package() {
+    target_dir="${pkgdir}/var/lib/${pkgname}/"
+    install -d ${target_dir}
+    install base/aboot.bin ${target_dir}/aboot.bin
+    install base/gpt_both0.bin ${target_dir}/gpt_both0.bin
+    install base/hyp.mbn ${target_dir}/hyp.mbn
+    install base/rpm.mbn ${target_dir}/rpm.mbn
+    install base/sbl1.mbn ${target_dir}/sbl1.mbn
+    install base/tz.mbn ${target_dir}/tz.mbn
+    install base/sbc_1.0_8016.bin ${target_dir}/sbc_1.0_8016.bin
+
+    install -Dm644 stick-flash ${pkgdir}/usr/bin/stick-flash
+}
