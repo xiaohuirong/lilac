@@ -17,8 +17,8 @@ bin_dir=/var/lib/stick-flash
 echo -e "\e[32mlet stick boot from aboot.bin\e[0m"
 fastboot erase boot
 fastboot flash aboot "$bin_dir"/aboot.bin
-# fastboot reboot
-fastboot boot "$bin_dir"/aboot.bin
+fastboot reboot
+fastboot devices
 
 # dump modem partition
 echo -e "\e[32mdump modem partition\e[0m"
@@ -30,6 +30,7 @@ fastboot oem dump modemst2 && fastboot get_staged modemst2.bin
 # reboot to stock fastboot
 echo -e "\e[32mreboot to stock fastboot\e[0m"
 fastboot reboot bootloader
+fastboot devices
 
 # flash partition table
 echo -e "\e[32mflash partition table\e[0m"
