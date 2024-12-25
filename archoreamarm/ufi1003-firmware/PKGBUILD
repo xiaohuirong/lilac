@@ -1,0 +1,18 @@
+# Maintainer: Hoream<hoream@qq.com>
+pkgname=ufi1003-firmware
+pkgver=1.0
+pkgrel=1
+pkgdesc='Firmware for wifi stick ufi1003_MB_V02'
+arch=('aarch64')
+url='https://alist.hoream.top/d/sources/%E9%9A%8F%E8%BA%ABWIFI/ufi003_MB_V02/firmware.tar.gz'
+license=('Custom')
+source=("firmware.tar.gz::${url}")
+sha512sums=('SKIP')
+options=('!strip')
+provides=('linux-firmware')
+conflicts=('linux-firmware' 'uz801-firmware')
+
+package() {
+    install -d "${pkgdir}"/usr/lib/firmware
+    cp -r "${srcdir}/firmware/"* "${pkgdir}/usr/lib/firmware/"
+}
