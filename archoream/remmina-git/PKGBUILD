@@ -6,7 +6,7 @@
 pkgname=remmina-git
 _pkgbase=remmina
 pkgver=1.4.37+r10023+g8b841a190
-pkgrel=1
+pkgrel=2
 pkgdesc='A remote desktop client written in GTK+ - git checkout'
 arch=(i686 x86_64)
 url='http://www.remmina.org/'
