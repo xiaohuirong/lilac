@@ -1,0 +1,44 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="gadget-tool"
+pkgname="${_pkgname}-git"
+pkgver=r146.a2aa973
+pkgrel=1
+pkgdesc="Gadget-tool - Linux command line tool for setting USB gadget using configFS"
+url="https://github.com/linux-usb-gadgets/gt"
+license=("Apache-2.0")
+arch=('x86_64' 'aarch64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=("libusbgx" "libconfig" "gcc-libs" "glibc")
+makedepends=("git")
+source=(${_pkgname}::git+${url})
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    cd source
+    mkdir -p build
+    cd build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+    make
+}
+
+package() {
+ 	cd "${srcdir}/${_pkgname}"
+    install -D examples/systemd/gt.target ${pkgdir}/usr/lib/systemd/system/gt.target
+    install -D examples/systemd/gt@.service ${pkgdir}/usr/lib/systemd/system/gt@.service
+    install -D examples/systemd/99-udc.rules ${pkgdir}/usr/lib/udev/rules.d/99-udc.rules
+
+    install -D LICENSE ${pkgdir}/usr/share/${pkgname}/LICENSE
+
+    cd source/build
+    make DESTDIR="$pkgdir/" PREFIX="/usr" MANDIR="/usr/share/man" install
+}
