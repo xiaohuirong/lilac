@@ -2,7 +2,7 @@
 
 pkgname=umtp-responder-git
 pkgver=r361.ef7a6fd4ee
-pkgrel=1
+pkgrel=2
 pkgdesc="Lightweight USB Media Transfer Protocol (MTP) responder daemon for GNU/Linux "
 arch=('x86_64' 'aarch64')
 url="https://github.com/viveris/uMTP-Responder"
