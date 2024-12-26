@@ -2,7 +2,7 @@
 _pkgname="gadget-tool"
 pkgname="${_pkgname}-git"
 pkgver=r146.a2aa973
-pkgrel=4
+pkgrel=5
 pkgdesc="Gadget-tool - Linux command line tool for setting USB gadget using configFS"
 url="https://github.com/linux-usb-gadgets/gt"
 license=("Apache-2.0")
