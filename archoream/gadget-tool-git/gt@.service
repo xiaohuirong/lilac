@@ -10,7 +10,7 @@ After=sys-kernel-config.mount
 [Service]
 ExecStart=/usr/bin/gt-load.sh %i
 RemainAfterExit=yes
-ExecStop=/usr/bin/gt-rm %i
+ExecStop=/usr/bin/gt-rm.sh %i
 Type=simple
 
 [Install]

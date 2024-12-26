@@ -27,6 +27,25 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP')
+backup=(
+        "etc/gt/templates/acm-ecm-adb.scheme"
+        "etc/gt/templates/acm-ecm-mtp.scheme"
+        "etc/gt/templates/acm-ecm.scheme"
+        "etc/gt/templates/acm.scheme"
+        "etc/gt/templates/bluetooth.scheme"
+        "etc/gt/templates/bmc.scheme"
+        "etc/gt/templates/cdc-ecm.scheme"
+        "etc/gt/templates/ecm.scheme"
+        "etc/gt/templates/ffs.scheme"
+        "etc/gt/templates/hid.scheme"
+        "etc/gt/templates/mass.scheme"
+        "etc/gt/templates/midi.scheme"
+        "etc/gt/templates/midi2.scheme"
+        "etc/gt/templates/rndis-os-desc.scheme"
+        "etc/gt/templates/uac1.scheme"
+        "etc/gt/templates/uac2.scheme"
+        "etc/gt/templates/uvc.scheme"
+        )
 
 pkgver() {
   cd "${srcdir}/${_pkgname}"

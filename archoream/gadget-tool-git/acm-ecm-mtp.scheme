@@ -47,7 +47,7 @@ functions :
     };
     ffs_mtp :
     {
-        instance = "adb";
+        instance = "mtp";
         type = "ffs";
         attrs :
         {
