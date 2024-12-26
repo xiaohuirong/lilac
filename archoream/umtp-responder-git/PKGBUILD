@@ -13,6 +13,7 @@ depends=('glib2' 'systemd-libs')
 makedepends=('make' 'git')
 conflicts=('umtp-responder')
 provides=("umtp-responder")
+backup=("etc/umtprd/umtprd.conf")
 
 pkgver() {
   cd uMTP-Responder
