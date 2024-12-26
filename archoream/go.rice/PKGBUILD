@@ -2,7 +2,7 @@
 
 pkgname=go.rice
 pkgver=1.0.3
-pkgrel=1
+pkgrel=2
 pkgdesc='Go package that makes working with resources such as html,js,css,images,templates, etc very easy.'
 arch=(x86_64)
 url='https://github.com/GeertJohan/go.rice'
