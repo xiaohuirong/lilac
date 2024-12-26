@@ -10,7 +10,7 @@ license=('Apache')
 source=("git+$url")
 sha256sums=('SKIP')
 depends=('glib2' 'systemd-libs')
-makedepends=('cmake')
+makedepends=('cmake' 'git')
 conflicts=('cmtp-responder')
 provides=("cmtp-responder")
 

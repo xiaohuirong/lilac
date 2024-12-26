@@ -11,6 +11,8 @@ provides=("${_pkgname}")
 conflicts=("${_pkgname}")
 depends=("libusbgx" "libconfig" "gcc-libs" "glibc")
 makedepends=("git")
+optdepends=("adbd-linux: for adb gadget support"
+"umtp-responder: for mtp gadget support")
 source=(${_pkgname}::git+${url}
         "templates::git+https://github.com/kinsamanka/OpenStick-Builder.git"
         "acm-ecm-adb.scheme"
