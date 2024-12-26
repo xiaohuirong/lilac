@@ -9,7 +9,8 @@ license=("MIT")
 arch=("any")
 depends=()
 makedepends=()
-optdepends=("adbd-linux: for adb gadget support")
+optdepends=("adbd-linux: for adb gadget support"
+            "umtp-responder: for mtp gadget support")
 source=('net-ecm'
         'net-rndis'
         'usb-gadget.sh'

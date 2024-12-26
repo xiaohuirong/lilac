@@ -69,13 +69,22 @@ fi
 mkdir -p ${gadget}/functions/acm.usb0
 ln -s ${gadget}/functions/acm.usb0 ${gadget}/configs/c.1/
 
-# for adb
-if [[ -e "/usr/bin/adbd" ]]; then
-    mkdir -p ${gadget}/functions/ffs.adb
-    ln -s ${gadget}/functions/ffs.adb ${gadget}/configs/c.1/
-    mkdir -p /dev/usb-ffs/adb
-    mount -o uid=1000,gid=1000 -t functionfs adb /dev/usb-ffs/adb
-    /usr/bin/adbd &
+# for mtp
+if [[ -e "/usr/bin/umtprd" ]]; then
+    mkdir -p ${gadget}/functions/ffs.mtp
+    ln -s ${gadget}/functions/ffs.mtp ${gadget}/configs/c.1/
+    mkdir -p /dev/ffs-mtp
+    mount -t functionfs mtp /dev/ffs-mtp
+    /usr/bin/umtprd &
+else
+    # for adb
+    if [[ -e "/usr/bin/adbd" ]]; then
+        mkdir -p ${gadget}/functions/ffs.adb
+        ln -s ${gadget}/functions/ffs.adb ${gadget}/configs/c.1/
+        mkdir -p /dev/usb-ffs/adb
+        mount -o uid=1000,gid=1000 -t functionfs adb /dev/usb-ffs/adb
+        /usr/bin/adbd &
+    fi
 fi
 
 # # for storage
