@@ -17,6 +17,10 @@ source=(${_pkgname}::git+${url}
         "templates::git+https://github.com/kinsamanka/OpenStick-Builder.git"
         "acm-ecm-adb.scheme"
         "acm-ecm-mtp.scheme"
+        "acm-ecm-mtp-adb.scheme"
+        "acm-rndis-adb.scheme"
+        "acm-rndis-mtp.scheme"
+        "acm-rndis-mtp-adb.scheme"
         "gt@.service"
         "gt-load.sh"
         "gt-rm.sh")
@@ -26,10 +30,18 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP')
 backup=(
         "etc/gt/templates/acm-ecm-adb.scheme"
         "etc/gt/templates/acm-ecm-mtp.scheme"
+        "etc/gt/templates/acm-ecm-mtp-adb.scheme"
+        "etc/gt/templates/acm-rndis-adb.scheme"
+        "etc/gt/templates/acm-rndis-mtp.scheme"
+        "etc/gt/templates/acm-rndis-mtp-adb.scheme"
         "etc/gt/templates/acm-ecm.scheme"
         "etc/gt/templates/acm.scheme"
         "etc/gt/templates/bluetooth.scheme"
@@ -82,4 +94,9 @@ package() {
 
     install -Dm644 ${srcdir}/acm-ecm-mtp.scheme ${pkgdir}/etc/gt/templates/acm-ecm-mtp.scheme
     install -Dm644 ${srcdir}/acm-ecm-adb.scheme ${pkgdir}/etc/gt/templates/acm-ecm-adb.scheme
+    install -Dm644 ${srcdir}/acm-ecm-mtp-adb.scheme ${pkgdir}/etc/gt/templates/acm-ecm-mtp-adb.scheme
+
+    install -Dm644 ${srcdir}/acm-rndis-mtp.scheme ${pkgdir}/etc/gt/templates/acm-rndis-mtp.scheme
+    install -Dm644 ${srcdir}/acm-rndis-adb.scheme ${pkgdir}/etc/gt/templates/acm-rndis-adb.scheme
+    install -Dm644 ${srcdir}/acm-rndis-mtp-adb.scheme ${pkgdir}/etc/gt/templates/acm-rndis-mtp-adb.scheme
 }
