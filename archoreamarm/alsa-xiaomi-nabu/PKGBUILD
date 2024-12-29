@@ -1,0 +1,17 @@
+# Maintainer: Hoream<hoream@qq.com>
+pkgname=alsa-xiaomi-nabu
+pkgver=1.0
+pkgrel=1
+pkgdesc='Alsa config for Xiaomi Pad 5(nabu)'
+arch=('aarch64')
+url='https://github.com/map220v/ubuntu-xiaomi-nabu'
+makedepends=('git')
+license=('Custom')
+source=("ubuntu-xiaomi-nabu::git+${url}")
+sha512sums=('SKIP')
+options=('!strip')
+
+package() {
+    install -d "${pkgdir}"/usr/share/alsa/ucm2
+    cp -r "${srcdir}/ubuntu-xiaomi-nabu/alsa-xiaomi-nabu/usr/share/alsa/ucm2/"* "${pkgdir}/usr/share/alsa/ucm2/"
+}
