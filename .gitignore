@@ -20,3 +20,4 @@ games/re3-git/*/*
 *.AppImage
 *.iso
 *.run
+*.deb
