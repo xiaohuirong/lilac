@@ -1,7 +1,7 @@
 # Maintainer: Hoream<hoream@qq.com>
 pkgname=nabu-firmware
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Firmware for Xiaomi Pad 5(nabu)'
 arch=('aarch64')
 url='https://github.com/map220v/ubuntu-xiaomi-nabu'
@@ -10,6 +10,8 @@ license=('Custom')
 source=("ubuntu-xiaomi-nabu::git+${url}")
 sha512sums=('SKIP')
 options=('!strip')
+provides=('linux-firmware')
+conflicts=('linux-firmware')
 
 package() {
     install -d "${pkgdir}"/usr/lib/firmware
