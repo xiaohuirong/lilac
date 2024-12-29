@@ -9,7 +9,7 @@ url="https://github.com/zotero/zotero"
 license=('AGPL-3.0-or-later')
 depends=('dbus-glib' 'gtk3' 'nss' 'libxt')
 makedepends=('npm' 'git' 'zip' 'unzip' 'perl' 'python>=3' 'curl' 'wget' 'rsync' 'nodejs' 'patch')
-_tag=b735f87ada6badad32fdd4d628c63d5dc285b079  # git rev-parse $pkgver
+_tag=aa4f942  # git rev-parse $pkgver
 source=("zotero.desktop"
         "zotero-client::git+https://github.com/zotero/zotero.git#tag=${_tag}"
         "zotero-translators::git+https://github.com/zotero/translators.git"
@@ -43,10 +43,10 @@ sha256sums=('eab76db7a56a4d9aaa17baaf240b82fcf57944a4ddf8ef1b58cc64182426cedc'
             'SKIP'
             'dc1894ac2e1520c3dae8e9cd5e09608f4bb3298bdede2891a77118187edffa9d')
 
-pkgver() {
-  cd "$srcdir/zotero-client"
-  git describe --tags
-}
+# pkgver() {
+#   cd "$srcdir/zotero-client"
+#   git describe --tags
+# }
 
 prepare() {
   cd "$srcdir/zotero-client"
