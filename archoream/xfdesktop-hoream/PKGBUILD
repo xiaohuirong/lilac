@@ -18,7 +18,7 @@ sha256sums=('773b31c89fa822944979379c45724db50c167cd3110736a0cf4f12fb9b230c00'
             'SKIP')
 
 prepare() {
-  cd $pkgname
+  cd $_pkgname
   NOCONFIGURE=1 ./autogen.sh
   sed -i 's#/backgrounds/xfce/xfce-shapes.svg#/backgrounds/xfce/background.png#g' common/xfdesktop-common.h
 }
