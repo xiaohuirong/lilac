@@ -1,0 +1,16 @@
+diff --git a/Kvantum/style/themeconfig/ThemeConfig.cpp b/Kvantum/style/themeconfig/ThemeConfig.cpp
+index e8c9adc8..71f92b37 100644
+--- a/Kvantum/style/themeconfig/ThemeConfig.cpp
++++ b/Kvantum/style/themeconfig/ThemeConfig.cpp
+@@ -161,7 +161,10 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
+     name = "LineEdit";
+ 
+   v = getValue(name,KSL("frame"), i);
+-  r.hasFrame = v.toBool();
++  if (v == "true")
++      r.hasFrame = true;
++  else
++      r.hasFrame = false;
+   if (r.hasFrame)
+   {
+     v = getValue(name,KSL("focusFrame"), i);

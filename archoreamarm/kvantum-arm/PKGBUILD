@@ -1,0 +1,43 @@
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Maintainer: Bruno Pagani <archange@archlinux.org>
+
+pkgname=kvantum-arm
+pkgver=1.1.3
+pkgrel=1
+pkgdesc='SVG-based theme engine for Qt6 (including config tool and extra themes) fix arm crash'
+arch=(aarch64)
+url='https://github.com/tsujan/Kvantum'
+license=(GPL-3.0-or-later)
+depends=(gcc-libs
+         glibc
+         libx11)
+makedepends=(cmake
+             git
+             kwindowsystem
+             qt6-svg
+             qt6-tools)
+source=(git+https://github.com/tsujan/Kvantum#tag=V$pkgver
+        'fix_gcc_bug.patch')
+sha256sums=('17c48d0983d17e183e8601c0355a65f740f5a518b9212e69696f61b19fc20e81'
+            'SKIP')
+provides=('kvantum')
+conflicts=('kvantum')
+
+prepare() {
+    patch -Np1 -i ${srcdir}/fix_gcc_bug.patch -d ${srcdir}/Kvantum
+}
+
+build() {
+  cmake -B build6 -S Kvantum/Kvantum \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  make -C build6
+}
+
+package() {
+  depends+=(kwindowsystem
+            qt6-base
+            qt6-svg)
+  optdepends=('kvantum-qt5: Qt5 style')
+
+  DESTDIR="$pkgdir" cmake --install build6
+}
