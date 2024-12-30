@@ -2,7 +2,7 @@
 # Maintainer: Aditya Gupta <adityag.ug19.cs at  nitp.ac.in>
 pkgname=ftxui-git
 pkgver=r699.6fafa2df
-pkgrel=1
+pkgrel=2
 pkgdesc="FTXUI is a C++ Functional Terminal User Interface library."
 arch=("any")
 url="https://github.com/ArthurSonzogni/FTXUI"

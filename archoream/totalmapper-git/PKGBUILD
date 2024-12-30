@@ -1,8 +1,8 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="totalmapper"
 pkgname="${_pkgname}-git"
-pkgver=1.4.3
-pkgrel=6
+pkgver=1.4.8.r1.g4191b0d
+pkgrel=1
 pkgdesc="A simple utility for remapping keys using the Linux event handling system."
 arch=(x86_64 aarch64)
 url="https://github.com/ellbur/totalmapper"
