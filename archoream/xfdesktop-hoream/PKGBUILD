@@ -4,40 +4,42 @@
 
 _pkgname=xfdesktop
 pkgname="$_pkgname-hoream"
-pkgver=4.18.1
-pkgrel=5
+pkgver=4.20.0
+pkgrel=1
 pkgdesc="Xfce's desktop manager"
 arch=('x86_64' 'aarch64')
 url="https://docs.xfce.org/xfce/xfdesktop/start"
-license=('GPL2')
-depends=('libxfce4ui' 'libwnck3' 'exo' 'thunar' 'garcon' 'hicolor-icon-theme')
-provides=("$_pkgname")
-conflicts=("$_pkgname")
-makedepends=('intltool')
-source=($_pkgname-$pkgver.tar.bz2::https://archive.xfce.org/src/xfce/$_pkgname/${pkgver%.*}/$_pkgname-$pkgver.tar.bz2
+license=('GPL-2.0-or-later')
+groups=('xfce4')
+depends=('libxfce4ui' 'libxfce4windowing' 'libwnck3' 'libyaml' 'gtk-layer-shell' 'exo' 'thunar' 'garcon' 'hicolor-icon-theme')
+makedepends=('git' 'glib2-devel' 'xfce4-dev-tools')
+source=("git+https://gitlab.xfce.org/xfce/xfdesktop.git#tag=$pkgname-$pkgver"
         background.png::https://lsky.hoream.top/i/2024/06/01/665b1b9ba4b1e.png)
-sha256sums=('ef9268190c25877e22a9ff5aa31cc8ede120239cb0dfca080c174e7eed4ff756'
+sha256sums=('773b31c89fa822944979379c45724db50c167cd3110736a0cf4f12fb9b230c00'
             'SKIP')
 
 prepare() {
-  cd $_pkgname-$pkgver
+  cd $pkgname
+  NOCONFIGURE=1 ./autogen.sh
   sed -i 's#/backgrounds/xfce/xfce-shapes.svg#/backgrounds/xfce/background.png#g' common/xfdesktop-common.h
 }
 
 build() {
-  cd $_pkgname-$pkgver
-
+  cd $_pkgname
   ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
     --enable-thunarx \
+    --enable-x11 \
+    --enable-wayland \
     --enable-notifications \
-    --disable-debug
+    --disable-debug \
+    --enable-maintainer-mode
   make
 }
 
 package() {
-  cd $_pkgname-$pkgver
+  cd $_pkgname
   make DESTDIR="$pkgdir" install
   install -Dm644 "${srcdir}/background.png" "${pkgdir}/usr/share/backgrounds/xfce"
 }
