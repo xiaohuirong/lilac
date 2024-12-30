@@ -17,8 +17,10 @@ source=("${_srcname}::git+${url}#branch=msm8916/6.12.1"
         'linux.preset'
         "config"
         "generate_bootimg.sh"
-        "over_frequence_and_delete_reserved_mem.patch")
+        "over_frequence.patch"
+        "delete_reserved_mem.patch")
 md5sums=('SKIP'
+         'SKIP'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -36,7 +38,8 @@ prepare() {
   echo "${pkgbase#linux}" > localversion.20-pkgname
 
   echo "Setting patching..."
-  patch -Np1 -i ${srcdir}/over_frequence_and_delete_reserved_mem.patch -d ${srcdir}/${_srcname}
+  patch -Np1 -i ${srcdir}/over_frequence.patch -d ${srcdir}/${_srcname}
+  patch -Np1 -i ${srcdir}/delete_reserved_mem.patch -d ${srcdir}/${_srcname}
 
   echo "Setting config..."
   # first time
