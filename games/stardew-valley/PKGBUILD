@@ -3,7 +3,7 @@ pkgname=stardew-valley
 pkgver=1.5.6.53040
 pkgrel=4
 pkgdesc="an open-ended country-life RPG"
-arch=('x86_64')
+arch=('x86_64' 'aarch64')
 url="https://freelinuxpcgames.com/stardew-valley/"
 license=('custom')
 source=("stardew_valley_1_5_6_1988831614_53040.sh::http://app.hoream.top:8000/games/stardew_valley_1_5_6_1988831614_53040.sh" "gog_com-Stardew_Valley.desktop")
@@ -11,6 +11,10 @@ sha256sums=('692722cb77acbccf7392abfbaec54cae34fd6edb8e62cfb2843f70494cb5ea91'
             '5c6f5aaca0dfafeee1e780959d0d930f0db144fffa652fcda302a27152fc8947')
 options=(!strip staticlibs)
 depends=("sdl2")
+
+if [[ $CARCH == "aarch64" ]]; then
+    depends+=('box64')
+fi
 
 package() {
 	install -d "${pkgdir}/opt/gog/${pkgname}"
@@ -26,5 +30,8 @@ else \
     export SDL_VIDEODRIVER=x11\
 fi
 ' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
-
+    
+    if [[ $CARCH == "aarch64" ]]; then
+        sed -i 's#\./"StardewValley"#box64 \./"StardewValley"#g' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+    fi
 }

@@ -3,7 +3,7 @@ pkgname=dead-cells
 pkgver=2023.3.6
 pkgrel=6
 pkgdesc="a rogue-lite, metroidvania inspired, action-platformer"
-arch=('x86_64')
+arch=('x86_64' 'aarch64')
 url="https://www.linuxgame.cn/dead-cells"
 license=('custom')
 depends=('bubblewrap' 'libxss' 'libbsd' 'hashlink')
@@ -13,6 +13,10 @@ sha256sums=('97ec0b5a7243d2bac5e7319c8e3ab7298bca1a219249b31cf2462e3e99a1ae20'
     '05aa7f3c11f6f5e6ca67a902594ec2cf8c3c8e121fe07b1ab0f12ed7b60885d1')
 options=(!strip)
 install="dead-cells.install"
+
+if [[ $CARCH == "aarch64" ]]; then
+    depends+=('box64')
+fi
 
 package() {
 	install -d "${pkgdir}/opt/gog/${pkgname}"
@@ -39,4 +43,8 @@ else \
     export SDL_VIDEODRIVER=x11\
 fi
 ' "$pkgdir"/opt/gog/"${pkgname}"/game/deadcells.sh
+
+    if [[ $CARCH == "aarch64" ]]; then
+        sed -i 's|./deadcells|box64 ./deadcells|' "$pkgdir"/opt/gog/"${pkgname}"/game/deadcells.sh 
+    fi
 }

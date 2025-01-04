@@ -3,7 +3,7 @@ pkgname=terraria
 pkgver=1.4.4.9.v4.60321
 pkgrel=2
 pkgdesc="an action-adventure sandbox game."
-arch=('x86_64')
+arch=('x86_64' 'aarch64')
 url="https://freelinuxpcgames.com/terraria/"
 license=('custom')
 source=("terraria_v1_4_4_9_v4_60321.sh::http://app.hoream.top:8000/games/terraria_v1_4_4_9_v4_60321.sh" "gog_com-Terraria.desktop")
@@ -13,6 +13,10 @@ sha256sums=('9ef66aa58acbdce161221539d91845b68a11bcd75560a019dc09206918aae876'
 options=(!strip)
 depends=("sdl2")
 install=terraria.install
+
+if [[ $CARCH == "aarch64" ]]; then
+    depends+=('box64')
+fi
 
 package() {
 	install -d "${pkgdir}/opt/gog/${pkgname}"
@@ -29,4 +33,8 @@ else \
     export SDL_VIDEODRIVER=x11\
 fi
 ' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+
+    if [[ $CARCH == "aarch64" ]]; then
+        sed -i 's#\./"Terraria"#box64 \./"Terraria"#g' "$pkgdir"/opt/gog/"${pkgname}"/start.sh
+    fi
 }
