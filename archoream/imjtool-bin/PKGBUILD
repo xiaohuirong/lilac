@@ -2,7 +2,7 @@
 _pkgname=imjtool
 pkgname=${_pkgname}-bin
 pkgver=2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Rudimentary Android image and partition unpacking tool."
 	arch=('x86_64')
 url="http://newandroidbook.com/tools/imjtool.html"
