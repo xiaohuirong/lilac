@@ -13,7 +13,7 @@ _minver=2
 _ver=${_majver}.${_minver}
 _tnyver=13
 pkgver=${_ver}.${_tnyver}
-pkgrel=6
+pkgrel=7
 arch=('x86_64' 'aarch64')
 if [[ $CARCH == "x86_64" ]]; then
     _mosekarch=linux64x86
