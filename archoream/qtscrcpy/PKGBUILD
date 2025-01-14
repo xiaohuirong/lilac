@@ -1,18 +1,18 @@
 # Maintainer:
 # Contributor: Mark Wagie <mark dot wagie at proton dot me>
 
-## useful links
+## links
 # https://github.com/barry-ran/QtScrcpy
 # https://github.com/barry-ran/QtScrcpyCore
 
 ## options
 : ${_install_path:=opt}
+: ${_commit=7d1fdf496545e1629bc72d2eac2814380978187d}
 
-# basic info
 _pkgname=qtscrcpy
 pkgname="$_pkgname"
-pkgver=2.2.1
-pkgrel=4
+pkgver=3.1.0
+pkgrel=1
 pkgdesc="Android real-time screencast control tool"
 url="https://github.com/barry-ran/QtScrcpy"
 license=('Apache-2.0')
@@ -37,27 +37,27 @@ backup=("etc/$_pkgname/config.ini")
 _pkgsrc="$_pkgname"
 _pkgsrc_core="qtscrcpycore"
 source=(
-  "$_pkgname"::"git+$url.git#tag=v$pkgver"
+  "$_pkgname"::"git+$url.git#commit=$_commit"
   "$_pkgsrc_core"::"git+https://github.com/barry-ran/QtScrcpyCore.git"
   "path-fix.patch"
 )
 sha256sums=(
   'SKIP'
   'SKIP'
-  '863e9179ef63914cd1bdcb35b1c27ba4cde05bbaa33fbbde7460841c880debb8'
+  '16c9470136d4ab84af22b9689e5767b38e7be4eaa41b069546480a44a2776c36'
 )
 
 prepare() {
-  cd "$_pkgsrc_core"
-  git remote set-url origin https://github.com/barry-ran/QtScrcpyCore.git
-  git fetch origin 769943161f99dbc7b0c55f7f769e32729ab06693
-
-  cd "$srcdir/$_pkgsrc"
+  cd "$_pkgsrc"
   git submodule init
   git config submodule.QtScrcpy/QtScrcpyCore.url "$srcdir/qtscrcpycore"
   git -c protocol.file.allow=always submodule update
 
   patch -Np1 -F100 -i "$srcdir/path-fix.patch"
+
+  sed -E -e 's&\bQt6 Qt5\b&Qt5&g' \
+    -i QtScrcpy/res/i18n/CMakeLists.txt \
+    QtScrcpy/CMakeLists.txt
 }
 
 build() {
@@ -66,6 +66,7 @@ build() {
     -S "$_pkgsrc"
     -DCMAKE_BUILD_TYPE=None
     -DCMAKE_INSTALL_PREFIX='/usr'
+    -DQT_VERSION_MAJOR=5
     -Wno-dev
   )
 
@@ -96,13 +97,8 @@ package() {
   install -dm755 "$pkgdir/usr/share/doc/$_pkgname"
   cp -r docs/* "$pkgdir/usr/share/doc/$_pkgname/"
 
-  # fix permissions
-  chmod -R u+rwX,go+rX,go-w "$pkgdir/"
-
   install -Dm755 /dev/stdin "$pkgdir/usr/bin/$_pkgname" << END
 #!/usr/bin/env sh
-
-export QTSCRCPY_CONFIG_PATH="/etc/qtscrcpy"
 exec /$_install_path/qtscrcpy/QtScrcpy "\$@"
 END
 
@@ -118,4 +114,7 @@ StartupNotify=true
 Categories=Development;Utility;
 MimeType=application/epub+zip;
 END
+
+  # fix permissions
+  chmod -R u+rwX,go+rX,go-w "$pkgdir/"
 }
