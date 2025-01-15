@@ -7,7 +7,7 @@ _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for Xiaomi Pad 5 (nabu)"
 pkgver=6.1.10.b7eaa3c
-pkgrel=5
+pkgrel=6
 arch=('aarch64')
 url="https://github.com/maverickjb/linux-6.1.10.git"
 license=('GPL2')
@@ -78,7 +78,7 @@ _package() {
   echo "Installing boot image and dtbs..."
   mkdir -p ${pkgdir}/boot/6.1/
   make ARCH=arm64 INSTALL_PATH="${pkgdir}/boot" install
-  cp arch/arm64/boot/Image.gz "${pkgdir}/boot/6.1/"
+  cp arch/arm64/boot/Image.gz "${pkgdir}/boot/Image6.1.gz"
   make ARCH=arm64 INSTALL_DTBS_PATH="${pkgdir}/boot/6.1/dtbs" dtbs_install
 
   echo "Installing modules..."

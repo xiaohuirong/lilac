@@ -73,7 +73,7 @@ _package() {
   echo "Installing boot image and dtbs..."
   mkdir -p ${pkgdir}/boot/6.11/
   make ARCH=arm64 INSTALL_PATH="${pkgdir}/boot" install
-  cp arch/arm64/boot/Image.gz "${pkgdir}/boot/6.11/"
+  cp arch/arm64/boot/Image.gz "${pkgdir}/boot/Image6.11.gz"
   make ARCH=arm64 INSTALL_DTBS_PATH="${pkgdir}/boot/6.11/dtbs" dtbs_install
 
   echo "Installing modules..."
