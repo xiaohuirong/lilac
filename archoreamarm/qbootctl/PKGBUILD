@@ -1,0 +1,34 @@
+# Maintainer: Hoream <hoream@qq.com>
+_pkgname="qbootctl"
+pkgname="${_pkgname}-git"
+pkgver=0.2.0.r0.gb8d2248
+pkgrel=1
+pkgdesc="Qualcomm bootctl HAL for Linux"
+url="https://github.com/linux-msm/qbootctl"
+license=("GPL-3.0")
+arch=('aarch64' 'x86_64')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+depends=()
+makedepends=("meson" "ninja")
+source=(${_pkgname}::git+${url})
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+build(){
+ 	cd "${srcdir}/${_pkgname}"
+    arch-meson build --prefix /usr
+    ninja -C build
+}
+
+package() {
+ 	cd "${srcdir}/${_pkgname}"
+    DESTDIR="${pkgdir}/" ninja -C build install
+}
