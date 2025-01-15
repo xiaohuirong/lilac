@@ -7,7 +7,7 @@ _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for Xiaomi Pad 5 (nabu)"
 pkgver=6.12.0.r1311313.g66c314ecc22b
-pkgrel=5
+pkgrel=6
 arch=('aarch64')
 url="https://gitlab.postmarketos.org/panpanpanpan/sm8150-mainline"
 license=('GPL2')
@@ -77,7 +77,7 @@ _package() {
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7' 'android-tools' 'python')
   optdepends=('wireless-regdb: to set the correct wireless channels of your country')
   provides=("linux=${pkgver}" "KSMBD-MODULE" "WIREGUARD-MODULE")
-  conflicts=('linux')
+  # conflicts=('linux')
   install=${pkgname}.install
 
   cd $_srcname
@@ -117,7 +117,7 @@ _package() {
 _package-headers() {
   pkgdesc="Header files and scripts for building modules for linux kernel - ${_desc}"
   provides=("linux-headers=${pkgver}")
-  conflicts=('linux-headers')
+  # conflicts=('linux-headers')
 
   cd $_srcname
   local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
