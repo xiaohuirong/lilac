@@ -1,15 +1,15 @@
 # Maintainer: Daniel Bowring <aur@daniel.bowring.email>
 pkgname=gitbutler-bin
-pkgver=0.14.4
+pkgver=0.14.5
 pkgrel=1
-_pkgvernum=1569
+_pkgvernum=1645
 pkgdesc="Version control client, backed by Git, powered by Tauri/Rust/Svelte "
 arch=('x86_64')
 url="https://gitbutler.com/"
 depends=('libayatana-appindicator' 'webkit2gtk-4.1' 'gtk3')
 license=('FSL-1.0-MIT')
 source=("https://releases.gitbutler.com/releases/release/${pkgver}-${_pkgvernum}/linux/$CARCH/GitButler_${pkgver}_amd64.deb")
-sha256sums=('cfae372f3a05c5be432a03427be8749da0b5740f7f55f30027b65262189b8694')
+sha256sums=('b237b021b4a776d1373fce3ae3294dbfea85d610b46f28b053d76e7b13013776')
 
 package() {
 	bsdtar -xf "$srcdir/data.tar.gz" -C "$pkgdir"
