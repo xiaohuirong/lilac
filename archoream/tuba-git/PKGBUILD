@@ -5,7 +5,7 @@
 
 _pkgname=tuba
 pkgname="$_pkgname-git"
-pkgver=0.9.1.r1.g316ec29c
+pkgver=0.9.1.r2.gec5c0d9f
 pkgrel=1
 pkgdesc='Browse the Fediverse'
 arch=(
