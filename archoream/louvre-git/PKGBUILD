@@ -2,7 +2,7 @@
 
 _pkgname=louvre 
 pkgname="$_pkgname-git"
-pkgver=2.13.0.1.r0.g89b80a7e
+pkgver=2.14.0.1.r0.g9f47021a
 pkgrel=1
 pkgdesc="A high-performance C++ library designed for building Wayland compositors with a strong emphasis on ease of development."
 arch=('x86_64')
