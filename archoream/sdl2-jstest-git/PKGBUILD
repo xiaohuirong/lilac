@@ -3,13 +3,13 @@
 
 pkgname=sdl2-jstest-git
 _gitname=sdl-jstest
-pkgver=r135.5bc418e
+pkgver=r141.60f6e62
 pkgver() {
 	cd "${_gitname}"
 	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 #	echo r.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 }
-pkgrel=2
+pkgrel=1
 pkgdesc="Simple SDL joystick test application for the command line."
 url="https://github.com/Grumbel/sdl-jstest.git"
 arch=('x86_64' 'i686' 'aarch64')
@@ -20,6 +20,11 @@ provides=('sdl2-jstest')
 
 source=("sdl-jstest::git+${url}")
 sha512sums=('SKIP')
+
+prepare() {
+	cd "${srcdir}/${_gitname}"
+    sed -i '/#include <limits.h>/a #include <string.h>' src/sdl2-jstest.c
+}
 
 build() {
 	cd "${srcdir}/${_gitname}"
