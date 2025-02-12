@@ -32,5 +32,13 @@ build () {
 
 package () {
 	DESTDIR="${pkgdir}" ninja -C build install
+    sed -i 's|^Exec=.*|Exec=/opt/wayfire-hoream/bin/wdisplays|' ${pkgdir}/opt/wayfire-hoream/share/applications/network.cycles.wdisplays.desktop
+    sed -i 's|^Icon=.*|Icon=/opt/wayfire-hoream/share/icons/hicolor/scalable/apps/network.cycles.wdisplays.svg|' ${pkgdir}/opt/wayfire-hoream/share/applications/network.cycles.wdisplays.desktop
+    sed -i 's|^Exec=.*|Exec=/opt/wayfire-hoream/bin/wcm|' ${pkgdir}/opt/wayfire-hoream/share/applications/wayfire-config-manager.desktop
+    sed -i 's|^Icon=.*|Icon=/opt/wayfire-hoream/share/icons/hicolor/scalable/apps/wayfire.svg|' ${pkgdir}/opt/wayfire-hoream/share/applications/wayfire-config-manager.desktop
+
+    install -d ${pkgdir}/usr/share/applications
+    ln -sf /opt/wayfire-hoream/share/applications/network.cycles.wdisplays.desktop ${pkgdir}/usr/share/applications/network.cycles.wdisplays.hoream.desktop
+    ln -sf /opt/wayfire-hoream/share/applications/wayfire-config-manager.desktop ${pkgdir}/usr/share/applications/wayfire-config-manager-hoream.desktop
 }
 
