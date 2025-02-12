@@ -6,23 +6,19 @@ pkgbase=linux-nabu
 _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for Xiaomi Pad 5 (nabu)"
-pkgver=6.12.0.r1311313.g66c314ecc22b
-pkgrel=6
+pkgver=6.13.0.r1325481.g17c283b727ef
+pkgrel=1
 arch=('aarch64')
 url="https://gitlab.postmarketos.org/panpanpanpan/sm8150-mainline"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc' 'aarch64-linux-gnu-gcc')
 options=('!strip')
-source=("${_srcname}::git+${url}#branch=6.12-wip"
+source=("${_srcname}::git+${url}#branch=sm8150-6.13"
         'linux.preset'
         "config"
         "generate_bootimg.sh"
-        "rtc.patch::https://file.chyk.ink/d/Linux/nabu-patches/rtc.patch"
-        "ln8000_charger.c::https://file.chyk.ink/d/Linux/nabu-patches/ln8000_charger.c"
-        "sm8150-xiaomi-nabu.dts::https://file.chyk.ink/d/Linux/nabu-patches/sm8150-xiaomi-nabu.dts")
+        "charge.patch")
 md5sums=('SKIP'
-         'SKIP'
-         'SKIP'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -46,9 +42,7 @@ prepare() {
   echo "${pkgbase#linux}" > localversion.20-pkgname
 
   echo "Setting patching..."
-  patch -Np1 -i ${srcdir}/rtc.patch -d ${srcdir}/${_srcname}
-  cp ${srcdir}/ln8000_charger.c drivers/power/supply/
-  cp ${srcdir}/sm8150-xiaomi-nabu.dts arch/arm64/boot/dts/qcom/
+  patch -Np1 -i ${srcdir}/charge.patch -d ${srcdir}/${_srcname}
 
   echo "Setting config..."
   # first time
