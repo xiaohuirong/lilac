@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="sshx"
 pkgname="${_pkgname}-git"
-pkgver=r312.8a47723
+pkgver=r313.6b0e0ae
 pkgrel=1
 pkgdesc="A secure web-based, collaborative terminal."
 url="https://github.com/ekzhang/sshx"
