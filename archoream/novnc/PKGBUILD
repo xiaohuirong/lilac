@@ -3,7 +3,7 @@
 
 pkgname=novnc
 pkgver=1.5.0
-pkgrel=1
+pkgrel=2
 pkgdesc="HTML VNC Client Library and Application"
 arch=('any')
 url="https://github.com/novnc/noVNC"
