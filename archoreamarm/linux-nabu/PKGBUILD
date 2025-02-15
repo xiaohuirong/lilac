@@ -79,7 +79,7 @@ _package() {
   local modulesdir="$pkgdir/usr/lib/modules/$kernver"
 
   echo "Installing boot image and dtbs..."
-  make ARCH=arm64 INSTALL_PATH="${pkgdir}/boot/" install
+  make ARCH=arm64 KERNELRELEASE="nabu" INSTALL_PATH="${pkgdir}/boot/" install
   cp arch/arm64/boot/Image.gz "${pkgdir}/boot/"
   make ARCH=arm64 INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
 
