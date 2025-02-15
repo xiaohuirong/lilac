@@ -6,20 +6,22 @@ pkgbase=linux-perseus
 _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for XiaoMi Mix3(perseus)"
-pkgver=6.11.r135.g662abb161e81
+pkgver=6.13.0.r6.g47be2e4e756c
 pkgrel=1
 arch=('aarch64')
 url="https://gitlab.com/sdm845-mainline/linux.git"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc' 'aarch64-linux-gnu-gcc')
 options=('!strip')
-source=("${_srcname}::git+${url}#branch=sdm845/6.11-dev"
+source=("${_srcname}::git+${url}#branch=sdm845/6.13-release"
         'linux.preset'
         "sdm845-xiaomi-common.dtsi"
         "sdm845-xiaomi-perseus.dts"
+        "generate_bootimg.sh"
         "config"
         "make.patch")
 md5sums=('SKIP'
+         'SKIP'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -28,7 +30,7 @@ md5sums=('SKIP'
 
 pkgver() {
     cd "${srcdir}/${_srcname}"
-    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//'
+    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//' | sed 's/sdm845.//g'
 }
 
 prepare() {
@@ -64,6 +66,8 @@ build() {
   # make make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
   # make make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- htmldocs
 
+  make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image.gz
+
 }
 
 _package() {
@@ -79,7 +83,8 @@ _package() {
   local modulesdir="$pkgdir/usr/lib/modules/$kernver"
 
   echo "Installing boot image and dtbs..."
-  make ARCH=arm64 INSTALL_PATH="${pkgdir}/boot/" install
+  make ARCH=arm64 KERNELRELEASE="perseus" INSTALL_PATH="${pkgdir}/boot/" install
+  cp arch/arm64/boot/Image.gz "${pkgdir}/boot/"
   make ARCH=arm64 INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
 
   echo "Installing modules..."
@@ -102,6 +107,10 @@ _package() {
   # which avoids a double run of mkinitcpio that can occur
   install -d "${pkgdir}/usr/lib/initcpio/"
   echo "dummy file to trigger mkinitcpio to run" > "${pkgdir}/usr/lib/initcpio/$(<version)"
+
+  # install mkbootimg scripts
+  install -Dm755 "${srcdir}/generate_bootimg.sh" "${pkgdir}/usr/bin/generate_bootimg.sh"
+
 }
 
 _package-headers() {
