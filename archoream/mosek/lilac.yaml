@@ -12,6 +12,7 @@ update_on:
 
 repo_depends:
   - python-trigger
+  - execstack
 
 update_on_build:
   - pkgbase: python-trigger
