@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="todo"
 pkgname="${_pkgname}-git"
-pkgver=r85.4be99f6
+pkgver=r95.0192d9c
 pkgrel=1
 pkgdesc="A lightweight and super fast cli todo program written in rust under 200 sloc"
 url="https://github.com/sioodmy/todo"
