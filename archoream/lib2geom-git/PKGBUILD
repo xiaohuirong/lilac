@@ -2,7 +2,7 @@
 # Contributor: Vinícius dos Santos Oliveira <vini.ipsmaker@gmail.com>
 
 pkgname=lib2geom-git
-pkgver=1.1.r95.g1504cdaf
+pkgver=1.1.r96.g4d7f74f0
 pkgrel=1
 pkgdesc="a library developed to provide a robust computational geometry framework"
 arch=('x86_64')
