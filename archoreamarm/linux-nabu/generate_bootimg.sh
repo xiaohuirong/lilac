@@ -10,6 +10,7 @@ mkbootimg \
     --base 0x00000000 \
     --kernel_offset 0x00008000 \
     --tags_offset 0x00000100 \
+    --ramdisk_offset 0x1000000 \
     --pagesize 4096 \
     --id \
     -o /boot/boot.img
