@@ -8,10 +8,4 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: wemeet-wayland-screenshare-git
-  - source: github
-    github: xuwd1/wemeet-wayland-screenshare
-
-repo_depends:
-  - wemeet-bin
-  - xwaylandvideobridge
+    aur: xwaylandvideobridge
