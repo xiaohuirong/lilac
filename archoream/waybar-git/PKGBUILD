@@ -1,0 +1,94 @@
+# Maintainer: Alexis Rouillard <contact@arouillard.fr>
+
+pkgname=waybar-git
+_pkgname=Waybar
+pkgver=0.12.0.r0.g8490a1d
+pkgrel=1
+pkgdesc='Highly customizable Wayland bar for Sway and Wlroots based compositors (GIT)'
+arch=('x86_64')
+url="https://github.com/Alexays/${_pkgname}"
+license=('MIT')
+provides=('waybar')
+conflicts=('waybar')
+depends=(
+	'atkmm'
+	'cairomm'
+	'fmt'
+	'gcc-libs'
+	'glib2'
+	'glibc'
+	'glibmm'
+	'gtk-layer-shell'
+	'gtk3'
+	'gtkmm3'
+	'jack'
+	'jsoncpp'
+	'libdbusmenu-gtk3'
+	'libevdev'
+	'libinput'
+	'libmpdclient'
+	'libnl'
+	'libpipewire'
+	'libpulse'
+	'libsigc++'
+	'libwireplumber'
+	'libxkbcommon'
+	'playerctl'
+	'sndio'
+	'spdlog'
+	'systemd-libs'
+	'upower'
+	'wayland'
+	'libatkmm-1.6.so'
+	'libcairomm-1.0.so'
+	'libgtk-3.so'
+	'libjack.so'
+	'libjsoncpp.so'
+	'libpipewire-0.3.so'
+	'libsndio.so'
+	'libspdlog.so'
+	'libudev.so'
+	'libupower-glib.so'
+)
+makedepends=(
+	'git'
+	'cmake'
+	'catch2'
+	'meson'
+	'scdoc' # For generating manpages
+	'wayland-protocols'
+	'glib2-devel'
+)
+backup=(etc/xdg/waybar/{config.jsonc,style.css})
+optdepends=('otf-font-awesome: Icons in the default configuration')
+replaces=("waybar-hyprland-git")
+source=("git+${url}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+	cd "${_pkgname}/"
+	git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+	cd "${_pkgname}/"
+
+	arch-meson -Dcpp_std=c++20 \
+		-Dexperimental=true \
+		-Dcava=disabled \
+		-Dtests=enabled \
+		build
+
+	meson compile -C build
+}
+
+# check() {
+# 	cd "${_pkgname}/"
+# 	meson test -C build --print-errorlogs --no-rebuild --suite waybar
+# }
+
+package() {
+	cd "${_pkgname}/"
+	meson install -C build --destdir "${pkgdir}"
+	install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+}
