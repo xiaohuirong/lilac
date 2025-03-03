@@ -10,7 +10,7 @@ update_on:
   - source: github
     github: xiaohuirong/wayfire-plugins-extra
   - source: manual
-    manual: 6
+    manual: 7
 
 repo_depends:
   - wayfire-hoream-git
