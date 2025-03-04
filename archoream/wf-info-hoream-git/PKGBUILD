@@ -3,7 +3,7 @@
 _pkgname=wf-info
 pkgname="${_pkgname}-hoream-git"
 pkgver=r16.242ae9a
-pkgrel=5
+pkgrel=6
 pkgdesc="A simple wayfire plugin and program to get information from wayfire"
 arch=(x86_64 aarch64)
 url="https://github.com/soreau/wf-info"
