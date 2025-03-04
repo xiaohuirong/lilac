@@ -9,7 +9,7 @@ license=("GPL-2.0-only")
 arch=('x86_64' 'aarch64')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
-depends=('libarchive' 'glibc' 'gcc-libs' 'plocate')
+depends=('libarchive' 'glibc' 'gcc-libs' 'plocate' 'pacman')
 makedepends=("cargo" "git")
 source=(${_pkgname}::git+${url})
 sha256sums=('SKIP')
@@ -42,7 +42,7 @@ check() {
 }
 
 package() {
-	install -d "${pkgdir}/usr/bin"
-	install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}" "${pkgdir}/usr/bin/${pkg_name}"
-    install -Dm644 "${srcdir}/${_pkgname}/LICENSE" -t "${pkgdir}/usr/share/licenses/${_pkgname}/"
+    install -d "${pkgdir}/usr/bin"
+    install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}" "${pkgdir}/usr/bin/${pkg_name}"
+    install -Dm644 "${srcdir}/${_pkgname}/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}/"
 }
