@@ -2,7 +2,7 @@
 _pkgname="pacfiles"
 pkgname="${_pkgname}-git"
 pkgver=r18.ea8cd25
-pkgrel=1
+pkgrel=2
 pkgdesc="A pacman -F alternative that runs blazingly fast"
 url="https://github.com/lilydjwg/pacfiles"
 license=("GPL-2.0-only")
