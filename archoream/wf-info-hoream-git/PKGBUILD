@@ -11,7 +11,7 @@ license=(unknow)
 depends=(wayfire-hoream-git)
 makedepends=(meson ninja pkg-config git cmake  wayland-protocols glm)
 #conflicts=("${_pkgname}")
-provides=("${_pkgname}")
+#provides=("${_pkgname}")
 source=("git+https://github.com/xiaohuirong/wf-info.git#branch=hoream")
 sha256sums=('SKIP')
 

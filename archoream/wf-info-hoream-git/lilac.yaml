@@ -10,4 +10,4 @@ update_on:
     github: xiaohuirong/wf-info
     branch: hoream
   - source: manual
-    manual: 2
+    manual: 3
