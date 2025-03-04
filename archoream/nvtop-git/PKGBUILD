@@ -1,7 +1,7 @@
 # Maintainer: Tony Lambiris <tony@libpcap.net>
 
 pkgname=nvtop-git
-pkgver=3.1.0.r100.gf901275
+pkgver=3.1.0.r110.g33cf468
 pkgrel=1
 pkgdesc="GPUs process monitoring for AMD, Intel and NVIDIA"
 arch=('x86_64' 'aarch64')
