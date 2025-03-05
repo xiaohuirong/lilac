@@ -5,7 +5,7 @@
 _pkgname='grub-imageboot'
 pkgname="${_pkgname}"
 pkgver='0.6+nmu2'
-pkgrel='1'
+pkgrel=2
 pkgdesc="grub2 script to automatically add boot entries for iso images placed in /boot/images/"
 url="https://launchpad.net/ubuntu/+source/grub-imageboot/"
 arch=('any')
