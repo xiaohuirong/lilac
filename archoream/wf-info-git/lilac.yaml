@@ -11,3 +11,7 @@ update_on:
     aur: wf-info-git
   - source: github
     github: soreau/wf-info
+  - source: manual
+
+repo_depends:
+  - wayfire-git
