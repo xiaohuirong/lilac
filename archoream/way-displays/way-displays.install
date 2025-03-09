@@ -37,6 +37,9 @@ post_install() {
     plain "  ${magenta}#164${all_off} add CALLBACK_CMD with \${CALLBACK_LEVEL} \${CALLBACK_MSG}, defaults to: ${blue}notify-send \"way-displays \${CALLBACK_LEVEL}\" \"\${CALLBACK_MSG}\"${all_off} @alex-courtis in ${green}#168${all_off}"
     blue  "Bug Fixes:"
 	plain "  ${magenta}#113${all_off} fix multiple preferred modes warning by @alex-courtis in ${green}#173${all_off}"
+    yello "1.12.1"
+    blue  "Bug Fixes:"
+	plain "  ${magenta}#185${all_off} 32-bit compatibility"
 }
 
 post_upgrade() {
