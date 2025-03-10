@@ -40,6 +40,9 @@ post_install() {
     yello "1.12.1"
     blue  "Bug Fixes:"
 	plain "  ${magenta}#185${all_off} 32-bit compatibility"
+    yello "1.12.2"
+    blue  "Bug Fixes:"
+	plain "  ${magenta}#189${all_off} remove unnecessary make way-displays on install target"
 }
 
 post_upgrade() {
