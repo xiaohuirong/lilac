@@ -31,13 +31,15 @@ options=(
 _srcname=linux-$pkgver
 _srctag=v$pkgver
 source=(
+  https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.xz
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
   0002-Default-to-maximum-amount-of-ASLR-bits.patch
   0003-skip-simpledrm-if-nvidia-drm.modeset\=1-is.patch
   config  # the main kernel config file
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('3cf389ced2b40e6457421cb27892bf126b73032fbf1de895ecc37b13d981a17c'
+sha256sums=('beb902a5f69d9e57710112203db38111dad6d30556ea8ce389284c8077fe944d'
+            '3cf389ced2b40e6457421cb27892bf126b73032fbf1de895ecc37b13d981a17c'
             '423b2c6fbc8d6df79997550bef1b1e4f6f402b668007d150013623a83a12b49e'
             '596f8e0aef1df72a84685e8f2b8a9dde7e33b513de555fae6069ba652cbd00c1'
             '8048e6f47cd898fc60f4b0e5f1ba613b603d561548587de6d5002a6df2907194')
@@ -52,15 +54,15 @@ prepare() {
   echo "-$pkgrel" > localversion.10-pkgrel
   echo "${pkgbase#linux}" > localversion.20-pkgname
 
-  # local src
-  # for src in "${source[@]}"; do
-  #   src="${src%%::*}"
-  #   src="${src##*/}"
-  #   src="${src%.zst}"
-  #   [[ $src = *.patch ]] || continue
-  #   echo "Applying patch $src..."
-  #   patch -Np1 < "../$src"
-  # done
+  local src
+  for src in "${source[@]}"; do
+    src="${src%%::*}"
+    src="${src##*/}"
+    src="${src%.zst}"
+    [[ $src = *.patch ]] || continue
+    echo "Applying patch $src..."
+    patch -Np1 < "../$src"
+  done
 
   echo "Setting config..."
   cp ../config .config
