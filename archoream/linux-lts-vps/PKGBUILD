@@ -40,7 +40,7 @@ source=(
 sha256sums=('3cf389ced2b40e6457421cb27892bf126b73032fbf1de895ecc37b13d981a17c'
             '423b2c6fbc8d6df79997550bef1b1e4f6f402b668007d150013623a83a12b49e'
             '596f8e0aef1df72a84685e8f2b8a9dde7e33b513de555fae6069ba652cbd00c1'
-            '42a2507738eb2adf3d85956a88c7872bec9baca0b0a3eef5186055f93e1e74c4')
+            '9ed63cfc5748bbd01e8c89c61ab8be6c3b8e19fce1785bdda27f1f10fa93a0dd')
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
