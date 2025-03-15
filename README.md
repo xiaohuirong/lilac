@@ -1,5 +1,3 @@
 # lilac
 
-auto package robot.
-faaa
-add repo.
+personal PKGBUILD repo
