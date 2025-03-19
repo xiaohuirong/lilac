@@ -2,7 +2,7 @@
 _pkgname="waypoint-lily"
 pkgname="${_pkgname}-git"
 pkgver=r61.e4206af
-pkgrel=2
+pkgrel=3
 pkgdesc="Wayland clone of keynav "
 url="https://github.com/lilydjwg/waypoint"
 license=("MPL-2.0")
