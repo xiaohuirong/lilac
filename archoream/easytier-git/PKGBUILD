@@ -2,7 +2,7 @@
 _pkgname="easytier"
 pkgname="${_pkgname}-git"
 pkgver=2.0.3.r7.gbbd3453
-pkgrel=1
+pkgrel=2
 pkgdesc="A simple, decentralized mesh VPN with WireGuard support."
 url="https://github.com/KKRainbow/EasyTier"
 license=("Apache-2.0")
