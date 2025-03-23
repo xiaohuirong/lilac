@@ -2,7 +2,7 @@
 
 pkgname=tex-fmt
 pkgver=0.5.2
-pkgrel=2
+pkgrel=3
 pkgdesc="An extremely fast LaTeX formatter written in Rust"
 arch=('x86_64')
 url="https://github.com/WGUNDERWOOD/tex-fmt"
