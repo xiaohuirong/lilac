@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname='archoream-keyring'
-pkgver=r118.c663892
+pkgver=r119.ea17bc2
 pkgrel=1
 pkgdesc='Archoream PGP keyring'
 url='https://github.com/xiaohuirong/archoream-keyring'
