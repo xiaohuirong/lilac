@@ -2,7 +2,7 @@
 _pkgname="gadget-tool"
 pkgname="${_pkgname}-git"
 pkgver=r146.a2aa973
-pkgrel=5
+pkgrel=6
 pkgdesc="Gadget-tool - Linux command line tool for setting USB gadget using configFS"
 url="https://github.com/linux-usb-gadgets/gt"
 license=("Apache-2.0")
@@ -78,8 +78,8 @@ build(){
 
 package() {
  	cd "${srcdir}/${_pkgname}"
-    install -D examples/systemd/gt.target ${pkgdir}/usr/lib/systemd/system/gt.target
-    install -D ${srcdir}/gt@.service ${pkgdir}/usr/lib/systemd/system/gt@.service
+    install -Dm644 examples/systemd/gt.target ${pkgdir}/usr/lib/systemd/system/gt.target
+    install -Dm644 ${srcdir}/gt@.service ${pkgdir}/usr/lib/systemd/system/gt@.service
     install -D examples/systemd/99-udc.rules ${pkgdir}/usr/lib/udev/rules.d/99-udc.rules
     install -Dm755 ${srcdir}/gt-load.sh ${pkgdir}/usr/bin/gt-load.sh
     install -Dm755 ${srcdir}/gt-rm.sh ${pkgdir}/usr/bin/gt-rm.sh
