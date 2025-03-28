@@ -7,7 +7,7 @@ _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for Xiaomi Pad 5 (nabu)"
 pkgver=6.13.0.r1325481.g17c283b727ef
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 url="https://gitlab.postmarketos.org/panpanpanpan/sm8150-mainline"
 license=('GPL2')
@@ -80,11 +80,14 @@ _package() {
 
   echo "Installing boot image and dtbs..."
   make ARCH=arm64 KERNELRELEASE="nabu" INSTALL_PATH="${pkgdir}/boot/" install
+  mv "${pkgdir}/boot/vmlinux-nabu" "${pkgdir}/boot/vmlinuz-linux-nabu"
   cp arch/arm64/boot/Image.gz "${pkgdir}/boot/"
   make ARCH=arm64 INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
 
   echo "Installing modules..."
-  make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$pkgdir/usr" modules_install
+  # make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$pkgdir/usr" modules_install
+  ZSTD_CLEVEL=19 make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 \
+    DEPMOD=/doesnt/exist modules_install  # Suppress depmod
 
   # remove build link
   rm "$modulesdir"/build
