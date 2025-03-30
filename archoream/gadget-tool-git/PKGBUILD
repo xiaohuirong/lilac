@@ -2,7 +2,7 @@
 _pkgname="gadget-tool"
 pkgname="${_pkgname}-git"
 pkgver=r146.a2aa973
-pkgrel=7
+pkgrel=8
 pkgdesc="Gadget-tool - Linux command line tool for setting USB gadget using configFS"
 url="https://github.com/linux-usb-gadgets/gt"
 license=("Apache-2.0")
@@ -15,30 +15,35 @@ optdepends=("adbd-linux: for adb gadget support"
 "umtp-responder: for mtp gadget support")
 source=(${_pkgname}::git+${url}
         "templates::git+https://github.com/kinsamanka/OpenStick-Builder.git"
+        "iioncm::git+https://github.com/kinsamanka/OpenStick-Builder.git"
         "acm-ecm-adb.scheme"
         "acm-ecm-mtp.scheme"
         "acm-ecm-mtp-adb.scheme"
         "acm-rndis-adb.scheme"
         "acm-rndis-mtp.scheme"
         "acm-rndis-mtp-adb.scheme"
+        "acm-ncm-mtp.scheme"
         "gt@.service"
         "gt-load.sh"
         "gt-rm.sh")
 sha256sums=('SKIP'
             'SKIP'
             'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP')
+            'e846ff583db998348f61b9a7783ff17a44370244189403b91d7acb29ad64a873'
+            'fb3c2db4e6a99f3bd84dc8d6bec05ba9b6f6b3c6352bf8e94d507e654472478d'
+            '2ee08647f3fd5d0125dbdb0a8a6cf01e5780764199f551e0fece8696ef26933b'
+            'edabc3c8b17437926b6fd2cda5e0a49d8475ef98298be7930d5fc629b6a45d38'
+            '8819e50102d1ca76faa8a6c29fbf8ba83cb158c4c913adb046e30c310f4294fc'
+            '26094278bc64e49c8db57b8c82b1290cb3b1c9a5246919944983c93f28062372'
+            '10c8ad3d3bf4053842f2833001a824fa4dfd0eae0a8fda98471439f2bcb4124d'
+            '2aaf54eba9bfe3a4a252a70c3e53322259dff07301ad5bf11c62d1f19e83efed'
+            'c51c9397186cee90c603f071c021dd75cb5a8fa94aa27ad7965cdc1ea04eb9e0'
+            '25cce5ac5b0bde13974a8089c022da365173279b375996bacd585eef8b546569')
 backup=(
         "etc/gt/templates/acm-ecm-adb.scheme"
         "etc/gt/templates/acm-ecm-mtp.scheme"
         "etc/gt/templates/acm-ecm-mtp-adb.scheme"
+        "etc/gt/templates/acm-ncm-mtp.scheme"
         "etc/gt/templates/acm-rndis-adb.scheme"
         "etc/gt/templates/acm-rndis-mtp.scheme"
         "etc/gt/templates/acm-rndis-mtp-adb.scheme"
@@ -92,6 +97,9 @@ package() {
     cd "${srcdir}/templates"
     cp configs/templates ${pkgdir}/etc/gt -r
 
+    cd ${srcdir}/usb-gadget-service/schemes
+    cp *.scheme ${pkgdir}/etc/gt/templates
+
     install -Dm644 ${srcdir}/acm-ecm-mtp.scheme ${pkgdir}/etc/gt/templates/acm-ecm-mtp.scheme
     install -Dm644 ${srcdir}/acm-ecm-adb.scheme ${pkgdir}/etc/gt/templates/acm-ecm-adb.scheme
     install -Dm644 ${srcdir}/acm-ecm-mtp-adb.scheme ${pkgdir}/etc/gt/templates/acm-ecm-mtp-adb.scheme
@@ -99,4 +107,6 @@ package() {
     install -Dm644 ${srcdir}/acm-rndis-mtp.scheme ${pkgdir}/etc/gt/templates/acm-rndis-mtp.scheme
     install -Dm644 ${srcdir}/acm-rndis-adb.scheme ${pkgdir}/etc/gt/templates/acm-rndis-adb.scheme
     install -Dm644 ${srcdir}/acm-rndis-mtp-adb.scheme ${pkgdir}/etc/gt/templates/acm-rndis-mtp-adb.scheme
+
+    install -Dm644 ${srcdir}/acm-ncm-mtp.scheme ${pkgdir}/etc/gt/templates/acm-ncm-mtp.scheme
 }
