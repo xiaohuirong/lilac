@@ -98,7 +98,7 @@ package() {
     cd "${srcdir}/templates"
     cp configs/templates ${pkgdir}/etc/gt -r
 
-    cd ${srcdir}/usb-gadget-service/schemes
+    cd ${srcdir}/iioncm/usb-gadget-service/schemes
     cp *.scheme ${pkgdir}/etc/gt/templates
 
     install -Dm644 ${srcdir}/acm-ecm-mtp.scheme ${pkgdir}/etc/gt/templates/acm-ecm-mtp.scheme
