@@ -32,17 +32,10 @@ magen() {
 }
 
 post_install() {
-    yello "1.12.0"
+    yello "1.13.0"
     blue  "New Features:"
-    plain "  ${magenta}#164${all_off} add CALLBACK_CMD with \${CALLBACK_LEVEL} \${CALLBACK_MSG}, defaults to: ${blue}notify-send \"way-displays \${CALLBACK_LEVEL}\" \"\${CALLBACK_MSG}\"${all_off} @alex-courtis in ${green}#168${all_off}"
-    blue  "Bug Fixes:"
-	plain "  ${magenta}#113${all_off} fix multiple preferred modes warning by @alex-courtis in ${green}#173${all_off}"
-    yello "1.12.1"
-    blue  "Bug Fixes:"
-	plain "  ${magenta}#185${all_off} 32-bit compatibility"
-    yello "1.12.2"
-    blue  "Bug Fixes:"
-	plain "  ${magenta}#189${all_off} remove unnecessary make way-displays on install target"
+	plain "  ${magenta}doc:${all_off} cfg.yaml schema: ${blue}https://raw.githubusercontent.com/alex-courtis/way-displays/refs/heads/master/schema/cfg-1.0.0.yaml${all_off} by @alex-courtis in ${green}#192${all_off}"
+	plain "  ${magenta}#121${all_off} add ${blue}--toggle${all_off} for SCALING, AUTO_SCALE, VRR_OFF, DISABLED by @mrsobakin in ${green}#193${all_off}"
 }
 
 post_upgrade() {
