@@ -75,6 +75,7 @@ pkgver() {
 build(){
  	cd "${srcdir}/${_pkgname}"
     cd source
+    sed -i 's/cmake_minimum_required(VERSION [0-9]\+\.[0-9]\+)/cmake_minimum_required(VERSION 3.5)/' CMakeLists.txt
     mkdir -p build
     cd build
     cmake .. -DCMAKE_INSTALL_PREFIX=/usr
