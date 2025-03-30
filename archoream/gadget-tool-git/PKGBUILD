@@ -10,7 +10,7 @@ arch=('x86_64' 'aarch64')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
 depends=("libusbgx" "libconfig" "gcc-libs" "glibc")
-makedepends=("git" "cmake" "pkgconf")
+makedepends=("git" "cmake" "pkgconf" "asciidoc")
 optdepends=("adbd-linux: for adb gadget support"
 "umtp-responder: for mtp gadget support")
 source=(${_pkgname}::git+${url}
