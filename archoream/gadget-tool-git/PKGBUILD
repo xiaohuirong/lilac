@@ -15,7 +15,7 @@ optdepends=("adbd-linux: for adb gadget support"
 "umtp-responder: for mtp gadget support")
 source=(${_pkgname}::git+${url}
         "templates::git+https://github.com/kinsamanka/OpenStick-Builder.git"
-        "iioncm::git+https://github.com/analogdevicesinc/linux_image_ADI-scripts.git"
+        "linux_image_ADI-scripts::git+https://github.com/analogdevicesinc/linux_image_ADI-scripts.git"
         "acm-ecm-adb.scheme"
         "acm-ecm-mtp.scheme"
         "acm-ecm-mtp-adb.scheme"
@@ -98,7 +98,7 @@ package() {
     cd "${srcdir}/templates"
     cp configs/templates ${pkgdir}/etc/gt -r
 
-    cd ${srcdir}/iioncm/usb-gadget-service/schemes
+    cd ${srcdir}/linux_image_ADI-scripts/usb-gadget-service/schemes
     cp *.scheme ${pkgdir}/etc/gt/templates
 
     install -Dm644 ${srcdir}/acm-ecm-mtp.scheme ${pkgdir}/etc/gt/templates/acm-ecm-mtp.scheme
