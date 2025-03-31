@@ -6,14 +6,14 @@ pkgbase=linux-nabu
 _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for Xiaomi Pad 5 (nabu)"
-pkgver=6.13.0.r1325481.g17c283b727ef
-pkgrel=2
+pkgver=6.14.0.r1337597.gdefb39db31e6
+pkgrel=1
 arch=('aarch64')
 url="https://gitlab.postmarketos.org/panpanpanpan/sm8150-mainline"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc' 'aarch64-linux-gnu-gcc')
 options=('!strip')
-source=("${_srcname}::git+${url}#branch=sm8150-6.13"
+source=("${_srcname}::git+${url}#branch=sm8150/6.14"
         'linux.preset'
         "config"
         "generate_bootimg.sh"

@@ -33,10 +33,3 @@ index 1eabea38d718..2704e040fbc5 100644
  
  		info->nb.notifier_call = ln8000_notifier_call;
  		ret = power_supply_reg_notifier(&info->nb);
-@@ -1759,4 +1759,4 @@ module_i2c_driver(ln8000_driver);
- MODULE_AUTHOR("sungdae choi<sungdae@lionsemi.com>");
- MODULE_DESCRIPTION("LIONSEMI LN8000 charger driver");
- MODULE_LICENSE("GPL v2");
--MODULE_VERSION("0.3.0");
-\ No newline at end of file
-+MODULE_VERSION("0.3.0");
