@@ -2,7 +2,7 @@
 
 pkgname=pict-rs
 pkgver=0.5.16
-pkgrel=1
+pkgrel=2
 pkgdesc='A simple image hosting service'
 arch=('x86_64')
 url='https://git.asonix.dog/asonix/pict-rs'
