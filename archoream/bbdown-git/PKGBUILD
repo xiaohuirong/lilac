@@ -1,5 +1,5 @@
 pkgname=bbdown-git
-pkgver=r323.8f07002
+pkgver=r518.7c48a07
 pkgrel=1
 pkgdesc="一款命令行式哔哩哔哩下载器. Bilibili Downloader."
 arch=("x86_64" "aarch64")
