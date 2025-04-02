@@ -1,0 +1,58 @@
+# Maintainer: hoream <hoream@qq.com>
+
+_pkgname=whisper.cpp
+pkgname=${_pkgname}-git
+pkgver=r2385.51c6961cb2365.r20.g51c6961c
+pkgrel=1
+pkgdesc="Port of OpenAI's Whisper model in C/C++ (with OPENBlas CPU optimizations)"
+arch=('armv7h' 'aarch64' 'x86_64')
+url="https://github.com/ggerganov/whisper.cpp"
+provides=('whisper.cpp')
+conflicts=('whisper.cpp')
+license=("MIT")
+depends=('blas-openblas')
+makedepends=(
+	'cmake'
+	'git'
+)
+
+source=("${_pkgname}::git+${url}")
+sha256sums=('SKIP')
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	(
+		set -o pipefail
+		git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+			printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+	)
+	git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | sed 's/^v//'
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+
+	cmake \
+		-B build \
+		-S . \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DGGML_OPENBLAS=1
+
+	cmake --build build
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	DESTDIR="$pkgdir" cmake --install build
+
+	for i in build/bin/*; do
+		install -Dm755 "$i" \
+			"${pkgdir}/usr/bin/${_pkgname}-${i//build\/bin\//}"
+	done
+	mv "${pkgdir}/usr/bin/${_pkgname}-main" \
+		"${pkgdir}/usr/bin/${_pkgname}"
+
+	install -Dm644 LICENSE \
+		-t "${pkgdir}/usr/share/licenses/${pkgname}"
+}
