@@ -2,7 +2,7 @@
 
 _pkgname='dune3d'
 pkgname="${_pkgname}-git"
-pkgver=r697.b7fb327
+pkgver=r699.e4df71c
 pkgrel=1
 pkgdesc='3D CAD application'
 arch=('x86_64')
