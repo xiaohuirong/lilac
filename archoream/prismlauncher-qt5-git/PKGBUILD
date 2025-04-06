@@ -9,7 +9,7 @@
 pkgname=prismlauncher-qt5-git
 _pkgname="${pkgname%-git}"
 __pkgname="${_pkgname%-qt5}"
-pkgver=8.0.r1944.gc1b460fa0
+pkgver=8.0.r1946.g6dd8bd070
 pkgrel=1
 pkgdesc='Minecraft launcher with ability to manage multiple instances'
 arch=(i686 x86_64 aarch64)
