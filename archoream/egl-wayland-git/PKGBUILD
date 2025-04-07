@@ -2,7 +2,7 @@
 # Contributor: Det
 
 pkgname=egl-wayland-git
-pkgver=1.1.18.r1.gf1fd514
+pkgver=1.1.18.r4.g3acc518
 pkgrel=1
 pkgdesc='EGLStream-based Wayland external platform (git version)'
 arch=('x86_64')
