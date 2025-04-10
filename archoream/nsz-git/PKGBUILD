@@ -2,7 +2,7 @@
 
 pkgname=nsz-git
 pkgrel=1
-pkgver=4.6.1.r21.gc9676f1
+pkgver=4.6.1.r23.gfebcb3f
 pkgdesc='Switch Homebrew compatible NSP/XCI compressor/decompressor'
 conflicts=("${pkgname%-*}")
 provides=("${pkgname%-*}=$pkgver")
