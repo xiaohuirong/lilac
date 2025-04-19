@@ -42,23 +42,23 @@ prepare() {
 
   echo "Setting config..."
   # first time
-  # make ARCH=arm64 msm8916_defconfig
+  # make msm8916_defconfig
 
   # after first time
   cp ../config .config
-  make ARCH=arm64 olddefconfig
+  make olddefconfig
   diff -u ../config .config || :
 
-  make ARCH=arm64 -s kernelrelease > version
+  make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
 }
 
 build() {
   cd ${srcdir}/${_srcname}
 
-  make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all -j$(nproc)
-  # make make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
-  # make make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- htmldocs
+  make all -j$(nproc)
+  # make make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
+  # make make htmldocs
 
 }
 
@@ -76,12 +76,12 @@ _package() {
   local modulesdir="$pkgdir/usr/lib/modules/$kernver"
 
   echo "Installing boot image and dtbs..."
-  make ARCH=arm64 INSTALL_PATH="${pkgdir}/boot/" install
+  make INSTALL_PATH="${pkgdir}/boot/" install
   cp arch/arm64/boot/Image.gz "${pkgdir}/boot/"
-  make ARCH=arm64 INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
+  make INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
 
   echo "Installing modules..."
-  make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$pkgdir/usr" modules_install
+  make CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$pkgdir/usr" modules_install
 
   # remove build link
   rm "$modulesdir"/build
@@ -123,12 +123,12 @@ _package-overfreq() {
   build
 
   echo "Installing boot image and dtbs..."
-  make ARCH=arm64 INSTALL_PATH="${pkgdir}/boot/" install
+  make INSTALL_PATH="${pkgdir}/boot/" install
   cp arch/arm64/boot/Image.gz "${pkgdir}/boot/"
-  make ARCH=arm64 INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
+  make INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
 
   echo "Installing modules..."
-  make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$pkgdir/usr" modules_install
+  make CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$pkgdir/usr" modules_install
 
   # remove build link
   rm "$modulesdir"/build

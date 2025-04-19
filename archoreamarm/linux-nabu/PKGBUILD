@@ -46,23 +46,23 @@ prepare() {
 
   echo "Setting config..."
   # first time
-  # make ARCH=arm64 defconfig sm8150.config
+  # make defconfig sm8150.config
 
   # after first time
   cp ../config .config
-  make ARCH=arm64 olddefconfig
+  make olddefconfig
   diff -u ../config .config || :
 
-  make ARCH=arm64 -s kernelrelease > version
+  make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
 }
 
 build() {
   cd ${_srcname}
 
-  make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all -j$(nproc)
-  # make make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
-  # make make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- htmldocs
+  make all -j$(nproc)
+  # make make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
+  # make make htmldocs
 
 }
 
@@ -79,14 +79,14 @@ _package() {
   local modulesdir="$pkgdir/usr/lib/modules/$kernver"
 
   echo "Installing boot image and dtbs..."
-  make ARCH=arm64 KERNELRELEASE="nabu" INSTALL_PATH="${pkgdir}/boot/" install
+  make KERNELRELEASE="nabu" INSTALL_PATH="${pkgdir}/boot/" install
   mv "${pkgdir}/boot/vmlinux-nabu" "${pkgdir}/boot/vmlinuz-linux-nabu"
   cp arch/arm64/boot/Image.gz "${pkgdir}/boot/"
-  make ARCH=arm64 INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
+  make INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
 
   echo "Installing modules..."
-  # make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$pkgdir/usr" modules_install
-  ZSTD_CLEVEL=19 make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 \
+  # make INSTALL_MOD_PATH="$pkgdir/usr" modules_install
+  ZSTD_CLEVEL=19 make INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 \
     DEPMOD=/doesnt/exist modules_install  # Suppress depmod
 
   # remove build link
