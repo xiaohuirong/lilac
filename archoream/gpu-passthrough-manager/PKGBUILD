@@ -9,7 +9,7 @@
 # Maintainer: Evan H. Moore <evmoore43@gmail.com>
 pkgname=gpu-passthrough-manager
 pkgver=1.2
-pkgrel=2
+pkgrel=3
 pkgdesc="GPU passthrough made easy."
 arch=('x86_64')
 url="https://github.com/uwzis/gpu-passthrough-manager"
