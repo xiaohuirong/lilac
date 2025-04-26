@@ -2,7 +2,7 @@
 pkgname=aml-git
 pkgdesc="Another/Andri's Main Loop"
 pkgver=r169.f6086bc
-pkgrel=1
+pkgrel=2
 url=https://github.com/any1/aml
 arch=(x86_64)
 makedepends=(meson ninja git)
