@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=matlab-2023a-cvx
 pkgver=2.2
-pkgrel=2
+pkgrel=3
 pkgdesc="Matlab Software for Disciplined Convex Programming."
 arch=(x86_64)
 url="http://cvxr.com/cvx"
