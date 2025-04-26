@@ -11,3 +11,6 @@ update_on:
     aur: neatvnc-git
   - source: github
     github: any1/neatvnc
+
+repo_depends:
+  - amd-git
