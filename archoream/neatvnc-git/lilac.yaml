@@ -13,4 +13,4 @@ update_on:
     github: any1/neatvnc
 
 repo_depends:
-  - amd-git
+  - aml-git
