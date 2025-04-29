@@ -1,7 +1,7 @@
 # Maintainer: Igor Dyatlov <dyatlov.igor@protonmail.com>
 
 pkgname=amberol-git
-pkgver=2025.1.r8.g04c83e6
+pkgver=2025.1.r11.g55b93b9
 pkgrel=1
 pkgdesc="Plays music, and nothing else"
 arch=('x86_64' 'aarch64')
