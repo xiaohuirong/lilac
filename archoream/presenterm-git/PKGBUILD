@@ -1,8 +1,8 @@
 # Maintainer: PwnWriter <hey@pwnwriter.xyz>
 
 pkgname=presenterm-git
-pkgver=0.13.0.r30.gd745c36
-pkgrel=2
+pkgver=0.13.0.r34.gaf27dc1
+pkgrel=1
 pkgdesc="A terminal slideshow tool"
 arch=('x86_64')
 url="https://github.com/mfontanini/presenterm"
