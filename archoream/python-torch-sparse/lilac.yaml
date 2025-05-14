@@ -17,3 +17,5 @@ update_on:
 
 repo_depends:
   - parallel-hashmap
+
+managed: false
