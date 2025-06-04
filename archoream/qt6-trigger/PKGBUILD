@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname=qt6-trigger
-pkgver=6.9.0
+pkgver=6.9.1
 pkgrel=1
 pkgdesc='Qt6 package rebuild trigger.'
 url='https://mirrors.hoream.top'
