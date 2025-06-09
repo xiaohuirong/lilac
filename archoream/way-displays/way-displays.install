@@ -32,12 +32,15 @@ magen() {
 }
 
 post_install() {
-    yello "1.13.0"
+    yello "1.14.0"
     blue  "New Features:"
 	plain "  ${magenta}#196${all_off} implement ${blue}DISABLED${all_off} conditions: ${blue}PLUGGED${all_off} and ${blue}UNPLUGGED${all_off} by @mrsobakin in ${green}#199${all_off}"
 	plain "  cfg write prepends schema comment by @alex-courtis in ${green}#203${all_off}"
 	blue  "Bug Fixes:"
 	plain "  retry on changes cancellation, up to 5 times by @mrsobakin in ${green}#200${all_off}"
+    yello "1.14.1"
+	blue  "Bug Fixes:"
+	plain "  ${magenta}#214${all_off} Missing \$CALLBACK_MSG by @alex-courtis in ${green}#215${all_off}"
 }
 
 post_upgrade() {
