@@ -52,7 +52,7 @@ fi
 
 pkgname=ffmpeg-obs
 pkgver=7.1.1
-pkgrel=4
+pkgrel=5
 pkgdesc='Complete solution to record, convert and stream audio and video with fixes for OBS Studio. And various options in the PKGBUILD'
 arch=('x86_64' 'aarch64')
 url=https://ffmpeg.org/
@@ -77,7 +77,7 @@ _vidstabver=1.1.1
 _vmafver=3
 _vulkanver=1.3.279
 _x264ver=0.164
-_x265ver=4
+_x265ver=4.1
 depends=(
   "aom>=$_aomver"
   "srt>=$_srtver"
@@ -462,6 +462,10 @@ prepare() {
     patch -Np1 -i "${srcdir}/030-ffmpeg-add-svt-hevc-docs-g${_svt_hevc_ver:0:7}.patch"
     patch -Np1 -i "${srcdir}/031-ffmpeg-add-svt-vp9.patch"
     patch -Np1 -i <(filterdiff -i b/libavcodec/libsvt_vp9.c "${srcdir}/040-ffmpeg-add-svt-vp9-g${_svt_vp9_ver:0:7}.patch")
+  fi
+
+  if [[ $FFMPEG_OBS_CUDA == ON'' ]]; then
+    sed -i 's/nvccflags -std=c++11/nvccflags -std=c++14/g' configure
   fi
 }
 
