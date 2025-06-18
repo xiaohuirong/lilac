@@ -2,8 +2,8 @@
 
 _pkgname=useful-scripts
 pkgname="${_pkgname}-git"
-pkgver=r40.241e8e4
-pkgrel=2
+pkgver=r41.d1e4589
+pkgrel=1
 pkgdesc="Some useful scripts."
 url="https://github.com/xiaohuirong/useful-scripts"
 license=("MIT")
