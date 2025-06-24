@@ -3,8 +3,8 @@
 # Contributor: sxe <sxxe@gmx.de>
 
 pkgname=wine-git
-pkgver=10.10.r0.g885446556ce
-pkgrel=2
+pkgver=10.10.r201.g7f0fac46d71
+pkgrel=1
 pkgdesc='A compatibility layer for running Windows programs (git version)'
 arch=('x86_64')
 url='https://www.winehq.org/'
