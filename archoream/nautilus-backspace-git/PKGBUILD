@@ -24,5 +24,5 @@ pkgver() {
 
 package() {
 	install -d "${pkgdir}/usr/share/nautilus-python/extensions/"
-    cp ${srcdir}/${_pkgname}/BackSpace.py ${pkgdir}/usr/share/nautilus-python/extensions
+    cp ${srcdir}/${_pkgname}/BackSpaceGnome47.py ${pkgdir}/usr/share/nautilus-python/extensions/BackSpaceGnome.py
 }
