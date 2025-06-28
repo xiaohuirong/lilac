@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="nautilus-backspace"
 pkgname="${_pkgname}-git"
-pkgver=r5.0b7f2b1
+pkgver=r8.cdea6a2
 pkgrel=1
 pkgdesc=' Use backspace key in nautilus files on fedora'
 url='https://github.com/jesusferm/Nautilus-43-BackSpace'
