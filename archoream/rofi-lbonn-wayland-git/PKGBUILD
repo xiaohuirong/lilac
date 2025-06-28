@@ -10,7 +10,7 @@
 # Contributor: SanskritFritz (gmail)
 
 pkgname=rofi-lbonn-wayland-git
-pkgver=1.7.8.wayland1.r22.g183b0b5d
+pkgver=1.7.9.wayland1.r1.gd4b16e6f
 pkgrel=1
 pkgdesc='A window switcher, application launcher and dmenu replacement (fork with Wayland support)'
 #arch=(x86_64)
