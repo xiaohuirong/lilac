@@ -2,7 +2,7 @@
 
 pkgname=bongo-cat
 pkgver=0.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc="BongoCat 是一个可爱地互动桌面宠物应用，让你的桌面充满乐趣！"
 arch=('x86_64' 'aarch64')
 url="https://github.com/ayangweb/BongoCat"
