@@ -1,7 +1,7 @@
 # Maintainer: Alberto Fanjul <albertofanjul@gmail.com>
 pkgname=miraclecast-git
 _name=miraclecast
-pkgver=339.937747f
+pkgver=342.54c73b5
 pkgrel=1
 pkgdesc="MiracleCast provides software to connect external monitors to your system via Wifi. It is compatible to Miracast. Link-management works, everything else is still being worked on. Replaces openwfd. Contribute on https://github.com/albfan/aur-miraclecast"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
