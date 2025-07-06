@@ -11,7 +11,7 @@ depends=('wlroots-hoream-git' 'cairo' 'pango' 'glm' 'libjpeg' 'wf-config-hoream-
 makedepends=('git' 'meson' 'ninja' 'wayland-protocols' 'doctest' 'cmake')
 optdepends=('wf-shell-hoream-git: GTK3-based panel for the Wayfire compositor'
             'wf-sound-control-git: Small utility for the Wayfire compositor to control sound volume')
-provides=(wayfire "wayfire=0.8.0")
+provides=(wayfire-hoream)
 conflicts=(wayfire-hoream)
 replaces=()
 options=(debug)
