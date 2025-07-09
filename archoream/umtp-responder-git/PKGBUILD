@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 
 pkgname=umtp-responder-git
-pkgver=r366.9948c51dc0
+pkgver=r377.00fc22259f
 pkgrel=1
 pkgdesc="Lightweight USB Media Transfer Protocol (MTP) responder daemon for GNU/Linux "
 arch=('x86_64' 'aarch64')
