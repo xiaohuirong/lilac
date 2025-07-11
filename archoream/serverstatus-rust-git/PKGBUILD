@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="serverstatus-rust"
 pkgname="${_pkgname}-git"
-pkgver=1.8.1.r2.g03b626d
+pkgver=1.8.1.r4.g15b26ef
 pkgrel=1
 pkgdesc="Rust 版 ServerStatus 探针、威力加强版"
 url="https://github.com/zdz/ServerStatus-Rust"
