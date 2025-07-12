@@ -1,7 +1,7 @@
 # Maintainer: Konrad Beckmann <konrad.beckmann@gmail.com>
 
 pkgname=airspyhf-git
-pkgver=r128.7b94498
+pkgver=r147.87cf12a
 pkgrel=1
 pkgdesc="Host code for AirspyHF+ SDR."
 arch=('i686' 'x86_64' 'aarch64')
