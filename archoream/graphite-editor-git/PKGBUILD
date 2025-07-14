@@ -8,7 +8,7 @@
 
 pkgname=graphite-editor-git
 _pkgname=Graphite
-pkgver=r2093.e89cded
+pkgver=r2094.c5800aa
 pkgrel=1
 pkgdesc='2D raster & vector editor that melds traditional layers & tools with a modern node-based, non-destructive, procedural workflow'
 arch=(x86_64)
