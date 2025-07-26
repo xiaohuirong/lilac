@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 # Contributor: Solomon Choina <shlomochoina@gmail.com0
 pkgname=wayfire-hoream-git
-pkgver=0.8.0.20250709.133225.ga8fba6dd
+pkgver=0.8.0.20250726.113138.g245e7442
 pkgrel=1
 pkgdesc="3D wayland compositor (hoream's version)"
 arch=('x86_64' 'aarch64')
