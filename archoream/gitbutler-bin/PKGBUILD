@@ -1,9 +1,9 @@
 # Maintainer: Daniel Bowring <aur@daniel.bowring.email>
 # Maintainer: Daniele Paolella <danpaolella@gmail.com>
 pkgname=gitbutler-bin
-pkgver=0.15.6
+pkgver=0.15.7
 pkgrel=1
-_pkgvernum=2263
+_pkgvernum=2269
 pkgdesc="Version control client, backed by Git, powered by Tauri/Rust/Svelte "
 arch=('x86_64')
 url="https://gitbutler.com/"
@@ -11,7 +11,7 @@ depends=('libayatana-appindicator' 'webkit2gtk-4.1' 'gtk3')
 license=('LicenseRef-FSL-1.1-MIT')
 source=("https://releases.gitbutler.com/releases/release/${pkgver}-${_pkgvernum}/linux/$CARCH/GitButler_${pkgver}_amd64.deb"
         "LICENSE.md")
-sha256sums=('1021c8e5669e322159a8665562ddbc67d0124b0fbb9d2781df7332debf79231a'
+sha256sums=('ebeeedfc07273c226ca1d79fc4ef3766fed67d28515788daec2b530eb812f19f'
             '2a3154bf44e0b219014291b96249082f3305844a1d73796741468c8128c2829e')
 
 package() {
