@@ -1,7 +1,7 @@
 # Maintainer: robertfoster
 
 pkgname=stable-diffusion.cpp-git
-pkgver=r211.10c6501
+pkgver=r256.5900ef6
 pkgrel=1
 pkgdesc="Stable Diffusion in pure C/C++"
 arch=('armv7h' 'aarch64' 'x86_64')
@@ -27,7 +27,7 @@ prepare() {
   cd "${srcdir}/${pkgname%%-git}"
   git submodule init
   git config submodule.ggml.url "${srcdir}/ggml"
-  git -c protocol.file.allow=always submodule update
+  git -c protocol.file.allow=always submodule update --remote
 }
 
 build() {
