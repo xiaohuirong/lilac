@@ -4,7 +4,7 @@
 pkgname=mosek
 pkgdesc="A commercial solver for mathematical optimization problems."
 pkgver=11.0.16
-pkgrel=4
+pkgrel=5
 epoch=1
 arch=('x86_64')
 _ver=${pkgver%.*}
