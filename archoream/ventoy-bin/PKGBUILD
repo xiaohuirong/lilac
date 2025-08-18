@@ -3,16 +3,23 @@
 # Contributor: KokaKiwi <kokakiwi+aur@kokakiwi.net>
 
 pkgname=ventoy-bin
-pkgver=1.1.06
+pkgver=1.1.07
 pkgrel=1
 pkgdesc="A new bootable USB solution"
 arch=('aarch64' 'i686' 'x86_64')
 url="http://www.ventoy.net"
 license=('GPL-3.0-or-later')
-depends=('bash' 'util-linux' 'xz' 'dosfstools')
-optdepends=('gtk3: GTK3 GUI'
-            'qt5-base: Qt5 GUI'
-            'polkit: run GUI from application menu')
+depends=(
+  'bash'
+  'dosfstools'
+  'util-linux'
+  'xz'
+)
+optdepends=(
+  'gtk3: GTK3 GUI'
+  'qt5-base: Qt5 GUI'
+  'polkit: run GUI from application menu'
+)
 provides=("${pkgname%-bin}")
 conflicts=("${pkgname%-bin}")
 install="${pkgname%-bin}.install"
@@ -26,7 +33,7 @@ source=("https://github.com/ventoy/Ventoy/releases/download/v${pkgver}/${pkgname
         "${pkgname%-bin}.desktop"
         'sanitize.patch'
         'desktop_session.patch')
-sha256sums=('6176cc1ea7c8b822f5ee11fa5c3c71331aa194c72167a35196d8f1380b2feb17'
+sha256sums=('4ffabce468b03d6357ce5f4594e209714d1509d065da102938096dad6654c36e'
             '1ad5d314e02b84127a5a59f3871eb1d28617218cad07cde3eeddcac391473000'
             '0215dbaf2095f5eeb2d40d9731268ed724790565e1dcaad67ffa4af80b5d8330'
             'c3d4463a878a89d96e5f0bc4e1a43e48f27af5965bd4c977567695d7cf91fe5f'
