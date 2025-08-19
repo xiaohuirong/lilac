@@ -6,7 +6,7 @@
 
 _pkgbase=glfw
 pkgname=glfw-git
-pkgver=3.4.r41.g7ef6efeb
+pkgver=3.4.r42.gacb92944d
 pkgrel=1
 pkgdesc="Free, open source, portable framework for OpenGL application development (git version)"
 arch=('x86_64' 'armv7h' 'aarch64')
