@@ -1,23 +1,26 @@
 # Maintainer: Adrian Perez de Castro <aperez@igalia.com>
 pkgname=wayfire
-pkgver=0.8.1
-pkgrel=4
+pkgver=0.10.0
+pkgrel=1
 pkgdesc="3D wayland compositor"
 arch=(x86_64 aarch64)
 url=https://wayfire.org
 license=(MIT)
-depends=(cairo pango "wf-config>=${pkgver%.*}.0" libjpeg libinput 'wlroots>=0.17')
-makedepends=(meson ninja wayland-protocols glm cmake doctest nlohmann-json)
+depends=(cairo pango "wf-config>=${pkgver%.*}.0" libjpeg libinput wlroots0.19 yyjson)
+makedepends=(meson ninja wayland-protocols glm cmake doctest nlohmann-json vulkan-headers)
 source=("https://github.com/WayfireWM/${pkgname}/releases/download/v${pkgver}/${pkgname}-${pkgver}.tar.xz")
-b2sums=('1b596b28878789ca26eeb57c6c24e0b69508731de2144e1477f8071b41f17757b2125f2f4f99670ca8b7f85172a9f641b9be1f9190eeff5b261bcc2df1bec4ab')
+sha256sums=('83f98d67479f41f3a4dcf30b414495bb8df2353daa7601159f4012a120827a16')
+b2sums=('d65b32c74a46d6e9e8c5c484515a44d51c01f090764f31b3e82e63c3444b11acde632840e0d081b4386675de021194d2925e15842be6b9bfaa528ce8fa67f06b')
 
 build() {
 	rm -rf build
+	PKG_CONFIG_PATH=/usr/lib/wlroots0.17/pkgconfig \
 	arch-meson "${pkgname}-${pkgver}" build \
 		--auto-features=disabled \
 		-Duse_system_wfconfig=enabled \
 		-Duse_system_wlroots=enabled \
-		-Dxwayland=enabled
+		-Dxwayland=enabled \
+		-Dtests=enabled
 	ninja -C build
 }
 
