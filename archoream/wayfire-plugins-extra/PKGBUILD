@@ -1,6 +1,6 @@
 # Maintainer: Adrian Perez de Castro <aperez@igalia.com>
 pkgname=wayfire-plugins-extra
-pkgver=0.8.1
+pkgver=0.10.0
 pkgrel=1
 pkgdesc='Additional plugins for Wayfire'
 url=https://wayfire.org
@@ -9,17 +9,20 @@ license=(MIT)
 conflicts=(wayfire-plugins-focus-request
            wayfire-plugins-windecor
            wayfire-plugins-shadows-git)
-depends=('wayfire>=0.8.1' cairo glibmm iio-sensor-proxy librsvg)
-makedepends=(meson ninja glm git wayland-protocols)
+depends=("wayfire>=${pkgver%.*}" cairo glibmm iio-sensor-proxy librsvg)
+makedepends=(boost meson ninja nlohmann-json glm git vulkan-headers wayland-protocols)
 source=("https://github.com/WayfireWM/${pkgname}/releases/download/v${pkgver}/${pkgname}-${pkgver}.tar.xz")
-b2sums=('65c14281fd9738864f2d63f01250e6384cdf46929ee6df653a5614805b89686f0020799246d6caf16b8d45aa16a66f314e705ae96c37188d892d339875ed4c03')
+sha256sums=('52704f13a6a59c106d6fb69e79aa8c57dadcea98f91e097df72478dd311a15e6')
+b2sums=('18cf7da7dff2be95cdbd104789f8bed0675aed05295ebacefd24503bad5abba84e0ed0b873de97dbf7916dc8607ab7ad41f2ac03b3b2ed2708beaa7b7eb14905')
 
 build () {
 	rm -rf build
+	PKG_CONFIG_PATH=/usr/lib/wlroots0.17/pkgconfig \
 	arch-meson "${pkgname}-${pkgver}" build \
+		-Denable_filters=true \
 		-Denable_focus_request=true \
+		-Denable_pixdecor=true \
 		-Denable_wayfire_shadows=true \
-		-Denable_windecor=true \
 		--auto-features=disabled
 	ninja -C build
 }
