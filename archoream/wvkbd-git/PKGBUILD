@@ -2,7 +2,7 @@
 
 _pkgname=wvkbd
 pkgname="${_pkgname}-git"
-pkgver=r247.ecc3d5a
+pkgver=r248.ed702f9
 pkgrel=1
 pkgdesc='On-screen keyboard for wlroots'
 url='https://git.sr.ht/~proycon/wvkbd'
