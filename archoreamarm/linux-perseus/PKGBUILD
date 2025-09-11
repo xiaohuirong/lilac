@@ -7,7 +7,7 @@ _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for XiaoMi Mix3(perseus)"
 pkgver=6.13.0.r6.g47be2e4e756c
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 url="https://gitlab.com/sdm845-mainline/linux.git"
 license=('GPL2')
@@ -72,8 +72,8 @@ build() {
 
 _package() {
   pkgdesc="The Linux Kernel and modules - ${_desc}"
-  depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
-  optdepends=('wireless-regdb: to set the correct wireless channels of your country')
+  depends=('coreutils' 'kmod' 'mkinitcpio>=0.7')
+  optdepends=('linux-firmware' 'wireless-regdb: to set the correct wireless channels of your country')
   provides=("linux=${pkgver}" "KSMBD-MODULE" "WIREGUARD-MODULE")
   conflicts=('linux')
   install=${pkgname}.install
