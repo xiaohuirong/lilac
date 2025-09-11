@@ -2,8 +2,8 @@
 # Maintainer: Daniele Paolella <danpaolella@gmail.com>
 pkgname=gitbutler-bin
 pkgver=0.15.19
-pkgrel=1
-_pkgvernum=2379
+pkgrel=2
+_pkgvernum=2385
 pkgdesc="Version control client, backed by Git, powered by Tauri/Rust/Svelte"
 arch=('x86_64')
 url="https://gitbutler.com/"
