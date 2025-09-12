@@ -7,7 +7,7 @@
 _pkgname=wemeet-wayland-screenshare
 pkgname=wemeet-wayland-screenshare-git
 provides=('wemeet-wayland-screenshare')
-pkgver=3.19.2.400_hooked.r56.g7f33896
+pkgver=3.19.2.400_hooked.r57.ga5d252d
 pkgrel=1
 pkgdesc='Hooked wemeet that enables screenshare on Wayland. 实现Wayland下腾讯会议屏幕共享.'
 arch=('x86_64')
@@ -58,9 +58,8 @@ prepare() {
 build() {
     cd "$srcdir/$_pkgname"
     mkdir -p build
-    cd build
-    cmake .. -DCMAKE_BUILD_TYPE=Release
-    make
+    cmake -DCMAKE_BUILD_TYPE=Release -B build
+    cmake --build build
 }
 
 package() {
