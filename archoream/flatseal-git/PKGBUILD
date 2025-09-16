@@ -2,7 +2,7 @@
 
 _gitname=Flatseal
 pkgname=flatseal-git
-pkgver=2.3.1.r17.g95c5891
+pkgver=2.3.1.r18.gd0d0e52
 pkgrel=1
 pkgdesc='A permissions manager for Flatpak.'
 url="https://github.com/tchx84/Flatseal/"
