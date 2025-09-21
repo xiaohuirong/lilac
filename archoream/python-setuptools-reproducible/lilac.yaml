@@ -8,12 +8,10 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: patool
-  - source: manual
+    aur: python-setuptools-reproducible
 
 repo_depends:
   - python-trigger
-  - python-setuptools-reproducible
 
 update_on_build:
   - pkgbase: python-trigger
