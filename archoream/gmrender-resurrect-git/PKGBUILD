@@ -25,7 +25,7 @@ source=("git+https://github.com/zangloo/gmrender-resurrect.git"
 	    'gmediarender')
 sha256sums=('SKIP'
             '28d9a61adc76448e7e4458e77239394be4292c04176826615adf4099d0938b66'
-            '54611c4131f76d2f2ae78469dc05e556bbc2a43666ca9296ebd9b5e2053865eb'
+            '21ddcc23cec7bb7b6b6f81e5fc74913c5f6e792ec6f57fd657782e43b2079041'
             '089b0d0854a8e74cdc9aca096b08088bb24a2c457f50b1b7146f0fa2ec2bfb69')
 
 pkgver() {
