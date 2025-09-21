@@ -1,0 +1,6 @@
+maintainers:
+  - github: Hoream
+    email: hoream@qq.com
+
+build_prefix: extra-x86_64
+post_build: git_pkgbuild_commit
