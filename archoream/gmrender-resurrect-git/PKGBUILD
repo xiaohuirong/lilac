@@ -4,7 +4,7 @@
 
 pkgname=gmrender-resurrect-git
 pkgver=r351.e1fed36
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Application to stream music from a UPnP server using gstreamer."
 arch=(x86_64 i686 i486 pentium4 arm armv6h armv7h aarch64)
