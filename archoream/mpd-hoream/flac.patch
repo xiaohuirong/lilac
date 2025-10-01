@@ -1,17 +1,14 @@
 diff --git a/src/decoder/Thread.cxx b/src/decoder/Thread.cxx
-index c9635e70b..c6fa5f46d 100644
+index 60ff299f5..13abfb85d 100644
 --- a/src/decoder/Thread.cxx
 +++ b/src/decoder/Thread.cxx
-@@ -191,9 +192,7 @@ static bool
- decoder_check_plugin(const DecoderPlugin &plugin, const InputStream &is,
- 		     std::string_view suffix) noexcept
+@@ -212,8 +212,7 @@ decoder_run_stream_plugin(DecoderBridge &bridge, InputStream &is,
+ 			  std::string_view suffix,
+ 			  const DecoderPlugin &plugin)
  {
--	return plugin.stream_decode != nullptr &&
--		(decoder_check_plugin_mime(plugin, is) ||
--		 decoder_check_plugin_suffix(plugin, suffix));
-+	return plugin.stream_decode != nullptr && decoder_check_plugin_suffix(plugin, suffix);
- }
+-	if (!decoder_check_plugin_mime(plugin, is) &&
+-	    !decoder_check_plugin_suffix(plugin, suffix))
++	if (!decoder_check_plugin_suffix(plugin, suffix))
+ 		return DecodeResult::NO_PLUGIN;
  
- static bool
- 
- /**
+ 	if (plugin.stream_decode == nullptr)
