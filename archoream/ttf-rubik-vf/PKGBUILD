@@ -2,7 +2,7 @@
 
 pkgname=ttf-rubik-vf
 pkgver=2.3.0
-pkgrel=3
+pkgrel=4
 _commit=e337a5f69a9bea30e58d05bd40184d79cc099628
 pkgdesc="A sans serif font family with slightly rounded corners: variable font version"
 arch=("any")
