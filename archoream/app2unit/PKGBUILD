@@ -3,7 +3,7 @@
 _pkgauthor=Vladimir-csp
 pkgname=app2unit
 pkgver=1.1.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Utility to launch commands as systemd user units"
 url="https://github.com/${_pkgauthor}/${pkgname}"
 arch=('any')
