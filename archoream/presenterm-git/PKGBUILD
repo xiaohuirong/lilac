@@ -1,7 +1,7 @@
 # Maintainer: PwnWriter <hey@pwnwriter.xyz>
 
 pkgname=presenterm-git
-pkgver=0.15.1.r37.gff2ea5c
+pkgver=0.15.1.r39.g5a1e2d0
 pkgrel=1
 pkgdesc="A terminal slideshow tool"
 arch=('x86_64')
