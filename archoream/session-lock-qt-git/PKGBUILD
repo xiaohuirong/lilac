@@ -1,6 +1,6 @@
 _pkgname=session-lock-qt
 pkgname=session-lock-qt-git
-pkgver=r81.86511cf
+pkgver=r82.4c9dde6
 pkgrel=1
 pkgdesc="session-lock-qt"
 url="https://github.com/waycrate/qt-session-lock"
