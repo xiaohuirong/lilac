@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 pkgname=wf-config-hoream-git
 pkgver=r174.e42a387
-pkgrel=9
+pkgrel=10
 pkgdesc="A library for managing configuration files, written for wayfire"
 arch=('x86_64' 'aarch64')
 url="https://github.com/WayfireWM/wf-config"
