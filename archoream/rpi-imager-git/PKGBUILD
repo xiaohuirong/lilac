@@ -1,7 +1,7 @@
 # Maintainer: Chocobo1 <chocobo1 AT archlinux DOT net>
 
 pkgname=rpi-imager-git
-pkgver=1.9.6.r294.gfcfa5f7a
+pkgver=1.9.6.r314.gcbd3a5a0
 pkgrel=1
 pkgdesc="Raspberry Pi imaging utility"
 arch=('i686' 'x86_64')
