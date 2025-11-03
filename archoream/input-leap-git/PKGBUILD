@@ -9,7 +9,7 @@
 _pkgname=input-leap
 pkgbase=$_pkgname-git
 pkgname=($_pkgname-headless-git $_pkgname-git)
-pkgver=3.0.2+70+g8efd4dd6
+pkgver=3.0.3+12+gea6b4eb8
 pkgrel=1
 pkgdesc="Open-source KVM software"
 arch=(x86_64)
