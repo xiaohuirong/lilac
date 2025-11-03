@@ -2,7 +2,7 @@
 
 _pkgname=tinycmmc
 pkgname=$_pkgname-git
-pkgver=r60.8238a6c
+pkgver=r61.caf1af3
 pkgrel=1
 arch=('any')
 pkgdesc='Tiny CMake Module Collections'
