@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="mvisor"
 pkgname="${_pkgname}-git"
-pkgver=r306.5f1d7ee
+pkgver=r310.8f9f37d
 pkgrel=1
 pkgdesc="A mini x86 hypervisor"
 url="https://github.com/tenclass/mvisor"
