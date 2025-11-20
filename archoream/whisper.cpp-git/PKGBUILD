@@ -2,7 +2,7 @@
 
 _pkgname=whisper.cpp
 pkgname=${_pkgname}-git
-pkgver=r3565.40e788a5
+pkgver=r3566.19ceec8e
 pkgrel=1
 pkgdesc="Port of OpenAI's Whisper model in C/C++ (with OPENBlas CPU optimizations)"
 arch=('armv7h' 'aarch64' 'x86_64')
