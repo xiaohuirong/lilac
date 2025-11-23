@@ -1,7 +1,7 @@
 # Maintainer: Mateen Ulhaq <mulhaq2005+aur at gmail dot com>
 
 pkgname=gping-git
-pkgver=1.19.0.r12.g688932a
+pkgver=1.20.1.r4.g26eb5b9
 pkgrel=1
 pkgdesc="Ping, but with a graph"
 arch=("x86_64")
