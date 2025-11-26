@@ -7,7 +7,7 @@
 
 pkgname=vscodium-bin
 _pkgname=VSCodium
-pkgver=1.105.17075
+pkgver=1.106.37938
 pkgrel=1
 pkgdesc="Binary releases of VS Code without MS branding/telemetry/licensing."
 arch=('x86_64' 'aarch64')
@@ -31,8 +31,8 @@ sha256sums=('3a5bc109974fcf408855c13965f6d6be0997655c5b359de0bfd19a678c00844e'
             '63b9f3e07dcfe92f59e851fdeeaed6ee986950672f75cc950489bce67e85d884'
             '07f0314b1869e3666f1ba52cd02dd40c841beef11a1ab9ae3246cafd01ef6caa')
 sha256sums+=('e622e6bdb70b0cfec57ad9df8717ea023b87e5e215003119b5a1a4d059fcd347')
-sha256sums_x86_64=('f9a31c44033598ebb6acb0951ad93280680cffc54d7ad78ceba04e9664022290')
-sha256sums_aarch64=('2f154a9f995dda686c57dc9ad95f735c48ed119440516ba93209165d282b2fef')
+sha256sums_x86_64=('b04ef537d1f9f75c6575bfaec6429590281da784636e2b3af2692f12b08fc97f')
+sha256sums_aarch64=('69ed9db220dbfc2e1861abcd407ab7be31afa0ab49fb0e8e7d8f54d8fee96ddf')
 
 source=('vscodium-bin.desktop'
         'vscodium-bin-url-handler.desktop'
@@ -49,7 +49,11 @@ package() {
   install -d -m755 "${pkgdir}/opt/${pkgname}"
   install -d -m755 "${pkgdir}/usr/bin"
   install -d -m755 "${pkgdir}/usr/share/"{applications,pixmaps}
-  cp -r "${srcdir}"/!(vscodium-bin?(-url-handler).desktop|${_pkgname}-linux-@(x|arm)64-${pkgver}.tar.gz) "${pkgdir}/opt/${pkgname}"
+  cp -r "${srcdir}"/* "${pkgdir}/opt/${pkgname}"
+  # remove source files links
+  cd "${pkgdir}/opt/${pkgname}"
+  rm $(find "${pkgdir}/opt/${pkgname}" -maxdepth 1 -type l)
+  cd -
   ln -s "/opt/${pkgname}/bin/codium" "${pkgdir}/usr/bin/codium"
   ln -s "/opt/${pkgname}/bin/codium" "${pkgdir}/usr/bin/vscodium"
   install -D -m644 "${srcdir}/vscodium-bin.desktop" "${pkgdir}/usr/share/applications/codium.desktop"
