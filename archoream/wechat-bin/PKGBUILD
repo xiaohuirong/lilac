@@ -3,7 +3,7 @@
 
 pkgname=wechat-bin
 pkgver=4.1.0.13
-pkgrel=1
+pkgrel=2
 epoch=
 pkgdesc="微信是一种生活方式. This is a repackage of WeChat."
 arch=('x86_64' 'aarch64' 'loong64')
