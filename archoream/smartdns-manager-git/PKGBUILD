@@ -2,7 +2,7 @@
 pkgname=smartdns-manager-git
 _pkgname=smartdns-manager
 pkgver=r47.0be707a
-pkgrel=1
+pkgrel=2
 pkgdesc="A powerful SmartDNS centralized management platform"
 arch=('x86_64' 'aarch64')
 url="https://github.com/almightyyantao/smartdns-manager"
