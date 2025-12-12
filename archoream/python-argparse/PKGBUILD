@@ -3,7 +3,7 @@
 
 pkgname=python-argparse
 pkgver=1.4.0
-pkgrel=25
+pkgrel=26
 arch=('any')
 pkgdesc="Python3 command-line parsing library"
 url="https://pypi.python.org/pypi/argparse"
