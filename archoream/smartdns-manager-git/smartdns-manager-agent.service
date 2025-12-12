@@ -1,0 +1,15 @@
+[Unit]
+Description=SmartDNS Log Agent
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+EnvironmentFile=-/etc/smartdns-manager/agent.env
+ExecStart=/usr/bin/smartdns-manager-agent
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

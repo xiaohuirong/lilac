@@ -1,0 +1,11 @@
+post_install() {
+  echo ":: Configuration files are located in /etc/smartdns-manager/"
+  echo ":: Please configure manager.env and agent.env before starting the services."
+  echo ":: The web interface static files are in /usr/share/webapps/smartdns-manager."
+  echo ":: You should configure a web server (like Nginx) to serve these files and proxy /api to the backend."
+  echo ":: An example Nginx config is available at /usr/share/doc/smartdns-manager-git/nginx.conf.example."
+}
+
+post_upgrade() {
+  post_install
+}

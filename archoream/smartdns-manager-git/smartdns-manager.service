@@ -1,0 +1,18 @@
+[Unit]
+Description=SmartDNS Manager
+After=network.target
+
+[Service]
+Type=simple
+User=smartdns-manager
+Group=smartdns-manager
+WorkingDirectory=/var/lib/smartdns-manager
+EnvironmentFile=-/etc/smartdns-manager/manager.env
+ExecStart=/usr/bin/smartdns-manager
+Restart=always
+RestartSec=5
+# CapabilityBoundingSet=... (Optional security hardening)
+# AmbientCapabilities=...
+
+[Install]
+WantedBy=multi-user.target

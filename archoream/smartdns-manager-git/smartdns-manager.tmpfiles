@@ -1,0 +1,3 @@
+d /var/lib/smartdns-manager 0750 smartdns-manager smartdns-manager
+d /var/log/smartdns-manager 0750 smartdns-manager smartdns-manager
+d /etc/smartdns-manager 0750 root smartdns-manager

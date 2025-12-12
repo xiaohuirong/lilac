@@ -1,0 +1,92 @@
+# Maintainer: yantao <https://github.com/almightyyantao>
+pkgname=smartdns-manager-git
+_pkgname=smartdns-manager
+pkgver=r47.0be707a
+pkgrel=1
+pkgdesc="A powerful SmartDNS centralized management platform"
+arch=('x86_64' 'aarch64')
+url="https://github.com/almightyyantao/smartdns-manager"
+license=('MIT')
+depends=('glibc')
+makedepends=('go' 'npm' 'git')
+backup=('etc/smartdns-manager/manager.env' 'etc/smartdns-manager/agent.env')
+install='smartdns-manager.install'
+# We use the local repository as source. 
+# In a real distribution package, this would be the git URL.
+source=("${_pkgname}::git+${url}"
+        "smartdns-manager.service"
+        "smartdns-manager-agent.service"
+        "smartdns-manager.sysusers"
+        "smartdns-manager.tmpfiles"
+        "manager.env"
+        "agent.env")
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+prepare() {
+  cd "$srcdir/$_pkgname/ui"
+  npm install
+}
+
+build() {
+  cd "$srcdir/$_pkgname"
+  
+  msg2 "Building Backend..."
+  cd backend
+  # Ensure we use Go modules
+  export CGO_ENABLED=1
+  go build -trimpath -ldflags "-s -w -X main.Version=${pkgver}" -o ../smartdns-manager .
+  cd ..
+
+  msg2 "Building Agent..."
+  cd agent
+  go build -trimpath -ldflags "-s -w -X main.Version=${pkgver}" -o ../smartdns-manager-agent .
+  cd ..
+
+  msg2 "Building Frontend..."
+  cd ui
+  npm run build
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+
+  # Install Binaries
+  install -Dm755 smartdns-manager "$pkgdir/usr/bin/smartdns-manager"
+  install -Dm755 smartdns-manager-agent "$pkgdir/usr/bin/smartdns-manager-agent"
+
+  # Install Frontend Assets
+  mkdir -p "$pkgdir/usr/share/webapps/smartdns-manager"
+  cp -r ui/build/* "$pkgdir/usr/share/webapps/smartdns-manager/"
+
+  # Install Configuration
+  install -Dm640 "$srcdir/manager.env" "$pkgdir/etc/smartdns-manager/manager.env"
+  install -Dm640 "$srcdir/agent.env" "$pkgdir/etc/smartdns-manager/agent.env"
+
+  # Install Systemd Services
+  install -Dm644 "$srcdir/smartdns-manager.service" "$pkgdir/usr/lib/systemd/system/smartdns-manager.service"
+  install -Dm644 "$srcdir/smartdns-manager-agent.service" "$pkgdir/usr/lib/systemd/system/smartdns-manager-agent.service"
+
+  # Install Sysusers and Tmpfiles
+  install -Dm644 "$srcdir/smartdns-manager.sysusers" "$pkgdir/usr/lib/sysusers.d/smartdns-manager.conf"
+  install -Dm644 "$srcdir/smartdns-manager.tmpfiles" "$pkgdir/usr/lib/tmpfiles.d/smartdns-manager.conf"
+
+  # Install License
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  
+  # Install Nginx Example
+  install -Dm644 nginx.conf "$pkgdir/usr/share/doc/$pkgname/nginx.conf.example"
+}
