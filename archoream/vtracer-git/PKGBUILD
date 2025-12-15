@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="vtracer"
 pkgname="${_pkgname}-git"
-pkgver=0.6.5.r3.gf6cf3e8
+pkgver=webapp.2024.5.r6.g8acb6bd
 pkgrel=1
 pkgdesc="An open source software to convert raster images (like jpg & png) into vector graphics (svg). It can vectorize graphics and photographs and trace the curves to output compact vector files."
 url="https://github.com/visioncortex/vtracer"
