@@ -3,7 +3,7 @@
 _pkgname=openboardview
 __pkgname=OpenBoardView
 pkgname=${_pkgname}-git
-pkgver=9.95.1.r45.g726e817
+pkgver=9.95.2.r11.g8031edc
 pkgrel=1
 pkgdesc="Linux SDL/ImGui edition software for viewing .brd files"
 arch=('i686' 'x86_64')
