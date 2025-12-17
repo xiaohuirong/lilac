@@ -1,10 +1,10 @@
 # Maintainer: AlphaLynx <alphalynx at alphalynx dot dev>
 
 pkgname=antigravity
-pkgver=1.11.14
-pkgrel=2
+pkgver=1.12.4
+pkgrel=1
 pkgdesc='An agentic development platform from Google, evolving the IDE into the agent-first era.'
-arch=('x86_64')
+arch=('aarch64' 'x86_64')
 url='https://antigravity.google/'
 license=('LicenseRef-Google-Antigravity')
 depends=(
@@ -35,28 +35,28 @@ depends=(
     'systemd-libs'
 )
 options=(!strip !debug)
-source=("$pkgname-$pkgver.tar.gz::https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/$pkgver-5763785964257280/linux-x64/Antigravity.tar.gz"
-        "antigravity.desktop"
-        "antigravity-url-handler.desktop")
-b2sums=('654df78b7c62e06028de0b346a2825b93653a2e876145dd45940e002a7e050c01db04fa0f16857b07fde7282e93e421a17cf095f57e3ce95624f62b37e077a32'
-        '59dc67f1cb2f06e77aa1e3496ebcdfc7b8182f94b6cec53f727c8644486b5259ac6683cc7db61dfa4ce5d468e96737290256529e44cc171adcd8dc4e106b3dbb'
-        '99042366cd8f3a4da093234903d755106ed895afafbe203c253927322126c70cfe75f28ca0bfb345688478f786f22f33e1e58c5e14479030f9babf32193c9071')
+source_aarch64=("Antigravity-$pkgver-aarch64.deb::https://us-central1-apt.pkg.dev/projects/$pkgname-auto-updater-dev/pool/$pkgname-debian/${pkgname}_$pkgver-1765945644_arm64_e9f1dca901faf9f1a2ef968116b6f835.deb")
+source_x86_64=("Antigravity-$pkgver-x86_64.deb::https://us-central1-apt.pkg.dev/projects/$pkgname-auto-updater-dev/pool/$pkgname-debian/${pkgname}_$pkgver-1765945650_amd64_2e1596b9e78009717589d375637bab9f.deb")
+sha256sums_aarch64=('755e546b01248abb599d33ff788f1c252115e53bc486cd2cbe6157e996b15db0')
+sha256sums_x86_64=('b19ba8495542ae75152df7c111330a36c6f7ba8358c015734418ad2f2847ae4d')
+b2sums_aarch64=('5a1aeba76aad4b3a1ec38d0e8e5a1982c188a4ae14a86ae8e4a10b6af0f87d5e0699d5c1be85a5e352a7ad7aa1ca126ad2766190d4b2b02b673f79d8a2cf12f4')
+b2sums_x86_64=('985e3986e0658103c02461a0b316c4c7a0c4a0d8ac1f5ba081491e1603101771e51e153690361c100ab9c2bd2b474edff4947b3a25e7574190c9e66b0f686462')
 
 package() {
-    install -dm755 "$pkgdir/opt/Antigravity"
-    cp -a Antigravity/* "$pkgdir/opt/Antigravity/"
+    tar -xf data.tar.xz --no-same-owner -C "$pkgdir/"
+
+    install -dm755 "$pkgdir/opt"
+    mv "$pkgdir/usr/share/$pkgname" "$pkgdir/opt/Antigravity"
 
     install -dm755 "$pkgdir/usr/bin"
     ln -s /opt/Antigravity/bin/$pkgname "$pkgdir/usr/bin/$pkgname"
 
-    install -Dm644 $pkgname.desktop \
-        "$pkgdir/usr/share/applications/$pkgname.desktop"
-    install -Dm644 $pkgname-url-handler.desktop \
-        "$pkgdir/usr/share/applications/$pkgname-url-handler.desktop"
+    sed -i 's|/usr/share/antigravity|/opt/Antigravity|g' "$pkgdir/usr/share/applications/"*.desktop
 
-    install -dm755 "$pkgdir/usr/share/pixmaps"
-    ln -s /opt/Antigravity/resources/app/resources/linux/code.png \
-        "$pkgdir/usr/share/pixmaps/$pkgname.png"
+    install -dm755 "$pkgdir/usr/share/metainfo"
+    mv "$pkgdir/usr/share/appdata/$pkgname.appdata.xml" \
+        "$pkgdir/usr/share/metainfo/$pkgname.appdata.xml"
+    rmdir "$pkgdir/usr/share/appdata"
 
     install -dm755 "$pkgdir/usr/share/licenses/$pkgname"
     ln -s /opt/Antigravity/resources/app/LICENSE.txt \
