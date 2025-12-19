@@ -7,9 +7,9 @@ _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="Linux kernel for Xiaomi Pad 5 (nabu)"
 pkgver=6.14.0.r1337597.gdefb39db31e6
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
-url="https://gitlab.postmarketos.org/panpanpanpan/sm8150-mainline"
+url="https://gitlab.com/sm8150-mainline/linux"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc' 'aarch64-linux-gnu-gcc')
 options=('!strip')
@@ -82,7 +82,7 @@ _package() {
   make KERNELRELEASE="nabu" INSTALL_PATH="${pkgdir}/boot/" install
   mv "${pkgdir}/boot/vmlinux-nabu" "${pkgdir}/boot/vmlinuz-linux-nabu"
   cp arch/arm64/boot/Image.gz "${pkgdir}/boot/"
-  make INSTALL_DTBS_PATH="${pkgdir}/boot/dtbs" dtbs_install
+  make INSTALL_DTBS_PATH="${pkgdir}/boot/${pkgbase}/dtbs" dtbs_install
 
   echo "Installing modules..."
   # make INSTALL_MOD_PATH="$pkgdir/usr" modules_install
