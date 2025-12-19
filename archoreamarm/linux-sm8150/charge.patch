@@ -1,0 +1,35 @@
+diff --git a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
+index f49f62d8f54f..ab10bc803881 100644
+--- a/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
++++ b/arch/arm64/boot/dts/qcom/sm8150-xiaomi-nabu.dts
+@@ -505,7 +505,7 @@ ln8000_charger@51 {
+ 		compatible = "lionsemi,ln8000";
+ 		reg = <0x51>;
+ 
+-		status = "disabled";
++		status = "okay";
+ 
+ 		irq-gpios = <&tlmm 36 0x2002>;
+ 
+@@ -707,7 +707,7 @@ PDO_FIXED_USB_COMM |
+ 					 PDO_FIXED_DUAL_ROLE |
+ 					 PDO_FIXED_USB_COMM |
+ 					 PDO_FIXED_DATA_SWAP)
+-					 PDO_VAR(5000, 12000, 3000)>;
++					 PDO_VAR(5000, 9000, 3000)>;
+ 
+ 		op-sink-microwatt = <10000000>;
+ 
+diff --git a/drivers/power/supply/ln8000_charger.c b/drivers/power/supply/ln8000_charger.c
+index 1eabea38d718..2704e040fbc5 100644
+--- a/drivers/power/supply/ln8000_charger.c
++++ b/drivers/power/supply/ln8000_charger.c
+@@ -1636,7 +1636,7 @@ static int ln8000_probe(struct i2c_client *client)
+ 	if (info->typec_psy) {
+ 		INIT_DELAYED_WORK(&info->status_changed_work,
+ 			ln8000_status_changed_worker);
+-        INIT_DELAYED_WORK(&info->charge_work, psy_chg_get_ti_alarm_status);
++        // INIT_DELAYED_WORK(&info->charge_work, psy_chg_get_ti_alarm_status);
+ 
+ 		info->nb.notifier_call = ln8000_notifier_call;
+ 		ret = power_supply_reg_notifier(&info->nb);
