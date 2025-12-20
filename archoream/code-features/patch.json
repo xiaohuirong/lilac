@@ -354,7 +354,8 @@
 			"terminalShellEnv"
 		],
 		"ms-python.vscode-python-envs": [
-			"terminalShellEnv"
+			"terminalShellEnv",
+			"terminalDataWriteEvent"
 		],
 		"ms-dotnettools.dotnet-interactive-vscode": [
 			"notebookMessaging"
@@ -444,6 +445,7 @@
 		],
 		"GitHub.vscode-pull-request-github": [
 			"activeComment",
+			"chatContextProvider",
 			"chatParticipantAdditions",
 			"chatParticipantPrivate",
 			"chatSessionsProvider",
@@ -452,6 +454,7 @@
 			"commentingRangeHint",
 			"commentReactor",
 			"commentReveal",
+			"commentsDraftState",
 			"commentThreadApplicability",
 			"contribAccessibilityHelpContent",
 			"contribCommentEditorActionsMenu",
@@ -462,13 +465,14 @@
 			"contribMultiDiffEditorMenus",
 			"contribShareMenu",
 			"diffCommand",
-			"languageModelDataPart",
 			"languageModelToolResultAudience",
+			"markdownAlertSyntax",
 			"quickDiffProvider",
 			"remoteCodingAgents",
 			"shareProvider",
 			"tabInputTextMerge",
 			"tokenInformation",
+			"treeItemMarkdownLabel",
 			"treeViewMarkdownMessage"
 		],
 		"GitHub.copilot": [
@@ -518,7 +522,6 @@
 			"chatReferenceBinaryData",
 			"languageModelSystem",
 			"languageModelCapabilities",
-			"languageModelDataPart",
 			"languageModelThinkingPart",
 			"chatStatusItem",
 			"taskProblemMatcherStatus",
@@ -529,7 +532,8 @@
 			"dataChannels",
 			"chatSessionsProvider",
 			"devDeviceId",
-			"contribEditorContentMenu"
+			"contribEditorContentMenu",
+			"tokenInformation"
 		],
 		"GitHub.remotehub": [
 			"contribRemoteHelp",
@@ -548,7 +552,8 @@
 		],
 		"ms-python.vscode-pylance": [
 			"terminalShellEnv",
-			"portsAttributes"
+			"portsAttributes",
+			"codeActionAI"
 		],
 		"ms-python.debugpy": [
 			"contribViewsWelcome",
@@ -632,6 +637,13 @@
 		],
 		"Microsoft.foundry-local-chat": [
 			"chatProvider"
+		],
+		"ms-wmcp.windows-mcp-server-extension": [
+			"mcpToolDefinitions"
+		],
+		"openai.chatgpt": [
+			"languageModelProxy",
+			"chatSessionsProvider"
 		]
 	},
 	"tasConfig": {
