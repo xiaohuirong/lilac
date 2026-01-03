@@ -3,7 +3,7 @@
 _pkgname=wayfire-plugins-extra
 pkgname="${_pkgname}-hoream-git"
 pkgver=r154.0cdbc73
-pkgrel=16
+pkgrel=17
 pkgdesc="3D wayland compositor extra plugins"
 arch=('x86_64' 'aarch64')
 url="https://github.com/xiaohuirong/wayfire-plugins-extra"
