@@ -2,8 +2,8 @@
 # Contributor: Christoph Brill <egore911@gmail.com>
 _pkgname=evtest-qt
 pkgname=${_pkgname}-git
-pkgver=r133.6fb1b84
-pkgrel=2
+pkgver=r135.41343d3
+pkgrel=1
 pkgdesc="Linux Joystick Tester for Qt"
 arch=('i686' 'x86_64')
 url="https://github.com/Grumbel/${_pkgname}"
