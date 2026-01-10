@@ -52,7 +52,7 @@ fi
 
 pkgname=ffmpeg-obs
 pkgver=8.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Complete solution to record, convert and stream audio and video with fixes for OBS Studio. And various options in the PKGBUILD'
 arch=('x86_64' 'aarch64')
 url=https://ffmpeg.org/
@@ -62,7 +62,7 @@ license=(GPL-3.0-only)
 _aomver=3
 _dav1dver=1.3.0
 _ffnvcodecver=12.2
-_glslangver=1.4.328
+_glslangver=1.4.335
 _libjxlver=0.11.0
 _libplacebover=7.351
 _libristver=0.2.7
@@ -351,16 +351,17 @@ fi
 if [[ $FFMPEG_OBS_SVT == 'ON' ]]; then
   depends+=(svt-hevc svt-vp9)
   makedepends+=(patchutils)
-  _svt_hevc_ver='ed80959ebb5586aa7763c91a397d44be1798587c'
+  _svt_hevc_ver='4181c9ee0611baefb40b4c0ed10023cfd837d522'
+  _svt_vp9_ver='290fb8c3662ed76a8887b587a9b8201878ba71ed'
   source+=(
     "010-ffmpeg-add-svt-hevc.patch"
     "020-ffmpeg-add-svt-hevc-docs-g${_svt_hevc_ver:0:7}.patch"::"https://raw.githubusercontent.com/OpenVisualCloud/SVT-HEVC/${_svt_hevc_ver}/ffmpeg_plugin/0002-doc-Add-libsvt_hevc-encoder-docs.patch"
-    "030-ffmpeg-add-svt-vp9.patch"
+    "030-ffmpeg-add-svt-vp9-g${_svt_vp9_ver:0:7}.patch"::"https://raw.githubusercontent.com/OpenVisualCloud/SVT-VP9/${_svt_vp9_ver}/ffmpeg_plugin/master-0001-Add-ability-for-ffmpeg-to-run-svt-vp9.patch"
   )
   sha256sums+=(
     '4b1053cc01244c79e3b23dc696eaff1aeb0627a2098e1a720a025d4ad75b5c16'
     'a164ebdc4d281352bf7ad1b179aae4aeb33f1191c444bed96cb8ab333c046f81'
-    'da01eb3ca31d35d23257760875e14bed808b3fea02f290028adaed76062125a0'
+    '1f06dfcb78e43a6c732cbc4f6ae583ae19fb111b56d33c8c860d5b6566c04f99'
   )
   _args+=(--enable-libsvthevc --enable-libsvtvp9)
   provides+=(ffmpeg-svt-hevc ffmpeg-svt-vp9)
@@ -500,6 +501,11 @@ fi
 prepare() {
   cd ffmpeg-src
 
+  if [[ $FFMPEG_OBS_DECKLINK == 'ON' ]]; then
+    git cherry-pick -n 0cd75dbfa0fc6c213cf9240b3c03c809070c5209
+    git cherry-pick -n 27e94281d1c880b4cae28738e35c0d6f9a58f06b
+  fi
+
   if [[ $FFMPEG_OBS_FULL == 'ON' ]]; then
     git cherry-pick -n c4ce51ee62205c74604767f1b7dab6a036edac7f
   fi
@@ -528,36 +534,12 @@ prepare() {
     rm -f libavcodec/libsvt_{hevc,vp9}.c
     patch -Np1 -i "${srcdir}/010-ffmpeg-add-svt-hevc.patch"
     patch -Np1 -i "${srcdir}/020-ffmpeg-add-svt-hevc-docs-g${_svt_hevc_ver:0:7}.patch"
-    patch -Np1 -i "${srcdir}/030-ffmpeg-add-svt-vp9.patch"
+    patch -Np1 -i "${srcdir}/030-ffmpeg-add-svt-vp9-g${_svt_vp9_ver:0:7}.patch"
   fi
 
   if [[ $FFMPEG_OBS_CUDA == 'ON' ]]; then
     sed -i 's/nvccflags -std=c++11/nvccflags -std=c++14/g' configure
     sed -i 's/arch=compute_60,code=sm_60/arch=compute_75,code=sm_75/g' configure
-  fi
-
-  if [[ $FFMPEG_OBS_DECKLINK == 'ON' ]]; then
-    ## Fix HAVE_PTHREAD_SETNAME_NP redefinition with SDL2 and the threads option
-    sed -i 's/pthread_set/ffmpeg_pthread_set/g' configure
-    sed -i 's/HAVE_PTHREAD_SET/HAVE_FFMPEG_PTHREAD_SET/g' libavutil/thread.h
-
-    sed -i 's|DeckLinkAPI.h|DeckLinkAPI_v14_2_1.h|g' \
-      libavdevice/decklink_common_c.h \
-      libavdevice/decklink_common.cpp \
-      libavdevice/decklink_enc.cpp \
-      libavdevice/decklink_dec.cpp
-    sed -i 's|DeckLinkAPIDispatch.cpp|DeckLinkAPIDispatch_v14_2_1.cpp|g' libavdevice/decklink_common.cpp
-
-    sed -i 's|CreateDeckLinkIteratorInstance|CreateDeckLinkIteratorInstance_v14_2_1|g' libavdevice/decklink_common.cpp
-    sed -i 's|CreateDeckLinkAPIInformationInstance|CreateDeckLinkAPIInformationInstance_v14_2_1|g' libavdevice/decklink_common.cpp
-
-    sed -i 's|IDeckLinkMemoryAllocator|IDeckLinkMemoryAllocator_v14_2_1|g' libavdevice/decklink_dec.cpp
-    sed -i 's|IDeckLinkInput \*|IDeckLinkInput_v14_2_1 \*|g' \
-      libavdevice/decklink_common.h \
-      libavdevice/decklink_common.cpp
-    sed -i 's|IDeckLinkInput,|IDeckLinkInput_v14_2_1,|g' libavdevice/decklink_dec.cpp
-    sed -i 's|IDeckLinkInputCallback|IDeckLinkInputCallback_v14_2_1|g' libavdevice/decklink_dec.cpp
-    sed -i 's|IDeckLinkVideoInputFrame|IDeckLinkVideoInputFrame_v14_2_1|g' libavdevice/decklink_dec.cpp
   fi
 }
 
