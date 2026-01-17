@@ -5,7 +5,7 @@
 # Contributor: ssfdust <ssfdust@gmail.com>
 
 pkgname=cairo-dock-core-wayland-git
-pkgver=3.6.97.20260111.9222e235
+pkgver=3.6.97.20260117.2527f4ba
 pkgrel=1
 pkgdesc='Light eye-candy fully themable animated dock with wayland support'
 arch=('i686' 'x86_64')
