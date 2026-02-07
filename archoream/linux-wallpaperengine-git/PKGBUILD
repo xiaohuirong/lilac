@@ -1,13 +1,13 @@
 # Maintainer: Alexis Maiquez <aur@almamu.com>
 pkgname=linux-wallpaperengine-git
 _pkgname=linux-wallpaperengine
-pkgver=r492.4a063d0
+pkgver=r568.6558998
 pkgrel=1
 pkgdesc="use steam's wallpaperengine on linux"
 arch=('x86_64')
 url="https://github.com/Almamu/linux-wallpaperengine"
-license=('GPL3')
-depends=('lz4' 'ffmpeg' 'mpv' 'glfw' 'glew' 'freeglut' 'libpulse')
+license=('GPL-3.0-only')
+depends=('lz4' 'ffmpeg' 'mpv' 'glfw' 'glew' 'freeglut' 'libpulse' 'libcups' 'at-spi2-core' 'nss' 'libxcomposite' 'libxdamage' 'nspr')
 makedepends=('git' 'cmake' 'sdl2' 'glm')
 provides=("linux-wallpaperengine")
 source=("${pkgname}::git+https://github.com/Almamu/linux-wallpaperengine.git#branch=main")
@@ -24,11 +24,19 @@ pkgver() {
         )
 }
 
+prepare() {
+    cd "$pkgname"
+    git submodule update --init --recursive
+    git -c protocol.file.allow=always submodule update
+}
+
 build() {
     cmake -B build -S "$pkgname" \
         -DCMAKE_BUILD_TYPE='Release' \
         -DCMAKE_INSTALL_PREFIX="/opt/${_pkgname}" \
-        -Wno-dev
+        -Wno-dev \
+        -DCMAKE_CXX_FLAGS="-ffat-lto-objects -Wno-builtin-macro-redefined" \
+        -DCMAKE_C_FLAGS="-Wno-builtin-macro-redefined"
     cmake --build build
 }
 
@@ -36,8 +44,11 @@ package() {
     DESTDIR="$pkgdir" cmake --install build
     # create forwarding script
     install -d -m755 "${pkgdir}/usr/bin"
-    echo "#!/bin/bash" > ${pkgdir}/usr/bin/${_pkgname}
-    echo "cd /opt/${_pkgname}; ./linux-wallpaperengine \$*" >> ${pkgdir}/usr/bin/${_pkgname}
+    cat > "${pkgdir}/usr/bin/${_pkgname}" << EOF
+#!/bin/bash
+export LD_LIBRARY_PATH="/opt/${_pkgname}/lib:\$LD_LIBRARY_PATH"
+cd /opt/${_pkgname}; ./${_pkgname} "\$@"
+EOF
     chmod +x ${pkgdir}/usr/bin/${_pkgname}
     chmod +x ${pkgdir}/opt/${_pkgname}/linux-wallpaperengine
 }
