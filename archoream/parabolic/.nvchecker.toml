@@ -1,0 +1,5 @@
+[parabolic]
+source = "github"
+github = "NickvisionApps/Parabolic"
+use_max_tag = true
+exclude_regex = ".*(beta).*"
