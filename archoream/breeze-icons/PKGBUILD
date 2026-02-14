@@ -6,7 +6,7 @@
 pkgbase=breeze-icons
 pkgname=('breeze-dark-icons' 'breeze-light-icons')
 pkgdesc='Breeze icon theme'
-pkgver=6.21.0
+pkgver=6.23.0
 pkgrel=1
 arch=(any)
 url='https://community.kde.org/Frameworks'
@@ -16,7 +16,7 @@ makedepends=(extra-cmake-modules
              qt6-base
              rsync)
 source=(https://download.kde.org/stable/frameworks/${pkgver%.*}/$pkgbase-$pkgver.tar.xz)
-sha256sums=('3a2d5b0131293673e18f0fb78800b4b4a23eefee481e90eba03de17ceaff5f15')
+sha256sums=('f12591f5714e053d8cef232ef41c36dc461516e4b89eeade77cc1947a33ddd33')
 
 build() {
   cmake -B build -S $pkgbase-$pkgver \
