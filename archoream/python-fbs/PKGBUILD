@@ -3,7 +3,7 @@
 pkgname=python-fbs
 _name=fbs
 pkgver=1.2.1
-pkgrel=15
+pkgrel=16
 pkgdesc="Python and Qt-based lightweight alternative to Electron"
 arch=('any')
 url="https://build-system.fman.io/"
