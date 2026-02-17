@@ -2,7 +2,7 @@
 _pkgname=xdpss
 pkgname=$_pkgname-git
 pkgver=r5.6853b7e
-pkgrel=13
+pkgrel=14
 pkgdesc="Initiate screencast with the help of XDG Desktop portals"
 arch=('any')
 url="https://github.com/MikeWalrus/xdpss"
