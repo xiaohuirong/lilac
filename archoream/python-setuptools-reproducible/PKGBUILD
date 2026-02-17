@@ -3,7 +3,7 @@
 _module="setuptools-reproducible"
 pkgname="python-${_module}"
 pkgver=0.1
-pkgrel=4
+pkgrel=5
 pkgdesc="Extension of setuptools to support reproducible builds"
 arch=("any")
 url="https://github.com/wimglenn/setuptools-reproducible"
