@@ -3,7 +3,7 @@
 pkgname=python-swatch
 _name=${pkgname#python-}
 pkgver=0.4.0
-pkgrel=15
+pkgrel=16
 pkgdesc="a parser for adobe swatch exchange files"
 url="https://github.com/nsfmc/swatch"
 license=("MIT")
