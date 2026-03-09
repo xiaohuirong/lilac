@@ -3,7 +3,7 @@
 
 pkgname=wshowkeys-git
 _pkgname=wshowkeys
-pkgver=r6.308fc9f
+pkgver=r8.8966ef0
 pkgrel=1
 pkgdesc='Displays keys being pressed on a Wayland session'
 arch=('x86_64' 'armv7h' 'aarch64')
