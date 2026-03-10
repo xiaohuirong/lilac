@@ -8,9 +8,10 @@ post_build: aur_post_build
 
 update_on:
   - source: aur
-    aur: caelestia-cli
+    aur: python-materialyoucolor
 
 repo_depends:
-  - app2unit
-  - gpu-screen-recorder
-  - python-materialyoucolor
+  - python-trigger
+
+update_on_build:
+  - pkgbase: python-trigger
