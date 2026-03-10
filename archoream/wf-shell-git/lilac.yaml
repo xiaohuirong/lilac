@@ -11,7 +11,6 @@ update_on:
     aur: wf-shell-git
 
 repo_depends:
-  - wf-config-git
   - wayfire-git
 
 managed: true
