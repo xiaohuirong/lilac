@@ -2,7 +2,7 @@
 
 _pkgname=wlroots
 pkgname="${_pkgname}-git"
-pkgver=0.20.0.rc4.r12.g736c0f3
+pkgver=0.20.0.rc4.r15.g3cb2cf9
 pkgrel=1
 license=('MIT')
 pkgdesc='Modular Wayland compositor library'
