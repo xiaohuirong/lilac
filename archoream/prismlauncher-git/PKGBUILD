@@ -8,7 +8,7 @@
 
 pkgname=prismlauncher-git
 _pkgname=${pkgname%-git}
-pkgver=10.0.0.pre1.r508.ga1e3a2866
+pkgver=10.0.0.pre1.r510.g14da23b06
 pkgrel=1
 pkgdesc='Minecraft launcher with ability to manage multiple instances'
 arch=(i686 x86_64 aarch64)
