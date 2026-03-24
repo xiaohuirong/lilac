@@ -1,6 +1,6 @@
 _pkgbase=netevent
 pkgname=netevent-git
-pkgver=2.2.3.r0.gf82e94d
+pkgver=2.2.3.r1.ged01f6f
 pkgrel=1
 pkgdesc="Event device viewing/cloning utility"
 url="https://github.com/Blub/netevent"
