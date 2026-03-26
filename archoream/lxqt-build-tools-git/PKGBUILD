@@ -2,7 +2,7 @@
 
 _pkgname=lxqt-build-tools
 pkgname=$_pkgname-git
-pkgver=2.3.0
+pkgver=2.3.0.r1.g4ed9e41
 pkgrel=1
 pkgdesc='Tools to build LXQt and components maintained by the project.'
 arch=('any')
