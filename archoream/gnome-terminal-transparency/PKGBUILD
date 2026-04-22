@@ -10,10 +10,10 @@
 
 pkgname=gnome-terminal-transparency
 _pkgname=gnome-terminal
-pkgver=3.58.0
+pkgver=3.60.0
 pkgrel=1
 pkgdesc="The GNOME Terminal Emulator with background transparency"
-url="https://wiki.gnome.org/Apps/Terminal"
+url="https://gitlab.gnome.org/GNOME/gnome-terminal"
 arch=(x86_64)
 license=(
   # Program
@@ -29,13 +29,14 @@ license=(
 depends=(
   cairo
   dconf
-  gcc-libs
   glib2
   glibc
   gsettings-desktop-schemas
   gtk3
   hicolor-icon-theme
+  libgcc
   libhandy
+  libstdc++
   libx11
   pango
   util-linux-libs
@@ -60,8 +61,8 @@ source=(
   transparency.patch
 )
 b2sums=(
-  'e58f60d79c80ed78c2e499a01d7cec266f3c070a9e101b9c179bd5eaa2d8ee08eb31f470dd59de1e474c88da57760d92c2b96f03e48527e87528672b5e079552'
-  'f115709bcbb71631e3e79eb64aefbd9dff22f6c0fe05f19a47026621d8056aa1cddfd30193d60f5ce4899eb58fb14546d9d4da74d42c9fa6959eaefaedfe2496'
+  'c9825005a583d0f6b3ee4c9bb94d45ef0102af8eb9096894a5ae42df44d0a17264da0f69153ee67b3b9d4c062ba22c8ed9466ceb558dc9f111b5ea62b2e423f3'
+  'ae0c227e62ba65e6b6ba465c88f6cf5497e1de0c2af4e5e31219b56c67860f8c814802a04112159f0ddaee1f2a8216097a50ee960863bcfdc5d083f953a60c39'
 )
 
 prepare() {
