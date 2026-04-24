@@ -3,7 +3,7 @@
 
 pkgname=czkawka-git
 pkgver=11.0.1.r11.gb5b454af
-pkgrel=1
+pkgrel=2
 pkgdesc='Multi functional app to find duplicates, empty folders, similar images etc.'
 url='https://github.com/qarmin/czkawka'
 arch=(
