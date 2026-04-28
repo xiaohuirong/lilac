@@ -5,7 +5,7 @@
 pkgname=trae-cn-desktop-bin
 _pkgname=trae-cn
 pkgver=2.3.21082
-pkgrel=1
+pkgrel=2
 pkgdesc="字节跳动推出的AI编程IDE（Trae CN）"
 arch=('x86_64' 'aarch64')
 url="https://www.trae.cn/"
