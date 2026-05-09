@@ -2,7 +2,7 @@
 # Contributor: Dušan Simić <dusan.simic1810@gmail.com>
 pkgname=adw-gtk-theme-git
 _pkgname=adw-gtk3
-pkgver=5.10.r2.g5962743
+pkgver=6.5.r4.g47922ed
 pkgrel=1
 pkgdesc="The theme from libadwaita ported to GTK-3"
 arch=('any')
