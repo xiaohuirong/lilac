@@ -4,8 +4,8 @@
 
 _pkgname=pypinyin
 pkgname="${_pkgname}-git"
-pkgver=0.55.0.r4.gfcd68ff
-pkgrel=2
+pkgver=0.55.0.r5.g8595294
+pkgrel=1
 pkgdesc='Chinese characters transliteration module and tool'
 arch=('any')
 url='https://github.com/mozillazg/python-pinyin'
