@@ -30,7 +30,6 @@ repo_depends:
   - python-colcon-powershell
   - python-colcon-python-setup-py
   - python-colcon-recursive-crawl
-  - python-colcon-ros
   - python-colcon-test-result
   - python-colcon-zsh
   - python-colcon-cd
