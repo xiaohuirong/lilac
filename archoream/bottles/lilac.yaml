@@ -13,7 +13,8 @@ update_on:
     manual: 1
 
 repo_depends:
-  - fvs
+  - fvs2
+  - python-fvs
   - vkbasalt-cli
   - python-steamgriddb
   - python-pathvalidate
