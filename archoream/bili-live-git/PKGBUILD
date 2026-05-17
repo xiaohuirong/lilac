@@ -1,8 +1,8 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname="bili-live"
 pkgname="${_pkgname}-git"
-pkgver=v0.1.1.r0.g4f1d3df
-pkgrel=3
+pkgver=v0.1.8.r3.ge2eff13
+pkgrel=1
 pkgdesc="A command line tool for starting and stopping live streams on bilibili.com, capable of providing the RTMP address and stream key for streaming software such as OBS."
 url="https://github.com/HellOwhatAs/bili-live"
 license=("custom")
@@ -22,11 +22,7 @@ prepare() {
 
 pkgver() {
 	cd "${srcdir}/${_pkgname}"
-	(
-		set -o pipefail
-		git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
-			printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-	)
+	git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
@@ -43,6 +39,6 @@ check() {
 }
 
 package() {
-	install -d "${pkgdir}/usr/bin"
-	install -Dm755 "${srcdir}/${_pkgname}/target/release/${_pkgname}" "${pkgdir}/usr/bin/${pkg_name}"
+	cd "${srcdir}/${_pkgname}"
+	install -Dm755 "target/release/${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}"
 }
