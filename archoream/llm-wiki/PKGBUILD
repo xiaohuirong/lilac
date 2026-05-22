@@ -2,13 +2,13 @@
 pkgname=llm-wiki
 _pkgname=llm_wiki
 pkgver=0.4.12
-pkgrel=2
+pkgrel=3
 pkgdesc="A personal knowledge base using an LLM to incrementally build and maintain a persistent wiki"
 arch=('x86_64')
 url="https://github.com/nashsu/llm_wiki"
 license=('GPL-3.0-only')
 depends=('gtk3' 'webkit2gtk-4.1' 'libnm' 'libayatana-appindicator')
-makedepends=('rust' 'npm' 'nodejs>=20')
+makedepends=('rust' 'npm' 'nodejs>=20' 'protobuf')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz"
         "$pkgname.desktop")
 sha256sums=('6a5e8f7402bddb57b3cdfbb897405e0dfe963153db873cf2e97233cb8a8b21a2'
