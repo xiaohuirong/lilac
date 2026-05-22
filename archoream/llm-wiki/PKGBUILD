@@ -2,7 +2,7 @@
 pkgname=llm-wiki
 _pkgname=llm_wiki
 pkgver=0.4.12
-pkgrel=1
+pkgrel=2
 pkgdesc="A personal knowledge base using an LLM to incrementally build and maintain a persistent wiki"
 arch=('x86_64')
 url="https://github.com/nashsu/llm_wiki"
@@ -21,7 +21,7 @@ prepare() {
 
 build() {
   cd "$_pkgname-$pkgver"
-  npm run tauri build -- --bundles none
+  npm run tauri build -- --no-bundle
 }
 
 package() {
