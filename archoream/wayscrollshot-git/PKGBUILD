@@ -1,7 +1,7 @@
 # Maintainer: Hoream <hoream@qq.com>
 _pkgname=wayscrollshot
 pkgname="${_pkgname}-git"
-pkgver=0.1.8.r15.g8879685
+pkgver=v0.1.8.r0.g940bca2
 pkgrel=1
 pkgdesc="A scrolling screenshot tool for Wayland"
 arch=('x86_64')
