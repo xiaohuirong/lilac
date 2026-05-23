@@ -3,7 +3,7 @@
 pkgname=adw-gtk-theme-git
 _pkgname=adw-gtk3
 pkgver=6.5.r4.g47922ed
-pkgrel=1
+pkgrel=2
 pkgdesc="The theme from libadwaita ported to GTK-3"
 arch=('any')
 url="https://github.com/lassekongo83/adw-gtk3"
