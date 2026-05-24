@@ -2,7 +2,7 @@
 pkgname=llm-wiki
 _pkgname=llm_wiki
 pkgver=0.4.12
-pkgrel=3
+pkgrel=4
 pkgdesc="A personal knowledge base using an LLM to incrementally build and maintain a persistent wiki"
 arch=('x86_64')
 options=('!lto')
