@@ -1,7 +1,7 @@
 # Maintainer: Alexis Maiquez <aur@almamu.com>
 pkgname=linux-wallpaperengine-git
 _pkgname=linux-wallpaperengine
-pkgver=r610.da4a95b7
+pkgver=r620.a1efb83b
 pkgrel=1
 pkgdesc="use steam's wallpaperengine on linux"
 arch=('x86_64')
