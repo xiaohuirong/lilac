@@ -1,7 +1,7 @@
 # Maintainer: Christopher Snowhill <kode54@gmail.com>
 # Contributor: Adrian Perez de Castro <aperez@igalia.com>
 pkgname=wf-shell-git
-pkgver=r285.3e7576f
+pkgver=r525.c390f15
 pkgrel=1
 pkgdesc='GTK3-based panel for the Wayfire compositor'
 url=https://wayfire.org
@@ -9,8 +9,8 @@ arch=(x86_64)
 license=(MIT)
 provides=("${pkgname%-git}")
 conflicts=("${provides[@]}")
-depends=(wf-config gtkmm3 gtk-layer-shell libdbusmenu-gtk3 libpulse)
-makedepends=("git" "glib2-devel" "gobject-introspection" "libdbusmenu-gtk3" "meson" "ninja" "wayfire-git" "wayland" "wayland-protocols")
+depends=(wf-config-git gtkmm-4.0 gtk4-layer-shell libdbusmenu-glib libpulse libpipewire wireplumber ddcutil)
+makedepends=("git" "glib2-devel" "gobject-introspection" "libdbusmenu-gtk3" "meson" "ninja" "vala" "wayfire-git" "wayland" "wayland-protocols")
 source=("${pkgname}::git+https://github.com/WayfireWM/wf-shell")
 sha512sums=('SKIP')
 
@@ -25,7 +25,7 @@ pkgver () {
 
 build () {
 	rm -rf build
-	arch-meson "${pkgname}" build -Dpulse=enabled
+	arch-meson "${pkgname}" build
 	ninja -C build
 }
 
@@ -34,4 +34,15 @@ package () {
 	cd "${pkgname}"
 	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 	install -Dm644 wf-shell.ini.example "${pkgdir}/usr/share/doc/${pkgname}/wf-shell.ini.example"
+
+    # what the hell is wrong with this package?
+	rm -rf "${pkgdir}/usr/include"
+	rm -rf "${pkgdir}/usr/lib/girepository-1.0"
+	rm -f "${pkgdir}/usr/lib/libgtk4-layer-shell.so"
+	rm -f "${pkgdir}/usr/lib/libgtk4-layer-shell.so.0"
+	rm -f "${pkgdir}/usr/lib/libgtk4-layer-shell.so.1.1.1"
+	rm -f "${pkgdir}/usr/lib/liblayer-shell-preload.so"
+	rm -f "${pkgdir}/usr/lib/pkgconfig/gtk4-layer-shell-0.pc"
+	rm -rf "${pkgdir}/usr/share/gir-1.0"
+	rm -rf "${pkgdir}/usr/share/vala"
 }
