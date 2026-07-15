@@ -4,7 +4,7 @@
 pkgbase=kvantum
 pkgname=(kvantum-git
          kvantum-qt5-git)
-pkgver=1.1.7.r1.g058534fc
+pkgver=1.1.8.r3.gdc344a71
 pkgrel=1
 pkgdesc='SVG-based theme engine for Qt6 (including config tool and extra themes)'
 arch=(x86_64)
