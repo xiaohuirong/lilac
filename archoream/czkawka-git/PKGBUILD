@@ -2,8 +2,8 @@
 # Maintainer: maki <maki@hotmilk.space>
 
 pkgname=czkawka-git
-pkgver=11.0.1.r13.g612c93a6
-pkgrel=2
+pkgver=12.0.0.r2.g94c61798
+pkgrel=1
 pkgdesc='Multi functional app to find duplicates, empty folders, similar images etc.'
 url='https://github.com/qarmin/czkawka'
 arch=(
