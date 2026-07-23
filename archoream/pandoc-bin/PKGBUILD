@@ -1,5 +1,5 @@
 pkgname=pandoc-bin
-pkgver=3.9.0.2
+pkgver=3.10.1
 pkgrel=1
 pkgdesc="Conversion between documentation formats"
 url="https://pandoc.org"
@@ -7,6 +7,7 @@ license=("GPL-2.0-or-later")
 arch=('x86_64' 'aarch64')
 conflicts=("pandoc-cli")
 provides=("pandoc=$pkgver" "pandoc-cli=$pkgver")
+options=(!debug !strip)
 optdepends=(
   'pandoc-crossref: for numbering figures, equations, tables and cross-references to them with pandoc-crossref filter'
   'texlive-context: for pdf output using context engine'
@@ -24,9 +25,9 @@ source=("$pkgname-$pkgver.tar.gz::https://github.com/jgm/pandoc/archive/${pkgver
 source_x86_64=("https://github.com/jgm/pandoc/releases/download/${pkgver}/pandoc-${pkgver}-linux-amd64.tar.gz")
 source_aarch64=("https://github.com/jgm/pandoc/releases/download/${pkgver}/pandoc-${pkgver}-linux-arm64.tar.gz")
 
-sha256sums=('c300c60ae4d47da6e5d265e93f89b896324cdc84ccbb504b88a9855bacd6b5d7')
-sha256sums_x86_64=('a69abfababda8a56969a254b09f9553a7be89ddec00d4e0fe9fd585d71a67508')
-sha256sums_aarch64=('b6d21e8f9c3b15744f5a7ab40248019157ed7793875dbe0383d4c82ff572b528')
+sha256sums=('faee98f42ed1592b2feb8da7fdfa87a23b679ca27ff883e06030f89c25c91ba9')
+sha256sums_x86_64=('72948bf5784f560d5ad1876709daca27e0667f262da727bb33f77b58e52df2f5')
+sha256sums_aarch64=('cd3963da375793a4804c65ae538b4f7b9c23f87cac7f6c74a1cf5e2fff7e8d59')
 
 package() {
   cd "${srcdir}/pandoc-${pkgver}"
