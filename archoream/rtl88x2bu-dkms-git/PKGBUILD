@@ -2,7 +2,7 @@
 
 pkgname=rtl88x2bu-dkms-git
 _pkgbase=rtl88x2bu
-pkgver=5.13.1.r214.37f40c5
+pkgver=5.13.1.r216.ad889cc
 _pkgver=5.13.1
 pkgrel=1
 pkgdesc="Kernel module for Realtek rtl88x2bu WiFi chipset"
