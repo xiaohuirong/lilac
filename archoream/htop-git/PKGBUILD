@@ -2,7 +2,7 @@
 
 gitname=htop
 pkgname=${gitname}-git
-pkgver=3.5.2.r24.g530de1e4
+pkgver=3.5.3.r1.g6f33ddd5
 pkgrel=1
 epoch=1
 pkgdesc="Interactive text-mode process viewer"
