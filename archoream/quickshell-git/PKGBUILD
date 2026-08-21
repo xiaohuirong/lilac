@@ -2,7 +2,7 @@
 
 _pkgname=quickshell
 pkgname="$_pkgname-git"
-pkgver=0.2.0.r61.g783b971
+pkgver=0.3.1.r0.g1a4716c
 pkgrel=1
 pkgdesc='Flexible toolkit for making desktop shells with QtQuick'
 arch=(x86_64 aarch64)
@@ -19,10 +19,11 @@ depends=(
   'wayland'
   'libdrm'
   'mesa'
-  'google-breakpad'
+	'cpptrace'
 	'polkit'
 )
 makedepends=(
+	'vulkan-headers'
   'spirv-tools'
   'qt6-shadertools'
   'wayland'
@@ -54,7 +55,6 @@ build() {
     -DCMAKE_BUILD_TYPE="RelWithDebInfo" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DDISTRIBUTOR="AUR (package: quickshell-git)" \
-    -DDISTRIBUTOR_DEBUGINFO_AVAILABLE=NO \
     -DINSTALL_QML_PREFIX=lib/qt6/qml
 
   cmake --build build
