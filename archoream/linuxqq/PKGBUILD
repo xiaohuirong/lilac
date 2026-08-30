@@ -2,7 +2,7 @@
 # Contributor: Integral <integral@member.fsf.org>
 
 pkgname=linuxqq
-pkgver=3.2.32_51802
+pkgver=3.2.33_52892
 pkgrel=1
 epoch=5
 pkgdesc="New Linux QQ based on Electron"
@@ -12,16 +12,16 @@ license=('LicenseRef-QQ')
 conflicts=("${pkgname}-nt-bwrap")
 depends=('nss' 'alsa-lib' 'gtk3' 'gjs' 'at-spi2-core' 'openjpeg2' 'openslide')
 optdepends=('libappindicator-gtk3: Allow QQ to extend a menu via Ayatana indicators in Unity, KDE or Systray (GTK+ 3 library).')
-_md5_prefix=c97651b2
+_md5_prefix=1763096b
 _src_prefix="${pkgname}_${pkgver/_/-}"
-source_x86_64=("https://qqdl.gtimg.cn/qqfile/QQNT/9.9.33/beta/${_md5_prefix}/${_src_prefix}_amd64.deb")
-source_aarch64=("https://qqdl.gtimg.cn/qqfile/QQNT/9.9.33/beta/${_md5_prefix}/${_src_prefix}_arm64.deb")
-source_loong64=("https://qqdl.gtimg.cn/qqfile/QQNT/9.9.33/beta/${_md5_prefix}/${_src_prefix}_loongarch64.deb")
+source_x86_64=("https://qqdl.gtimg.cn/qqfile/QQNT/9.9.35/beta/${_md5_prefix}/${_src_prefix}_amd64.deb")
+source_aarch64=("https://qqdl.gtimg.cn/qqfile/QQNT/9.9.35/beta/${_md5_prefix}/${_src_prefix}_arm64.deb")
+source_loong64=("https://qqdl.gtimg.cn/qqfile/QQNT/9.9.35/beta/${_md5_prefix}/${_src_prefix}_loongarch64.deb")
 source=("${pkgname}.sh")
 sha512sums=('bd89ea20f9e540b37073db6a147b74db7ef706fbd77940c8c9d383a637d139077ccd9266612400c465c128ebe84a3c9a1b28b3e6681df52dae6e378c51399fe7')
-sha512sums_x86_64=('5a397574b333671f65395e4dcbe4fa829a0cb1a3e94569daeac15582c1f17d8e1ecbfea271b66a3c303ed73228eec12dc3f9962f51826b924896c31b05c08e9e')
-sha512sums_aarch64=('7c9b201afeef11846e4a7b10332d6a81c786b8c28957d102ebdd1d20d998c83b72e15348832ca97ec10bd183e0881ab9911ec8122f9bdc4ca98a61316e44d512')
-sha512sums_loong64=('aac5bb9e53554db5c95bbb2541cfda0841633e996798088756d2a16d3c8e480288fb6d8c52eecd154b1d119ddf2f1da59e58e90c9dd40a74e40518ba815f386a')
+sha512sums_x86_64=('8b12141690c38708508627817f40188d23da5e357164a0cdd6395530b9abad88d06da44c36ff85262872eb8bf2995c184c391048f63a004be81284a444ebb53e')
+sha512sums_aarch64=('27636f05d56ef2cc21bd5ae45375648cfe2d6ce1ebb7418a8ae0318ae7d61aab44482d276a29552dce374420dbbd9ee66653406e0ddcac0a5f87211a320ea6fc')
+sha512sums_loong64=('dc7cec63e6ec10acfa0e973157d80f28ff46418f51f20626e35103057e68a1bc82f355c267abc2b1dee0a57893814496d13e32085e56afbcbc6e1419b39cbd17')
 options=('!strip' '!debug')
 
 package() {
