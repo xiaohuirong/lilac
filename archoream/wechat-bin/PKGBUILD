@@ -2,7 +2,7 @@
 # Contributor: wszqkzqk
 
 pkgname=wechat-bin
-pkgver=4.1.13.9
+pkgver=4.1.13.23
 pkgrel=1
 epoch=
 pkgdesc="微信是一种生活方式. This is a repackage of WeChat."
@@ -57,6 +57,7 @@ optdepends=(
 	'ttf-twemoji: An emoji font that will work with WeChat'
 	'libjack.so: libjack_plugin.so'
 	'at-spi2-core: Accessibility in the browser part'
+	'xdg-desktop-portal-impl: XDG Desktop Portal implementation for File Chooser and ScreenCast'
 )
 
 makedepends+=(
