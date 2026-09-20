@@ -3,7 +3,7 @@
 # Co-Maintainer: Christopher Snowhill <kode54@gmail.com>
 _wfconfig_version=0.7
 pkgname=wayfire-git
-pkgver=0.11.0.r22.g4ab4428d
+pkgver=0.11.0.r26.g71f2bcfa
 pkgrel=1
 pkgdesc="3D wayland compositor"
 arch=('x86_64')
