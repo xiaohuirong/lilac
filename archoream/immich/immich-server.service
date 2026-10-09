@@ -6,10 +6,8 @@ Requires=postgresql.service
 After=network.target
 Wants=network-online.target
 After=network-online.target
-
-# for convenience, all services start with immich-server
-BindsTo=immich-machine-learning.service
-After=immich-machine-learning.service
+StartLimitIntervalSec=60
+StartLimitBurst=3
 
 [Service]
 User=immich
@@ -23,12 +21,16 @@ Environment=IMMICH_BUILD_DATA=/usr/lib/immich/build
 SyslogIdentifier=immich-server
 ExecStart=node dist/main
 
-PrivateDevices=true
 ProtectHome=true
 ProtectSystem=strict
 ProtectKernelTunables=yes
 ProtectKernelModules=yes
 ProtectControlGroups=yes
+# hardware transcoding access, based on hwaccel.transcoding.yml
+DeviceAllow=char-drm rw
+DeviceAllow=char-nvidia* rw
+SupplementaryGroups=render video
+# if you use Rockchip you might want to just PrivateDevices=false
 
 RestrictNamespaces=yes
 
@@ -38,7 +40,10 @@ CapabilityBoundingSet=
 NoNewPrivileges=yes
 
 WorkingDirectory=/usr/lib/immich/app/server
-ReadWritePaths=/tmp /var/tmp /var/lib/immich/upload
+ReadWritePaths=/tmp /var/tmp /var/lib/immich/upload /var/lib/immich/.cache
+
+# overwrites ffmpeg in /usr/bin with the jellyfin version for this unit only
+BindReadOnlyPaths=/usr/lib/jellyfin-ffmpeg/ffmpeg:/usr/bin/ffmpeg /usr/lib/jellyfin-ffmpeg/ffprobe:/usr/bin/ffprobe
 
 [Install]
 WantedBy=multi-user.target

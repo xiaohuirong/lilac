@@ -1,0 +1,103 @@
+--- a/server/src/services/database-backup.service.ts
++++ b/server/src/services/database-backup.service.ts
+@@ -215,7 +215,7 @@
+     }
+ 
+     return {
+-      bin: `/usr/lib/postgresql/${databaseMajorVersion}/bin/${bin}`,
++      bin: `/usr/bin/${bin}`,
+       args,
+       databaseUsername,
+       databasePassword,
+--- a/server/src/services/database-backup.service.spec.ts
++++ b/server/src/services/database-backup.service.spec.ts
+@@ -298,7 +298,7 @@
+         mocks.database.getPostgresVersion.mockResolvedValue(postgresVersion);
+         await sut.handleBackupDatabase();
+         expect(mocks.process.spawnDuplexStream).toHaveBeenCalledWith(
+-          `/usr/lib/postgresql/${expectedVersion}/bin/pg_dump`,
++          `/usr/bin/pg_dump`,
+           expect.any(Array),
+           expect.any(Object),
+         );
+@@ -332,7 +332,7 @@
+             "--clean",
+             "--if-exists",
+           ],
+-          "bin": "/usr/lib/postgresql/14/bin/pg_dump",
++          "bin": "/usr/bin/pg_dump",
+           "databaseMajorVersion": 14,
+           "databasePassword": "postgres",
+           "databaseUsername": "postgres",
+@@ -356,7 +356,7 @@
+             "--echo-all",
+             "--output=/dev/null",
+           ],
+-          "bin": "/usr/lib/postgresql/14/bin/psql",
++          "bin": "/usr/bin/psql",
+           "databaseMajorVersion": 14,
+           "databasePassword": "postgres",
+           "databaseUsername": "postgres",
+@@ -384,7 +384,7 @@
+             "--echo-all",
+             "--output=/dev/null",
+           ],
+-          "bin": "/usr/lib/postgresql/14/bin/psql",
++          "bin": "/usr/bin/psql",
+           "databaseMajorVersion": 14,
+           "databasePassword": "postgres",
+           "databaseUsername": "postgres",
+@@ -442,7 +442,7 @@
+               "--clean",
+               "--if-exists",
+             ],
+-            "bin": "/usr/lib/postgresql/14/bin/pg_dump",
++            "bin": "/usr/bin/pg_dump",
+             "databaseMajorVersion": 14,
+             "databasePassword": "mypwd",
+             "databaseUsername": "mypg",
+@@ -470,7 +470,7 @@
+               "--echo-all",
+               "--output=/dev/null",
+             ],
+-            "bin": "/usr/lib/postgresql/14/bin/psql",
++            "bin": "/usr/bin/psql",
+             "databaseMajorVersion": 14,
+             "databasePassword": "mypwd",
+             "databaseUsername": "mypg",
+@@ -511,7 +511,7 @@
+               "--clean",
+               "--if-exists",
+             ],
+-            "bin": "/usr/lib/postgresql/14/bin/pg_dump",
++            "bin": "/usr/bin/pg_dump",
+             "databaseMajorVersion": 14,
+             "databasePassword": "mypwd",
+             "databaseUsername": "mypg",
+@@ -533,7 +533,7 @@
+               "--echo-all",
+               "--output=/dev/null",
+             ],
+-            "bin": "/usr/lib/postgresql/14/bin/psql",
++            "bin": "/usr/bin/psql",
+             "databaseMajorVersion": 14,
+             "databasePassword": "mypwd",
+             "databaseUsername": "mypg",
+@@ -575,7 +575,7 @@
+               "--echo-all",
+               "--output=/dev/null",
+             ],
+-            "bin": "/usr/lib/postgresql/14/bin/psql",
++            "bin": "/usr/bin/psql",
+             "databaseMajorVersion": 14,
+             "databasePassword": "",
+             "databaseUsername": "postgres",
+@@ -617,7 +617,7 @@
+               "--clean",
+               "--if-exists",
+             ],
+-            "bin": "/usr/lib/postgresql/14/bin/pg_dump",
++            "bin": "/usr/bin/pg_dump",
+             "databaseMajorVersion": 14,
+             "databasePassword": "",
+             "databaseUsername": "postgres",
