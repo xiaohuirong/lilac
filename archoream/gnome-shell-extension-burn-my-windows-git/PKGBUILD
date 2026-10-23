@@ -2,7 +2,7 @@
 
 pkgname=gnome-shell-extension-burn-my-windows-git
 _pkgname=Burn-My-Windows
-pkgver=r1764.6686db4
+pkgver=r1797.b09d5e6
 pkgrel=1
 pkgdesc="Disintegrate your apps the old-school way."
 arch=('any')
