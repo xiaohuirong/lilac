@@ -10,7 +10,7 @@
 # Based on community/clementine PKGBUILD
 
 pkgname=clementine-git
-pkgver=1.4.4.r22.dev.gb06bc396a.0.gb06bc396a
+pkgver=1.4.4.r33.dev.gca32d2669.2.g9d83aa5c9
 pkgrel=1
 pkgdesc='A modern music player and library organizer'
 arch=(x86_64)
