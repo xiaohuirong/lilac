@@ -4,7 +4,7 @@
 
 _pkgname=pypinyin
 pkgname="${_pkgname}-git"
-pkgver=0.55.0.r9.g34bf628
+pkgver=0.55.0.r18.gaab5e69
 pkgrel=1
 pkgdesc='Chinese characters transliteration module and tool'
 arch=('any')
