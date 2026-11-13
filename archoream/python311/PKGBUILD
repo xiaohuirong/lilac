@@ -7,14 +7,14 @@
 # Contributor: Felix Yan <felixonmars@archlinux.org>
 
 pkgname=python311
-pkgver=3.11.16
-pkgrel=1
+pkgver=3.11.18
+pkgrel=2
 _pybasever=${pkgver%.*}
-pkgdesc="The Python programming language (version 3.11)"
+pkgdesc="The Python programming language (version $_pybasever)"
 arch=("x86_64" "aarch64")
 license=("PSF-2.0")
 url="https://www.python.org/"
-depends=("mpdecimal")
+depends=("mpdecimal" "openssl-3")
 makedepends=("gdb" "tk")
 optdepends=("python-pip" "python-pipx" "python-setuptools" "tk")
 options=(strip !debug !lto)
@@ -23,7 +23,7 @@ source=(
 	EXTERNALLY-MANAGED
 )
 sha256sums=(
-	"91bcdebfdde239a003ae93738a7fce0f9230fee5c4bc2b86f6e6e8c6f98aabe8"
+	"9120e0a653868f6e3698d36cdd99e5a58903ec9469e448f21d98f7b16d8fa290"
 	"d96bca8f7be0d1a83eb88f7c40924434168b1cb8a57870a55ad34207a3718c0a"
 )
 validpgpkeys=(
@@ -52,7 +52,8 @@ build() {
 	CFLAGS="${CFLAGS/-O2/-O3} -ffat-lto-objects"
 
 	# Disable bundled pip & setuptools
-	./configure \
+	PKG_CONFIG_PATH=/usr/lib/openssl-3/pkgconfig \
+		./configure \
 		ax_cv_c_float_words_bigendian=no \
 		--prefix=/usr \
 		--enable-shared \
@@ -65,6 +66,7 @@ build() {
 		--with-system-libmpdec \
 		--enable-loadable-sqlite-extensions \
 		--without-ensurepip \
+		--with-openssl-rpath=auto \
 		--with-tzpath=/usr/share/zoneinfo
 
 	make EXTRA_CFLAGS="$CFLAGS"
